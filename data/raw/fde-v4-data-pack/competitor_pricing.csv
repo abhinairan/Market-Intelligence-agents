@@ -1,0 +1,8 @@
+competitor,product,pack,price,currency,region,captured_at,source_url
+Saltmarsh Coffee,Saltmarsh Nitro Cold Brew,6 x 200ml,540,INR,IN,2026-09-15,https://saltmarsh.example/nitro
+Saltmarsh Coffee,Saltmarsh Nitro Cold Brew,6 x 200ml,45,AED,AE,2026-09-18,https://saltmarsh.example/ae/nitro
+Saltmarsh Coffee,Ratnagiri Blend,250g,399,INR,IN,2026-09-15,https://saltmarsh.example/ratnagiri
+Bluepeak Roasters,Chikmagalur Medium Roast,250g,450,INR,IN,2026-09-20,https://bluepeak.example/chikmagalur
+Bluepeak Roasters,Peak Instant Classic,100g jar,299,INR,IN,2026-09-20,https://bluepeak.example/peak-instant
+Bluepeak Roasters,Chikmagalur Medium Roast,250g,420,INR,IN,2025-11-03,https://bluepeak.example/chikmagalur
+Filterhaus,House Filter Blend,250g,380,INR,IN,2026-09-10,https://filterhaus.example/shop/house

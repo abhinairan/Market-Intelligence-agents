@@ -1,0 +1,7 @@
+code,name,owner_team,includes,client_rule
+PKG,Packaging & transit damage,Logistics,"torn pouches, crushed boxes, dented cans",Physical damage caused in transit only.
+TST,Taste & freshness,Quality Assurance,"stale, sour, weak, flat, swollen or bulging cans","Any can that arrives swollen, bulging, flat or fizzless is TST, even if it also leaks. QA owns seal integrity. Do not file these as PKG."
+PRC,Price & value,Category,"too expensive, price increases",
+DLV,Delivery delay,Logistics,"late, stuck tracking, not delivered",
+SUB,Subscription & billing,Growth,"double charges, cancellation problems",
+CSX,Customer service,CX,"slow or no reply, bot loops",

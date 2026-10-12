@@ -1,0 +1,20 @@
+advertiser,ad_id,first_seen,last_seen,platform,headline,offer,landing_url
+Bluepeak Roasters,BP-A-115,2026-07-20,2026-10-04,meta,"Chikmagalur roasts, delivered",,https://bluepeak.example
+Saltmarsh Coffee,SM-A-201,2026-08-03,2026-10-04,meta,"Ratnagiri Blend, roasted weekly",,https://saltmarsh.example/ratnagiri
+Filterhaus,FH-A-020,2026-08-25,2026-09-30,meta,Cafe-grade filter coffee at home,,https://filterhaus.example/shop
+Bluepeak Roasters,BP-A-131,2026-09-01,2026-10-04,youtube,Peak Instant. Real coffee in 30 seconds,,https://bluepeak.example/peak-instant
+Bluepeak Roasters,BP-A-132,2026-09-08,2026-10-04,meta,Peak Instant hazelnut is here,,https://bluepeak.example/peak-instant
+Saltmarsh Coffee,SM-A-310,2026-09-15,2026-10-04,youtube,Smooth. Nitro. Saltmarsh.,,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-306,2026-09-16,2026-10-04,meta,Smooth. Nitro. Saltmarsh.,,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-311,2026-09-16,2026-10-04,meta,"New: Saltmarsh Nitro cans, now on Blinkit",,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-302,2026-09-17,2026-10-04,meta,Smooth. Nitro. Saltmarsh.,,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-309,2026-09-17,2026-10-04,youtube,"Why pay more for nitro? Saltmarsh Nitro, 540 for 6",Launch: 30% off first order,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-300,2026-09-19,2026-10-04,meta,"Nitro cold brew, half the price of the other guys",Launch: 30% off first order,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-301,2026-09-19,2026-10-04,meta,"Why pay more for nitro? Saltmarsh Nitro, 540 for 6",Launch: 30% off first order,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-305,2026-09-19,2026-10-04,meta,"Why pay more for nitro? Saltmarsh Nitro, 540 for 6",Launch: 30% off first order,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-312,2026-09-19,2026-10-04,meta,"Nitro cold brew, half the price of the other guys",Launch: 30% off first order,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-303,2026-09-20,2026-10-04,meta,"New: Saltmarsh Nitro cans, now on Blinkit",,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-304,2026-09-20,2026-10-04,meta,"Nitro cold brew, half the price of the other guys",Launch: 30% off first order,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-307,2026-09-20,2026-10-04,meta,"New: Saltmarsh Nitro cans, now on Blinkit",,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-308,2026-09-20,2026-10-04,meta,"Nitro cold brew, half the price of the other guys",Launch: 30% off first order,https://saltmarsh.example/nitro
+Saltmarsh Coffee,SM-A-313,2026-09-20,2026-10-04,youtube,"Why pay more for nitro? Saltmarsh Nitro, 540 for 6",Launch: 30% off first order,https://saltmarsh.example/nitro

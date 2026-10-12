@@ -42,13 +42,14 @@ These are our judgement calls with the default applied. Approve or change each o
 
 ## 2. Mention hygiene
 
-**D-10 Mention identity.** One mention per `mention_id`. Rows that are byte-identical duplicates are collapsed, and provenance records that the row appeared twice. If two rows share an ID but differ, both are kept and flagged for review (none in this pack). *Authority: Ours.* *Impact: 18 duplicate rows, giving 1,904 unique mentions.*
+**D-10 Mention identity.** One mention per `mention_id`. Rows that are byte-identical duplicates are collapsed into one node. Since the copies share the same `mention_id`, provenance records the **source row numbers** of every copy (e.g. M10149 is on lines 158 and 159 of `mentions.csv`), so the duplication stays traceable. If two rows share an ID but differ, both are kept and flagged for review (none in this pack). *Authority: Ours.* *Impact: 18 duplicate rows, giving 1,904 unique mentions.*
 
 **D-11 Repost.** A mention is a repost if any of these holds. Reposts are kept in the graph and linked to their original where possible, but never counted as conversations. *Authority: Ours, extending the README's `is_repost_of`.* *Impact: 70 reposts, 32 of them not flagged by the export tool.*
 - (a) `is_repost_of` is set. Basis `tool_flag`, extracted. *Impact: 38.*
 - (b) The text starts with `RT @handle:`. Basis `rt_text`, inferred. *Impact: 15.*
 - (c) The text ends with `#repost via @handle`. Basis `repost_via_text`, inferred. *Impact: 17.*
-- For (b) and (c), the original is the earliest earlier mention with the same normalised text (D-12). If none is found, the repost stays unlinked.
+- For (b) and (c), the original is the earlier mention **by the quoted handle** with the same normalised text (D-12). This links all 32 in this pack. If no such mention exists, the repost stays unlinked.
+- **Who reposts doesn't matter.** A repost by a different account is amplification of the original, not a new conversation: it adds reach, not a new opinion. Reposts are counted on the original as `repost_count` and reported as reach, never as conversations. A quote-post that adds the reposter's own comment would be a new conversation; there are none in this pack. *Impact: no repost in this pack is by the original author.*
 
 **D-12 Normalised text.** Lower-case. Remove leading filler (`psa:`, `ngl`, `honestly`, `update:`, `ok so`), trailing decoration (a city in brackets, `lol`, `!!`, `#coffee`, emoji), and repost markers. Normalised text is used only for repost linking and for the oracle's label lookup. **Identical normalised text alone never makes something a repost**: different authors post the same short phrases independently. *Authority: Ours.*
 
@@ -58,7 +59,7 @@ These are our judgement calls with the default applied. Approve or change each o
 
 **D-16 Excluded mentions stay in the graph.** Duplicates, reposts, spam and unrelated-entity mentions are kept as `Mention` nodes with a `status` and an `exclusion_reason`, not dropped. That is what lets anyone see what was excluded and why (Dev's share-of-voice question, the 22 Sep spike, the eval's traces). Every query tool counts only `status = genuine` by default, and including excluded mentions needs an explicit `include_excluded=True`. *Authority: Ours.*
 
-**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. It is reported alongside the distinct author count (1,006 authors for 1,009 conversations) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 1,009, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 140.*
+**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (1,006 authors for 1,009 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 1,009, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 140.*
 - It is unique (D-10).
 - It is not a repost (D-11).
 - It is not spam (D-13).
@@ -83,7 +84,7 @@ These are our judgement calls with the default applied. Approve or change each o
 
 **D-23 Ambiguous: "Brewbird pop-up at the Bandra flea".** Nothing in the pack says whether this is the coffee brand. By default it is included as Brewbird brand-level and logged in `er-log.md`. *Authority: Ours (O-1).* *Impact: 22 genuine plus 1 repost.*
 
-**D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. *Authority: Client aliases.*
+**D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. A product or line name **without** a Brewbird reference (D-20) is not a Brewbird mention: "nitro", "classic" and "drip bags" are generic, and competitors use them. *Authority: Client aliases.* *Impact: 91 mentions name a line word without "Brewbird"; all 91 are about Saltmarsh Nitro.*
 
 **D-25 Mentions naming two brands.** These count once for each brand they name, e.g. "Saltmarsh vs Bluepeak for French press". Totals across brands may therefore exceed the number of mentions; share of voice says so (D-41). *Authority: Ours.*
 

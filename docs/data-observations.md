@@ -26,8 +26,8 @@ Pass done 2026-10-11 with plain pandas, no model calls. Data unpacked at `/mnt/p
 - Platforms: instagram 580, x 535, amazon_review 249, google_review 202, reddit 189, youtube_comment 167 (pre-dedupe).
 - **Reposts: 70 in total, and the tool flagged only 38.**
   - 38 rows have `is_repost_of` set. All targets exist and the repost text is identical to the original, by a different handle.
-  - 15 rows are `RT @handle: ...` with `is_repost_of` empty. The quoted handles are not the original authors in the file, so they cannot be linked by ID, only by text.
-  - 17 rows end with `#repost via @handle` with `is_repost_of` empty.
+  - 15 rows are `RT @handle: ...` with `is_repost_of` empty. The quoted handle is the original author in the file, and the original has the same normalised text, so all of them can be linked (corrected 12 Oct; the first pass said otherwise).
+  - 17 rows end with `#repost via @handle` with `is_repost_of` empty. These link the same way.
   - The README says the column is set "when the tool recognised the post as a repost". The data shows the tool missed 32 of 70.
 - **Exact-text duplicates are not reposts.** 505 rows share text with another row, but that is the templating: different handles, different times, different platforms. Treating text duplicates as reposts would delete most of the dataset. "Genuine" has to rest on repost markers plus spam and collision rules, not on text uniqueness.
 - **Spam / bots**: the 84 BB50 posts above, all on 22 Sep, handles matching `^(coupon_kart|lootbazaar|dealsloot)_\d+$`, likes 0 to 3.

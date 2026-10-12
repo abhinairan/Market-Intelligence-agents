@@ -13,9 +13,9 @@ The single rulebook for the Brewbird build. The pipeline (`src/halyard/`) and th
 
 ---
 
-## Open calls for Abhinav
+## Open calls (approved)
 
-These are our judgement calls with the default applied. Approve or change each one.
+These are our judgement calls. Abhinav approved all six defaults on 12 Oct 2026.
 
 | # | Call | Default | Effect |
 |---|---|---|---|
@@ -59,9 +59,11 @@ These are our judgement calls with the default applied. Approve or change each o
 
 **D-16 Excluded mentions stay in the graph.** Duplicates, reposts, spam and unrelated-entity mentions are kept as `Mention` nodes with a `status` and an `exclusion_reason`, not dropped. That is what lets anyone see what was excluded and why (Dev's share-of-voice question, the 22 Sep spike, the eval's traces). Every query tool counts only `status = genuine` by default, and including excluded mentions needs an explicit `include_excluded=True`. *Authority: Ours.*
 
+**D-17 Cross-posts.** If the same author posts the same normalised text (D-12) under different mention IDs within 24 hours, on the same or different platforms, it is one conversation. The earliest post is the conversation; the others link to it with `CROSS_POST_OF` and are excluded from counts, and all IDs stay in provenance. Identical text from **different** authors is not a cross-post (see D-12). *Authority: Ours.* *Impact: none in this pack: no author posts the same text twice, and no two mentions share a URL. The rule is here for unseen data.*
+
 **D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (1,006 authors for 1,009 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 1,009, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 140.*
 - It is unique (D-10).
-- It is not a repost (D-11).
+- It is not a repost (D-11) or a cross-post (D-17).
 - It is not spam (D-13).
 - It is not about an unrelated entity (D-22).
 - It refers to Brewbird explicitly (D-20).
@@ -120,7 +122,7 @@ These are our judgement calls with the default applied. Approve or change each o
 
 **D-41 Share of voice.** *Authority: Ours. This is Dev's answer.*
 - **Formula:** `SOV(brand) = brand's genuine original mentions / sum of the four brands' genuine original mentions` over the window.
-- **What counts:** reposts, spam and unrelated-entity mentions are excluded, Peak Instant counts for Bluepeak, and mentions naming two brands count for both (D-25).
+- **What counts:** reposts, spam and unrelated-entity mentions are excluded (reposts are reported next to SOV as a separate reach figure, never added into it), Peak Instant counts for Bluepeak, and mentions naming two brands count for both (D-25).
 - **Reporting:** always show the counts, the exclusions with their sizes, and the naive figure (plain name matching over all rows) next to the counted one.
 - **Impact, last four weeks:** counted gives Brewbird 56%, Saltmarsh 20%, Bluepeak 19%, Filterhaus 5%. Naive gives Brewbird 66%.
 
@@ -164,4 +166,5 @@ These are our judgement calls with the default applied. Approve or change each o
 ---
 
 ## Change log
-- 2026-10-12: first draft (open calls O-1 to O-6 pending review).
+- 2026-10-12: first draft.
+- 2026-10-12: open calls O-1 to O-6 approved; added D-16 and D-17; tightened D-10, D-11, D-15 and D-24.

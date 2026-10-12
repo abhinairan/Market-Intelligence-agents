@@ -2,7 +2,7 @@
 
 The brief asks for "a short log of anything you deliberately merged or deliberately kept apart, with your reason for each". This is that log. The pipeline links each decision to its rule in `docs/definitions.md`, and the graph records these merges as `inferred` edges with `rule = ER-xx`.
 
-Status: draft, 12 Oct 2026. Only ER-08 needs a decision from Abhinav (open call O-1).
+Status: draft, 12 Oct 2026. ER-08 decided by Abhinav (O-1).
 
 ## Merged
 
@@ -20,7 +20,7 @@ Status: draft, 12 Oct 2026. Only ER-08 needs a decision from Abhinav (open call 
 
 | ID | Strings | Kept apart from | Reason | Rule |
 |---|---|---|---|---|
-| ER-08 | "Brewbird pop-up at the Bandra flea" | Nothing (default: included as Brewbird brand-level) | **Judgement call, open (O-1).** Nothing says whether this is the coffee brand or the taproom. | D-23 |
+| ER-08 | "Brewbird pop-up at the Bandra flea" | Brewbird Coffee Co. (excluded as ambiguous) | Nothing says whether this is the coffee brand or the taproom, so it is not counted for Brewbird. It stays in the graph and is listed among the exclusions. Decided by Abhinav (O-1). | D-23 |
 | ER-09 | "Brewbird taproom", "Brewbird Pune live music", beer, IPA, pints, Koregaon Park | Brewbird Coffee Co. | Brewbird's about page says it has no connection with any restaurant, bar or taproom using a similar name. Kept as `UnrelatedEntity`. | D-22 |
 | ER-10 | "BB50" | Brewbird / "BB Nitro" | A coupon code in spam, not a brand reference. A prefix match on "BB" would wrongly count it. | D-20 |
 | ER-11 | "Saltmarsh Nitro" | Brewbird Nitro | Both are called "Nitro". A mention naming only "nitro" with Saltmarsh is Saltmarsh's product. | D-24 |
@@ -29,3 +29,4 @@ Status: draft, 12 Oct 2026. Only ER-08 needs a decision from Abhinav (open call 
 | ER-14 | Saltmarsh Nitro INR (IN) and AED (AE) prices | Each other | They are different markets and currencies; they are never compared and never converted. | D-53 |
 | ER-15 | Bluepeak Chikmagalur Rs 420 (2025-11-03) and Rs 450 (2026-09-20) | Each other | These are two dated observations of the same product, so the older one is history, not a duplicate. | D-50, D-52 |
 | ER-16 | Same handle posting twice (3 handles) | Nothing: each post counts | A conversation is a post, not a person. Distinct authors are reported alongside. | D-15 |
+| ER-17 | Same author, same text, different platforms | Nothing: each counts | Each reaches its own audience. Only a same-platform double post within 24 hours counts once. None in this pack. | D-17 |

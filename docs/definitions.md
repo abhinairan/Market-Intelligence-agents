@@ -15,11 +15,11 @@ The single rulebook for the Brewbird build. The pipeline (`src/halyard/`) and th
 
 ## Open calls (approved)
 
-These are our judgement calls. Abhinav approved all six defaults on 12 Oct 2026.
+These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and changed O-1 (12 Oct 2026).
 
 | # | Call | Default | Effect |
 |---|---|---|---|
-| O-1 | "Brewbird pop-up at the Bandra flea" posts (D-23) | **Include** as Brewbird brand-level | +22 genuine conversations |
+| O-1 | "Brewbird pop-up at the Bandra flea" posts (D-23) | **Exclude** as ambiguous (changed from include) | 22 fewer conversations |
 | O-2 | Plain questions ("does Nitro have sugar?") (D-30) | Count as genuine conversations, **neutral** sentiment | 247 Brewbird mentions are neutral |
 | O-3 | Sentiment scale (D-30) | Three classes: positive, neutral, negative | Simple and auditable |
 | O-4 | "Last N weeks" (D-03) | The N most recent full weeks ending on the as-of date | Last 3 weeks = 14 Sep to 4 Oct |
@@ -59,13 +59,13 @@ These are our judgement calls. Abhinav approved all six defaults on 12 Oct 2026.
 
 **D-16 Excluded mentions stay in the graph.** Duplicates, reposts, spam and unrelated-entity mentions are kept as `Mention` nodes with a `status` and an `exclusion_reason`, not dropped. That is what lets anyone see what was excluded and why (Dev's share-of-voice question, the 22 Sep spike, the eval's traces). Every query tool counts only `status = genuine` by default, and including excluded mentions needs an explicit `include_excluded=True`. *Authority: Ours.*
 
-**D-17 Cross-posts.** If the same author posts the same normalised text (D-12) under different mention IDs within 24 hours, on the same or different platforms, it is one conversation. The earliest post is the conversation; the others link to it with `CROSS_POST_OF` and are excluded from counts, and all IDs stay in provenance. Identical text from **different** authors is not a cross-post (see D-12). *Authority: Ours.* *Impact: none in this pack: no author posts the same text twice, and no two mentions share a URL. The rule is here for unseen data.*
+**D-17 Double posts and cross-posts.** Each post on a **different platform** is its own conversation, even when the same author posts the same text: each one reaches a different audience and draws its own engagement. Only a **double post** counts once: the same author posting the same normalised text (D-12) **on the same platform** within 24 hours. In that case the earliest counts, the other links to it with `DOUBLE_POST_OF`, and both IDs stay in provenance. *Authority: Ours (changed by Abhinav).* *Impact: none in this pack. The rule is here for unseen data.*
 
-**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (1,006 authors for 1,009 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 1,009, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 140.*
+**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (984 authors for 987 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 987, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 118.*
 - It is unique (D-10).
-- It is not a repost (D-11) or a cross-post (D-17).
+- It is not a repost (D-11) or a double post (D-17).
 - It is not spam (D-13).
-- It is not about an unrelated entity (D-22).
+- It is not about an unrelated entity (D-22) or an ambiguous one (D-23).
 - It refers to Brewbird explicitly (D-20).
 
 ## 3. Entity resolution
@@ -84,7 +84,7 @@ These are our judgement calls. Abhinav approved all six defaults on 12 Oct 2026.
 
 **D-22 Unrelated entity: the "Brewbird" taproom.** Mentions of a taproom, bar, beer, IPA, pints, pitchers, live music, or Koregaon Park alongside "Brewbird" refer to an unrelated Pune taproom. They link to an `UnrelatedEntity` node and are never counted for the client. *Authority: Client (brand_site/about.md says Brewbird has no connection with any restaurant, bar or taproom using a similar name).* *Impact: 45 mentions.*
 
-**D-23 Ambiguous: "Brewbird pop-up at the Bandra flea".** Nothing in the pack says whether this is the coffee brand. By default it is included as Brewbird brand-level and logged in `er-log.md`. *Authority: Ours (O-1).* *Impact: 22 genuine plus 1 repost.*
+**D-23 Ambiguous: "Brewbird pop-up at the Bandra flea".** Nothing in the pack says whether this is the coffee brand or the taproom, and an event at a Mumbai flea market is not conclusive evidence of either. These mentions get `status = ambiguous` with `exclusion_reason = unresolved_entity`. They stay in the graph and are reported among the exclusions, but are not counted for Brewbird. They would be included if the client confirms the pop-up was theirs. *Authority: Ours (O-1, decided by Abhinav).* *Impact: 22 mentions plus 1 repost excluded.*
 
 **D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. A product or line name **without** a Brewbird reference (D-20) is not a Brewbird mention: "nitro", "classic" and "drip bags" are generic, and competitors use them. *Authority: Client aliases.* *Impact: 91 mentions name a line word without "Brewbird"; all 91 are about Saltmarsh Nitro.*
 
@@ -119,6 +119,9 @@ These are our judgement calls. Abhinav approved all six defaults on 12 Oct 2026.
 ## 5. Metrics
 
 **D-40 Sentiment score.** For any scope (brand, line) and week: `net = (positive − negative) / n`, reported with `n`, `% negative` and the counts. Only genuine conversations (D-15) are included. A week with n < 10 is reported as "too few to read". *Authority: Ours.*
+- **Why net, with neutral in the denominator:** it runs from −1 to +1 and reads like NPS. Including neutral posts stops a week of mostly questions from looking more extreme than it is.
+- **Why `% negative` is always shown next to it:** complaints are the signal Dev and QA act on. Nitro's net score hides how fast negatives grew; its % negative (about 7% → 63%) doesn't.
+- **Why not weighted by likes:** one viral post would swing the score. Engagement is reported separately (D-44).
 
 **D-41 Share of voice.** *Authority: Ours. This is Dev's answer.*
 - **Formula:** `SOV(brand) = brand's genuine original mentions / sum of the four brands' genuine original mentions` over the window.
@@ -129,6 +132,14 @@ These are our judgement calls. Abhinav approved all six defaults on 12 Oct 2026.
 **D-42 Complaint ranking.** Codes are ranked by the number of genuine conversations carrying the code in the window. Ties are broken by code name. Example mentions are chosen deterministically: highest likes, then earliest, and never a repost or spam. *Authority: Ours.*
 
 **D-43 Spikes and anomalies.** A day is anomalous if its total mentions exceed 2× the window's median daily count. An anomaly is always explained by decomposing it into genuine conversations vs spam, reposts and unrelated mentions before saying anything about the brand. *Authority: Ours.*
+
+**D-44 Reach (reposts and likes).** Reported next to conversation counts, never mixed into them:
+- `reposts`: the number of reposts of genuine conversations in scope.
+- `amplification rate`: reposts per 100 genuine conversations, so brands and weeks of different sizes compare fairly.
+- `most reposted`: the top three originals by repost count, with IDs.
+- `likes`: the total likes on genuine conversations, labelled "likes at capture time", since the export took a single snapshot.
+
+*Authority: Ours.* *Impact: 39 Brewbird reposts against 987 conversations, about 4 per 100.*
 
 ## 6. Competitor evidence
 
@@ -167,4 +178,4 @@ These are our judgement calls. Abhinav approved all six defaults on 12 Oct 2026.
 
 ## Change log
 - 2026-10-12: first draft.
-- 2026-10-12: open calls O-1 to O-6 approved; added D-16 and D-17; tightened D-10, D-11, D-15 and D-24.
+- 2026-10-12: open calls approved, O-1 changed to exclude; added D-16, D-17 and D-44; tightened D-10, D-11, D-15, D-24 and D-40.

@@ -28,7 +28,7 @@ These are our judgement calls with the default applied. Approve or change each o
 
 ## 1. Time
 
-**D-01 Timezone.** All bucketing uses IST (UTC+05:30). Timestamps are parsed with their offset and never converted to UTC before bucketing. *Authority: Client (README).* *Impact: converting to UTC first moves 57 mentions to a different week.*
+**D-01 Timezone.** All dates, weeks and "last N weeks" are computed in IST (UTC+05:30), the timezone every timestamp in the export already carries. The pipeline stores `posted_at` with its offset and also writes `date_ist` and `week_ist` on each mention at ingest, so no query ever derives a date itself. Never let a library normalise timestamps to UTC before bucketing; pandas `utc=True`, some drivers and `date()` on a UTC value all do this silently. *Authority: Client (README).* *Impact: if timestamps were converted to UTC first, 57 mentions would land in a different week.*
 
 **D-02 Reporting week.** Monday 00:00 to Sunday 23:59:59 IST. A week is named by its Monday: 17 Aug, 24 Aug, 31 Aug, 7 Sep, 14 Sep, 21 Sep, 28 Sep. *Authority: Client (README).*
 
@@ -53,6 +53,8 @@ These are our judgement calls with the default applied. Approve or change each o
 **D-13 Spam / coordinated promotion.** A mention is spam when it belongs to a burst of identical promotional text: at least 5 distinct handles post the same normalised text within 6 hours, and the text carries a coupon code or a shortened link. Spam mentions are kept in the graph with `status = spam`, and their authors get `account_class = coupon_bot`. *Authority: Ours.* *Impact: 84 mentions on 22 Sep, 02:00 to 05:00 IST, from handle families `coupon_kart_*`, `lootbazaar_*` and `dealsloot_*`.*
 
 **D-14 We don't vouch for promotions.** Spam about Brewbird says nothing about Brewbird's own promotions. The agent reports "the BB50 code appears only in spam; nothing in the client data confirms it is a Brewbird offer." *Authority: Ours (O-6).*
+
+**D-16 Excluded mentions stay in the graph.** Duplicates, reposts, spam and unrelated-entity mentions are kept as `Mention` nodes with a `status` and an `exclusion_reason`, not dropped. That is what lets anyone see what was excluded and why (Dev's share-of-voice question, the 22 Sep spike, the eval's traces). Every query tool counts only `status = genuine` by default, and including excluded mentions needs an explicit `include_excluded=True`. *Authority: Ours.*
 
 **D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. It is reported alongside the distinct author count (1,006 authors for 1,009 conversations) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 1,009, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 140.*
 - It is unique (D-10).

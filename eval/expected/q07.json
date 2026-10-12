@@ -1,0 +1,46 @@
+{
+  "id": "Q07",
+  "status": "final",
+  "question": "What did Saltmarsh launch, when, and what does it cost per can compared with ours?",
+  "kind": "numeric",
+  "answer": {
+    "product": "Saltmarsh Nitro (nitro cold brew, 200ml can)",
+    "launch_date": "2026-09-14",
+    "launch_source": "competitor_snapshots/saltmarsh_nitro_launch_2026-09-14.md",
+    "first_ad_seen": "2026-09-15",
+    "first_customer_mention": "M10931",
+    "saltmarsh": {
+      "pack": "6 x 200ml",
+      "per_pack": 540.0,
+      "per_can": 90.0,
+      "per_100ml": 45.0,
+      "observed_at": "2026-09-15"
+    },
+    "brewbird": {
+      "pack": "6 x 200ml",
+      "per_pack": 660.0,
+      "per_can": 110.0,
+      "per_100ml": 55.0,
+      "observed_at": "client catalogue price, undated"
+    },
+    "not_compared": [
+      {
+        "product": "Saltmarsh Nitro Cold Brew",
+        "pack": "6 x 200ml",
+        "price": 45.0,
+        "currency": "AED",
+        "region": "AE",
+        "observed_at": "2026-09-18",
+        "age_days": 16,
+        "stale": false,
+        "source": "competitor_pricing.csv (https://saltmarsh.example/ae/nitro)"
+      }
+    ]
+  },
+  "rules": [
+    "D-50",
+    "D-52",
+    "D-53",
+    "D-55"
+  ]
+}

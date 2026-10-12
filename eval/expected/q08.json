@@ -1,0 +1,31 @@
+{
+  "id": "Q08",
+  "status": "final",
+  "question": "Is Saltmarsh's \"half the price\" claim accurate?",
+  "kind": "numeric+rubric",
+  "answer": {
+    "verdict": "not accurate",
+    "list_ratio": 0.818,
+    "offer_ratio": 0.573,
+    "threshold": 0.55,
+    "saltmarsh_per_can": 90.0,
+    "saltmarsh_per_can_with_first_order_offer": 63.0,
+    "brewbird_per_can": 110.0,
+    "claim_ads": [
+      "SM-A-300",
+      "SM-A-312",
+      "SM-A-304",
+      "SM-A-308"
+    ],
+    "claim_first_seen": "2026-09-19",
+    "claim_names_brewbird": false
+  },
+  "rubric": [
+    "Compares per can (or per 100ml) in INR only; never uses the AED price.",
+    "Reports list ratio (~0.82) and the first-order-offer ratio (~0.57) separately.",
+    "Says the ad does not name Brewbird, so applying it to Brewbird is an inference."
+  ],
+  "rules": [
+    "D-53"
+  ]
+}

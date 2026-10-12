@@ -15,7 +15,7 @@ The brief rewards two things above all: **every number traces back to rows**, an
 | LLM | Claude via a generic `LLMClient`; OpenAI client added later | Tool schemas are written once and translated per provider. Eval results are reported per model. |
 | Agents | Two agents on one shared set of query tools | Generality lives in the tools; there's no code written for particular questions. |
 | Oracle | Independent pandas code over the raw CSVs, never the graph | The eval mustn't grade itself. It shares definitions with the pipeline, not code. |
-| Labels for the oracle | Human-reviewed template table (`docs/review/label_table_draft.csv`) | Expected answers come from human judgement. |
+| Labels for the oracle | Human-reviewed template table (`oracle/label_table.csv`, reviewed 12 Oct) | Expected answers come from human judgement. |
 | Where code lives | This repo, built in VS Code on your laptop | The demo and the live code change happen there. |
 
 ## 2. Repo layout and commands
@@ -144,6 +144,6 @@ Each phase ends in something runnable. Total is about 13 hours plus buffer.
 ## 9. Open items for you
 
 1. When did you receive the brief? It sets the submission deadline.
-2. Review `docs/review/label_table_draft.csv`: fill `reviewer_ok` or correct the row.
+2. ~~Review the label table~~ Done 12 Oct (`oracle/label_table.csv`).
 3. Confirm Docker Desktop runs on the demo laptop.
 4. An Anthropic API key in `.env` (never committed) for P2 and P4.

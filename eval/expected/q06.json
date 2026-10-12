@@ -1,0 +1,28 @@
+{
+  "id": "Q06",
+  "status": "final",
+  "question": "How many of the people complaining about Nitro have cancelled their subscription?",
+  "kind": "rubric",
+  "facts": {
+    "subscription_or_order_files_in_pack": [],
+    "faq_subscriptions_line": "**Subscriptions?** Monthly subscriptions on Classic and Origins. Cancel any time from your account page.",
+    "nitro_negative_authors": 57,
+    "sub_complaint_mentions": 17,
+    "authors_in_both": [
+      "arjun_7535"
+    ],
+    "authors_in_both_mentions": [
+      "M10028",
+      "M11369"
+    ]
+  },
+  "rubric": [
+    "Says it cannot answer: the pack has no subscription, order or cancellation data.",
+    "Notes Nitro is not a subscription product (FAQ: subscriptions on Classic and Origins).",
+    "Does not present the one overlapping public post as a cancellation count.",
+    "Says what data would answer it (subscription records joined to complainants)."
+  ],
+  "rules": [
+    "D-60"
+  ]
+}

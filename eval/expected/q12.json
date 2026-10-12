@@ -1,0 +1,50 @@
+{
+  "id": "Q12",
+  "status": "final",
+  "question": "Did Saltmarsh's launch cause the fall in Nitro sentiment?",
+  "kind": "rubric",
+  "facts": {
+    "saltmarsh_launch": "2026-09-14",
+    "first_nitro_tst": {
+      "mention_id": "M10928",
+      "date": "2026-09-14"
+    },
+    "nitro_tst_by_week": {
+      "2026-08-17": 0,
+      "2026-08-24": 0,
+      "2026-08-31": 0,
+      "2026-09-07": 0,
+      "2026-09-14": 7,
+      "2026-09-21": 9,
+      "2026-09-28": 13
+    },
+    "nitro_genuine_volume_by_week": {
+      "2026-08-17": 30,
+      "2026-08-24": 30,
+      "2026-08-31": 30,
+      "2026-09-07": 30,
+      "2026-09-14": 30,
+      "2026-09-21": 31,
+      "2026-09-28": 30
+    },
+    "brewbird_complaints_mentioning_saltmarsh": [],
+    "nitro_tst_saying_last_batch": 5,
+    "brand_without_nitro_net": {
+      "2026-08-17": 0.32,
+      "2026-08-24": 0.42,
+      "2026-08-31": 0.37,
+      "2026-09-07": 0.42,
+      "2026-09-14": 0.46,
+      "2026-09-21": 0.39,
+      "2026-09-28": 0.45
+    }
+  },
+  "rubric": [
+    "Does not claim causation.",
+    "Separates shows (same week) from suggests (complaints are about defects, volume flat, none mention Saltmarsh).",
+    "Names the data that would establish cause (batch/QA records, sales and repeat purchase, markets with and without Saltmarsh)."
+  ],
+  "rules": [
+    "D-61"
+  ]
+}

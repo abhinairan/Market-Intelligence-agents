@@ -1,0 +1,116 @@
+[
+  {
+    "check": "duplicate rows collapsed (D-10)",
+    "expected": 18,
+    "actual": 18,
+    "ok": true
+  },
+  {
+    "check": "unique mentions (D-10)",
+    "expected": 1904,
+    "actual": 1904,
+    "ok": true
+  },
+  {
+    "check": "reposts (D-11)",
+    "expected": 70,
+    "actual": 70,
+    "ok": true
+  },
+  {
+    "check": "reposts flagged by tool (D-11a)",
+    "expected": 38,
+    "actual": 38,
+    "ok": true
+  },
+  {
+    "check": "reposts RT text (D-11b)",
+    "expected": 15,
+    "actual": 15,
+    "ok": true
+  },
+  {
+    "check": "reposts '#repost via' (D-11c)",
+    "expected": 17,
+    "actual": 17,
+    "ok": true
+  },
+  {
+    "check": "reposts left unlinked (D-11)",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  },
+  {
+    "check": "spam mentions (D-13)",
+    "expected": 84,
+    "actual": 84,
+    "ok": true
+  },
+  {
+    "check": "taproom mentions incl. reposts (D-22)",
+    "expected": 45,
+    "actual": 45,
+    "ok": true
+  },
+  {
+    "check": "pop-up genuine mentions excluded (D-23)",
+    "expected": 22,
+    "actual": 22,
+    "ok": true
+  },
+  {
+    "check": "double posts (D-17)",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  },
+  {
+    "check": "genuine Brewbird conversations (D-15)",
+    "expected": 987,
+    "actual": 987,
+    "ok": true
+  },
+  {
+    "check": "distinct Brewbird authors (D-15)",
+    "expected": 984,
+    "actual": 984,
+    "ok": true
+  },
+  {
+    "check": "unlabelled mentions",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  },
+  {
+    "check": "spam rule vs label table",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  },
+  {
+    "check": "taproom rule vs label table",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  },
+  {
+    "check": "pop-up rule vs label table",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  },
+  {
+    "check": "Brewbird reference rule vs label table",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  },
+  {
+    "check": "mention ids with differing content",
+    "expected": 0,
+    "actual": 0,
+    "ok": true
+  }
+]

@@ -121,7 +121,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 **D-40 Sentiment score.** For any scope (brand, line) and week: `net = (positive − negative) / n`, reported with `n`, `% negative` and the counts. Only genuine conversations (D-15) are included. A week with n < 10 is reported as "too few to read". *Authority: Ours.*
 - **Why net, with neutral in the denominator:** it runs from −1 to +1 and reads like NPS. Including neutral posts stops a week of mostly questions from looking more extreme than it is.
 - **Why `% negative` is always shown next to it:** complaints are the signal Dev and QA act on. Nitro's net score hides how fast negatives grew; its % negative (about 7% → 63%) doesn't.
-- **Why not weighted by likes:** one viral post would swing the score. Engagement is reported separately (D-44).
+- **Why not weighted by likes:** likes are a single snapshot (older posts have had longer to collect them), mean different things per platform (upvotes, hearts, "helpful" votes), and one viral post would swing a weighted score. Likes still matter, so they get their own signal: **negative like share**, the share of likes going to negative posts, is shown next to `% negative`. When it exceeds `% negative` by 10 points or more, the answer flags that complaints are drawing more engagement than their numbers suggest. *Impact: Nitro, week of 21 Sep: 42% of posts are negative but they hold 57% of likes, so this week is flagged. Other weeks track within a few points.*
 
 **D-41 Share of voice.** *Authority: Ours. This is Dev's answer.*
 - **Formula:** `SOV(brand) = brand's genuine original mentions / sum of the four brands' genuine original mentions` over the window.
@@ -178,4 +178,4 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 ## Change log
 - 2026-10-12: first draft.
-- 2026-10-12: open calls approved, O-1 changed to exclude; added D-16, D-17 and D-44; tightened D-10, D-11, D-15, D-24 and D-40.
+- 2026-10-12: open calls approved, O-1 changed to exclude; added D-16, D-17 and D-44; tightened D-10, D-11, D-15, D-24 and D-40 (including negative like share).

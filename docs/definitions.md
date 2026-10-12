@@ -2,6 +2,8 @@
 
 The single rulebook for the Brewbird build. The pipeline (`src/halyard/`) and the oracle (`oracle/`) both implement these rules independently, and both cite rule IDs in comments. The agents cite them in their "how I counted" notes, and the eval report cites them when a result disagrees.
 
+**Numbering.** The tens digit is the section: D-0x time, D-1x mention hygiene, D-2x entities, D-3x labels, D-4x metrics, D-5x competitor evidence, D-6x answerability. Gaps are deliberate. A new rule takes the next free number in its section, and existing IDs never change, because code and reports cite them.
+
 **Authority** says who owns each rule:
 - **Client**: stated by Brewbird (taxonomy file, kickoff call, README, brand site). We follow it even where we'd choose differently.
 - **Brief**: stated in the assignment brief.

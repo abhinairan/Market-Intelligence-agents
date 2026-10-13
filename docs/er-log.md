@@ -2,7 +2,7 @@
 
 The brief asks for "a short log of anything you deliberately merged or deliberately kept apart, with your reason for each". This is that log. The pipeline links each decision to its rule in `docs/definitions.md`, and the graph records these merges as `inferred` edges with `rule = ER-xx`.
 
-Status: draft, 12 Oct 2026. ER-08 decided by Abhinav (O-1).
+Status: in step with the pipeline as of 13 Oct 2026 (`config/brewbird/entities.yaml`, `config/brewbird/hygiene.yaml`). ER-08 decided by Abhinav (O-1).
 
 ## Merged
 
@@ -30,3 +30,22 @@ Status: draft, 12 Oct 2026. ER-08 decided by Abhinav (O-1).
 | ER-15 | Bluepeak Chikmagalur Rs 420 (2025-11-03) and Rs 450 (2026-09-20) | Each other | These are two dated observations of the same product, so the older one is history, not a duplicate. | D-50, D-52 |
 | ER-16 | Same handle posting twice (3 handles) | Nothing: each post counts | A conversation is a post, not a person. Distinct authors are reported alongside. | D-15 |
 | ER-17 | Same author, same text, different platforms | Nothing: each counts | Each reaches its own audience. Only a same-platform double post within 24 hours counts once. None in this pack. | D-17 |
+| ER-18 | "Brewbird beans" ("Ordered Brewbird beans again") | Brewbird Classic | It names no line, product or alias, and Origins coffees may be beans too, so it stays brand-level. Decided by Abhinav (13 Oct 2026). | D-24 |
+
+## What the pipeline resolved
+
+Counts over the 1,904 unique mentions, checked by `tests/test_entities.py` and `tests/test_hygiene.py`.
+
+| Decision | Mentions |
+|---|---|
+| ER-01 Peak Instant counted for Bluepeak | 180 (none also says "Bluepeak") |
+| ER-02 `@saltmarshcoffee` counted for Saltmarsh | 52 |
+| ER-04 "BB Nitro" counted for Brewbird Nitro | 31 |
+| ER-06 Reposts linked to an original | 70 of 70 (38 tool flag, 15 `RT @`, 17 `#repost via`) |
+| ER-07 Coupon-bot posts | 84, from 84 handles |
+| ER-08 Bandra pop-up, excluded as ambiguous | 23 (22 originals, 1 repost) |
+| ER-09 Taproom, kept as an unrelated entity | 45 (42 originals, 3 reposts) |
+| ER-12 "the other nitro cans", recorded only | 13 |
+| ER-13 Line word without "Brewbird" | 91, all Saltmarsh Nitro |
+| ER-18 "Brewbird beans", kept brand-level | 34 genuine conversations |
+| Mentions that resolve to nothing | 0 |

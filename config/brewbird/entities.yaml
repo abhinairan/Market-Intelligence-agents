@@ -1,0 +1,71 @@
+# Entity resolution: who a mention is about. Rule IDs refer to docs/definitions.md,
+# ER IDs to docs/er-log.md. Matching is case-insensitive on whole words.
+#
+# references        strings that refer to the brand on their own
+# lines[].terms     count for the line only when the brand is also referenced (D-24)
+# lines[].standalone_terms   refer to the brand and the line on their own
+# lines[].sub_brand the products.csv sub_brand whose product names and aliases are
+#                   added to the line's terms by the pipeline
+
+brands:
+  - key: brewbird
+    name: Brewbird Coffee Co.
+    is_client: true
+    references: ["brewbird"]          # D-20. Plain "BB" or "BB50" is not one (ER-10)
+    rule: D-20
+    lines:
+      - name: Classic
+        sub_brand: Brewbird Classic
+        terms: ["classic"]
+      - name: Drip
+        sub_brand: Brewbird Drip
+        terms: ["drip"]
+      - name: Nitro
+        sub_brand: Brewbird Nitro
+        terms: ["nitro"]
+        standalone_terms: ["BB Nitro"]   # D-20, ER-04
+      - name: Origins
+        sub_brand: Brewbird Origins
+        terms: ["origins"]
+
+  - key: saltmarsh
+    name: Saltmarsh Coffee
+    references: ["saltmarsh", "@saltmarshcoffee"]   # ER-02
+    rule: D-21
+    lines:
+      - name: Saltmarsh Nitro           # ER-11: "nitro" with Saltmarsh is Saltmarsh's
+        terms: ["nitro"]
+
+  - key: bluepeak
+    name: Bluepeak Roasters
+    references: ["bluepeak"]            # ER-03
+    rule: D-21
+    lines:
+      - name: Peak Instant              # ER-01: sub-brand per Bluepeak's own brands page
+        standalone_terms: ["peak instant"]
+        source: competitor_snapshots/bluepeak_brands_2026-09-20.md
+
+  - key: filterhaus
+    name: Filterhaus
+    references: ["filterhaus"]
+    rule: D-21
+
+# D-22 (ER-09): a different entity that shares a brand's name. When a context term appears
+# next to the brand's name, the mention is about this entity and not counted for the brand.
+unrelated_entities:
+  - key: brewbird_taproom
+    name: Brewbird taproom, Pune
+    collides_with: brewbird
+    context_terms: ["taproom", "bar", "beer", "ipa", "pint", "pints", "pitcher", "pitchers",
+                    "live music", "koregaon park"]
+    rule: D-22
+
+# D-23 (ER-08): nothing in the pack says which entity these are about. Excluded, not guessed.
+ambiguous:
+  - key: bandra_popup
+    collides_with: brewbird
+    phrases: ["pop-up at the Bandra flea"]
+    rule: D-23
+
+# D-20 (ER-12): phrases that point at an unnamed rival. Recorded, never counted for anyone.
+implied_references: ["the other nitro cans", "the other guys"]

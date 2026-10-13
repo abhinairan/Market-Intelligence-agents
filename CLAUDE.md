@@ -44,6 +44,7 @@ uv run ruff check src tests
   - plus this CLAUDE.md
   - **P2 step 2 done**: loaders in `src/halyard/ingest/` (`records.py`, `loaders.py`, `load_pack(client)`), pack file names and `city_tags` in `client.yaml`, `tests/test_loaders.py`
   - **P2 step 3 done**: `src/halyard/ingest/hygiene.py` (`run_hygiene(mentions, client)`: normalised text, reposts, spam bursts, double posts), `config/brewbird/hygiene.yaml`, `tests/test_hygiene.py`. Normalisation gives 93 distinct texts; the forensics' 108 counted the 15 `RT @` variants separately.
+  - **P2 step 4 done**: `src/halyard/ingest/entities.py` (`resolve_entities`, `mention_status`), `config/brewbird/entities.yaml`, `tests/test_entities.py`, counts added to `docs/er-log.md`. 987 genuine and the SOV counts match the forensics. Decided: the 34 "Brewbird beans" mentions stay brand-level (ER-18), so Classic is 246 and brand-level 152; the reviewed table row was changed to match.
 
 ## Next steps (P2, on `p2-pipeline`)
 2. **Loaders** (`src/halyard/ingest/`): typed records for every file in the pack (mentions, products, taxonomy, pricing, ads, snapshots, brand site) with source file + row number provenance. Keep `posted_at` as exported; add `date_ist`, `week_ist` (Monday-named), `city`. Record row numbers of every byte-identical duplicate (D-10).
@@ -51,6 +52,6 @@ uv run ruff check src tests
 4. **Entity resolution:** Brewbird reference (D-20; plain "BB"/"BB50" is not one), competitors incl. Peak Instant → Bluepeak (D-21), taproom as `UnrelatedEntity` (D-22), Bandra pop-up ambiguous (D-23), product lines (D-24), two-brand mentions (D-25). Config in `config/brewbird/entities.yaml`. Keep `docs/er-log.md` in step.
 5. **Labelling** per PLAN §5a; client rules in `config/brewbird/labels.yaml`. First run fills and commits the cache.
 6. **Graph write:** Neo4j MERGE writes with provenance on every edge (`source_file`, `source_ref`, `captured_at`, `method` extracted|inferred, `rule`/`model`); `halyard build` wipes and rebuilds.
-7. **Done-check:** two builds give identical node/edge counts; counts match the forensics (987 genuine conversations: Classic 280, Nitro 211, Origins 203, Drip 175, brand-level 118; Nitro TST by week 0,0,0,0,7,9,13; SOV last 4 weeks 56% counted vs 66% naive) or differences are explained. Then merge to `main`.
+7. **Done-check:** two builds give identical node/edge counts; counts match the forensics (987 genuine conversations: Classic 246, Nitro 211, Origins 203, Drip 175, brand-level 152 (forensics had 280 / 118 before ER-18); Nitro TST by week 0,0,0,0,7,9,13; SOV last 4 weeks 56% counted vs 66% naive) or differences are explained. Then merge to `main`.
 
 After P2: P3 (GraphStore, Neo4jStore, query tools, `trace`, a test per tool against a known figure), P4 (tool calling in both adapters, two agents, CLI, pulse), P5 (oracle, eval).

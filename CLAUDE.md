@@ -21,6 +21,7 @@ Brewbird take-home for Zocket (FDE assignment v4): a brand knowledge graph (Neo4
 - **Labelling (PLAN §5a, D-35):** model-first, not rules-first. The label model labels each distinct normalised text; sentiment and codes are separate cached calls; codes only for negative texts; cache key = normalised text + provider + model + hash of the generated prompt (no manual prompt versions); cache `data/cache/labels.jsonl` is append-only and committed. Deterministic client rules run last (TST over PKG for can defects, only the six codes, routing from the taxonomy). Cache miss with no key gives `unlabelled`, never neutral. Mention text is passed as delimited data (M11554 is a planted prompt injection).
 - **Time (D-01):** keep timestamps exactly as exported (`+05:30`); derive `date_ist` and `week_ist` from the local IST clock time. Never convert to UTC before bucketing.
 - **City tag (D-26, added at Abhinav's request):** extract the bracketed city, e.g. "(Delhi)", to `Mention.city` before normalisation. 502 of 1,904 mentions carry one (Bangalore 175, Delhi 167, Mumbai 160).
+- **Extracted vs inferred (decided 13 Oct):** a value copied from a source is `extracted`; anything computed from extracted values by a rule or model is `inferred` and names its rule, including node properties (`date_ist`, `week_ist`, `city`, pack units, unit prices), not only edges. To be implemented in the graph write (step 6) and described in `docs/ontology.md`.
 - **Normalisation (D-12)** never alters stored text; it only produces matching keys.
 
 ## Commands
@@ -41,6 +42,7 @@ uv run ruff check src tests
   - `3ea1759` provider-neutral LLM settings; exact brief filename in `.gitignore`
   - `6753896` **P2 step 1 done**: `LLMClient` + OpenAI/Anthropic adapters, usage log `outputs/llm_usage.jsonl`, `halyard llm-check` (live check passed)
   - plus this CLAUDE.md
+  - **P2 step 2 done**: loaders in `src/halyard/ingest/` (`records.py`, `loaders.py`, `load_pack(client)`), pack file names and `city_tags` in `client.yaml`, `tests/test_loaders.py`
 
 ## Next steps (P2, on `p2-pipeline`)
 2. **Loaders** (`src/halyard/ingest/`): typed records for every file in the pack (mentions, products, taxonomy, pricing, ads, snapshots, brand site) with source file + row number provenance. Keep `posted_at` as exported; add `date_ist`, `week_ist` (Monday-named), `city`. Record row numbers of every byte-identical duplicate (D-10).

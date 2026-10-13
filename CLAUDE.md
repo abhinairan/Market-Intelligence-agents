@@ -43,6 +43,7 @@ uv run ruff check src tests
   - `6753896` **P2 step 1 done**: `LLMClient` + OpenAI/Anthropic adapters, usage log `outputs/llm_usage.jsonl`, `halyard llm-check` (live check passed)
   - plus this CLAUDE.md
   - **P2 step 2 done**: loaders in `src/halyard/ingest/` (`records.py`, `loaders.py`, `load_pack(client)`), pack file names and `city_tags` in `client.yaml`, `tests/test_loaders.py`
+  - **P2 step 3 done**: `src/halyard/ingest/hygiene.py` (`run_hygiene(mentions, client)`: normalised text, reposts, spam bursts, double posts), `config/brewbird/hygiene.yaml`, `tests/test_hygiene.py`. Normalisation gives 93 distinct texts; the forensics' 108 counted the 15 `RT @` variants separately.
 
 ## Next steps (P2, on `p2-pipeline`)
 2. **Loaders** (`src/halyard/ingest/`): typed records for every file in the pack (mentions, products, taxonomy, pricing, ads, snapshots, brand site) with source file + row number provenance. Keep `posted_at` as exported; add `date_ist`, `week_ist` (Monday-named), `city`. Record row numbers of every byte-identical duplicate (D-10).

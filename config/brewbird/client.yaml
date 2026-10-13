@@ -12,6 +12,9 @@ window:                   # D-03: inclusive, in IST
 as_of: 2026-10-04         # D-03: "last N weeks" ends here, not today
 stale_after_days: 90      # D-52
 anomaly_median_multiple: 2   # D-43: a day above this many times the median day is a spike
+sentiment:                # D-40
+  min_mentions: 10        # a week with fewer labelled conversations is too few to read
+  like_share_gap_points: 10   # flag when negative like share exceeds % negative by this much
 
 # The files of the data pack, relative to data_pack.
 files:

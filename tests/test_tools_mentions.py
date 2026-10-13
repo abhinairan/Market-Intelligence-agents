@@ -137,3 +137,64 @@ def test_registry(ctx, tmp_path):
     assert entries[0]["result"]["data"]["window"] == {
         "start": date(2026, 9, 28).isoformat(), "end": "2026-10-04",
     }  # fmt: skip
+
+
+# --- sentiment_trend, complaint_breakdown (step 3) --------------------------------------
+
+
+def test_sentiment_trend_for_a_line_and_its_brand(call):  # D-40
+    r = call("sentiment_trend", line="Nitro")
+    data = r["data"]
+    assert [w["net"] for w in data["weeks"]] == [0.33, 0.53, 0.73, 0.53, 0.03, 0.03, -0.27]
+    assert [w["net"] for w in data["brand_overall"]] == [0.33, 0.45, 0.45, 0.44, 0.37, 0.32, 0.31]
+    last = data["weeks"][-1]
+    assert (last["week"], last["n"], last["negative"], last["pct_negative"]) == (
+        "2026-09-28", 30, 19, 63.3,
+    )  # fmt: skip
+    # Without Nitro the brand does not fall: the drop is Nitro's.
+    rest = [w["net"] for w in data["brand_without_this_line"]]
+    assert min(rest[-3:]) >= min(rest[:4]) - 0.05
+    assert len(r["mention_ids"]) == 211 and data["overall"]["n"] == 211
+
+
+def test_sentiment_trend_flags_complaints_that_draw_outsized_likes(call):  # D-40
+    weeks = call("sentiment_trend", line="Nitro")["data"]["weeks"]
+    flagged = [w["week"] for w in weeks if w.get("complaints_draw_outsized_likes")]
+    assert flagged == ["2026-09-21"]
+    week = weeks[5]
+    assert (round(week["pct_negative"]), round(week["negative_like_share"])) == (42, 57)
+
+
+def test_sentiment_trend_split_by_line_and_small_weeks(call):
+    by_line = call("sentiment_trend", brand="brewbird", split_by_line=True)["data"]["by_line"]
+    assert set(by_line) == {
+        "brewbird:Classic", "brewbird:Drip", "brewbird:Nitro", "brewbird:Origins", "brand-level",
+    }  # fmt: skip
+    assert by_line["brewbird:Nitro"][-1]["net"] == -0.27
+    with pytest.raises(ToolError, match="needs a brand"):
+        call("sentiment_trend", split_by_line=True)
+    with pytest.raises(ToolError, match="takes no argument"):
+        call("sentiment_trend", include_excluded=True)  # D-40: genuine conversations only
+    small = call("sentiment_trend", line="Nitro", city="Delhi")["data"]["weeks"]
+    assert any(w.get("too_few_to_read") and "net" not in w for w in small)
+
+
+def test_complaint_breakdown(call):  # D-42, D-34
+    r = call("complaint_breakdown", brand="brewbird", last_weeks=3)
+    codes = r["data"]["codes"]
+    assert [(c["code"], c["count"]) for c in codes] == [
+        ("TST", 36), ("PRC", 23), ("DLV", 16), ("CSX", 11), ("PKG", 8), ("SUB", 7),
+    ]  # fmt: skip
+    tst = codes[0]
+    assert tst["owner_team"] == "Quality Assurance" and tst["by_line"]["brewbird:Nitro"] == 29
+    assert tst["client_rule"]  # the client's routing rule, verbatim
+    assert all(len(c["examples"]) == 2 for c in codes)
+    assert tst["examples"][0]["likes"] >= tst["examples"][1]["likes"]
+    assert r["source_refs"][0].startswith("client_complaint_taxonomy.csv:")
+
+    nitro = call("complaint_breakdown", line="Nitro", top_n=1, examples=0)["data"]["codes"]
+    assert [c["code"] for c in nitro] == ["TST"]
+    assert list(nitro[0]["by_week"].values()) == [0, 0, 0, 0, 7, 9, 13]
+    # D-31: competitor complaints carry sentiment and no client codes.
+    other = call("complaint_breakdown", brand="saltmarsh")["data"]
+    assert other["codes"] == [] and other["negative"] == other["negative_without_a_code"] > 0

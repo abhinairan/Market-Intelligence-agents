@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from halyard.settings import PROJECT_ROOT
-from halyard.tools import mentions
+from halyard.tools import mentions, sentiment
 from halyard.tools.base import ToolError, ToolResult
 from halyard.tools.context import ToolContext
 from halyard.tools.filters import BRAND_LEVEL, MentionFilter
@@ -74,12 +74,18 @@ class Tool:
     own_parameters: dict[str, dict[str, Any]]  # beyond the shared filter and window ones
     takes_filter: bool = True
     takes_window: bool = True
+    genuine_only: bool = False  # the metric is defined on genuine conversations only
 
     @property
     def parameters(self) -> dict[str, Any]:
         """JSON Schema of the arguments, the form both LLM adapters start from."""
+        filters = {
+            k: v
+            for k, v in FILTER_PARAMETERS.items()
+            if not (self.genuine_only and k == "include_excluded")
+        }
         properties = (
-            (FILTER_PARAMETERS if self.takes_filter else {})
+            (filters if self.takes_filter else {})
             | (WINDOW_PARAMETERS if self.takes_window else {})
             | self.own_parameters
         )
@@ -128,6 +134,36 @@ TOOLS: dict[str, Tool] = {
                 "top": {"type": "integer", "description": "Repeated texts to list. Default 5."},
             },
             takes_filter=False,
+        ),
+        Tool(
+            "sentiment_trend",
+            "Sentiment week by week for a brand or a product line: net score, % negative and "
+            "the counts behind them. For a line it also returns the brand overall and the "
+            "brand without that line. Set `split_by_line` with a brand to see every line side "
+            "by side, which shows what a brand-level figure hides.",
+            sentiment.sentiment_trend,
+            {
+                "split_by_line": {
+                    "type": "boolean",
+                    "description": "With a brand and no line: one series per line.",
+                }
+            },
+            genuine_only=True,
+        ),
+        Tool(
+            "complaint_breakdown",
+            "Complaints by the client's own complaint codes, ranked, each with its owner team, "
+            "counts by product line and by week, and example mentions. Use for 'what are "
+            "people complaining about' and for routing a complaint to a team.",
+            sentiment.complaint_breakdown,
+            {
+                "top_n": {"type": "integer", "description": "Only the top N codes. Default all."},
+                "examples": {
+                    "type": "integer",
+                    "description": "Example mentions per code. Default 2.",
+                },
+            },
+            genuine_only=True,
         ),
     )
 }

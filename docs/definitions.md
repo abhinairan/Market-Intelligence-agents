@@ -51,7 +51,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - For (b) and (c), the original is the earlier mention **by the quoted handle** with the same normalised text (D-12). This links all 32 in this pack. If no such mention exists, the repost stays unlinked.
 - **Who reposts doesn't matter.** A repost by a different account is amplification of the original, not a new conversation: it adds reach, not a new opinion. Reposts are counted on the original as `repost_count` and reported as reach, never as conversations. A quote-post that adds the reposter's own comment would be a new conversation; there are none in this pack. *Impact: no repost in this pack is by the original author.*
 
-**D-12 Normalised text.** Lower-case. Remove leading filler (`psa:`, `ngl`, `honestly`, `update:`, `ok so`), trailing decoration (a city in brackets, `lol`, `!!`, `#coffee`, emoji), and repost markers. Normalised text is used only for repost linking and for the oracle's label lookup. **Identical normalised text alone never makes something a repost**: different authors post the same short phrases independently. *Authority: Ours.*
+**D-12 Normalised text.** Lower-case. Remove leading filler (`psa:`, `ngl`, `honestly`, `update:`, `ok so`), trailing decoration (a city in brackets, `lol`, `!!`, `#coffee`, emoji), and repost markers. Normalised text is used only for repost linking, the label cache key and the oracle's label lookup; the stored `text` is never altered, and anything stripped that carries meaning is extracted first (the city tag, D-26). **Identical normalised text alone never makes something a repost**: different authors post the same short phrases independently. *Authority: Ours.*
 
 **D-13 Spam / coordinated promotion.** A mention is spam when it belongs to a burst of identical promotional text: at least 5 distinct handles post the same normalised text within 6 hours, and the text carries a coupon code or a shortened link. Spam mentions are kept in the graph with `status = spam`, and their authors get `account_class = coupon_bot`. *Authority: Ours.* *Impact: 84 mentions on 22 Sep, 02:00 to 05:00 IST, from handle families `coupon_kart_*`, `lootbazaar_*` and `dealsloot_*`.*
 
@@ -89,6 +89,8 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 **D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. A product or line name **without** a Brewbird reference (D-20) is not a Brewbird mention: "nitro", "classic" and "drip bags" are generic, and competitors use them. *Authority: Client aliases.* *Impact: 91 mentions name a line word without "Brewbird"; all 91 are about Saltmarsh Nitro.*
 
 **D-25 Mentions naming two brands.** These count once for each brand they name, e.g. "Saltmarsh vs Bluepeak for French press". Totals across brands may therefore exceed the number of mentions; share of voice says so (D-41). *Authority: Ours.*
+
+**D-26 City tag.** A city in brackets in the text, e.g. "(Delhi)", is extracted to `city` on the mention (title case) before normalisation strips it. It is the city the post names, not a verified author location. A mention without a tag has `city = null` and is never assigned one by guessing; place names inside the text (Pune, Koregaon Park, Bandra) belong to the entity rules (D-22, D-23), not to `city`. Answers broken down by city state how many mentions carry a tag. *Authority: Ours (requested by Abhinav).* *Impact: 502 of 1,904 mentions carry a tag: Bangalore 175, Delhi 167, Mumbai 160. The split is even for Brewbird and for Nitro, so it is not a finding in this pack.*
 
 ## 4. Labels
 
@@ -179,3 +181,4 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 ## Change log
 - 2026-10-12: first draft.
 - 2026-10-12: open calls approved, O-1 changed to exclude; added D-16, D-17 and D-44; tightened D-10, D-11, D-15, D-24 and D-40 (including negative like share).
+- 2026-10-13: added D-26 (city tag); D-12 clarified that normalisation never alters stored text.

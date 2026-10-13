@@ -3,3 +3,11 @@ __pycache__/
 *.pyc
 .venv/
 neo4j-data/
+.DS_Store
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+
+# Assignment brief: not ours to publish
+docs/*Brief*.pdf

@@ -1,0 +1,27 @@
+# Neo4j 5 Community for the Halyard graph. Started by `halyard up` (or `make up`).
+# Ports can be overridden in .env (NEO4J_HTTP_PORT, NEO4J_BOLT_PORT) if 7474/7687 are taken.
+name: halyard
+
+services:
+  neo4j:
+    image: neo4j:5.26-community
+    container_name: halyard-neo4j
+    ports:
+      - "${NEO4J_HTTP_PORT:-7474}:7474"
+      - "${NEO4J_BOLT_PORT:-7687}:7687"
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:?set NEO4J_PASSWORD in .env (copy .env.example)}
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1g
+      NEO4J_server_memory_pagecache_size: 512m
+    volumes:
+      - neo4j-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u neo4j -p \"$${NEO4J_AUTH#neo4j/}\" 'RETURN 1' >/dev/null 2>&1 || exit 1"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
+      start_period: 15s
+
+volumes:
+  neo4j-data:

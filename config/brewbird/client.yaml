@@ -1,0 +1,13 @@
+# Brewbird deployment settings. Everything client-specific lives under config/brewbird/;
+# code under src/halyard/ must not hard-code any of it. Rule IDs refer to docs/definitions.md.
+
+client: Brewbird Coffee Co.
+data_pack: data/raw/fde-v4-data-pack
+
+timezone: "+05:30"        # D-01: IST, the offset every export timestamp carries
+week_starts_on: monday    # D-02
+window:                   # D-03: inclusive, in IST
+  start: 2026-08-17
+  end: 2026-10-04
+as_of: 2026-10-04         # D-03: "last N weeks" ends here, not today
+stale_after_days: 90      # D-52

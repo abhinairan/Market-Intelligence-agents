@@ -37,11 +37,12 @@ outputs/                       pulse, readout, replies
 docker-compose.yml, Makefile, .env.example, README.md
 ```
 
-Commands (via `make` and a small CLI):
+Commands. The sequencing logic lives in the Python CLI so it works on every OS; the Makefile is a thin wrapper, so `make` is optional (Windows users without it run `halyard ...` directly, or use WSL2).
 
 ```
-make up            # start Neo4j, wait until it is ready
-make build         # wipe and rebuild the graph from data/raw (idempotent)
+make up            # = halyard up: start Neo4j, wait until it is ready
+make build         # = halyard build: wipe and rebuild the graph from data/raw (idempotent)
+make demo          # = halyard demo: install, up, build, then one sample question per agent
 halyard ask consumer   "question"
 halyard ask competitor "question"
 halyard pulse --week 2026-09-28
@@ -136,6 +137,7 @@ Each phase ends in something runnable. Total is about 13 hours plus buffer.
 
 ## 8. Risks and cut list
 
+- **Reviewer environment.** Prerequisites: any Docker runtime, Python 3.11+, an Anthropic API key. `make` is optional. `halyard demo` fails early with a clear message if Docker is not running or `.env` / the API key is missing. SQLite stays a stretch item for now; revisit if a no-Docker path is wanted.
 - **Docker on the demo machine.** Pre-pull the image, wait until Neo4j is ready, wipe the database on build, use fixed ports with an override.
 - **LLM spend.** Use a cheaper model for labelling text the rules don't recognise and cache everything. Agents get one model with a token cap per question. Log spend per run.
 - **Overfitting to templates.** Rules are written from definitions, not from the 108 strings. The fallback labeller handles unseen text, and adversarial cases include new text.
@@ -145,5 +147,5 @@ Each phase ends in something runnable. Total is about 13 hours plus buffer.
 
 1. When did you receive the brief? It sets the submission deadline.
 2. Review `docs/review/label_table_draft.csv`: fill `reviewer_ok` or correct the row.
-3. Confirm Docker Desktop runs on the demo laptop.
+3. Confirm a Docker runtime (Docker Desktop, OrbStack or Colima) runs on the demo laptop: `docker run hello-world`.
 4. An Anthropic API key in `.env` (never committed) for P2 and P4.

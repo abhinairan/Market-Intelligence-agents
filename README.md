@@ -6,7 +6,7 @@ Knowledge graph and two agents for the Brewbird take-home. See `docs/PLAN.md`.
 
 - A Docker runtime: Docker Desktop, OrbStack, Colima, or Docker Engine on Linux
 - Python 3.11+
-- An Anthropic API key (copy `.env.example` to `.env` and fill it in)
+- An OpenAI or Anthropic API key (copy `.env.example` to `.env`, set `LLM_PROVIDER` and that provider's key)
 - `make` (optional). On Windows, use WSL2, or run the `halyard` commands directly.
 
 ## Quick start

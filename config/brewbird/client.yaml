@@ -11,3 +11,24 @@ window:                   # D-03: inclusive, in IST
   end: 2026-10-04
 as_of: 2026-10-04         # D-03: "last N weeks" ends here, not today
 stale_after_days: 90      # D-52
+
+# The files of the data pack, relative to data_pack.
+files:
+  mentions: mentions.csv
+  products: products.csv
+  taxonomy: client_complaint_taxonomy.csv
+  pricing: competitor_pricing.csv
+  ads: competitor_ads.csv
+page_folders:             # saved web pages, one .md per page
+  - brand_site
+  - competitor_snapshots
+
+# D-26: bracketed tags read as a city, e.g. "(Delhi)". Any other bracketed tag is
+# reported by the loader and never guessed at.
+city_tags: [Bangalore, Delhi, Mumbai]
+
+# The client catalogue states prices in INR (column price_inr) and no market. The brand
+# ships across India (brand_site/about.md), so its prices are read as India list prices.
+catalogue:
+  currency: INR
+  region: IN

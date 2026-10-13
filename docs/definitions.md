@@ -61,7 +61,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 **D-17 Double posts and cross-posts.** Each post on a **different platform** is its own conversation, even when the same author posts the same text: each one reaches a different audience and draws its own engagement. Only a **double post** counts once: the same author posting the same normalised text (D-12) **on the same platform** within 24 hours. In that case the earliest counts, the other links to it with `DOUBLE_POST_OF`, and both IDs stay in provenance. *Authority: Ours (changed by Abhinav).* *Impact: none in this pack. The rule is here for unseen data.*
 
-**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (984 authors for 987 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 987, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 118.*
+**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (984 authors for 987 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: 987, of which Classic 246, Nitro 211, Origins 203, Drip 175 and brand-level only 152.*
 - It is unique (D-10).
 - It is not a repost (D-11) or a double post (D-17).
 - It is not spam (D-13).
@@ -86,7 +86,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 **D-23 Ambiguous: "Brewbird pop-up at the Bandra flea".** Nothing in the pack says whether this is the coffee brand or the taproom, and an event at a Mumbai flea market is not conclusive evidence of either. These mentions get `status = ambiguous` with `exclusion_reason = unresolved_entity`. They stay in the graph and are reported among the exclusions, but are not counted for Brewbird. They would be included if the client confirms the pop-up was theirs. *Authority: Ours (O-1, decided by Abhinav).* *Impact: 22 mentions plus 1 repost excluded.*
 
-**D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. A product or line name **without** a Brewbird reference (D-20) is not a Brewbird mention: "nitro", "classic" and "drip bags" are generic, and competitors use them. *Authority: Client aliases.* *Impact: 91 mentions name a line word without "Brewbird"; all 91 are about Saltmarsh Nitro.*
+**D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. "Brewbird beans" on its own is brand-level: it names no line or alias (ER-18). A product or line name **without** a Brewbird reference (D-20) is not a Brewbird mention: "nitro", "classic" and "drip bags" are generic, and competitors use them. *Authority: Client aliases.* *Impact: 91 mentions name a line word without "Brewbird"; all 91 are about Saltmarsh Nitro.*
 
 **D-25 Mentions naming two brands.** These count once for each brand they name, e.g. "Saltmarsh vs Bluepeak for French press". Totals across brands may therefore exceed the number of mentions; share of voice says so (D-41). *Authority: Ours.*
 
@@ -98,6 +98,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - **Sarcasm takes its real meaning.** "great, another bloated Brewbird nitro can 🙄 love that for me" is negative.
 - **Mixed text takes the dominant judgement about the product.** "love the taste but filter blend is getting too pricey" is negative, with code PRC.
 - **Plain questions and announcements are neutral.**
+- **Regular use is positive.** A customer saying they use, rebuy or stock up on a product is endorsing it, even with no praise word: "stocked the fridge with Brewbird Nitro cold brew cans for the week" is positive. A notice that a product is available or back in stock is an announcement, so neutral.
 - **Hinglish and other languages are labelled by meaning.** "phool gaya tha, kholte hi flat" means it swelled and was flat on opening, so it is negative.
 
 **D-31 Complaint codes.** Only Brewbird's six codes are used: PKG, TST, PRC, DLV, SUB, CSX. Owners and descriptions come from `client_complaint_taxonomy.csv` verbatim. A negative mention with no matching code gets no code, never a new invented category. A mention may carry more than one code (e.g. a price complaint and a delivery complaint). *Authority: Client.*
@@ -116,7 +117,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 **D-34 Routing.** A complaint's owner is the `owner_team` of its code. TST goes to Quality Assurance, never to Logistics. *Authority: Client.*
 
-**D-35 Label provenance.** Every sentiment and code records how it was assigned: `rule:<id>`, `model:<name>` (fallback for text the rules don't recognise), or `human` (oracle table). *Authority: Brief (provenance).*
+**D-35 Label provenance.** Every sentiment and code records how it was assigned: `model:<name>` with the prompt hash and a one-line reason (the pipeline labels each distinct normalised text with a cached model call, PLAN §5a), `override:<rule id>` when a deterministic client rule (D-31, D-32, D-34) changed the model's output, or `human` (the oracle's reviewed table). A label the pipeline could not assign is `unlabelled`, never defaulted to neutral. *Authority: Brief (provenance).*
 
 ## 5. Metrics
 
@@ -182,3 +183,6 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - 2026-10-12: first draft.
 - 2026-10-12: open calls approved, O-1 changed to exclude; added D-16, D-17 and D-44; tightened D-10, D-11, D-15, D-24 and D-40 (including negative like share).
 - 2026-10-13: added D-26 (city tag); D-12 clarified that normalisation never alters stored text.
+- 2026-10-13: D-35 rewritten for model-first labelling with client-rule overrides.
+- 2026-10-13: D-24: "Brewbird beans" alone is brand-level (ER-18, decided by Abhinav); D-15 impact updated to Classic 246, brand-level 152.
+- 2026-10-13: D-30: regular use, repeat purchase or stocking up is positive (Abhinav).

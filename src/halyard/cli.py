@@ -25,16 +25,83 @@ def cmd_down(args: argparse.Namespace) -> None:
     print("Neo4j stopped" + (" and its data volume removed." if args.wipe else "."))
 
 
+def cmd_llm_check(args: argparse.Namespace) -> None:
+    from halyard.llm import get_client
+
+    settings = load_settings()
+    schema = {
+        "type": "object",
+        "properties": {"ok": {"type": "boolean"}},
+        "required": ["ok"],
+        "additionalProperties": False,
+    }
+    for purpose in ("label", "agent"):
+        client = get_client(settings, purpose)
+        r = client.complete_json("Reply with ok=true.", "Health check.", schema, "health_check")
+        print(f"{purpose}: {r.provider}/{r.model} ok={r.data['ok']} "
+              f"({r.input_tokens} in, {r.output_tokens} out)")
+
+
+def cmd_label(args: argparse.Namespace) -> None:
+    from halyard.ingest.pipeline import prepare
+
+    p = prepare(load_settings())
+    run, labels = p.label_run, p.labels
+    print(f"{len(labels)} distinct texts: {run.cache_hits} answers from the cache, "
+          f"{run.model_calls} model calls, {run.unlabelled} unlabelled, "
+          f"{run.overridden} changed by a client rule.")
+    for label in sorted({x.sentiment for x in labels.values()}):
+        print(f"  {label}: {sum(1 for x in labels.values() if x.sentiment == label)} texts")
+
+
 def cmd_build(args: argparse.Namespace) -> None:
-    raise NotBuiltYet("build", "P2")
+    from collections import Counter
+
+    from halyard.ingest.graph import build_graph
+    from halyard.ingest.pipeline import prepare
+    from halyard.store.neo4j_writer import connect, stored_counts, write_graph
+
+    settings = load_settings()
+    runtime.wait_for_neo4j(settings, timeout_s=10)
+    p = prepare(settings)
+    graph = build_graph(p, settings.client)
+    with connect(settings) as driver:
+        write_graph(graph, driver)
+        stored = stored_counts(driver)
+
+    report, run = p.pack.report, p.label_run
+    print(f"Read {report.mention_rows} mention rows: {len(p.pack.mentions)} unique mentions, "
+          f"{report.duplicate_rows} duplicate rows collapsed.")
+    statuses = Counter(p.statuses.values())
+    print("Mentions by status: " + ", ".join(f"{k} {v}" for k, v in statuses.most_common()) + ".")
+    print(f"Labels: {len(p.labels)} distinct texts, {run.cache_hits} answers from the cache, "
+          f"{run.model_calls} model calls, {run.unlabelled} unlabelled, "
+          f"{run.overridden} changed by a client rule.")
+    for kind in ("nodes", "edges"):
+        print(f"{kind.capitalize()} ({sum(stored[kind].values())}): "
+              + ", ".join(f"{k} {v}" for k, v in sorted(stored[kind].items())))
+    expected = {k: dict(v) for k, v in graph.counts().items()}
+    if stored != expected:
+        raise HalyardError("The database does not hold what was built; see the counts above.")
+
+
+def cmd_ontology(args: argparse.Namespace) -> None:
+    from halyard.settings import PROJECT_ROOT
+    from halyard.store.schema import render_ontology
+
+    path = PROJECT_ROOT / "docs" / "ontology.md"
+    path.write_text(render_ontology(), encoding="utf-8")
+    print(f"Wrote {path.relative_to(PROJECT_ROOT)}.")
 
 
 def cmd_demo(args: argparse.Namespace) -> None:
     settings = load_settings()
-    if not settings.anthropic_api_key:
-        raise HalyardError("ANTHROPIC_API_KEY is empty in .env; the demo needs it for the agents.")
+    if not settings.llm_api_key:
+        key = f"{settings.llm_provider.upper()}_API_KEY"
+        raise HalyardError(f"{key} is empty in .env; the demo needs it for the agents.")
     runtime.up(settings)
     cmd_build(args)
+    raise NotBuiltYet("demo (the sample questions)", "P4")
 
 
 def cmd_ask(args: argparse.Namespace) -> None:
@@ -63,8 +130,17 @@ def parser() -> argparse.ArgumentParser:
     down.add_argument("--wipe", action="store_true", help="also delete the Neo4j data volume")
     down.set_defaults(func=cmd_down)
 
+    sub.add_parser("llm-check", help="one tiny call per configured model").set_defaults(
+        func=cmd_llm_check
+    )
+    sub.add_parser("label", help="label new texts and add them to the label cache").set_defaults(
+        func=cmd_label
+    )
     sub.add_parser("build", help="wipe and rebuild the graph from the raw pack").set_defaults(
         func=cmd_build
+    )
+    sub.add_parser("ontology", help="regenerate docs/ontology.md from the schema").set_defaults(
+        func=cmd_ontology
     )
     sub.add_parser("demo", help="up, build, then one sample question per agent").set_defaults(
         func=cmd_demo

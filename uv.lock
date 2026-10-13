@@ -80,6 +80,7 @@ source = { editable = "." }
 dependencies = [
     { name = "anthropic" },
     { name = "neo4j" },
+    { name = "openai" },
     { name = "python-dotenv" },
     { name = "pyyaml" },
 ]
@@ -94,6 +95,7 @@ dev = [
 requires-dist = [
     { name = "anthropic", specifier = ">=0.40" },
     { name = "neo4j", specifier = ">=5.20,<6" },
+    { name = "openai", specifier = ">=1.50" },
     { name = "python-dotenv", specifier = ">=1.0" },
     { name = "pyyaml", specifier = ">=6.0" },
 ]
@@ -284,6 +286,23 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/77/ea/a17b0df723422cb3124bd45e6570d9677eafa38ffa207c3d12f601cbb90e/neo4j-5.28.6.tar.gz", hash = "sha256:224020cb649517cba1b76bf94129ccf84de30e7005932b5ab0cdd9cb566d55b2", size = 233391, upload-time = "2026-09-15T08:47:07.57Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/cd/9c/ec2a2f4b9fbb6c93d51c785a8c4e4cdca280009b7ad0821ff145e6cb02a5/neo4j-5.28.6-py3-none-any.whl", hash = "sha256:5454b51e0a1de870e7d0cc233b8897bb8b3a273fe32458ccbcde9d5a604f7437", size = 313892, upload-time = "2026-09-15T08:47:04.604Z" },
+]
+
+[[package]]
+name = "openai"
+version = "3.29.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "anyio" },
+    { name = "httpx2" },
+    { name = "jiter" },
+    { name = "pydantic" },
+    { name = "sniffio" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e4/99/5f6206494a87edbaa67b35c5212a2cb5e6f414bee5efb0f0672c4704315a/openai-3.29.0.tar.gz", hash = "sha256:bc70a46d97b70ba64daedfcb3227f610a395f297ec68d39f735676190a92be94", size = 1828914, upload-time = "2026-10-11T17:39:41.895Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ef/9a/91285d01a9293d0b3d86167f9c7bd13f08c960d3fa365782751ce9bcbfb1/openai-3.29.0-py3-none-any.whl", hash = "sha256:860d3bad424c5d38cd9ba0a0a2050d558b58ce027596a39f9ccbc0f51a2090b7", size = 2173181, upload-time = "2026-10-11T17:39:39.493Z" },
 ]
 
 [[package]]

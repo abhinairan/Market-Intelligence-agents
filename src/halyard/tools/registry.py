@@ -21,6 +21,7 @@ from halyard.tools import mentions, sentiment
 from halyard.tools.base import ToolError, ToolResult
 from halyard.tools.context import ToolContext
 from halyard.tools.filters import BRAND_LEVEL, MentionFilter
+from halyard.tools.share_of_voice import share_of_voice
 from halyard.tools.windows import resolve_window
 
 TOOL_LOG = PROJECT_ROOT / "outputs" / "tool_calls.jsonl"
@@ -164,6 +165,27 @@ TOOLS: dict[str, Tool] = {
                 },
             },
             genuine_only=True,
+        ),
+        Tool(
+            "share_of_voice",
+            "Share of voice between brands over a window: each brand's genuine conversations, "
+            "its share, what was left out and why, and reach (reposts, likes) alongside. Use "
+            "for any share-of-voice question and to explain how the figure was counted. Set "
+            "`compare_naive` only when asked why the figure differs from another tool's or "
+            "vendor's: it adds what plain name matching would report.",
+            share_of_voice,
+            {
+                "brands": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Brands to compare. Default: the client and every competitor.",
+                },
+                "compare_naive": {
+                    "type": "boolean",
+                    "description": "Also return the naive name-matching figure. Default false.",
+                },
+            },
+            takes_filter=False,
         ),
     )
 }

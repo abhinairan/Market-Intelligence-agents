@@ -198,3 +198,52 @@ def test_complaint_breakdown(call):  # D-42, D-34
     # D-31: competitor complaints carry sentiment and no client codes.
     other = call("complaint_breakdown", brand="saltmarsh")["data"]
     assert other["codes"] == [] and other["negative"] == other["negative_without_a_code"] > 0
+
+
+# --- share_of_voice (step 4) ----------------------------------------------------------
+
+
+def test_share_of_voice(call):  # D-41
+    r = call("share_of_voice", last_weeks=4)
+    data = r["data"]
+    rows = {b["brand"]: b for b in data["brands"]}
+    assert [(b["brand"], b["conversations"], round(b["share_pct"])) for b in data["brands"]] == [
+        ("brewbird", 585, 56), ("saltmarsh", 210, 20), ("bluepeak", 198, 19), ("filterhaus", 48, 5),
+    ]  # fmt: skip
+    assert data["sum_of_brand_counts"] == 1041
+    # D-25: a mention naming two brands is counted for each.
+    assert data["distinct_conversations"] + data["naming_more_than_one_brand"] == 1041
+    assert len(r["mention_ids"]) == data["distinct_conversations"]
+    assert rows["bluepeak"]["of_which_by_line"] == {"bluepeak:Peak Instant": 100}  # D-21
+    assert data["left_out"]["by_status"]["spam"] == 84
+    assert "naive" not in data and "naive" not in r["method_note"]  # only on request
+
+
+def test_share_of_voice_reach_is_reported_next_to_the_counts(call):  # D-44
+    brewbird = call("share_of_voice")["data"]["brands"][0]
+    assert brewbird["conversations"] == 987
+    reach = brewbird["reach"]
+    assert reach["reposts"] == 39 and reach["reposts_per_100_conversations"] == 4.0
+    assert len(reach["most_reposted"]) == 3
+    assert reach["most_reposted"][0]["reposts"] >= reach["most_reposted"][1]["reposts"]
+
+
+def test_share_of_voice_naive_figure_on_request(call):  # D-41
+    data = call("share_of_voice", last_weeks=4, compare_naive=True)["data"]
+    naive = {b["brand"]: b for b in data["naive"]["brands"]}
+    assert round(naive["brewbird"]["share_pct"]) == 66 and round(naive["bluepeak"]["share_pct"]) == 9
+    # Why they differ: spam and the taproom inflate the client, the sub-brand is missed.
+    assert naive["brewbird"]["matched_but_not_counted"]["spam"] == 84
+    assert naive["brewbird"]["matched_but_not_counted"]["unrelated"] == 24
+    assert naive["bluepeak"]["counted_but_not_matched"] == 100  # the Peak Instant mentions (ER-01)
+    assert [round(b["share_pct"]) for b in data["brands"]] == [56, 20, 19, 5]  # unchanged
+
+
+def test_share_of_voice_between_chosen_brands(call):
+    data = call("share_of_voice", last_weeks=4, brands=["Brewbird", "Saltmarsh"])["data"]
+    assert [(b["brand"], b["conversations"]) for b in data["brands"]] == [
+        ("brewbird", 585), ("saltmarsh", 210),
+    ]  # fmt: skip
+    assert round(data["brands"][0]["share_pct"], 1) == round(100 * 585 / 795, 1)
+    with pytest.raises(ToolError, match="at least two"):
+        call("share_of_voice", brands=["Brewbird"])

@@ -37,8 +37,10 @@ uv run ruff check src tests
 uv run halyard build      # wipe and rebuild the graph in Neo4j; prints counts
 uv run halyard label      # label new texts into the cache (needs the API key only for new text)
 uv run halyard ontology   # regenerate docs/ontology.md from the schema
+uv run halyard tool       # list the query tools; `halyard tool <name> '<json args>'` runs one and logs it
+uv run halyard trace M10149 R-c9ce8b67   # mention, ad, observation or result IDs back to file and row
 ```
-`halyard demo | ask | pulse | trace | eval` exist as stubs that fail with the phase they belong to.
+`halyard demo | ask | pulse | eval` exist as stubs that fail with the phase they belong to.
 
 ## Progress (as of 13 Oct 2026)
 - **P0 done**, merged and pushed to `main` (`a9a5089`): skeleton, compose, Makefile, CLI, `config/brewbird/client.yaml`.
@@ -58,6 +60,36 @@ uv run halyard ontology   # regenerate docs/ontology.md from the schema
 - Matches the forensics: 987 genuine conversations from 984 authors; Nitro 211, Origins 203, Drip 175; Nitro TST by week 0,0,0,0,7,9,13; last-3-weeks codes TST 36, PRC 23, DLV 16, CSX 11, PKG 8, SUB 7; SOV last 4 weeks 585 / 210 / 198 / 48 (56%, 20%, 19%, 5%); both net-sentiment trends.
 - Explained differences: Classic 246 and brand-level 152 (forensics 280 / 118) because of ER-18; 93 distinct texts, not 108 (RT variants merge); 14 Saltmarsh Nitro ads, not 13.
 
-## Next steps
-- **P3** (new branch from `main`): `GraphStore` interface and `Neo4jStore`, the query tools in PLAN §4, `halyard trace`, and a test per tool against a known figure. `price_compare` must match on region first, then currency, and refuse the AED row for an India comparison (D-53, agreed with Abhinav).
-- Then P4 (tool calling in both adapters, two agents, CLI, pulse) and P5 (oracle, eval).
+## P3 done (13 Oct 2026), branch `p3-tools` merged to `main` (not pushed)
+Query layer: a store interface, twelve tools, a registry, a call log and `halyard trace`.
+
+**Store** (`src/halyard/store/`)
+- `graph_store.py`: `GraphStore` protocol with five reads (`mentions`, `observations`, `ads`, `nodes(label)`, `node(label, key)`), row types, and `MemoryStore` over the in-memory graph, so tool tests need no database.
+- `neo4j_store.py`: `Neo4jStore`, the only Cypher in the query layer. `connect()` switches off Neo4j's "unrecognised relationship type" warning (no `DOUBLE_POST_OF` edges exist in this pack).
+- Counting is done in Python in the tools, so a second store only needs the five reads.
+
+**Tools** (`src/halyard/tools/`). Every tool returns `ToolResult` = `{data, mention_ids, source_refs, method_note, as_of}`.
+- `base.py` (`ToolResult`, `ToolError`), `context.py` (`ToolContext`: store, client, cached `mentions`, `names`, `products`, `code_owners`, `tool_log`), `windows.py` (`resolve_window`, `weeks_in`; D-01 to D-04), `filters.py` (`Names`, `MentionFilter`, `select_mentions`; `brand-level` as a line filter; genuine only unless `include_excluded`, D-16).
+- `mentions.py`: `count_mentions`, `get_mentions` (by filter, `ids` or `result_id`), `exclusions`, `daily_activity` (D-43).
+- `sentiment.py`: `sentiment_trend` (D-40; for a line also `brand_overall` and `brand_without_this_line`; `split_by_line`), `complaint_breakdown` (D-42, D-34).
+- `share_of_voice.py`: `share_of_voice` (D-41, reach per D-44; `naive` only with `compare_naive`).
+- `competitors.py`: `competitor_observations` (age, stale, changes as date ranges per D-51, launches with corroboration per D-55), `price_compare` (same market, currency and unit only; `claimed_ratio`; `include_offers`; D-53), `competitor_ads` (D-54).
+- `coverage.py`: `coverage(topic)`; `holds` from the graph, `not_in_data` from `config/brewbird/coverage.yaml` (D-60, D-62).
+- `trace.py`: `trace(ids)` for mention, ad, observation and other node keys and for result IDs; `render_trace` for the CLI.
+- `registry.py`: `TOOLS` (name, description, JSON Schema) and `run_tool(ctx, name, args)`, the only way a tool is called. `log.py`: calls are logged whole to `outputs/tool_calls.jsonl` (git-ignored) under a deterministic `R-xxxxxxxx` result ID when `ctx.tool_log` is set.
+- Parameters added to `client.yaml`: `anomaly_median_multiple` (D-43), `sentiment` thresholds (D-40), `pricing.claim_tolerance` (O-5), `change_evidence` (D-51).
+
+**Tests:** `test_store.py`, `test_tools_mentions.py`, `test_tools_competitors.py`, `test_tools_trace.py`. The last runs every registered tool on `Neo4jStore` and `MemoryStore` and fails if a tool is missing from that check.
+
+**P3 done-check (step 7, passed 13 Oct 2026)**
+- Clean clone of the branch with `.env.example` as `.env` (no API key): 110 tests pass, lint clean, `halyard build` twice gives identical output (3,889 nodes, 5,384 edges, 0 model calls), `halyard tool` and `halyard trace` work.
+- Figures the tools are tested against, all matching the forensics: 987 conversations from 984 authors, by line 246 / 211 / 203 / 175 / 152; exclusions 84 spam, 70 reposts, 42 taproom, 22 pop-up; 22 Sep = 132 mentions = 84 spam + 41 genuine + 4 reposts + 3 unrelated (the forensics' "48 organic" is everything but spam), median day 36; Nitro net .33, .53, .73, .53, .03, .03, -.27 with 63.3% negative in the last week; week of 21 Sep flagged for negative like share (42% of posts, 57% of likes); codes TST 36 (29 on Nitro), PRC 23, DLV 16, CSX 11, PKG 8, SUB 7; SOV 585 / 210 / 198 / 48, naive 66% for Brewbird and 9% for Bluepeak; Rs 90 vs Rs 110 a can, ratio 0.82, with the 30% first-order offer Rs 63 and 0.57; AED row not compared; Bluepeak shipping 499 to 799 between 3 Nov 2025 and 18 Aug 2026 (M10049); Saltmarsh Nitro launched 14 Sep, 14 ads all still running; M10149 on rows 158 and 159.
+
+**Decisions made by Abhinav during P3**
+- Naive share of voice is shown only on request (`compare_naive`); the brief asks for the counted figure and how it was counted. D-41 updated.
+- Tools keep the brand explicit (no default inside a tool). **For P4:** the agent skill says that when a question names no brand, use the client brand, and say so in the answer.
+- The full list of mention IDs stays in the tool-call log under the result ID. **For P4:** send the agent a capped list plus the result ID; a follow-up gets the IDs back with `get_mentions(result_id=...)` or `trace`.
+- `outputs/tool_calls.jsonl` is git-ignored.
+
+## Next steps: P4 (branch `p4-agents` from `main`, nothing built yet)
+Tool calling in both LLM adapters (translate `Tool.parameters` per provider), the two agents with their skill files, grounding rules, `halyard ask | demo | pulse`, and the Monday pulse for the week of 28 Sep. Done when all 12 golden questions are answered end to end with citations. Stop after each step with a short walkthrough, as in P2 and P3. Then P5 (oracle, eval).

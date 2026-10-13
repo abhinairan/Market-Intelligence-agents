@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from contextlib import contextmanager
 
 from halyard import runtime
 from halyard.settings import HalyardError, load_settings
@@ -112,8 +113,46 @@ def cmd_pulse(args: argparse.Namespace) -> None:
     raise NotBuiltYet("pulse", "P4")
 
 
+@contextmanager
+def tool_context():
+    """A ToolContext over the built graph in Neo4j, with the tool-call log switched on."""
+    from halyard.store.neo4j_store import Neo4jStore
+    from halyard.store.neo4j_writer import connect
+    from halyard.tools.context import ToolContext
+    from halyard.tools.log import TOOL_LOG
+
+    settings = load_settings()
+    runtime.wait_for_neo4j(settings, timeout_s=10)
+    with connect(settings) as driver:
+        ctx = ToolContext(Neo4jStore(driver), settings.client, tool_log=TOOL_LOG)
+        if not ctx.mentions:
+            raise HalyardError("The graph is empty. Run `halyard build` first.")
+        yield ctx
+
+
+def cmd_tool(args: argparse.Namespace) -> None:
+    import json
+
+    from halyard.tools.registry import TOOLS, run_tool
+
+    if args.name is None:
+        for tool in TOOLS.values():
+            print(f"{tool.name}({', '.join(tool.parameters['properties'])})\n  {tool.description}")
+        return
+    try:
+        tool_args = json.loads(args.args)
+    except json.JSONDecodeError as exc:
+        raise HalyardError(f"The arguments are not valid JSON: {exc}") from exc
+    with tool_context() as ctx:
+        print(json.dumps(run_tool(ctx, args.name, tool_args), indent=2, ensure_ascii=False))
+
+
 def cmd_trace(args: argparse.Namespace) -> None:
-    raise NotBuiltYet("trace", "P3")
+    from halyard.tools.trace import render_trace, trace
+
+    with tool_context() as ctx:
+        # Called directly: looking something up is not itself a call worth logging.
+        print(render_trace(trace(ctx, args.ids).to_dict()["data"]))
 
 
 def cmd_eval(args: argparse.Namespace) -> None:
@@ -156,8 +195,13 @@ def parser() -> argparse.ArgumentParser:
     pulse.set_defaults(func=cmd_pulse)
 
     trace = sub.add_parser("trace", help="trace mention or result IDs back to file and row")
-    trace.add_argument("ids", nargs="+")
+    trace.add_argument("ids", nargs="+", help="mention IDs, ad IDs, observation keys, R-... IDs")
     trace.set_defaults(func=cmd_trace)
+
+    tool = sub.add_parser("tool", help="run one query tool; with no name, list the tools")
+    tool.add_argument("name", nargs="?")
+    tool.add_argument("args", nargs="?", default="{}", help="arguments as JSON")
+    tool.set_defaults(func=cmd_tool)
 
     sub.add_parser("eval", help="run golden and adversarial sets, write the report").set_defaults(
         func=cmd_eval

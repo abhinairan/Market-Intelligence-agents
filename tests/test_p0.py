@@ -27,7 +27,7 @@ def test_missing_docker_is_a_clear_error(monkeypatch):
 
 
 def test_unbuilt_commands_fail_loudly(capsys):
-    assert main(["trace", "M10001"]) == 1
+    assert main(["eval"]) == 1
     assert "not implemented yet" in capsys.readouterr().err
 
 

@@ -1,0 +1,49 @@
+# What the Brewbird data pack does not contain (D-60, D-62). The coverage tool returns the
+# entries whose terms match a question's topic, so an agent can decline with a reason, say
+# what data would answer it, and offer the nearest thing the data can show.
+# These are our reading of the pack: nothing here is a fact about the client.
+
+not_in_data:
+  - topic: Subscriptions, orders and cancellations
+    terms: [subscription, subscriber, cancel, churn, order data, order history]
+    statement: >-
+      The pack has no subscription, order or account data. Public posts are not customer
+      records, so they cannot show who cancelled.
+    would_need: Subscription and order records, keyed to customers, from the client.
+    nearest: >-
+      Complaints carrying the client's SUB code, and what the client's own pages say about
+      which lines have subscriptions.
+
+  - topic: Wholesale and trade prices
+    terms: [wholesale, trade price, trade portal, cafe price, b2b, bulk price]
+    statement: >-
+      The pack has only public retail prices. Trade prices sit behind a partner login, and
+      a gated source is never accessed with someone else's credentials (D-62).
+    would_need: >-
+      A price list the competitor shares with the client directly, or published by the
+      competitor.
+    nearest: The competitor's public retail prices, and what its public pages say about trade sales.
+
+  - topic: Sales, revenue and repeat purchase
+    terms: [sales, revenue, units sold, repeat purchase, market share, conversion]
+    statement: >-
+      The pack has no sales or revenue data for the client or any competitor. Share of
+      voice is a share of conversation, not of sales.
+    would_need: Sales by product line and week from the client.
+    nearest: Conversation volume, sentiment and complaints by product line and week.
+
+  - topic: Batches, lots and quality records
+    terms: [batch, lot number, quality record, qa data, production, root cause, cause]
+    statement: >-
+      The pack has no batch, lot or quality-assurance records, so it cannot establish the
+      cause of a product problem. Timing alone is not cause (D-61).
+    would_need: Batch or lot records and QA findings for the affected products.
+    nearest: What complaints say, when they started, and which lines they are about.
+
+  - topic: Ad spend, impressions and targeting
+    terms: [ad spend, spend, impressions, reach of ads, targeting, budget, clicks]
+    statement: >-
+      The ad-library export lists each ad's text, platform and the dates it was seen. It
+      has no spend, impressions, clicks or targeting.
+    would_need: Paid ad-intelligence data, or the platforms' own transparency reports.
+    nearest: How many ads ran, on which platforms, with which messages, and for how long.

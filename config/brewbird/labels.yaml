@@ -1,0 +1,31 @@
+# Labelling rules for Brewbird. Rule IDs refer to docs/definitions.md.
+# The `rules` lists are written into the prompts in skills/labelling/; the `overrides`
+# run in code after the model and never depend on it (PLAN §5a).
+
+sentiment:
+  classes: [positive, neutral, negative]      # D-30 (O-3)
+  rules:
+    - "Judge by meaning, not by keywords."
+    - "Sarcasm takes its real meaning: praise words used to complain about a fault are negative."
+    - "Mixed text takes the dominant judgement about the product. Praise followed by a complaint about price, quality, delivery or service is negative."
+    - "Plain questions and announcements are neutral. A question that reports a fault or a problem is negative."
+    - "A customer saying they use, rebuy or stock up on a product is positive, even with no praise word: regular use is an endorsement. A notice that a product is available or back in stock is still an announcement, so neutral."
+    - "Hinglish and other languages are labelled by meaning."
+
+codes:
+  rules:
+    - "Use a code only when the post describes that problem. A negative post that fits no code gets an empty list; never invent a category."        # D-31
+    - "A post may carry more than one code when it describes more than one problem."                                                                # D-31
+    - "A can that is swollen, bulging, puffed, bloated, flat, fizzless or without foam is TST, even if it also leaks or the box was damaged. Do not add PKG to it."   # D-32
+    - "PKG is only for physical damage in transit (torn pouch, crushed box, dented can) with no swelling or flatness."                              # D-32
+    - "TST also covers stale, sour or weak taste for any product."                                                                                  # D-33
+    - "DLV is late, stuck or missing delivery. SUB is billing and subscription problems. CSX is slow, absent or looping customer service. PRC is price and value."   # D-33
+
+overrides:
+  # D-32: a can with a seal or freshness defect is TST and never PKG, whatever the model said.
+  - rule: D-32
+    when_all:
+      - ["can", "cans"]
+      - ["swollen", "bulging", "puffed", "bloated", "flat", "fizzless", "no foam"]
+    add: [TST]
+    remove: [PKG]

@@ -98,6 +98,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - **Sarcasm takes its real meaning.** "great, another bloated Brewbird nitro can 🙄 love that for me" is negative.
 - **Mixed text takes the dominant judgement about the product.** "love the taste but filter blend is getting too pricey" is negative, with code PRC.
 - **Plain questions and announcements are neutral.**
+- **Regular use is positive.** A customer saying they use, rebuy or stock up on a product is endorsing it, even with no praise word: "stocked the fridge with Brewbird Nitro cold brew cans for the week" is positive. A notice that a product is available or back in stock is an announcement, so neutral.
 - **Hinglish and other languages are labelled by meaning.** "phool gaya tha, kholte hi flat" means it swelled and was flat on opening, so it is negative.
 
 **D-31 Complaint codes.** Only Brewbird's six codes are used: PKG, TST, PRC, DLV, SUB, CSX. Owners and descriptions come from `client_complaint_taxonomy.csv` verbatim. A negative mention with no matching code gets no code, never a new invented category. A mention may carry more than one code (e.g. a price complaint and a delivery complaint). *Authority: Client.*
@@ -184,3 +185,4 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - 2026-10-13: added D-26 (city tag); D-12 clarified that normalisation never alters stored text.
 - 2026-10-13: D-35 rewritten for model-first labelling with client-rule overrides.
 - 2026-10-13: D-24: "Brewbird beans" alone is brand-level (ER-18, decided by Abhinav); D-15 impact updated to Classic 246, brand-level 152.
+- 2026-10-13: D-30: regular use, repeat purchase or stocking up is positive (Abhinav).

@@ -42,6 +42,18 @@ def cmd_llm_check(args: argparse.Namespace) -> None:
               f"({r.input_tokens} in, {r.output_tokens} out)")
 
 
+def cmd_label(args: argparse.Namespace) -> None:
+    from halyard.ingest.pipeline import prepare
+
+    p = prepare(load_settings())
+    run, labels = p.label_run, p.labels
+    print(f"{len(labels)} distinct texts: {run.cache_hits} answers from the cache, "
+          f"{run.model_calls} model calls, {run.unlabelled} unlabelled, "
+          f"{run.overridden} changed by a client rule.")
+    for label in sorted({x.sentiment for x in labels.values()}):
+        print(f"  {label}: {sum(1 for x in labels.values() if x.sentiment == label)} texts")
+
+
 def cmd_build(args: argparse.Namespace) -> None:
     raise NotBuiltYet("build", "P2")
 
@@ -83,6 +95,9 @@ def parser() -> argparse.ArgumentParser:
 
     sub.add_parser("llm-check", help="one tiny call per configured model").set_defaults(
         func=cmd_llm_check
+    )
+    sub.add_parser("label", help="label new texts and add them to the label cache").set_defaults(
+        func=cmd_label
     )
     sub.add_parser("build", help="wipe and rebuild the graph from the raw pack").set_defaults(
         func=cmd_build

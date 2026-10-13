@@ -26,3 +26,9 @@ page_folders:             # saved web pages, one .md per page
 # D-26: bracketed tags read as a city, e.g. "(Delhi)". Any other bracketed tag is
 # reported by the loader and never guessed at.
 city_tags: [Bangalore, Delhi, Mumbai]
+
+# The client catalogue states prices in INR (column price_inr) and no market. The brand
+# ships across India (brand_site/about.md), so its prices are read as India list prices.
+catalogue:
+  currency: INR
+  region: IN

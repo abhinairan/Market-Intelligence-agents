@@ -157,6 +157,21 @@ class EntityResolver:
         implied = tuple(m[0] for p in self._implied if (m := p.search(text)))
         return Resolution(tuple(brands), tuple(lines), set_aside, implied)
 
+    def brand_named(self, name: str) -> str | None:
+        """The brand whose company name is exactly `name` (advertiser and competitor columns)."""
+        return next((b["key"] for b in self.config["brands"] if b["name"] == name), None)
+
+    def lines_for(self, brand: str, text: str) -> list[tuple[str, str]]:
+        """(line, matched) for a text already known to be this brand's, e.g. its own ad."""
+        hits = []
+        for b in self._brands:
+            if b.key == brand:
+                for ln in b.lines:
+                    hit = _first(ln.standalone + ln.terms, text)
+                    if hit:
+                        hits.append((ln.name, hit))
+        return hits
+
     def _collision(self, brand: str, text: str) -> SetAside | None:
         for kind, c, patterns in self._collisions:
             if c["collides_with"] == brand and (hit := _first(patterns, text)):

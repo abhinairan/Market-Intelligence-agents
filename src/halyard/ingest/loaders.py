@@ -273,13 +273,15 @@ def load_pages(pack_dir: Path, folder: str) -> tuple[PageRecord, ...]:
             raise LoadError(f"{name}: needs a '# title' line and a 'Captured <date> from <url>' line")
         row, m = captured
         where = SourceRef(name, row)
+        body_row = next((i for i in range(row + 1, len(lines) + 1) if lines[i - 1].strip()), row)
         pages.append(
             PageRecord(
                 kind=folder,
                 title=title,
                 captured_at=_date(m[1], where),
                 url=m[2],
-                body="\n".join(lines[row:]).strip(),
+                body="\n".join(lines[body_row - 1 :]).rstrip() if body_row > row else "",
+                body_row=body_row,
                 source=where,
             )
         )

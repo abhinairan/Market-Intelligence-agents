@@ -6,6 +6,7 @@
 # lines[].standalone_terms   refer to the brand and the line on their own
 # lines[].sub_brand the products.csv sub_brand whose product names and aliases are
 #                   added to the line's terms by the pipeline
+# lines[].source    the saved page that states the line is this brand's
 
 brands:
   - key: brewbird
@@ -35,6 +36,7 @@ brands:
     lines:
       - name: Saltmarsh Nitro           # ER-11: "nitro" with Saltmarsh is Saltmarsh's
         terms: ["nitro"]
+        source: competitor_snapshots/saltmarsh_nitro_launch_2026-09-14.md
 
   - key: bluepeak
     name: Bluepeak Roasters

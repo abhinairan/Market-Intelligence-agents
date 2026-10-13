@@ -1,0 +1,13 @@
+# Facts read from saved web pages (brand_site/, competitor_snapshots/). Each match becomes
+# an Observation dated by the page's capture date (D-50). `value` is captured as a number.
+# Patterns are deliberately narrow: a fact that does not match stays readable in the page
+# text (Source.body) and is never guessed.
+
+page_facts:
+  - kind: free_shipping_threshold
+    pattern: 'Free shipping (?:on (?:all )?orders )?above Rs (?P<value>\d+)'
+    currency: INR
+  - kind: launch              # D-55: only a first-party "today launched", so the page's
+    pattern: 'today launched [^,.]+'    # date is the launch date
+  - kind: offer
+    pattern: 'Launch offer: [^.]+'

@@ -108,6 +108,7 @@ class PageRecord:
     captured_at: date  # D-50
     url: str
     body: str
+    body_row: int  # line number of the first line of `body`
     source: SourceRef  # row of the "Captured ... from ..." line
 
 

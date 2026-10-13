@@ -55,7 +55,43 @@ def cmd_label(args: argparse.Namespace) -> None:
 
 
 def cmd_build(args: argparse.Namespace) -> None:
-    raise NotBuiltYet("build", "P2")
+    from collections import Counter
+
+    from halyard.ingest.graph import build_graph
+    from halyard.ingest.pipeline import prepare
+    from halyard.store.neo4j_writer import connect, stored_counts, write_graph
+
+    settings = load_settings()
+    runtime.wait_for_neo4j(settings, timeout_s=10)
+    p = prepare(settings)
+    graph = build_graph(p, settings.client)
+    with connect(settings) as driver:
+        write_graph(graph, driver)
+        stored = stored_counts(driver)
+
+    report, run = p.pack.report, p.label_run
+    print(f"Read {report.mention_rows} mention rows: {len(p.pack.mentions)} unique mentions, "
+          f"{report.duplicate_rows} duplicate rows collapsed.")
+    statuses = Counter(p.statuses.values())
+    print("Mentions by status: " + ", ".join(f"{k} {v}" for k, v in statuses.most_common()) + ".")
+    print(f"Labels: {len(p.labels)} distinct texts, {run.cache_hits} answers from the cache, "
+          f"{run.model_calls} model calls, {run.unlabelled} unlabelled, "
+          f"{run.overridden} changed by a client rule.")
+    for kind in ("nodes", "edges"):
+        print(f"{kind.capitalize()} ({sum(stored[kind].values())}): "
+              + ", ".join(f"{k} {v}" for k, v in sorted(stored[kind].items())))
+    expected = {k: dict(v) for k, v in graph.counts().items()}
+    if stored != expected:
+        raise HalyardError("The database does not hold what was built; see the counts above.")
+
+
+def cmd_ontology(args: argparse.Namespace) -> None:
+    from halyard.settings import PROJECT_ROOT
+    from halyard.store.schema import render_ontology
+
+    path = PROJECT_ROOT / "docs" / "ontology.md"
+    path.write_text(render_ontology(), encoding="utf-8")
+    print(f"Wrote {path.relative_to(PROJECT_ROOT)}.")
 
 
 def cmd_demo(args: argparse.Namespace) -> None:
@@ -65,6 +101,7 @@ def cmd_demo(args: argparse.Namespace) -> None:
         raise HalyardError(f"{key} is empty in .env; the demo needs it for the agents.")
     runtime.up(settings)
     cmd_build(args)
+    raise NotBuiltYet("demo (the sample questions)", "P4")
 
 
 def cmd_ask(args: argparse.Namespace) -> None:
@@ -101,6 +138,9 @@ def parser() -> argparse.ArgumentParser:
     )
     sub.add_parser("build", help="wipe and rebuild the graph from the raw pack").set_defaults(
         func=cmd_build
+    )
+    sub.add_parser("ontology", help="regenerate docs/ontology.md from the schema").set_defaults(
+        func=cmd_ontology
     )
     sub.add_parser("demo", help="up, build, then one sample question per agent").set_defaults(
         func=cmd_demo

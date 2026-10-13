@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from functools import cached_property
+from pathlib import Path
 from typing import Any
 
 from halyard.settings import ClientConfig
@@ -13,9 +14,10 @@ from halyard.tools.filters import Names
 class ToolContext:
     """One per run. Mentions and names are read once and reused by every tool call."""
 
-    def __init__(self, store: GraphStore, client: ClientConfig):
+    def __init__(self, store: GraphStore, client: ClientConfig, tool_log: Path | None = None):
         self.store = store
         self.client = client
+        self.tool_log = tool_log  # where calls are logged and result IDs looked up; None = off
 
     @cached_property
     def mentions(self) -> list[MentionRow]:

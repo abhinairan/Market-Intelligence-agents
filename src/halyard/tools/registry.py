@@ -13,18 +13,17 @@ import json
 from collections.abc import Callable
 from dataclasses import dataclass, fields
 from datetime import datetime
-from pathlib import Path
 from typing import Any
 
-from halyard.settings import PROJECT_ROOT
 from halyard.tools import competitors, mentions, sentiment
 from halyard.tools.base import ToolError, ToolResult
 from halyard.tools.context import ToolContext
+from halyard.tools.coverage import coverage
 from halyard.tools.filters import BRAND_LEVEL, MentionFilter
+from halyard.tools.log import RESULT_PREFIX, record
 from halyard.tools.share_of_voice import share_of_voice
+from halyard.tools.trace import trace
 from halyard.tools.windows import resolve_window
-
-TOOL_LOG = PROJECT_ROOT / "outputs" / "tool_calls.jsonl"
 
 FILTER_PARAMETERS: dict[str, dict[str, Any]] = {
     "brand": {
@@ -117,6 +116,9 @@ TOOLS: dict[str, Tool] = {
             {
                 "ids": {"type": "array", "items": {"type": "string"},
                         "description": "Mention IDs to look up. Filters are ignored."},
+                "result_id": {"type": "string",
+                              "description": "Read the mentions an earlier result counted, by "
+                              "its `R-...` ID. Filters are ignored."},
                 "limit": {"type": "integer", "description": "How many to return. Default 10."},
                 "sort": {"type": "string", "enum": list(mentions.SORTS),
                          "description": "Default `likes`: most liked first."},
@@ -253,14 +255,38 @@ TOOLS: dict[str, Tool] = {
             },
             takes_filter=False,
         ),
+        Tool(
+            "coverage",
+            "What the data does and does not contain. Call it before answering anything that "
+            "may not be in the data (subscriptions, orders, sales, wholesale prices, causes): "
+            "pass the `topic` and it returns whether there is data on it, what was found, and "
+            "what would be needed. With no topic it lists everything the graph holds.",
+            coverage,
+            {"topic": {"type": "string", "description": "What the question needs, in a few "
+                                                        "words, e.g. `subscription "
+                                                        "cancellations`."}},
+            takes_filter=False,
+            takes_window=False,
+        ),
+        Tool(
+            "trace",
+            "Trace IDs back to their source file and row. Takes mention IDs, ad IDs, "
+            "observation keys and result IDs (`R-...`). For a node it shows which values were "
+            "extracted and which inferred, by which rule. For a result ID it returns the "
+            "original call and every mention ID it counted.",
+            trace,
+            {"ids": {"type": "array", "items": {"type": "string"}}},
+            takes_filter=False,
+            takes_window=False,
+            required=("ids",),
+        ),
     )
 }
 
 
-def run_tool(
-    ctx: ToolContext, name: str, args: dict[str, Any], log: Path | None = TOOL_LOG
-) -> dict[str, Any]:
-    """Call a tool with JSON arguments. Returns the result as JSON-ready data with its ID."""
+def run_tool(ctx: ToolContext, name: str, args: dict[str, Any]) -> dict[str, Any]:
+    """Call a tool with JSON arguments. Returns the result as JSON-ready data with its ID.
+    The call is logged whole when the context has a tool log."""
     tool = TOOLS.get(name)
     if tool is None:
         raise ToolError(f"There is no tool named {name!r}. Tools: {', '.join(TOOLS)}.")
@@ -284,11 +310,9 @@ def run_tool(
 
     # The same call over the same graph gets the same ID.
     body = json.dumps({"tool": name, "args": given, "result": result}, sort_keys=True)
-    result_id = "R-" + hashlib.sha256(body.encode()).hexdigest()[:8]
-    if log is not None:
-        log.parent.mkdir(parents=True, exist_ok=True)
+    result_id = RESULT_PREFIX + hashlib.sha256(body.encode()).hexdigest()[:8]
+    if ctx.tool_log is not None:
         entry = {"result_id": result_id, "at": datetime.now().astimezone().isoformat(),
                  "tool": name, "args": given, "result": result}  # fmt: skip
-        with log.open("a") as f:
-            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+        record(ctx.tool_log, entry)
     return {"result_id": result_id} | result

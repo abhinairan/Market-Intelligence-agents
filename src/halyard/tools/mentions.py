@@ -23,6 +23,7 @@ from halyard.tools.filters import (
     resolve_filter,
     select_mentions,
 )
+from halyard.tools.log import find
 from halyard.tools.windows import Window, resolve_window
 
 GROUP_BY = ("line", "brand", "platform", "city", "sentiment", "code", "status", "week", "date")
@@ -155,19 +156,32 @@ def get_mentions(
     flt: MentionFilter | None = None,
     window: Window | None = None,
     ids: list[str] | None = None,
+    result_id: str | None = None,
     limit: int = 10,
     sort: str = "likes",
 ) -> ToolResult:
-    """Mentions by ID (whatever their status), or the ones a filter and window keep."""
+    """Mentions by ID (whatever their status), the ones an earlier result counted, or the
+    ones a filter and window keep."""
     if sort not in SORTS:
         raise ToolError(f"sort must be one of: {', '.join(SORTS)}.")
     if limit < 1:
         raise ToolError("limit must be 1 or more.")
-    if ids:
+    if result_id:
+        logged = find(ctx.tool_log, result_id)
+        if logged is None:
+            raise ToolError(f"There is no logged result {result_id!r}.")
+        counted = set(logged["result"]["mention_ids"])
+        found = sorted(
+            (m for m in ctx.mentions if m.mention_id in counted),
+            key=most_liked if sort == "likes" else earliest,
+        )
+        data: dict[str, Any] = {"result_id": result_id, "from_tool": logged["tool"], "sort": sort}
+        note = f"The mentions counted by result {result_id} ({logged['tool']})."
+    elif ids:
         wanted = list(dict.fromkeys(ids))
         by_id = {m.mention_id: m for m in ctx.mentions if m.mention_id in set(wanted)}
         found = [by_id[i] for i in wanted if i in by_id]
-        data: dict[str, Any] = {"not_found": [i for i in wanted if i not in by_id]}
+        data = {"not_found": [i for i in wanted if i not in by_id]}
         note = "Looked up by mention ID, whatever the mention's status (D-16)."
     else:
         found, flt, window = scope(ctx, flt, window)

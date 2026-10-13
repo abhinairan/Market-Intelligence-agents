@@ -16,7 +16,7 @@ def call():
     client = load_client("brewbird")
     settings = Settings("", "", "", "", "openai", None, "gpt-6-luna", None, client)
     ctx = ToolContext(MemoryStore(build_graph(prepare(settings), client)), client)
-    return lambda name, **args: run_tool(ctx, name, args, log=None)
+    return lambda name, **args: run_tool(ctx, name, args)
 
 
 # --- price_compare --------------------------------------------------------------------

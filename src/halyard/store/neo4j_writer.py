@@ -16,7 +16,11 @@ BATCH = 1000
 
 def connect(settings: Settings) -> Driver:
     return GraphDatabase.driver(
-        settings.neo4j_uri, auth=(settings.neo4j_user, settings.neo4j_password)
+        settings.neo4j_uri,
+        auth=(settings.neo4j_user, settings.neo4j_password),
+        # An edge type the ontology declares can have no instance in a given pack (no double
+        # posts here, D-17). Asking for it is not a mistake, so that warning is switched off.
+        notifications_disabled_categories=["UNRECOGNIZED"],
     )
 
 

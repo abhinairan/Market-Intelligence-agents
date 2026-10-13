@@ -23,7 +23,7 @@ def ctx():
 
 @pytest.fixture(scope="module")
 def call(ctx):
-    return lambda name, **args: run_tool(ctx, name, args, log=None)
+    return lambda name, **args: run_tool(ctx, name, args)
 
 
 def _groups(result):
@@ -121,16 +121,17 @@ def test_registry(ctx, tmp_path):
         assert tool.description and schema["type"] == "object"
         assert all("type" in p for p in schema["properties"].values()), tool.name
     with pytest.raises(ToolError, match="no tool named"):
-        run_tool(ctx, "delete_everything", {}, log=None)
+        run_tool(ctx, "delete_everything", {})
     with pytest.raises(ToolError, match="takes no argument"):
-        run_tool(ctx, "exclusions", {"brand": "brewbird"}, log=None)
+        run_tool(ctx, "exclusions", {"brand": "brewbird"})
     with pytest.raises(ToolError, match="group_by must be one of"):
-        run_tool(ctx, "count_mentions", {"group_by": "mood"}, log=None)
+        run_tool(ctx, "count_mentions", {"group_by": "mood"})
 
     log = tmp_path / "tool_calls.jsonl"
+    logged = ToolContext(ctx.store, ctx.client, tool_log=log)
     args = {"brand": "brewbird", "week": "2026-09-28", "city": None}
-    first = run_tool(ctx, "count_mentions", args, log=log)
-    second = run_tool(ctx, "count_mentions", args, log=log)
+    first = run_tool(logged, "count_mentions", args)
+    second = run_tool(logged, "count_mentions", args)
     assert first["result_id"] == second["result_id"] and first["result_id"].startswith("R-")
     entries = [json.loads(line) for line in log.read_text().splitlines()]
     assert len(entries) == 2 and entries[0]["args"] == {"brand": "brewbird", "week": "2026-09-28"}

@@ -12,6 +12,7 @@ import yaml
 from dotenv import load_dotenv
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+LLM_PROVIDERS = ("openai", "anthropic")
 
 
 class HalyardError(Exception):
@@ -38,7 +39,10 @@ class Settings:
     neo4j_user: str
     neo4j_password: str
     neo4j_http_port: str
-    anthropic_api_key: str | None
+    llm_provider: str
+    llm_api_key: str | None
+    label_model: str | None
+    agent_model: str | None
     client: ClientConfig
 
 
@@ -72,11 +76,17 @@ def load_settings() -> Settings:
     if not password:
         raise HalyardError("NEO4J_PASSWORD is not set. Copy .env.example to .env and fill it in.")
     bolt_port = os.environ.get("NEO4J_BOLT_PORT", "7687")
+    provider = os.environ.get("LLM_PROVIDER", "openai").lower()
+    if provider not in LLM_PROVIDERS:
+        raise HalyardError(f"LLM_PROVIDER must be one of {', '.join(LLM_PROVIDERS)}, not {provider!r}.")
     return Settings(
         neo4j_uri=os.environ.get("NEO4J_URI", f"bolt://localhost:{bolt_port}"),
         neo4j_user=os.environ.get("NEO4J_USER", "neo4j"),
         neo4j_password=password,
         neo4j_http_port=os.environ.get("NEO4J_HTTP_PORT", "7474"),
-        anthropic_api_key=os.environ.get("ANTHROPIC_API_KEY") or None,
+        llm_provider=provider,
+        llm_api_key=os.environ.get(f"{provider.upper()}_API_KEY") or None,
+        label_model=os.environ.get("LABEL_MODEL") or None,
+        agent_model=os.environ.get("AGENT_MODEL") or None,
         client=load_client(os.environ.get("HALYARD_CLIENT", "brewbird")),
     )

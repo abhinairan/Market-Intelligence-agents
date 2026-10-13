@@ -31,8 +31,9 @@ def cmd_build(args: argparse.Namespace) -> None:
 
 def cmd_demo(args: argparse.Namespace) -> None:
     settings = load_settings()
-    if not settings.anthropic_api_key:
-        raise HalyardError("ANTHROPIC_API_KEY is empty in .env; the demo needs it for the agents.")
+    if not settings.llm_api_key:
+        key = f"{settings.llm_provider.upper()}_API_KEY"
+        raise HalyardError(f"{key} is empty in .env; the demo needs it for the agents.")
     runtime.up(settings)
     cmd_build(args)
 

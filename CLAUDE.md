@@ -17,7 +17,7 @@ Brewbird take-home for Zocket (FDE assignment v4): a brand knowledge graph (Neo4
 
 ## Decisions made in chat (not all obvious from the docs)
 - **Docker runtime:** OrbStack on this Mac. Neo4j `5.26-community` via `docker-compose.yml`.
-- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` sets `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6.1-sol`. Anthropic adapter exists too. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`.
+- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` sets `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6.1-sol` (as of 13 Oct the `.env` actually has `AGENT_MODEL=gpt-6-luna` with `gpt-6.1-sol` commented out; see P4 decision 1). Anthropic adapter exists too. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`.
 - **Labelling (PLAN §5a, D-35):** model-first, not rules-first. The label model labels each distinct normalised text; sentiment and codes are separate cached calls; codes only for negative texts; cache key = normalised text + provider + model + hash of the generated prompt (no manual prompt versions); cache `data/cache/labels.jsonl` is append-only and committed. Deterministic client rules run last (TST over PKG for can defects, only the six codes, routing from the taxonomy). Cache miss with no key gives `unlabelled`, never neutral. Mention text is passed as delimited data (M11554 is a planted prompt injection).
 - **Time (D-01):** keep timestamps exactly as exported (`+05:30`); derive `date_ist` and `week_ist` from the local IST clock time. Never convert to UTC before bucketing.
 - **City tag (D-26, added at Abhinav's request):** extract the bracketed city, e.g. "(Delhi)", to `Mention.city` before normalisation. 502 of 1,904 mentions carry one (Bangalore 175, Delhi 167, Mumbai 160).
@@ -44,7 +44,7 @@ uv run halyard trace M10149 R-c9ce8b67   # mention, ad, observation or result ID
 
 ## Progress (as of 13 Oct 2026)
 - **P0 done**, merged and pushed to `main` (`a9a5089`): skeleton, compose, Makefile, CLI, `config/brewbird/client.yaml`.
-- **P2 done**, merged to `main` (not pushed). Branch `p2-pipeline`:
+- **P2 done**, merged to `main` and pushed. Branch `p2-pipeline`:
   - `a272030` PLAN §5a + D-35 rewrite (model-first labelling)
   - `3ea1759` provider-neutral LLM settings; exact brief filename in `.gitignore`
   - `6753896` **P2 step 1 done**: `LLMClient` + OpenAI/Anthropic adapters, usage log `outputs/llm_usage.jsonl`, `halyard llm-check` (live check passed)
@@ -60,7 +60,7 @@ uv run halyard trace M10149 R-c9ce8b67   # mention, ad, observation or result ID
 - Matches the forensics: 987 genuine conversations from 984 authors; Nitro 211, Origins 203, Drip 175; Nitro TST by week 0,0,0,0,7,9,13; last-3-weeks codes TST 36, PRC 23, DLV 16, CSX 11, PKG 8, SUB 7; SOV last 4 weeks 585 / 210 / 198 / 48 (56%, 20%, 19%, 5%); both net-sentiment trends.
 - Explained differences: Classic 246 and brand-level 152 (forensics 280 / 118) because of ER-18; 93 distinct texts, not 108 (RT variants merge); 14 Saltmarsh Nitro ads, not 13.
 
-## P3 done (13 Oct 2026), branch `p3-tools` merged to `main` (not pushed)
+## P3 done (13 Oct 2026), branch `p3-tools` merged to `main` and pushed (`9531e79`)
 Query layer: a store interface, twelve tools, a registry, a call log and `halyard trace`.
 
 **Store** (`src/halyard/store/`)
@@ -91,5 +91,30 @@ Query layer: a store interface, twelve tools, a registry, a call log and `halyar
 - The full list of mention IDs stays in the tool-call log under the result ID. **For P4:** send the agent a capped list plus the result ID; a follow-up gets the IDs back with `get_mentions(result_id=...)` or `trace`.
 - `outputs/tool_calls.jsonl` is git-ignored.
 
-## Next steps: P4 (branch `p4-agents` from `main`, nothing built yet)
-Tool calling in both LLM adapters (translate `Tool.parameters` per provider), the two agents with their skill files, grounding rules, `halyard ask | demo | pulse`, and the Monday pulse for the week of 28 Sep. Done when all 12 golden questions are answered end to end with citations. Stop after each step with a short walkthrough, as in P2 and P3. Then P5 (oracle, eval).
+## Next steps: P4 on branch `p4-agents` (created from `main` at `9531e79`, nothing built yet)
+`main` with P3 is pushed. The approach and steps below were proposed to Abhinav on 13 Oct; he has not yet answered the four decisions. **Start the next session by getting those answers, then begin step 1.** Stop after each step with a short walkthrough, as in P2 and P3.
+
+**Approach (proposed)**
+- One generic agent loop, two configurations. The loop sends the question and the tool list, runs each tool call through `run_tool`, feeds results back, and stops at a final answer or a turn cap. The consumer and competitor agents differ only in skill file and tool subset.
+- Instructions live in skill files (`skills/consumer/`, `skills/competitor/`), as for labelling: instructions, grounding rules, output format. Tool definitions are generated from the registry (`TOOLS`), never copied. This is also the packaging the brief's deliverable 5 asks for.
+- Tool calling goes through `LLMClient`: a new `run_with_tools` (or similar) on the base class, implemented in both adapters, which translate `Tool.parameters` into each provider's tool format. No agent code imports an SDK. Today `LLMClient` only has `complete_json` (OpenAI uses the Responses API with strict JSON schema).
+- Grounding is checked in code: after the model answers, every mention ID and source ref it cites must have been returned by a tool in that run. An invented or uncited ID fails the answer.
+- Carried over from P3: when a question names no brand the skill says to use the client brand and say so; the agent is sent a capped ID list plus the result ID, and follow-ups use `get_mentions(result_id=...)` or `trace`.
+
+**Steps**
+1. `run_with_tools` in `LLMClient` and both adapters, schema translation, usage logged per call. Done when a fake-client test passes for the loop contract and one live call returns a tool call.
+2. Agent loop in `src/halyard/agents/`: turn cap, token cap, tool errors (`ToolError`) fed back to the model, capped results with result IDs, a run transcript. Tested with a scripted fake model.
+3. Consumer skill, `halyard ask consumer`, the citation check. Done when Q1 to Q6 are answered live with correct figures and valid citations, and Q6 declines (D-60).
+4. Competitor skill, `halyard ask competitor`. Done when Q7 to Q12 are answered live; Q11 declines and refuses the login (D-62); Q12 separates shows, suggests and would need (D-61).
+5. `halyard pulse --week 2026-09-28` writing a one-page brief to `outputs/`. It should lead with Nitro TST (13 complaints, QA-owned, with IDs), then what is noise.
+6. `halyard demo`, done-check from a clean clone with a key, spend reported, merge to `main`.
+
+**Decisions awaiting Abhinav (with the recommendation given)**
+1. Agent model. `.env` has `AGENT_MODEL=gpt-6-luna`, not the `gpt-6.1-sol` this file records. Recommended: build and debug on `gpt-6-luna`, then run the 12 questions on both and keep the stronger one only if it answers better.
+2. Structured final answer. Recommended: yes. The last message is JSON (answer text, claims with their cited IDs, a "cannot answer" flag), which makes the citation check exact and gives P5 something to grade; the CLI prints it as text.
+3. Pulse as an agent run or a fixed template. Recommended: an agent run from a pulse-specific skill file with the same tools and citation check, since the brief judges whether it leads with what matters and the eval should test that.
+4. Anthropic adapter. Tool calling will be implemented in both adapters, but only a provider with a key can be tested live. Is there an Anthropic key, or is OpenAI-only live testing fine with Anthropic covered by unit tests?
+
+**Spend:** `outputs/llm_usage.jsonl` has 194 calls, all labelling. P4 is the first phase since labelling that calls the model; report spend after step 3.
+
+After P4: P5 (oracle, golden expected answers, adversarial set, eval report), P6 (outputs and packaging), P7 (clean-clone rehearsal and recording).

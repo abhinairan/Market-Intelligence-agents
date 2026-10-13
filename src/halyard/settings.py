@@ -66,6 +66,11 @@ def load_client(name: str) -> ClientConfig:
     )
 
 
+def _env(name: str) -> str | None:
+    """Optional .env value, trimmed; empty means unset."""
+    return (os.environ.get(name) or "").strip() or None
+
+
 def env_file() -> Path:
     return PROJECT_ROOT / ".env"
 
@@ -85,8 +90,8 @@ def load_settings() -> Settings:
         neo4j_password=password,
         neo4j_http_port=os.environ.get("NEO4J_HTTP_PORT", "7474"),
         llm_provider=provider,
-        llm_api_key=os.environ.get(f"{provider.upper()}_API_KEY") or None,
-        label_model=os.environ.get("LABEL_MODEL") or None,
-        agent_model=os.environ.get("AGENT_MODEL") or None,
+        llm_api_key=_env(f"{provider.upper()}_API_KEY"),
+        label_model=_env("LABEL_MODEL"),
+        agent_model=_env("AGENT_MODEL"),
         client=load_client(os.environ.get("HALYARD_CLIENT", "brewbird")),
     )

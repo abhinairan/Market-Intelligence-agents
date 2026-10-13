@@ -1,0 +1,2 @@
+{"at": "2026-10-13T09:44:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "label", "input_tokens": 40, "output_tokens": 13}
+{"at": "2026-10-13T09:44:13+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "agent", "input_tokens": 40, "output_tokens": 13}

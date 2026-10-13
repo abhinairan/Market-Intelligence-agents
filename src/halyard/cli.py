@@ -25,6 +25,23 @@ def cmd_down(args: argparse.Namespace) -> None:
     print("Neo4j stopped" + (" and its data volume removed." if args.wipe else "."))
 
 
+def cmd_llm_check(args: argparse.Namespace) -> None:
+    from halyard.llm import get_client
+
+    settings = load_settings()
+    schema = {
+        "type": "object",
+        "properties": {"ok": {"type": "boolean"}},
+        "required": ["ok"],
+        "additionalProperties": False,
+    }
+    for purpose in ("label", "agent"):
+        client = get_client(settings, purpose)
+        r = client.complete_json("Reply with ok=true.", "Health check.", schema, "health_check")
+        print(f"{purpose}: {r.provider}/{r.model} ok={r.data['ok']} "
+              f"({r.input_tokens} in, {r.output_tokens} out)")
+
+
 def cmd_build(args: argparse.Namespace) -> None:
     raise NotBuiltYet("build", "P2")
 
@@ -64,6 +81,9 @@ def parser() -> argparse.ArgumentParser:
     down.add_argument("--wipe", action="store_true", help="also delete the Neo4j data volume")
     down.set_defaults(func=cmd_down)
 
+    sub.add_parser("llm-check", help="one tiny call per configured model").set_defaults(
+        func=cmd_llm_check
+    )
     sub.add_parser("build", help="wipe and rebuild the graph from the raw pack").set_defaults(
         func=cmd_build
     )

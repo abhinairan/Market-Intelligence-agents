@@ -11,6 +11,7 @@ window:                   # D-03: inclusive, in IST
   end: 2026-10-04
 as_of: 2026-10-04         # D-03: "last N weeks" ends here, not today
 stale_after_days: 90      # D-52
+anomaly_median_multiple: 2   # D-43: a day above this many times the median day is a spike
 
 # The files of the data pack, relative to data_pack.
 files:

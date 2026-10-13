@@ -129,7 +129,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 **D-41 Share of voice.** *Authority: Ours. This is Dev's answer.*
 - **Formula:** `SOV(brand) = brand's genuine original mentions / sum of the four brands' genuine original mentions` over the window.
 - **What counts:** reposts, spam and unrelated-entity mentions are excluded (reposts are reported next to SOV as a separate reach figure, never added into it), Peak Instant counts for Bluepeak, and mentions naming two brands count for both (D-25).
-- **Reporting:** always show the counts, the exclusions with their sizes, and the naive figure (plain name matching over all rows) next to the counted one.
+- **Reporting:** always show the counts, the exclusions with their sizes and the counting method. The naive figure (plain name matching over all rows) is shown next to the counted one only on request, e.g. when someone asks why the number differs from another vendor's.
 - **Impact, last four weeks:** counted gives Brewbird 56%, Saltmarsh 20%, Bluepeak 19%, Filterhaus 5%. Naive gives Brewbird 66%.
 
 **D-42 Complaint ranking.** Codes are ranked by the number of genuine conversations carrying the code in the window. Ties are broken by code name. Example mentions are chosen deterministically: highest likes, then earliest, and never a repost or spam. *Authority: Ours.*
@@ -186,3 +186,4 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - 2026-10-13: D-35 rewritten for model-first labelling with client-rule overrides.
 - 2026-10-13: D-24: "Brewbird beans" alone is brand-level (ER-18, decided by Abhinav); D-15 impact updated to Classic 246, brand-level 152.
 - 2026-10-13: D-30: regular use, repeat purchase or stocking up is positive (Abhinav).
+- 2026-10-13: D-41: the naive share-of-voice figure is shown on request, not always (Abhinav).

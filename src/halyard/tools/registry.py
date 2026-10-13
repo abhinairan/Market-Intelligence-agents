@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from halyard.settings import PROJECT_ROOT
-from halyard.tools import mentions, sentiment
+from halyard.tools import competitors, mentions, sentiment
 from halyard.tools.base import ToolError, ToolResult
 from halyard.tools.context import ToolContext
 from halyard.tools.filters import BRAND_LEVEL, MentionFilter
@@ -76,6 +76,7 @@ class Tool:
     takes_filter: bool = True
     takes_window: bool = True
     genuine_only: bool = False  # the metric is defined on genuine conversations only
+    required: tuple[str, ...] = ()
 
     @property
     def parameters(self) -> dict[str, Any]:
@@ -90,7 +91,12 @@ class Tool:
             | (WINDOW_PARAMETERS if self.takes_window else {})
             | self.own_parameters
         )
-        return {"type": "object", "properties": properties, "additionalProperties": False}
+        return {
+            "type": "object",
+            "properties": properties,
+            "required": list(self.required),
+            "additionalProperties": False,
+        }
 
 
 TOOLS: dict[str, Tool] = {
@@ -187,6 +193,66 @@ TOOLS: dict[str, Tool] = {
             },
             takes_filter=False,
         ),
+        Tool(
+            "competitor_observations",
+            "Dated facts about a brand from its own pages and the pricing export: prices, "
+            "free-shipping thresholds, launches and offers, each with its capture date and "
+            "age. Also returns changes between observations as date ranges. Use for what a "
+            "competitor launched, charges or changed, and when.",
+            competitors.competitor_observations,
+            {
+                "brand": FILTER_PARAMETERS["brand"],
+                "line": {"type": "string", "description": "Product line, e.g. `Saltmarsh Nitro`."},
+                "kind": {
+                    "type": "string",
+                    "enum": ["price", "free_shipping_threshold", "launch", "offer"],
+                },
+            },
+            takes_filter=False,
+            takes_window=False,
+        ),
+        Tool(
+            "price_compare",
+            "Compare the price of `a` with `b` like with like: same market and currency, per "
+            "unit. Returns the ratio of a's price to b's, each price's date, and any price "
+            "that could not be compared and why. Use for 'what does X cost compared with "
+            "ours' and to check a price claim in an ad.",
+            competitors.price_compare,
+            {
+                "a": {"type": "string", "description": "Product line or product, e.g. "
+                                                       "`Saltmarsh Nitro`."},
+                "b": {"type": "string", "description": "What to compare it with, e.g. "
+                                                       "`Brewbird Nitro`."},
+                "region": {"type": "string", "description": "Market code, e.g. `IN`. Default: "
+                                                            "every market both are priced in."},
+                "claimed_ratio": {
+                    "type": "number",
+                    "description": "A claim to check, as a's price over b's: 0.5 for 'half the "
+                    "price'.",
+                },
+                "include_offers": {
+                    "type": "boolean",
+                    "description": "Also apply a's stated offers, kept apart from list price.",
+                },
+            },
+            takes_filter=False,
+            takes_window=False,
+            required=("a", "b"),
+        ),
+        Tool(
+            "competitor_ads",
+            "Competitor ads from the ad-library export, grouped by headline: how many, on "
+            "which platforms, when first and last seen, whether still running, and any offer. "
+            "Use for what a competitor is advertising and claiming.",
+            competitors.competitor_ads,
+            {
+                "brand": {"type": "string", "description": "The advertiser."},
+                "line": {"type": "string", "description": "Product line the ad promotes."},
+                "text": {"type": "string", "description": "Words to find in the headline or "
+                                                          "offer."},
+            },
+            takes_filter=False,
+        ),
     )
 }
 
@@ -203,6 +269,9 @@ def run_tool(
     if unknown:
         raise ToolError(f"{name} takes no argument {unknown}. It takes: {', '.join(allowed)}.")
     given = {k: v for k, v in args.items() if v is not None}
+    missing = [k for k in tool.required if k not in given]
+    if missing:
+        raise ToolError(f"{name} needs {', '.join(missing)}.")
 
     kwargs = {k: v for k, v in given.items() if k in tool.own_parameters}
     if tool.takes_filter:

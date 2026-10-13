@@ -15,6 +15,12 @@ anomaly_median_multiple: 2   # D-43: a day above this many times the median day 
 sentiment:                # D-40
   min_mentions: 10        # a week with fewer labelled conversations is too few to read
   like_share_gap_points: 10   # flag when negative like share exceeds % negative by this much
+pricing:                  # D-53
+  claim_tolerance: 0.05   # O-5: "half the price" (0.5) holds up to a per-unit ratio of 0.55
+# D-51: a customer mention bounds the date of a change when it is about the brand, states
+# the new value, and uses one of these words. Kinds not listed get no mention evidence.
+change_evidence:
+  free_shipping_threshold: ["shipping"]
 
 # The files of the data pack, relative to data_pack.
 files:

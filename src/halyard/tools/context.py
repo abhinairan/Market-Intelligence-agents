@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from functools import cached_property
+from typing import Any
 
 from halyard.settings import ClientConfig
 from halyard.store.graph_store import GraphStore, MentionRow
@@ -23,6 +24,20 @@ class ToolContext:
     @cached_property
     def names(self) -> Names:
         return Names(self.store)
+
+    @cached_property
+    def products(self) -> dict[str, dict[str, Any]]:
+        """Each product's name, brand and lines, from its OF_BRAND and IN_LINE edges."""
+        products = {}
+        for p in self.store.nodes("Product"):
+            edges = self.store.node("Product", p["key"]).edges
+            products[p["key"]] = {
+                "key": p["key"],
+                "name": p["name"],
+                "brand": next(e.other[1] for e in edges if e.kind == "OF_BRAND"),
+                "lines": tuple(e.other[1] for e in edges if e.kind == "IN_LINE"),
+            }
+        return products
 
     @cached_property
     def code_owners(self) -> dict[str, str]:

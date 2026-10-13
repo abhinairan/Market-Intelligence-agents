@@ -116,7 +116,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 **D-34 Routing.** A complaint's owner is the `owner_team` of its code. TST goes to Quality Assurance, never to Logistics. *Authority: Client.*
 
-**D-35 Label provenance.** Every sentiment and code records how it was assigned: `rule:<id>`, `model:<name>` (fallback for text the rules don't recognise), or `human` (oracle table). *Authority: Brief (provenance).*
+**D-35 Label provenance.** Every sentiment and code records how it was assigned: `model:<name>` with the prompt hash and a one-line reason (the pipeline labels each distinct normalised text with a cached model call, PLAN §5a), `override:<rule id>` when a deterministic client rule (D-31, D-32, D-34) changed the model's output, or `human` (the oracle's reviewed table). A label the pipeline could not assign is `unlabelled`, never defaulted to neutral. *Authority: Brief (provenance).*
 
 ## 5. Metrics
 
@@ -182,3 +182,4 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - 2026-10-12: first draft.
 - 2026-10-12: open calls approved, O-1 changed to exclude; added D-16, D-17 and D-44; tightened D-10, D-11, D-15, D-24 and D-40 (including negative like share).
 - 2026-10-13: added D-26 (city tag); D-12 clarified that normalisation never alters stored text.
+- 2026-10-13: D-35 rewritten for model-first labelling with client-rule overrides.

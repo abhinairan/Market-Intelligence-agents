@@ -1,0 +1,47 @@
+{
+  "id": "Q10",
+  "status": "final",
+  "question": "Has any competitor changed its shipping terms? When?",
+  "kind": "numeric",
+  "answer": {
+    "changed": [
+      {
+        "competitor": "bluepeak",
+        "from_rs": 499,
+        "to_rs": 799,
+        "changed_after": "2025-11-03",
+        "changed_by": "2026-08-18",
+        "evidence": [
+          "competitor_snapshots/bluepeak_shipping_2025-11-03.md",
+          "competitor_snapshots/bluepeak_shipping_2026-09-20.md",
+          "M10049"
+        ],
+        "not_the_change_date": "2026-09-20"
+      }
+    ],
+    "no_change_evidence": [
+      {
+        "competitor": "saltmarsh",
+        "observations": [
+          {
+            "file": "competitor_snapshots/saltmarsh_home_2026-09-15.md",
+            "captured_at": "2026-09-15",
+            "threshold_rs": 499
+          }
+        ]
+      }
+    ],
+    "no_shipping_evidence": [
+      "filterhaus"
+    ]
+  },
+  "rubric": [
+    "Gives the change as a date range, not the 20 Sep capture date.",
+    "Says single or missing snapshots are 'no evidence of change', not 'no change'."
+  ],
+  "rules": [
+    "D-50",
+    "D-51",
+    "D-52"
+  ]
+}

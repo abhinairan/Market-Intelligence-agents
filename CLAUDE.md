@@ -7,7 +7,8 @@ Brewbird take-home for Zocket (FDE assignment v4): a brand knowledge graph (Neo4
 - `docs/definitions.md`: the rulebook (D-xx rule IDs). **Implement the D-rules from this file, never from `oracle/`.** The pipeline and the oracle must stay independent: they share definitions, not code. Cite rule IDs in code comments.
 - `docs/data-observations.md`: forensics pass with the reference figures to check against.
 - `docs/er-log.md`: entity-resolution log (ER-xx), to be kept in step with the pipeline.
-- `docs/review/label_table_draft.csv`: human-reviewed labels for the oracle only (P5). The pipeline never reads it. Abhinav checked it but left `reviewer_ok` blank; treat it as reviewed.
+- `oracle/label_table.csv`: human-reviewed labels for the oracle only (P5), marked reviewed 12 Oct. The pipeline never reads it.
+- `oracle/`: the independent oracle (pandas over the raw CSVs) that writes `eval/expected/`. **Never import from or copy into it**; `tests/test_oracle.py` checks the oracle imports nothing from `src/halyard`.
 
 ## Working agreements
 - One branch per phase, merged to `main` when the phase's "Done when" passes. `main` must always run from a clean clone. Commit only when asked or at the end of an agreed step. Never commit `.env`.

@@ -1,0 +1,267 @@
+{
+  "id": "Q03",
+  "status": "final",
+  "question": "What were the top complaint categories in the last three weeks, using our codes, with two example mentions each?",
+  "kind": "numeric",
+  "window": [
+    "2026-09-14",
+    "2026-10-04"
+  ],
+  "answer": [
+    {
+      "code": "TST",
+      "name": "Taste & freshness",
+      "owner_team": "Quality Assurance",
+      "conversations": 36,
+      "by_line": {
+        "Nitro": 29,
+        "Classic": 4,
+        "Drip": 3
+      },
+      "examples": [
+        {
+          "mention_id": "M11441",
+          "text": "ok so Brewbird Nitro can phool gaya tha, kholte hi flat. Not happy #coffee",
+          "likes": 100
+        },
+        {
+          "mention_id": "M11197",
+          "text": "ok so Brewbird drip bags taste weak unless you use 2 per cup",
+          "likes": 85
+        }
+      ]
+    },
+    {
+      "code": "PRC",
+      "name": "Price & value",
+      "owner_team": "Category",
+      "conversations": 23,
+      "by_line": {
+        "Classic": 12,
+        "Origins": 8,
+        "Nitro": 3
+      },
+      "examples": [
+        {
+          "mention_id": "M11562",
+          "text": "Love the taste but Brewbird filter blend is getting too pricey #coffee",
+          "likes": 108
+        },
+        {
+          "mention_id": "M11226",
+          "text": "love the taste but brewbird filter blend is getting too pricey",
+          "likes": 74
+        }
+      ]
+    },
+    {
+      "code": "DLV",
+      "name": "Delivery delay",
+      "owner_team": "Logistics",
+      "conversations": 16,
+      "by_line": {
+        "Classic": 11,
+        "Nitro": 5
+      },
+      "examples": [
+        {
+          "mention_id": "M11723",
+          "text": "Ordered Brewbird House Espresso beans, tracking stuck for a week (Mumbai)",
+          "likes": 154
+        },
+        {
+          "mention_id": "M11379",
+          "text": "Brewbird Nitro order delayed twice, still waiting #coffee",
+          "likes": 152
+        }
+      ]
+    },
+    {
+      "code": "CSX",
+      "name": "Customer service",
+      "owner_team": "CX",
+      "conversations": 11,
+      "by_line": {
+        "brand-level only": 11
+      },
+      "examples": [
+        {
+          "mention_id": "M11832",
+          "text": "brewbird chat support just loops the same bot answer 👍",
+          "likes": 85
+        },
+        {
+          "mention_id": "M11125",
+          "text": "Brewbird chat support just loops the same bot answer 👍",
+          "likes": 33
+        }
+      ]
+    },
+    {
+      "code": "PKG",
+      "name": "Packaging & transit damage",
+      "owner_team": "Logistics",
+      "conversations": 8,
+      "by_line": {
+        "Nitro": 5,
+        "Drip": 3
+      },
+      "examples": [
+        {
+          "mention_id": "M11813",
+          "text": "Brewbird drip bag pouch was ripped open on delivery",
+          "likes": 37
+        },
+        {
+          "mention_id": "M11520",
+          "text": "update: Courier dented my Brewbird Nitro cans, one was leaking from the dent",
+          "likes": 35
+        }
+      ]
+    },
+    {
+      "code": "SUB",
+      "name": "Subscription & billing",
+      "owner_team": "Growth",
+      "conversations": 7,
+      "by_line": {
+        "brand-level only": 7
+      },
+      "examples": [
+        {
+          "mention_id": "M10946",
+          "text": "PSA: Brewbird charged my subscription twice this month!!",
+          "likes": 54
+        },
+        {
+          "mention_id": "M11515",
+          "text": "ngl cancelled my brewbird subscription but still got billed",
+          "likes": 44
+        }
+      ]
+    }
+  ],
+  "mention_ids": {
+    "TST": [
+      "M10928",
+      "M10964",
+      "M11004",
+      "M11034",
+      "M11078",
+      "M11083",
+      "M11115",
+      "M11143",
+      "M11197",
+      "M11242",
+      "M11311",
+      "M11343",
+      "M11348",
+      "M11384",
+      "M11401",
+      "M11410",
+      "M11418",
+      "M11430",
+      "M11441",
+      "M11508",
+      "M11554",
+      "M11589",
+      "M11604",
+      "M11613",
+      "M11619",
+      "M11632",
+      "M11725",
+      "M11735",
+      "M11741",
+      "M11746",
+      "M11759",
+      "M11773",
+      "M11776",
+      "M11778",
+      "M11782",
+      "M11803"
+    ],
+    "PRC": [
+      "M10930",
+      "M10944",
+      "M10945",
+      "M10958",
+      "M10963",
+      "M10970",
+      "M10973",
+      "M11041",
+      "M11064",
+      "M11220",
+      "M11226",
+      "M11391",
+      "M11420",
+      "M11492",
+      "M11527",
+      "M11535",
+      "M11562",
+      "M11577",
+      "M11600",
+      "M11608",
+      "M11706",
+      "M11713",
+      "M11784"
+    ],
+    "DLV": [
+      "M11010",
+      "M11076",
+      "M11153",
+      "M11165",
+      "M11221",
+      "M11233",
+      "M11238",
+      "M11379",
+      "M11392",
+      "M11580",
+      "M11624",
+      "M11653",
+      "M11656",
+      "M11676",
+      "M11723",
+      "M11732"
+    ],
+    "CSX": [
+      "M10942",
+      "M10998",
+      "M11100",
+      "M11116",
+      "M11125",
+      "M11376",
+      "M11389",
+      "M11474",
+      "M11605",
+      "M11714",
+      "M11832"
+    ],
+    "PKG": [
+      "M10960",
+      "M11087",
+      "M11107",
+      "M11520",
+      "M11649",
+      "M11687",
+      "M11693",
+      "M11813"
+    ],
+    "SUB": [
+      "M10946",
+      "M11117",
+      "M11369",
+      "M11503",
+      "M11515",
+      "M11704",
+      "M11710"
+    ]
+  },
+  "rules": [
+    "D-03",
+    "D-31",
+    "D-32",
+    "D-33",
+    "D-34",
+    "D-42"
+  ]
+}

@@ -33,9 +33,11 @@ def q02(df):
     return {
         "question": "Week by week, how has sentiment toward Brewbird Nitro moved, and how does that compare with the brand overall?",
         "kind": "numeric",
-        "answer": {"nitro": strip(nitro), "brand": strip(brand), "brand_without_nitro": strip(ex)},
+        "answer": {"nitro": strip(nitro), "brand": strip(brand), "brand_without_nitro": strip(ex),
+                   "directions": {"nitro": p.direction(nitro), "brand": p.direction(brand),
+                                  "brand_without_nitro": p.direction(ex)}},
         "mention_ids": {"nitro": {w: s["mention_ids"] for w, s in nitro.items()}},
-        "rules": ["D-01", "D-02", "D-15", "D-30", "D-40"],
+        "rules": ["D-01", "D-02", "D-15", "D-30", "D-40", "D-45"],
     }
 
 

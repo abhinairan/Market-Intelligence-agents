@@ -240,6 +240,50 @@
         "negative_like_share": 21.0,
         "engagement_flag": false
       }
+    },
+    "directions": {
+      "nitro": {
+        "label": "falling",
+        "first_week": "2026-08-17",
+        "last_week": "2026-09-28",
+        "change": -0.6,
+        "moves": [
+          0.2,
+          0.2,
+          -0.2,
+          -0.5,
+          0.0,
+          -0.3
+        ]
+      },
+      "brand": {
+        "label": "steady",
+        "first_week": "2026-08-17",
+        "last_week": "2026-09-28",
+        "change": -0.02,
+        "moves": [
+          0.12,
+          0.0,
+          -0.01,
+          -0.07,
+          -0.05,
+          -0.01
+        ]
+      },
+      "brand_without_nitro": {
+        "label": "mildly rising",
+        "first_week": "2026-08-17",
+        "last_week": "2026-09-28",
+        "change": 0.13,
+        "moves": [
+          0.1,
+          -0.05,
+          0.05,
+          0.04,
+          -0.07,
+          0.06
+        ]
+      }
     }
   },
   "mention_ids": {
@@ -476,6 +520,7 @@
     "D-02",
     "D-15",
     "D-30",
-    "D-40"
+    "D-40",
+    "D-45"
   ]
 }

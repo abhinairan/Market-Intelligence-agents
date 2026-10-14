@@ -112,5 +112,23 @@
     "expected": 0,
     "actual": 0,
     "ok": true
+  },
+  {
+    "check": "Nitro direction (D-45)",
+    "expected": "falling",
+    "actual": "falling",
+    "ok": true
+  },
+  {
+    "check": "brand direction (D-45)",
+    "expected": "steady",
+    "actual": "steady",
+    "ok": true
+  },
+  {
+    "check": "brand without Nitro direction (D-45)",
+    "expected": "mildly rising",
+    "actual": "mildly rising",
+    "ok": true
   }
 ]

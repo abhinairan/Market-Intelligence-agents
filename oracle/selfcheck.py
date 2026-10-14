@@ -2,7 +2,7 @@
 
 If the data, a rule or the label table drifts from what the definitions doc says, this fails.
 """
-from . import rules
+from . import primitives as p, rules
 
 # Figures stated in docs/definitions.md.
 EXPECTED = {
@@ -52,4 +52,14 @@ def run(df) -> list[dict]:
         "mention ids with differing content": df["id_clash"].sum(),
     }
     checks += [{"check": k, "expected": 0, "actual": int(v), "ok": int(v) == 0} for k, v in cross.items()]
+
+    # D-45 impact: Nitro falling, brand steady, brand without Nitro mildly rising.
+    directions = {
+        "Nitro direction (D-45)": (p.weekly_sentiment(df, line="Nitro"), "falling"),
+        "brand direction (D-45)": (p.weekly_sentiment(df), "steady"),
+        "brand without Nitro direction (D-45)": (p.weekly_sentiment(df, exclude_line="Nitro"), "mildly rising"),
+    }
+    for k, (series, want) in directions.items():
+        got = p.direction(series)["label"]
+        checks.append({"check": k, "expected": want, "actual": got, "ok": got == want})
     return checks

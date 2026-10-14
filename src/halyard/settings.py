@@ -44,6 +44,7 @@ class Settings:
     label_model: str | None
     agent_model: str | None
     client: ClientConfig
+    judge_model: str | None = None  # the eval's rubric judge (P5)
 
 
 def load_client(name: str) -> ClientConfig:
@@ -94,4 +95,5 @@ def load_settings() -> Settings:
         label_model=_env("LABEL_MODEL"),
         agent_model=_env("AGENT_MODEL"),
         client=load_client(os.environ.get("HALYARD_CLIENT", "brewbird")),
+        judge_model=_env("JUDGE_MODEL"),
     )

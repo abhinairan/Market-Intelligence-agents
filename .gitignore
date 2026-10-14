@@ -17,3 +17,6 @@ outputs/tool_calls.jsonl
 
 # Agent run transcripts: one file per question asked
 outputs/runs/
+
+# Eval results: one file per `halyard eval` run
+outputs/eval/

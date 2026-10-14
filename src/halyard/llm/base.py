@@ -80,7 +80,7 @@ class LLMClient(ABC):
 
     def __init__(self, model: str, purpose: str, usage_log: Path | None = USAGE_LOG):
         self.model = model
-        self.purpose = purpose  # "label" or "agent", recorded in the usage log
+        self.purpose = purpose  # "label", "agent" or "judge", recorded in the usage log
         self.usage_log = usage_log
 
     @abstractmethod

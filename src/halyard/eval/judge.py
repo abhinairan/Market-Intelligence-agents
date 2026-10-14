@@ -41,9 +41,18 @@ SCHEMA = {
 
 
 def _plain(text: str) -> str:
-    """For finding a quote: one space for any whitespace, straight quotes and dashes, lower case."""
+    """For finding a quote: one space for any whitespace, straight quotes and dashes, no
+    markdown emphasis or code marks, lower case."""
     text = text.translate(str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"', "–": "-", "—": "-", "−": "-"}))
+    text = re.sub(r"[*`]", "", text)
     return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def quote_found(quote: str, haystack: str) -> bool:
+    """Every fragment of the quote (fragments are joined with an ellipsis) is in the answer."""
+    fragments = [_plain(f).strip(" .,;") for f in re.split(r"…|\.\.\.", quote)]
+    fragments = [f for f in fragments if f]
+    return bool(fragments) and all(f in haystack for f in fragments)
 
 
 def answer_payload(answer: dict[str, Any] | None) -> dict[str, Any]:
@@ -80,7 +89,7 @@ def judge(client: LLMClient, case: Case, answer: dict[str, Any] | None) -> dict[
                           "judge_met": None, "quote_found": False})  # fmt: skip
             continue
         quote = v.get("quote", "").strip()
-        found = bool(quote) and _plain(quote) in haystack
+        found = quote_found(quote, haystack)
         items.append({
             "item": text, "met": bool(v["met"]) and found, "quote": quote, "reason": v.get("reason", ""),
             "judge_met": bool(v["met"]), "quote_found": found,

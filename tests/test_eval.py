@@ -121,6 +121,12 @@ def test_judge_counts_a_met_item_only_when_its_quote_is_in_the_answer():
     assert (r["met"], r["of"], r["passed"]) == (2, 3, False)
     assert "<case>" in model.users[0] and "Offers a route." in model.users[0]
 
+    stitched = judge(ScriptedJudge([
+        {"item": 1, "met": True, "quote": "We **cannot** say … subscriptions are on Classic.", "reason": ""},
+        {"item": 2, "met": True, "quote": "We cannot say subscriptions are on Classic.", "reason": "joined"},
+    ]), case, answer)  # fmt: skip
+    assert [x["met"] for x in stitched["items"]] == [True, False, False]
+
     missing = judge(ScriptedJudge([]), case, answer)
     assert missing["met"] == 0 and missing["items"][0]["reason"] == "no verdict from the judge"
 

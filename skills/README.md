@@ -9,11 +9,15 @@ Everything a model is told lives here, apart from the code and apart from the cl
 | `consumer/tools.json` | Its tool schemas, generated from the registry. |
 | `competitor/SKILL.md` | The competitor intelligence agent's instructions and tool list. |
 | `competitor/tools.json` | Its tool schemas, generated from the registry. |
+| `consumer/pulse.md` | The consumer agent's second skill: the Monday pulse, a one-page weekly brief (`halyard pulse --week`). |
+| `consumer/pulse.tools.json` | Its tool schemas, generated from the registry. |
 | `shared/grounding.md` | Grounding rules every agent follows (D-60 to D-64). |
 | `shared/answer_format.md` | The output format every agent uses. |
 
-An agent skill is one `SKILL.md`: front matter with the agent's `name`, `description` and
-the `tools` it may call, then its instructions. `{{name}}` marks a slot filled when the
+An agent's main skill is its `SKILL.md`: front matter with the agent's `name`,
+`description` and the `tools` it may call, then its instructions. An agent can have more
+skills in the same folder, one file each, in the same form (the consumer agent's
+`pulse.md`). `{{name}}` marks a slot filled when the
 agent starts (`src/halyard/agents/skills.py`): `client`, `brand`, `window_start`,
 `window_end` and `as_of` come from the client config and the graph; `grounding` and
 `answer_format` are the shared files. Skills name no brand, product or date themselves, so

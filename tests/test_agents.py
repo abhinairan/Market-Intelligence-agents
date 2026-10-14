@@ -5,7 +5,13 @@ import pytest
 from halyard.agents.citations import citation_check, returned_ids
 from halyard.agents.loop import AgentRun
 from halyard.agents.render import render_run
-from halyard.agents.skills import SKILLS_DIR, TOOLS_FILE, agent_names, load_skill, render_tools
+from halyard.agents.skills import (
+    SKILLS_DIR,
+    load_skill,
+    render_tools,
+    skill_files,
+    tools_path,
+)
 from halyard.ingest.graph import build_graph
 from halyard.ingest.pipeline import prepare
 from halyard.settings import HalyardError, Settings, load_client
@@ -39,10 +45,10 @@ def _answer(text, *claims):
             "claims": [{"claim": c, "cites": list(cites)} for c, cites in claims]}  # fmt: skip
 
 
-@pytest.mark.parametrize("name", agent_names())
-def test_every_skill_loads_with_all_slots_filled(ctx, name):
-    spec = load_skill(name, ctx)
-    assert spec.name == name and "{{" not in spec.instructions
+@pytest.mark.parametrize(("name", "skill"), skill_files())
+def test_every_skill_loads_with_all_slots_filled(ctx, name, skill):
+    spec = load_skill(name, ctx, skill)
+    assert spec.name.startswith(name) and "{{" not in spec.instructions
     assert set(spec.tools) <= set(TOOLS)
     # Client facts arrive through slots, and the shared rules are included.
     assert "Brewbird Coffee Co." in spec.instructions and "`brewbird`" in spec.instructions
@@ -52,16 +58,17 @@ def test_every_skill_loads_with_all_slots_filled(ctx, name):
 def test_skill_files_name_no_client(ctx):
     """A new client must need no change to a skill: no brand, line or date in the files."""
     names = [b["name"].split()[0] for b in ctx.names.brands] + [ln["name"] for ln in ctx.names.lines]
-    for path in [*SKILLS_DIR.glob("*/SKILL.md"), *SKILLS_DIR.glob("shared/*.md")]:
+    agent_files = [SKILLS_DIR / a / f"{s}.md" for a, s in skill_files()]
+    for path in [*agent_files, *SKILLS_DIR.glob("shared/*.md")]:
         text = path.read_text()
         assert not [n for n in names if n in text], path
         assert "2026" not in text and "2025" not in text, path
 
 
-@pytest.mark.parametrize("name", agent_names())
-def test_tools_json_matches_the_registry(name):
-    """`skills/<agent>/tools.json` is generated. Run `halyard skills` if this fails."""
-    assert (SKILLS_DIR / name / TOOLS_FILE).read_text(encoding="utf-8") == render_tools(name)
+@pytest.mark.parametrize(("name", "skill"), skill_files())
+def test_tools_json_matches_the_registry(name, skill):
+    """Each skill's tools file is generated. Run `halyard skills` if this fails."""
+    assert tools_path(name, skill).read_text(encoding="utf-8") == render_tools(name, skill)
 
 
 def test_unknown_agent_is_a_clear_error(ctx):
@@ -120,3 +127,38 @@ def test_render_shows_answer_evidence_and_cost(run):
     assert "cannot answer" in render_run(run) and "Would need: Subscription records." in render_run(run)
     run.answer = run.answer | {"answerable": "partly"}
     assert render_run(run).count("Partly answerable") == 1
+
+
+def test_the_pulse_is_a_skill_of_the_consumer_agent(ctx):
+    assert ("consumer", "pulse") in skill_files()
+    spec = load_skill("consumer", ctx, "pulse")
+    assert spec.name == "consumer (pulse)" and "Monday pulse" in spec.instructions
+    with pytest.raises(HalyardError, match="no skill 'digest'"):
+        load_skill("consumer", ctx, "digest")
+
+
+def test_pulse_week_must_start_a_reporting_week_in_the_data():
+    from halyard.agents.pulse import pulse_request, pulse_week
+
+    client = load_client("brewbird")
+    week = pulse_week(client, "2026-09-28")
+    assert (week.start.isoformat(), week.end.isoformat()) == ("2026-09-28", "2026-10-04")
+    assert "week: 2026-09-28" in pulse_request(week)
+    with pytest.raises(HalyardError, match="starts on 2026-09-28"):
+        pulse_week(client, "2026-09-30")
+    with pytest.raises(HalyardError):
+        pulse_week(client, "2026-10-05")  # after the data ends
+
+
+def test_pulse_is_written_with_its_evidence(run, tmp_path):
+    from halyard.agents.pulse import pulse_week, write_pulse
+
+    week = pulse_week(load_client("brewbird"), "2026-09-28")
+    run.answer = _answer("# Monday pulse: week of 28 Sep\n\nNitro TST 13.", ("13", ["R-1"]))
+    run.status = "answered"
+    text = write_pulse(run, week, tmp_path).read_text()
+    assert text.startswith("# Monday pulse: week of 28 Sep")
+    assert "1. 13 [R-1]" in text and "NOT VERIFIED" not in text
+    run.status = "failed_check"
+    path = write_pulse(run, week, tmp_path)
+    assert path.name == "pulse-2026-09-28.md" and path.read_text().startswith("> NOT VERIFIED")

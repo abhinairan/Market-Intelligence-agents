@@ -162,7 +162,25 @@ def cmd_ask(args: argparse.Namespace) -> None:
 
 
 def cmd_pulse(args: argparse.Namespace) -> None:
-    raise NotBuiltYet("pulse", "P4")
+    from halyard.agents.citations import citation_check
+    from halyard.agents.loop import Limits, run_agent, save_run
+    from halyard.agents.pulse import pulse_request, pulse_week, write_pulse
+    from halyard.agents.skills import load_skill
+    from halyard.llm import get_client
+
+    settings = load_settings()
+    window = pulse_week(settings.client, args.week)
+    client = get_client(settings, "agent")
+    with tool_context() as ctx:
+        spec = load_skill("consumer", ctx, skill="pulse")
+        limits = Limits.from_client(settings.client)
+        run = run_agent(client, ctx, spec, pulse_request(window), limits, citation_check(ctx))
+    transcript = save_run(run)
+    path = write_pulse(run, window)
+    print(path.read_text(encoding="utf-8"))
+    print(f"Wrote {path.relative_to(PROJECT_ROOT)}. Transcript: {transcript.relative_to(PROJECT_ROOT)}")
+    if run.status != "answered":
+        raise HalyardError(f"Run {run.run_id} ended as {run.status}; see the transcript.")
 
 
 @contextmanager

@@ -45,7 +45,8 @@ def test_count_mentions_by_line(call):  # D-15
 
 def test_count_mentions_other_groupings(call):
     by_week = _groups(call("count_mentions", line="Nitro", code="TST", group_by="week"))
-    assert by_week == {"2026-09-14": 7, "2026-09-21": 9, "2026-09-28": 13}
+    assert by_week == {"2026-08-17": 0, "2026-08-24": 0, "2026-08-31": 0, "2026-09-07": 0,
+                       "2026-09-14": 7, "2026-09-21": 9, "2026-09-28": 13}  # fmt: skip
     codes = _groups(call("count_mentions", brand="brewbird", last_weeks=3, group_by="code"))
     del codes["none"]
     assert codes == {"TST": 36, "PRC": 23, "DLV": 16, "CSX": 11, "PKG": 8, "SUB": 7}
@@ -53,6 +54,9 @@ def test_count_mentions_other_groupings(call):
     assert _groups(brands) == {"brewbird": 585, "saltmarsh": 210, "bluepeak": 198, "filterhaus": 48}
     assert sum(_groups(brands).values()) > brands["data"]["total"]  # D-25: two brands, two groups
     assert call("count_mentions", include_excluded=True)["data"]["total"] == 1904  # D-16
+    # An empty group shows as 0: no Nitro conversation names another brand.
+    nitro = _groups(call("count_mentions", line="Nitro", group_by="brand"))
+    assert nitro == {"brewbird": 211, "saltmarsh": 0, "bluepeak": 0, "filterhaus": 0}
 
 
 def test_get_mentions(call):
@@ -265,3 +269,19 @@ def test_share_of_voice_between_chosen_brands(call):
     assert round(data["brands"][0]["share_pct"], 1) == round(100 * 585 / 795, 1)
     with pytest.raises(ToolError, match="at least two"):
         call("share_of_voice", brands=["Brewbird"])
+
+
+def test_get_mentions_reads_page_by_page(call):
+    """At most 50 a call, and the pages together are exactly the full list."""
+    first = call("get_mentions", line="Nitro", limit=500)["data"]
+    assert first["matched"] == 211 and first["returned"] == 50
+    assert (first["limit_capped_at"], first["next_offset"]) == (50, 50)
+    ids, offset = [], 0
+    while offset is not None:
+        page = call("get_mentions", line="Nitro", limit=50, offset=offset)["data"]
+        ids += [m["mention_id"] for m in page["mentions"]]
+        offset = page.get("next_offset")
+    everything = call("count_mentions", line="Nitro")["mention_ids"]
+    assert len(ids) == len(set(ids)) == 211 and set(ids) == set(everything)
+    last = call("get_mentions", line="Nitro", limit=50, offset=200)["data"]
+    assert last["returned"] == 11 and "next_offset" not in last

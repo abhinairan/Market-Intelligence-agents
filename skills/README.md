@@ -7,6 +7,8 @@ Everything a model is told lives here, apart from the code and apart from the cl
 | `labelling/` | The label model's prompts (see its README). |
 | `consumer/SKILL.md` | The consumer intelligence agent's instructions and tool list. |
 | `consumer/tools.json` | Its tool schemas, generated from the registry. |
+| `competitor/SKILL.md` | The competitor intelligence agent's instructions and tool list. |
+| `competitor/tools.json` | Its tool schemas, generated from the registry. |
 | `shared/grounding.md` | Grounding rules every agent follows (D-60 to D-64). |
 | `shared/answer_format.md` | The output format every agent uses. |
 

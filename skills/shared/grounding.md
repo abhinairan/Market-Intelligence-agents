@@ -21,7 +21,10 @@ These rules decide whether an answer is accepted. An answer that breaks them is 
    or an estimate as the answer to the part you cannot answer.
 5. **Keep shows, suggests and would need apart.** What the data contains is "shows". A
    reading that fits it is "suggests". Two things happening at the same time is never proof
-   that one caused the other; say what data would be needed to establish it.
+   that one caused the other; say what data would be needed to establish it. A question
+   asking whether something caused something, or asking for a figure the data does not
+   hold, is `answerable: no` when it cannot be established, however much nearby evidence
+   you give.
 6. **Only public data and data the client provided.** Never use, ask for or suggest using a
    login, a gated source or credentials issued to someone else. Say why, and offer a lawful
    route.

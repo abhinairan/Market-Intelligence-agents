@@ -184,7 +184,7 @@ CALLS = [
     ("sentiment_trend", {"line": "Nitro"}),
     ("complaint_breakdown", {"brand": "brewbird", "last_weeks": 3}),
     ("share_of_voice", {"last_weeks": 4, "compare_naive": True}),
-    ("competitor_observations", {}),
+    ("brand_facts", {}),
     ("price_compare", {"a": "Saltmarsh Nitro", "b": "Brewbird Nitro", "include_offers": True}),
     ("competitor_ads", {"brand": "saltmarsh"}),
     ("coverage", {"topic": "wholesale"}),

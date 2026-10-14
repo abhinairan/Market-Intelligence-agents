@@ -94,7 +94,7 @@ Every tool returns `{data, mention_ids or source_refs, method_note, as_of}`. No 
 | `get_mentions(ids or filters, limit)` | examples, citations |
 | `share_of_voice(brands, window)`: with the method spelled out | Q9 |
 | `price_compare(a, b, basis, region, include_offers)` | Q7, Q8 |
-| `competitor_observations(competitor, kind, as_of)`: with evidence age | Q7, Q10 |
+| `brand_facts(brand, line, kind)`: dated facts for any brand, with evidence age (renamed from `competitor_observations` in P4) | Q7, Q10 |
 | `competitor_ads(advertiser, window, text)` | Q7, Q8 |
 | `trace(ids)`: back to file and row | demo, Dev's question |
 

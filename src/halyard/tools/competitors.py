@@ -66,7 +66,7 @@ def _in_scope(subject: dict[str, Any], brand: str | None, line: str | None) -> b
     return (not brand or subject["brand"] == brand) and (not line or line in subject["lines"])
 
 
-# --- competitor_observations ----------------------------------------------------------
+# --- brand_facts ----------------------------------------------------------------------
 
 
 def _mention_evidence(
@@ -140,7 +140,7 @@ def _launch_support(ctx: ToolContext, line: str) -> dict[str, Any]:
     return support
 
 
-def competitor_observations(
+def brand_facts(
     ctx: ToolContext, brand: str | None = None, line: str | None = None, kind: str | None = None
 ) -> ToolResult:
     """Dated facts about brands (prices, shipping rules, launches, offers), with their age,
@@ -169,6 +169,10 @@ def competitor_observations(
         "changes": changes,
         "seen_only_once": seen_once,
     }
+    if kind is not None and brand is None and line is None:
+        # Brands with nothing of this kind: no evidence, which is not evidence of none.
+        have = {_subject(ctx, o)["brand"] for o in chosen}
+        data["no_facts_for"] = [b["key"] for b in ctx.names.brands if b["key"] not in have]
     note = (
         "Every fact is an observation dated by its source's capture date (D-50); `age_days` is "
         f"counted to the as-of date, and one older than {ctx.client.stale_after_days} days is "
@@ -176,7 +180,9 @@ def competitor_observations(
         "capture date. A change is a date range, from the last observation of the old value "
         "to the earliest evidence of the new one; a customer mention can bound the date but "
         "never supplies the value (D-51). Something in `seen_only_once` has no second "
-        "observation, which is no evidence of a change, not evidence of none. A launch date "
+        "observation, which is no evidence of a change, not evidence of none; a brand in "
+        "`no_facts_for` has no observation of that kind at all, so nothing can be said about "
+        "it either way. A launch date "
         "is the earliest dated first-party statement; ads and mentions only corroborate it "
         "(D-55)."
     )

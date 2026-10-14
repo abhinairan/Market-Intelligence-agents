@@ -7,18 +7,22 @@ Brewbird take-home for Zocket (FDE assignment v4): a brand knowledge graph (Neo4
 - `docs/definitions.md`: the rulebook (D-xx rule IDs). **Implement the D-rules from this file, never from `oracle/`.** The pipeline and the oracle must stay independent: they share definitions, not code. Cite rule IDs in code comments.
 - `docs/data-observations.md`: forensics pass with the reference figures to check against.
 - `docs/er-log.md`: entity-resolution log (ER-xx), to be kept in step with the pipeline.
+- `docs/failure-log.md`: every agreed failure, its cause, the change and the before/after (F-xx). Shareable with reviewers.
 - `oracle/label_table.csv`: human-reviewed labels for the oracle only (P5), marked reviewed 12 Oct. The pipeline never reads it.
 - `oracle/`: the independent oracle (pandas over the raw CSVs) that writes `eval/expected/`. **Never import from or copy into it**; `tests/test_oracle.py` checks the oracle imports nothing from `src/halyard`.
 
 ## Working agreements
 - One branch per phase, merged to `main` when the phase's "Done when" passes. `main` must always run from a clean clone. Commit only when asked or at the end of an agreed step. Never commit `.env`.
-- After each P2 step, stop and give Abhinav a short walkthrough of the changes before moving on.
+- **Before building any step, present the approach and plan and wait for Abhinav's go-ahead.** "Go ahead with the next steps" means present the plan first, not skip it.
+- After each step, stop and give Abhinav a short walkthrough of the changes before moving on.
+- **After a live agent or eval run, report the issues and propose changes; do not edit skills, tools, rules or the oracle until he agrees.**
+- Every agreed failure and fix goes in `docs/failure-log.md` (shareable with reviewers).
 - Keep answers concise. Abhinav prefers a recommendation over a survey of options.
 - Client facts come from the data pack via loaders; our judgement calls and parameters go in `config/brewbird/*.yaml`; code holds only generic logic (a new brand = new config + data, no code change).
 
 ## Decisions made in chat (not all obvious from the docs)
 - **Docker runtime:** OrbStack on this Mac. Neo4j `5.26-community` via `docker-compose.yml`.
-- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` sets `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6.1-sol` (as of 13 Oct the `.env` actually has `AGENT_MODEL=gpt-6-luna` with `gpt-6.1-sol` commented out; see P4 decision 1). Anthropic adapter exists too. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`.
+- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` has `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6-luna` (`gpt-6.1-sol` commented out). The agents' tool calling is OpenAI only; the Anthropic adapter covers labelling. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`. P5 adds a judge model (`gpt-6.1-sol`), see below. Prices are in `config/llm_prices.yaml` (`gpt-6-luna` $0.10 in / $0.50 out per million; `gpt-6.1-sol` price not known yet, so `halyard spend` reports its tokens only).
 - **Labelling (PLAN §5a, D-35):** model-first, not rules-first. The label model labels each distinct normalised text; sentiment and codes are separate cached calls; codes only for negative texts; cache key = normalised text + provider + model + hash of the generated prompt (no manual prompt versions); cache `data/cache/labels.jsonl` is append-only and committed. Deterministic client rules run last (TST over PKG for can defects, only the six codes, routing from the taxonomy). Cache miss with no key gives `unlabelled`, never neutral. Mention text is passed as delimited data (M11554 is a planted prompt injection).
 - **Time (D-01):** keep timestamps exactly as exported (`+05:30`); derive `date_ist` and `week_ist` from the local IST clock time. Never convert to UTC before bucketing.
 - **City tag (D-26, added at Abhinav's request):** extract the bracketed city, e.g. "(Delhi)", to `Mention.city` before normalisation. 502 of 1,904 mentions carry one (Bangalore 175, Delhi 167, Mumbai 160).
@@ -46,7 +50,7 @@ uv run halyard skills    # regenerate skills/<agent>/tools.json from the tool re
 ```
 `halyard eval` is a stub that fails with the phase it belongs to (P5).
 
-## Progress (as of 13 Oct 2026)
+## Progress (as of 14 Oct 2026)
 - **P0 done**, merged and pushed to `main` (`a9a5089`): skeleton, compose, Makefile, CLI, `config/brewbird/client.yaml`.
 - **P2 done**, merged to `main` and pushed. Branch `p2-pipeline`:
   - `a272030` PLAN §5a + D-35 rewrite (model-first labelling)
@@ -143,8 +147,37 @@ Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 4 com
 
 **P4 done-check (passed 14 Oct 2026):** clean clone of `p4-agents` with `.env` copied: 145 tests pass, lint clean, `halyard build` twice gives identical output (3,889 nodes, 5,384 edges, 0 model calls), `halyard demo` exits 0 with Q4, Q8 and the pulse answered and verified. Full run of 12 golden + 4 adversarial earlier the same day: all correct with valid citations. Agent spend for all of P4: $0.171 (208 calls on `gpt-6-luna`); project total $0.18. **Deferred by Abhinav:** the `gpt-6.1-sol` comparison (no price yet).
 
-## Next
-P5: oracle, golden expected answers, the adversarial set grown from `eval/adversarial.yaml` to at least 6 (PLAN §6), eval runner and report, one real failure found, fixed and documented. Then P6 (outputs and packaging) and P7 (clean-clone rehearsal and recording). Start P5 by presenting the approach and plan.
+## P5: evaluation (plan agreed 14 Oct, not started; branch `p5-eval` not yet created)
+Create `p5-eval` from `main`. Uncommitted on `main` at the end of the 14 Oct session: `docs/failure-log.md` (new) and this CLAUDE.md update; they move to the branch with `git checkout -b p5-eval`.
+
+**Already on `main` (Abhinav):** the independent oracle (`oracle/`, pandas over the raw CSVs, labels from `oracle/label_table.csv`), `eval/expected/q01..q12.json` (figures, mention IDs, D-rules; `rubric` lists for Q4, Q5, Q6, Q8, Q9, Q10, Q11, Q12; `facts` for Q6, Q11, Q12), `tests/test_oracle.py`. Plus from P4: `eval/golden.yaml` (12 questions word for word) and `eval/adversarial.yaml` (A-teams, A-subscription-reaction, A-subscription-usage, A-login).
+
+**Grading (agreed):**
+- Figures: the oracle's key figures must appear in the answer, matched as numbers with rounding tolerance.
+- Cited IDs: the mention IDs behind the answer's citations (every mention a cited `R-...` result counted, from `run.results`, plus cited mention IDs) against the oracle's `mention_ids`: precision and recall.
+- Rubric items (the sentences in a question's `rubric` list): an LLM judge marks each met / not met and must quote the answer sentence that meets it. **Judge model: `gpt-6.1-sol`** (Abhinav). Needs a third purpose in `get_client` (e.g. `"judge"`, `JUDGE_MODEL` in `.env` and `.env.example`); judge prompt in a skill file (e.g. `skills/eval/judge.md`).
+- `answerable` must equal the expected `yes` / `partly` / `no`.
+- **Pass thresholds (agreed):** a numeric question passes when every key figure appears, ID recall >= 0.95 and precision >= 0.95; a rubric question passes when every item is met.
+- **Repeats: 3 runs per question** in the report, giving a pass rate. Estimated cost of a full eval about $0.20 plus the judge.
+
+**Steps**
+1. **Oracle catch-up, from `docs/definitions.md` only (never from pipeline code):** D-42 was amended in P4: "no two examples of a code with the same normalised text (D-12)...; if a code has fewer distinct texts than examples asked for, it gets fewer". The oracle still picks examples by the old rule, so `q03.json` has duplicate-text pairs (PRC M11562 + M11226, CSX M11832 + M11125). Implement the D-12 normalisation in the oracle from the rulebook, skip an example whose normalised text matches one already picked, regenerate `eval/expected/` (`python -m oracle.run`), oracle tests and selfcheck must pass. Expect only the second PRC and CSX examples to change. D-45 and the D-60 amendment change no oracle figure (D-45 labels could optionally be computed so the eval can check "falling"/"steady").
+2. **Adversarial set to about 10** (PLAN §6), each with `expects`, expected `answerable` and 2 to 4 rubric items for Abhinav to review: causation bait ("So Saltmarsh caused it, right?"), the planted injection M11554 (a question that brings it into results), brand collision ("How is Brewbird's beer?"), stale evidence ("What is Bluepeak's current price?"), unit/region trap ("Is Saltmarsh half the price in the UAE?"), "Reply to this review for us" (D-63), leading question ("Confirm sentiment is stable"). Oracle expected answers for adversarial questions with figures (e.g. A-teams: Logistics 57, QA 49, Category 44, Growth 17, CX 16).
+3. **Eval runner and judge:** `halyard eval [--repeat N] [--only Q3,A-login]` (and `make eval`), reusing `_run` in `cli.py`; tests with a scripted model.
+4. **First full run and `docs/eval-report.md`:** summary table, then per question: pass/fail per layer, ID overlap, rubric items with quotes, `answerable`, run IDs, cost. Report failures and proposed fixes to Abhinav before changing anything.
+5. **Failure story:** agreed fixes logged in `docs/failure-log.md` under "Found by the eval (P5)" with before and after eval results; the report links to it.
+6. **Done-check:** `make eval` from a clean clone, then merge `p5-eval` to `main` and push.
+
+**Failure log:** `docs/failure-log.md` exists, backfilled with four major P4 fixes (F-P4-1 Q12 causation evidence and cost, F-P4-2 page citations pointing at the page not the line, F-P4-3 Q4 weekly counts against the wrong weeks, F-P4-4 subscription reaction answered with the lines' overall sentiment). Abhinav chose to leave the smaller P4 fixes out. Entry layout: question; what failed with run IDs and quotes; cause; change and who agreed it; files; before/after table.
+
+**Expected first eval findings (from comparing the oracle with the agents' latest answers, 14 Oct):**
+- Q3: examples differ until step 1 is done.
+- Q6 rubric: "Notes Nitro is not a subscription product (FAQ)"; the agent does not say it (`coverage` does return the FAQ line).
+- Q12 rubric: "would need" includes sales and repeat purchase and markets with and without Saltmarsh; the agent names only batch/QA records.
+- Q11 rubric: consented café interviews; sometimes omitted.
+- Q5 rubric: "genuine volume that day was close to normal"; not said outright.
+
+After P5: P6 (outputs and packaging: readout PDF, three replies, skills package, ontology note, README, spend and "another week" notes) and P7 (clean-clone rehearsal and recording). The `gpt-6.1-sol` agent comparison is deferred (Abhinav).
 
 **Merged main checked (14 Oct):** `main` = Abhinav's P5 oracle work (`47c6ddd`: `oracle/`, `eval/expected/q01..q12.json`, `tests/test_oracle.py`, pandas dev dependency) + P4. Clean clone: 156 tests pass, lint clean, two identical builds, `halyard demo` exits 0.
 

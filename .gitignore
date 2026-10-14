@@ -3,3 +3,14 @@ __pycache__/
 *.pyc
 .venv/
 neo4j-data/
+.DS_Store
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+
+# Assignment brief: not ours to publish
+docs/FDE Assignment v4 - Brief (Brewbird).pdf
+
+# Tool-call log: written on every tool call, not needed by a clean clone
+outputs/tool_calls.jsonl

@@ -1,0 +1,24 @@
+# Mention hygiene parameters. Rule IDs refer to docs/definitions.md.
+
+normalise:                # D-12: used for matching keys only, never to change stored text
+  leading_fillers: ["psa:", "ngl", "honestly", "update:", "ok so"]
+  trailing_decorations: ["lol", "!!", "#coffee"]
+  # A trailing bracketed city (client.yaml city_tags) and trailing emoji are also removed.
+
+reposts:                  # D-11 (b) and (c): text markers the export tool did not flag
+  markers:
+    - basis: rt_text
+      pattern: '^RT @(?P<handle>[\w.]+):\s*'
+    - basis: repost_via_text
+      pattern: '\s*#repost via @(?P<handle>[\w.]+)\s*$'
+
+spam:                     # D-13: a burst of identical promotional text
+  min_handles: 5
+  window_hours: 6
+  promo_patterns:         # a coupon code or a shortened link
+    - '\b[A-Z]{2,}\d{2,}\b'
+    - '\b(?:bit\.ly|tinyurl\.com|t\.co|goo\.gl|cutt\.ly)/\S+'
+  account_class: coupon_bot
+
+double_post:              # D-17: same author, text and platform
+  window_hours: 24

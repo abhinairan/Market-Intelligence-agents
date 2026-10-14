@@ -51,7 +51,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - For (b) and (c), the original is the earlier mention **by the quoted handle** with the same normalised text (D-12). This links all 32 in this pack. If no such mention exists, the repost stays unlinked.
 - **Who reposts doesn't matter.** A repost by a different account is amplification of the original, not a new conversation: it adds reach, not a new opinion. Reposts are counted on the original as `repost_count` and reported as reach, never as conversations. A quote-post that adds the reposter's own comment would be a new conversation; there are none in this pack. *Impact: no repost in this pack is by the original author.*
 
-**D-12 Normalised text.** Lower-case. Remove leading filler (`psa:`, `ngl`, `honestly`, `update:`, `ok so`), trailing decoration (a city in brackets, `lol`, `!!`, `#coffee`, emoji), and repost markers. Normalised text is used only for repost linking and for the oracle's label lookup. **Identical normalised text alone never makes something a repost**: different authors post the same short phrases independently. *Authority: Ours.*
+**D-12 Normalised text.** Lower-case. Remove leading filler (`psa:`, `ngl`, `honestly`, `update:`, `ok so`), trailing decoration (a city in brackets, `lol`, `!!`, `#coffee`, emoji), and repost markers. Normalised text is used only for repost linking, the label cache key and the oracle's label lookup; the stored `text` is never altered, and anything stripped that carries meaning is extracted first (the city tag, D-26). **Identical normalised text alone never makes something a repost**: different authors post the same short phrases independently. *Authority: Ours.*
 
 **D-13 Spam / coordinated promotion.** A mention is spam when it belongs to a burst of identical promotional text: at least 5 distinct handles post the same normalised text within 6 hours, and the text carries a coupon code or a shortened link. Spam mentions are kept in the graph with `status = spam`, and their authors get `account_class = coupon_bot`. *Authority: Ours.* *Impact: 84 mentions on 22 Sep, 02:00 to 05:00 IST, from handle families `coupon_kart_*`, `lootbazaar_*` and `dealsloot_*`.*
 
@@ -61,7 +61,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 **D-17 Double posts and cross-posts.** Each post on a **different platform** is its own conversation, even when the same author posts the same text: each one reaches a different audience and draws its own engagement. Only a **double post** counts once: the same author posting the same normalised text (D-12) **on the same platform** within 24 hours. In that case the earliest counts, the other links to it with `DOUBLE_POST_OF`, and both IDs stay in provenance. *Authority: Ours (changed by Abhinav).* *Impact: none in this pack. The rule is here for unseen data.*
 
-**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (984 authors for 987 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: about 987, of which Classic 280, Nitro 211, Origins 203, Drip 175 and brand-level only 118.*
+**D-15 Genuine conversation.** A mention is a **genuine conversation about Brewbird** when all of these hold. "Unique" means unique by D-10 and not a repost by D-11. Each distinct post counts, even when the same author posts more than once: a conversation is a post, not a person. Conversations are always reported alongside the distinct author count (984 authors for 987 conversations; 3 authors post twice) so nobody mistakes one for the other. *Authority: Ours, operationalising Q1.* *Impact: 987, of which Classic 246, Nitro 211, Origins 203, Drip 175 and brand-level only 152.*
 - It is unique (D-10).
 - It is not a repost (D-11) or a double post (D-17).
 - It is not spam (D-13).
@@ -86,9 +86,11 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 **D-23 Ambiguous: "Brewbird pop-up at the Bandra flea".** Nothing in the pack says whether this is the coffee brand or the taproom, and an event at a Mumbai flea market is not conclusive evidence of either. These mentions get `status = ambiguous` with `exclusion_reason = unresolved_entity`. They stay in the graph and are reported among the exclusions, but are not counted for Brewbird. They would be included if the client confirms the pop-up was theirs. *Authority: Ours (O-1, decided by Abhinav).* *Impact: 22 mentions plus 1 repost excluded.*
 
-**D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. A product or line name **without** a Brewbird reference (D-20) is not a Brewbird mention: "nitro", "classic" and "drip bags" are generic, and competitors use them. *Authority: Client aliases.* *Impact: 91 mentions name a line word without "Brewbird"; all 91 are about Saltmarsh Nitro.*
+**D-24 Product line.** A mention maps to a product line when it names the line (Classic, Drip, Nitro, Origins) or an alias or product of that line (e.g. "filter blend" or "espresso beans" → Classic, "Attikan" or "Baba Budangiri" → Origins, "drip bags" → Drip). A mention can map to more than one line. Brewbird mentions that name no line are counted as **brand-level only** and are never assigned to a line by guessing. "Brewbird beans" on its own is brand-level: it names no line or alias (ER-18). A product or line name **without** a Brewbird reference (D-20) is not a Brewbird mention: "nitro", "classic" and "drip bags" are generic, and competitors use them. *Authority: Client aliases.* *Impact: 91 mentions name a line word without "Brewbird"; all 91 are about Saltmarsh Nitro.*
 
 **D-25 Mentions naming two brands.** These count once for each brand they name, e.g. "Saltmarsh vs Bluepeak for French press". Totals across brands may therefore exceed the number of mentions; share of voice says so (D-41). *Authority: Ours.*
+
+**D-26 City tag.** A city in brackets in the text, e.g. "(Delhi)", is extracted to `city` on the mention (title case) before normalisation strips it. It is the city the post names, not a verified author location. A mention without a tag has `city = null` and is never assigned one by guessing; place names inside the text (Pune, Koregaon Park, Bandra) belong to the entity rules (D-22, D-23), not to `city`. Answers broken down by city state how many mentions carry a tag. *Authority: Ours (requested by Abhinav).* *Impact: 502 of 1,904 mentions carry a tag: Bangalore 175, Delhi 167, Mumbai 160. The split is even for Brewbird and for Nitro, so it is not a finding in this pack.*
 
 ## 4. Labels
 
@@ -96,6 +98,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - **Sarcasm takes its real meaning.** "great, another bloated Brewbird nitro can 🙄 love that for me" is negative.
 - **Mixed text takes the dominant judgement about the product.** "love the taste but filter blend is getting too pricey" is negative, with code PRC.
 - **Plain questions and announcements are neutral.**
+- **Regular use is positive.** A customer saying they use, rebuy or stock up on a product is endorsing it, even with no praise word: "stocked the fridge with Brewbird Nitro cold brew cans for the week" is positive. A notice that a product is available or back in stock is an announcement, so neutral.
 - **Hinglish and other languages are labelled by meaning.** "phool gaya tha, kholte hi flat" means it swelled and was flat on opening, so it is negative.
 
 **D-31 Complaint codes.** Only Brewbird's six codes are used: PKG, TST, PRC, DLV, SUB, CSX. Owners and descriptions come from `client_complaint_taxonomy.csv` verbatim. A negative mention with no matching code gets no code, never a new invented category. A mention may carry more than one code (e.g. a price complaint and a delivery complaint). *Authority: Client.*
@@ -114,7 +117,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 **D-34 Routing.** A complaint's owner is the `owner_team` of its code. TST goes to Quality Assurance, never to Logistics. *Authority: Client.*
 
-**D-35 Label provenance.** Every sentiment and code records how it was assigned: `rule:<id>`, `model:<name>` (fallback for text the rules don't recognise), or `human` (oracle table). *Authority: Brief (provenance).*
+**D-35 Label provenance.** Every sentiment and code records how it was assigned: `model:<name>` with the prompt hash and a one-line reason (the pipeline labels each distinct normalised text with a cached model call, PLAN §5a), `override:<rule id>` when a deterministic client rule (D-31, D-32, D-34) changed the model's output, or `human` (the oracle's reviewed table). A label the pipeline could not assign is `unlabelled`, never defaulted to neutral. *Authority: Brief (provenance).*
 
 ## 5. Metrics
 
@@ -126,7 +129,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 **D-41 Share of voice.** *Authority: Ours. This is Dev's answer.*
 - **Formula:** `SOV(brand) = brand's genuine original mentions / sum of the four brands' genuine original mentions` over the window.
 - **What counts:** reposts, spam and unrelated-entity mentions are excluded (reposts are reported next to SOV as a separate reach figure, never added into it), Peak Instant counts for Bluepeak, and mentions naming two brands count for both (D-25).
-- **Reporting:** always show the counts, the exclusions with their sizes, and the naive figure (plain name matching over all rows) next to the counted one.
+- **Reporting:** always show the counts, the exclusions with their sizes and the counting method. The naive figure (plain name matching over all rows) is shown next to the counted one only on request, e.g. when someone asks why the number differs from another vendor's.
 - **Impact, last four weeks:** counted gives Brewbird 56%, Saltmarsh 20%, Bluepeak 19%, Filterhaus 5%. Naive gives Brewbird 66%.
 
 **D-42 Complaint ranking.** Codes are ranked by the number of genuine conversations carrying the code in the window. Ties are broken by code name. Example mentions are chosen deterministically: highest likes, then earliest, and never a repost or spam. *Authority: Ours.*
@@ -179,3 +182,8 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 ## Change log
 - 2026-10-12: first draft.
 - 2026-10-12: open calls approved, O-1 changed to exclude; added D-16, D-17 and D-44; tightened D-10, D-11, D-15, D-24 and D-40 (including negative like share).
+- 2026-10-13: added D-26 (city tag); D-12 clarified that normalisation never alters stored text.
+- 2026-10-13: D-35 rewritten for model-first labelling with client-rule overrides.
+- 2026-10-13: D-24: "Brewbird beans" alone is brand-level (ER-18, decided by Abhinav); D-15 impact updated to Classic 246, brand-level 152.
+- 2026-10-13: D-30: regular use, repeat purchase or stocking up is positive (Abhinav).
+- 2026-10-13: D-41: the naive share-of-voice figure is shown on request, not always (Abhinav).

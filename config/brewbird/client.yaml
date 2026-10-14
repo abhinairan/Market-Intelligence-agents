@@ -1,0 +1,44 @@
+# Brewbird deployment settings. Everything client-specific lives under config/brewbird/;
+# code under src/halyard/ must not hard-code any of it. Rule IDs refer to docs/definitions.md.
+
+client: Brewbird Coffee Co.
+data_pack: data/raw/fde-v4-data-pack
+
+timezone: "+05:30"        # D-01: IST, the offset every export timestamp carries
+week_starts_on: monday    # D-02
+window:                   # D-03: inclusive, in IST
+  start: 2026-08-17
+  end: 2026-10-04
+as_of: 2026-10-04         # D-03: "last N weeks" ends here, not today
+stale_after_days: 90      # D-52
+anomaly_median_multiple: 2   # D-43: a day above this many times the median day is a spike
+sentiment:                # D-40
+  min_mentions: 10        # a week with fewer labelled conversations is too few to read
+  like_share_gap_points: 10   # flag when negative like share exceeds % negative by this much
+pricing:                  # D-53
+  claim_tolerance: 0.05   # O-5: "half the price" (0.5) holds up to a per-unit ratio of 0.55
+# D-51: a customer mention bounds the date of a change when it is about the brand, states
+# the new value, and uses one of these words. Kinds not listed get no mention evidence.
+change_evidence:
+  free_shipping_threshold: ["shipping"]
+
+# The files of the data pack, relative to data_pack.
+files:
+  mentions: mentions.csv
+  products: products.csv
+  taxonomy: client_complaint_taxonomy.csv
+  pricing: competitor_pricing.csv
+  ads: competitor_ads.csv
+page_folders:             # saved web pages, one .md per page
+  - brand_site
+  - competitor_snapshots
+
+# D-26: bracketed tags read as a city, e.g. "(Delhi)". Any other bracketed tag is
+# reported by the loader and never guessed at.
+city_tags: [Bangalore, Delhi, Mumbai]
+
+# The client catalogue states prices in INR (column price_inr) and no market. The brand
+# ships across India (brand_site/about.md), so its prices are read as India list prices.
+catalogue:
+  currency: INR
+  region: IN

@@ -1,0 +1,38 @@
+{
+  "id": "A-subscription-usage",
+  "status": "final",
+  "question": "Are customers using our subscription products?",
+  "kind": "rubric",
+  "answerable": "partly",
+  "facts": {
+    "sub_complaints": 17,
+    "authors": 17,
+    "mention_ids": [
+      "M10068",
+      "M10076",
+      "M10081",
+      "M10172",
+      "M10278",
+      "M10441",
+      "M10555",
+      "M10656",
+      "M10673",
+      "M10790",
+      "M10946",
+      "M11117",
+      "M11369",
+      "M11503",
+      "M11515",
+      "M11704",
+      "M11710"
+    ]
+  },
+  "rubric": [
+    "Says at least some do: posts about being billed or cancelling show their authors subscribe or did, with example IDs.",
+    "Does not turn the posts into a count or share of subscribers.",
+    "Says how many subscribe, and whether that is changing, needs the client's subscription records."
+  ],
+  "rules": [
+    "D-60"
+  ]
+}

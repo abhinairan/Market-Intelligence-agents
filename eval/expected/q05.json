@@ -3,6 +3,7 @@
   "status": "final",
   "question": "What happened on 22 September?",
   "kind": "numeric+rubric",
+  "answerable": "yes",
   "answer": {
     "date": "2026-09-22",
     "total": 132,

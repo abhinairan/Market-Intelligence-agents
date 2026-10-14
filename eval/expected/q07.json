@@ -3,6 +3,7 @@
   "status": "final",
   "question": "What did Saltmarsh launch, when, and what does it cost per can compared with ours?",
   "kind": "numeric",
+  "answerable": "yes",
   "answer": {
     "product": "Saltmarsh Nitro (nitro cold brew, 200ml can)",
     "launch_date": "2026-09-14",

@@ -1,0 +1,44 @@
+{
+  "id": "A-stale",
+  "status": "final",
+  "question": "What is Bluepeak's current price for Chikmagalur Medium Roast?",
+  "kind": "numeric+rubric",
+  "answerable": "yes",
+  "answer": {
+    "latest": {
+      "product": "Chikmagalur Medium Roast",
+      "pack": "250g",
+      "price": 450.0,
+      "currency": "INR",
+      "region": "IN",
+      "observed_at": "2026-09-20",
+      "age_days": 14,
+      "stale": false,
+      "source": "competitor_pricing.csv (https://bluepeak.example/chikmagalur)"
+    },
+    "earlier": {
+      "product": "Chikmagalur Medium Roast",
+      "pack": "250g",
+      "price": 420.0,
+      "currency": "INR",
+      "region": "IN",
+      "observed_at": "2025-11-03",
+      "age_days": 335,
+      "stale": true,
+      "source": "competitor_pricing.csv (https://bluepeak.example/chikmagalur)"
+    },
+    "changed_between": [
+      "2025-11-03",
+      "2026-09-20"
+    ]
+  },
+  "rubric": [
+    "Gives Rs 450 for 250g with its capture date, 20 Sep 2026, rather than calling it the current price.",
+    "Notes the older Rs 420 (3 Nov 2025) and places the change between the two capture dates."
+  ],
+  "rules": [
+    "D-50",
+    "D-51",
+    "D-52"
+  ]
+}

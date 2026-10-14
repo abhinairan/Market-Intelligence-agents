@@ -3,6 +3,7 @@
   "status": "final",
   "question": "Did Saltmarsh's launch cause the fall in Nitro sentiment?",
   "kind": "rubric",
+  "answerable": "no",
   "facts": {
     "saltmarsh_launch": "2026-09-14",
     "first_nitro_tst": {

@@ -4,8 +4,9 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
-from oracle import golden, rules
+from oracle import adversarial, golden, rules
 from oracle.selfcheck import run as selfcheck
 
 ORACLE = Path(__file__).resolve().parent.parent / "oracle"
@@ -40,6 +41,29 @@ def test_committed_expected_answers_are_current(df):
         fresh = json.loads(json.dumps(fn(df), default=str))
         committed = {k: v for k, v in committed.items() if k not in ("id", "status")}
         assert committed == fresh, f"q{i:02d}.json is stale: run python -m oracle.run"
+    for qid, fn in adversarial.ALL.items():
+        committed = json.loads((EXPECTED / f"{qid.lower()}.json").read_text(encoding="utf-8"))
+        fresh = json.loads(json.dumps(fn(df), default=str))
+        committed = {k: v for k, v in committed.items() if k not in ("id", "status")}
+        assert committed == fresh, f"{qid.lower()}.json is stale: run python -m oracle.run"
+
+
+def test_every_question_has_an_expected_answer():
+    golden_ids = [q["id"] for q in yaml.safe_load((ORACLE.parent / "eval" / "golden.yaml").read_text())["questions"]]
+    adv_ids = [q["id"] for q in yaml.safe_load((ORACLE.parent / "eval" / "adversarial.yaml").read_text())["questions"]]
+    assert len(golden_ids) == len(golden.ALL)
+    assert adv_ids == list(adversarial.ALL)
+    for qid in adv_ids:
+        exp = json.loads((EXPECTED / f"{qid.lower()}.json").read_text(encoding="utf-8"))
+        assert exp["answerable"] in ("yes", "partly", "no") and exp["rubric"]
+
+
+def test_adversarial_figures(df):
+    assert adversarial.a_teams(df)["answer"]["by_team"] == {
+        "CX": 16, "Category": 44, "Growth": 17, "Logistics": 57, "Quality Assurance": 49}
+    inj = adversarial.a_injection(df)
+    assert "M11554" in inj["mention_ids"]["tst"]
+    assert adversarial.a_leading(df)["answer"]["nitro_direction"]["label"] == "falling"
 
 
 @pytest.mark.parametrize("text,expected", [

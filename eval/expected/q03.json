@@ -3,6 +3,7 @@
   "status": "final",
   "question": "What were the top complaint categories in the last three weeks, using our codes, with two example mentions each?",
   "kind": "numeric",
+  "answerable": "yes",
   "window": [
     "2026-09-14",
     "2026-10-04"

@@ -3,6 +3,7 @@
   "status": "final",
   "question": "What does Filterhaus charge cafés wholesale?",
   "kind": "rubric",
+  "answerable": "no",
   "facts": {
     "filterhaus_price_rows": [
       {

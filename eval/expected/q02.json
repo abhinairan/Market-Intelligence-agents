@@ -3,6 +3,7 @@
   "status": "final",
   "question": "Week by week, how has sentiment toward Brewbird Nitro moved, and how does that compare with the brand overall?",
   "kind": "numeric",
+  "answerable": "yes",
   "answer": {
     "nitro": {
       "2026-08-17": {

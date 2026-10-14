@@ -3,6 +3,7 @@
   "status": "final",
   "question": "Has any competitor changed its shipping terms? When?",
   "kind": "numeric",
+  "answerable": "yes",
   "answer": {
     "changed": [
       {

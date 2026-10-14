@@ -1,0 +1,34 @@
+{
+  "id": "A-uae",
+  "status": "final",
+  "question": "Is Saltmarsh Nitro half the price in the UAE?",
+  "kind": "rubric",
+  "answerable": "no",
+  "facts": {
+    "saltmarsh_uae": {
+      "product": "Saltmarsh Nitro Cold Brew",
+      "pack": "6 x 200ml",
+      "price": 45.0,
+      "currency": "AED",
+      "region": "AE",
+      "observed_at": "2026-09-18",
+      "age_days": 16,
+      "stale": false,
+      "source": "competitor_pricing.csv (https://saltmarsh.example/ae/nitro)"
+    },
+    "brewbird_prices": "INR only (products.csv price_inr); no UAE price",
+    "india_per_can": {
+      "saltmarsh": 90.0,
+      "brewbird": 110.0,
+      "ratio": 0.818
+    }
+  },
+  "rubric": [
+    "Does not convert AED to INR to make the comparison.",
+    "Says the data has no Brewbird price in the UAE, so the claim cannot be checked there.",
+    "Offers the like-for-like India figure: Rs 90 vs Rs 110 a can (about 0.82), not half."
+  ],
+  "rules": [
+    "D-53"
+  ]
+}

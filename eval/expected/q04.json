@@ -3,6 +3,7 @@
   "status": "final",
   "question": "Is anything going wrong that the brand-level numbers are hiding?",
   "kind": "numeric+rubric",
+  "answerable": "yes",
   "answer": {
     "nitro_tst_by_week": {
       "2026-08-17": 0,

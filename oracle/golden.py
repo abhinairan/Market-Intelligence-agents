@@ -17,6 +17,7 @@ def q01(df):
     return {
         "question": "How many unique, genuine conversations about Brewbird were there between 17 August and 4 October, broken down by product line?",
         "kind": "numeric",
+        "answerable": "yes",
         "answer": {"total": c["total"], "authors": c["authors"],
                    "by_line": {k: v["conversations"] for k, v in c["by_line"].items()}},
         "excluded": {k: v["count"] for k, v in p.exclusions(df).items()},
@@ -33,6 +34,7 @@ def q02(df):
     return {
         "question": "Week by week, how has sentiment toward Brewbird Nitro moved, and how does that compare with the brand overall?",
         "kind": "numeric",
+        "answerable": "yes",
         "answer": {"nitro": strip(nitro), "brand": strip(brand), "brand_without_nitro": strip(ex),
                    "directions": {"nitro": p.direction(nitro), "brand": p.direction(brand),
                                   "brand_without_nitro": p.direction(ex)}},
@@ -47,6 +49,7 @@ def q03(df):
     return {
         "question": "What were the top complaint categories in the last three weeks, using our codes, with two example mentions each?",
         "kind": "numeric",
+        "answerable": "yes",
         "window": [str(weeks[0]), "2026-10-04"],
         "answer": [{k: r[k] for k in ("code", "name", "owner_team", "conversations", "by_line", "examples")} for r in rank],
         "mention_ids": {r["code"]: r["mention_ids"] for r in rank},
@@ -63,6 +66,7 @@ def q04(df):
     return {
         "question": "Is anything going wrong that the brand-level numbers are hiding?",
         "kind": "numeric+rubric",
+        "answerable": "yes",
         "answer": {
             "nitro_tst_by_week": {w: v["count"] for w, v in tst.items()},
             "nitro_pct_negative": pick(nitro, "pct_negative"),
@@ -86,6 +90,7 @@ def q05(df):
     return {
         "question": "What happened on 22 September?",
         "kind": "numeric+rubric",
+        "answerable": "yes",
         "answer": day,
         "mention_ids": {"spam": day["spam"]["mention_ids"]},
         "rubric": [
@@ -110,6 +115,7 @@ def q06(df):
     return {
         "question": "How many of the people complaining about Nitro have cancelled their subscription?",
         "kind": "rubric",
+        "answerable": "no",
         "facts": {
             "subscription_or_order_files_in_pack": sub_files,
             "faq_subscriptions_line": faq_line.strip(),
@@ -147,6 +153,7 @@ def q07(df):
     return {
         "question": "What did Saltmarsh launch, when, and what does it cost per can compared with ours?",
         "kind": "numeric",
+        "answerable": "yes",
         "answer": {
             "product": "Saltmarsh Nitro (nitro cold brew, 200ml can)",
             "launch_date": str(launch), "launch_source": src,
@@ -173,6 +180,7 @@ def q08(df):
     return {
         "question": "Is Saltmarsh's \"half the price\" claim accurate?",
         "kind": "numeric+rubric",
+        "answerable": "yes",
         "answer": {
             "verdict": "not accurate",
             "list_ratio": round(sm_can / bb_can, 3), "offer_ratio": round(offer_can / bb_can, 3),
@@ -196,6 +204,7 @@ def q09(df):
     return {
         "question": "What is our share of voice against Saltmarsh, Bluepeak and Filterhaus over the last four weeks? Say exactly how you counted.",
         "kind": "numeric",
+        "answerable": "yes",
         "answer": {
             "weeks": sov["weeks"],
             "counted_share_pct": {b: v["share_pct"] for b, v in sov["counted"].items()},
@@ -235,6 +244,7 @@ def q10(df):
     return {
         "question": "Has any competitor changed its shipping terms? When?",
         "kind": "numeric",
+        "answerable": "yes",
         "answer": {"changed": changes, "no_change_evidence": unchanged,
                    "no_shipping_evidence": [c for c in ("filterhaus",) if c not in by_comp]},
         "rubric": ["Gives the change as a date range, not the 20 Sep capture date.",
@@ -251,6 +261,7 @@ def q11(df):
     return {
         "question": "What does Filterhaus charge cafés wholesale?",
         "kind": "rubric",
+        "answerable": "no",
         "facts": {
             "filterhaus_price_rows": fh,
             "wholesale_rows": [o for o in fh if "wholesale" in o["product"].lower() or "trade" in o["product"].lower()],
@@ -277,6 +288,7 @@ def q12(df):
     return {
         "question": "Did Saltmarsh's launch cause the fall in Nitro sentiment?",
         "kind": "rubric",
+        "answerable": "no",
         "facts": {
             "saltmarsh_launch": str(launch),
             "first_nitro_tst": {"mention_id": nitro_tst.iloc[0]["mention_id"], "date": str(nitro_tst.iloc[0]["date_ist"])},

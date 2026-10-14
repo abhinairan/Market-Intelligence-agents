@@ -132,7 +132,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - **Reporting:** always show the counts, the exclusions with their sizes and the counting method. The naive figure (plain name matching over all rows) is shown next to the counted one only on request, e.g. when someone asks why the number differs from another vendor's.
 - **Impact, last four weeks:** counted gives Brewbird 56%, Saltmarsh 20%, Bluepeak 19%, Filterhaus 5%. Naive gives Brewbird 66%.
 
-**D-42 Complaint ranking.** Codes are ranked by the number of genuine conversations carrying the code in the window. Ties are broken by code name. Example mentions are chosen deterministically: highest likes, then earliest, and never a repost or spam. *Authority: Ours.*
+**D-42 Complaint ranking.** Codes are ranked by the number of genuine conversations carrying the code in the window. Ties are broken by code name. Example mentions are chosen deterministically: highest likes, then earliest, never a repost or spam, and no two examples of a code with the same normalised text (D-12), so two examples show two different complaints. If a code has fewer distinct texts than examples asked for, it gets fewer examples. *Authority: Ours.*
 
 **D-43 Spikes and anomalies.** A day is anomalous if its total mentions exceed 2× the window's median daily count. An anomaly is always explained by decomposing it into genuine conversations vs spam, reposts and unrelated mentions before saying anything about the brand. *Authority: Ours.*
 
@@ -143,6 +143,8 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - `likes`: the total likes on genuine conversations, labelled "likes at capture time", since the export took a single snapshot.
 
 *Authority: Ours.* *Impact: 39 Brewbird reposts against 987 conversations, about 4 per 100.*
+
+**D-45 Direction of a trend.** A weekly sentiment series gets one direction label, computed from its `net` scores, so "rising" or "falling" is a rule and not a model's choice of word. Only weeks that can be read (D-40) count, and at least 3 are needed; otherwise the label is "too few weeks". `change` is the last readable week's net minus the first's. A change smaller than 0.10 is **steady**. A change of 0.20 or more, with at least half the week-to-week moves going the same way, is **rising** or **falling**. Anything in between, or a large change with uneven moves, is **mildly rising** or **mildly falling**. The label always comes with the first and last weeks, the change and the moves, so the reader can judge. Thresholds are in `client.yaml` (`sentiment.direction`). *Authority: Ours (asked for by Abhinav, 14 Oct). Impact: Nitro falling (.33 to -.27); brand steady (.33 to .31); brand without Nitro mildly rising (.32 to .45).*
 
 ## 6. Competitor evidence
 
@@ -166,7 +168,7 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 
 ## 7. Answerability
 
-**D-60 Decline when the data isn't there.** If no source in the graph can answer a question, the agent says it can't answer, names what data would be needed, and offers the nearest thing it can answer. It never estimates from proxies presented as the answer. *Authority: Brief.*
+**D-60 Decline when the data isn't there.** If no source in the graph can answer a question, the agent says it can't answer, names what data would be needed, and offers the nearest thing it can answer. It never estimates from proxies presented as the answer. When only part of a question needs data that isn't there, the agent declines that part and answers the rest: a post is evidence that its author did or said something (so posts about being billed for a subscription show that those authors subscribe), never a count of how many people did. *Authority: Brief.*
 - Example: Q6. There is no subscription or order data, and Nitro is not a subscription product (brand_site/faq.md). One public post by someone who complained about Nitro and also mentioned cancelling is not a cancellation record.
 
 **D-61 Cause needs more than timing.** The agent separates **shows** (what the data contains), **suggests** (an interpretation consistent with it) and **would need** (the data that could establish cause). Co-timing is never presented as cause. *Authority: Brief.*
@@ -187,3 +189,6 @@ These are our judgement calls. Abhinav approved O-2 to O-6 as proposed and chang
 - 2026-10-13: D-24: "Brewbird beans" alone is brand-level (ER-18, decided by Abhinav); D-15 impact updated to Classic 246, brand-level 152.
 - 2026-10-13: D-30: regular use, repeat purchase or stocking up is positive (Abhinav).
 - 2026-10-13: D-41: the naive share-of-voice figure is shown on request, not always (Abhinav).
+- 2026-10-14: D-42: no two examples of a code share the same normalised text (Abhinav).
+- 2026-10-14: added D-45 (direction of a trend) (Abhinav).
+- 2026-10-14: D-60: decline only the part of a question the data cannot answer; a post is evidence of what its author did, never a count of people (Abhinav).

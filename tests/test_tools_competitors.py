@@ -1,4 +1,4 @@
-"""competitor_observations, price_compare and competitor_ads (P3 step 5)."""
+"""brand_facts, price_compare and competitor_ads (P3 step 5)."""
 
 import pytest
 
@@ -74,11 +74,11 @@ def test_price_compare_by_weight_and_with_history(call):
         call("price_compare", a="Saltmarsh Nitro")
 
 
-# --- competitor_observations ----------------------------------------------------------
+# --- brand_facts ---------------------------------------------------------------------
 
 
 def test_a_change_is_a_date_range_not_a_capture_date(call):  # D-51
-    r = call("competitor_observations", kind="free_shipping_threshold")
+    r = call("brand_facts", kind="free_shipping_threshold")
     (change,) = r["data"]["changes"]
     assert change["brand"] == "bluepeak"
     assert (change["from"]["value"], change["to"]["value"]) == (499, 799)
@@ -88,10 +88,13 @@ def test_a_change_is_a_date_range_not_a_capture_date(call):  # D-51
     assert evidence["mention_id"] == "M10049" and r["mention_ids"] == ["M10049"]
     # One observation is no evidence of a change, not evidence of none.
     assert {s["brand"] for s in r["data"]["seen_only_once"]} == {"brewbird", "saltmarsh"}
+    # A tracked brand with no shipping fact at all is named, not silently left out.
+    assert r["data"]["no_facts_for"] == ["filterhaus"]
+    assert "no_facts_for" not in call("brand_facts", brand="Bluepeak", kind="price")["data"]
 
 
 def test_observations_carry_their_age(call):  # D-50, D-52
-    data = call("competitor_observations", brand="Bluepeak")["data"]
+    data = call("brand_facts", brand="Bluepeak")["data"]
     by_ref = {o["source_ref"]: o for o in data["observations"]}
     old = by_ref["competitor_snapshots/bluepeak_shipping_2025-11-03.md:4"]
     assert old["stale"] is True and old["age_days"] == 335
@@ -100,11 +103,11 @@ def test_observations_carry_their_age(call):  # D-50, D-52
     assert [(c["from"]["value"], c["to"]["value"]) for c in prices] == [(420, 450)]
     assert prices[0]["changed_between"] == {"after": "2025-11-03", "on_or_before": "2026-09-20"}
     with pytest.raises(ToolError, match="not a kind of observation"):
-        call("competitor_observations", kind="wholesale_price")
+        call("brand_facts", kind="wholesale_price")
 
 
 def test_launch_is_dated_by_the_first_party_statement(call):  # D-55
-    r = call("competitor_observations", line="Saltmarsh Nitro", kind="launch")
+    r = call("brand_facts", line="Saltmarsh Nitro", kind="launch")
     (launch,) = r["data"]["observations"]
     assert launch["observed_at"] == "2026-09-14" and launch["text"].startswith("today launched")
     support = launch["corroborated_by"]

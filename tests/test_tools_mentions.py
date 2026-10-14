@@ -45,7 +45,8 @@ def test_count_mentions_by_line(call):  # D-15
 
 def test_count_mentions_other_groupings(call):
     by_week = _groups(call("count_mentions", line="Nitro", code="TST", group_by="week"))
-    assert by_week == {"2026-09-14": 7, "2026-09-21": 9, "2026-09-28": 13}
+    assert by_week == {"2026-08-17": 0, "2026-08-24": 0, "2026-08-31": 0, "2026-09-07": 0,
+                       "2026-09-14": 7, "2026-09-21": 9, "2026-09-28": 13}  # fmt: skip
     codes = _groups(call("count_mentions", brand="brewbird", last_weeks=3, group_by="code"))
     del codes["none"]
     assert codes == {"TST": 36, "PRC": 23, "DLV": 16, "CSX": 11, "PKG": 8, "SUB": 7}
@@ -53,6 +54,9 @@ def test_count_mentions_other_groupings(call):
     assert _groups(brands) == {"brewbird": 585, "saltmarsh": 210, "bluepeak": 198, "filterhaus": 48}
     assert sum(_groups(brands).values()) > brands["data"]["total"]  # D-25: two brands, two groups
     assert call("count_mentions", include_excluded=True)["data"]["total"] == 1904  # D-16
+    # An empty group shows as 0: no Nitro conversation names another brand.
+    nitro = _groups(call("count_mentions", line="Nitro", group_by="brand"))
+    assert nitro == {"brewbird": 211, "saltmarsh": 0, "bluepeak": 0, "filterhaus": 0}
 
 
 def test_get_mentions(call):
@@ -158,6 +162,20 @@ def test_sentiment_trend_for_a_line_and_its_brand(call):  # D-40
     assert len(r["mention_ids"]) == 211 and data["overall"]["n"] == 211
 
 
+def test_sentiment_trend_direction_labels(call):  # D-45
+    d = call("sentiment_trend", line="Nitro")["data"]["directions"]
+    assert (d["weeks"]["label"], d["weeks"]["change"]) == ("falling", -0.6)
+    assert d["weeks"]["moves_the_same_way"] == "3 of 6"
+    assert d["brand_overall"]["label"] == "steady"
+    assert (d["brand_without_this_line"]["label"], d["brand_without_this_line"]["change"]) == (
+        "mildly rising", 0.13,
+    )  # fmt: skip
+    by_line = call("sentiment_trend", brand="brewbird", split_by_line=True)["data"]["directions"]
+    assert by_line["by_line"]["brewbird:Nitro"]["label"] == "falling"
+    small = call("sentiment_trend", line="Nitro", city="Delhi")["data"]["directions"]["weeks"]
+    assert small["label"] == "too few weeks"
+
+
 def test_sentiment_trend_flags_complaints_that_draw_outsized_likes(call):  # D-40
     weeks = call("sentiment_trend", line="Nitro")["data"]["weeks"]
     flagged = [w["week"] for w in weeks if w.get("complaints_draw_outsized_likes")]
@@ -191,6 +209,9 @@ def test_complaint_breakdown(call):  # D-42, D-34
     assert tst["client_rule"]  # the client's routing rule, verbatim
     assert all(len(c["examples"]) == 2 for c in codes)
     assert tst["examples"][0]["likes"] >= tst["examples"][1]["likes"]
+    # D-42: two examples of a code are two different complaints, not one text posted twice.
+    for c in codes:
+        assert len({e["text"].lower().strip() for e in c["examples"]}) == 2, c["code"]
     assert r["source_refs"][0].startswith("client_complaint_taxonomy.csv:")
 
     nitro = call("complaint_breakdown", line="Nitro", top_n=1, examples=0)["data"]["codes"]
@@ -248,3 +269,19 @@ def test_share_of_voice_between_chosen_brands(call):
     assert round(data["brands"][0]["share_pct"], 1) == round(100 * 585 / 795, 1)
     with pytest.raises(ToolError, match="at least two"):
         call("share_of_voice", brands=["Brewbird"])
+
+
+def test_get_mentions_reads_page_by_page(call):
+    """At most 50 a call, and the pages together are exactly the full list."""
+    first = call("get_mentions", line="Nitro", limit=500)["data"]
+    assert first["matched"] == 211 and first["returned"] == 50
+    assert (first["limit_capped_at"], first["next_offset"]) == (50, 50)
+    ids, offset = [], 0
+    while offset is not None:
+        page = call("get_mentions", line="Nitro", limit=50, offset=offset)["data"]
+        ids += [m["mention_id"] for m in page["mentions"]]
+        offset = page.get("next_offset")
+    everything = call("count_mentions", line="Nitro")["mention_ids"]
+    assert len(ids) == len(set(ids)) == 211 and set(ids) == set(everything)
+    last = call("get_mentions", line="Nitro", limit=50, offset=200)["data"]
+    assert last["returned"] == 11 and "next_offset" not in last

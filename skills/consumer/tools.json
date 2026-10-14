@@ -1,0 +1,467 @@
+[
+  {
+    "name": "count_mentions",
+    "description": "Count consumer mentions, optionally grouped. Use for any 'how many' question about conversations. Returns the total, the distinct authors and the mention IDs counted.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+        },
+        "line": {
+          "type": "string",
+          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform as the export names it."
+        },
+        "city": {
+          "type": "string",
+          "description": "City tag on the mention; most have none."
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "unlabelled"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "description": "One of the client's complaint codes, e.g. `TST`."
+        },
+        "include_excluded": {
+          "type": "boolean",
+          "description": "Also count reposts, spam and unrelated mentions. Default false: only genuine conversations are counted."
+        },
+        "start": {
+          "type": "string",
+          "description": "First day, YYYY-MM-DD. Default: start of data."
+        },
+        "end": {
+          "type": "string",
+          "description": "Last day, YYYY-MM-DD. Default: end of data."
+        },
+        "last_weeks": {
+          "type": "integer",
+          "description": "The N most recent full reporting weeks. Use instead of start and end."
+        },
+        "week": {
+          "type": "string",
+          "description": "Any day of one reporting week, YYYY-MM-DD. Use instead of start and end."
+        },
+        "group_by": {
+          "type": "string",
+          "enum": [
+            "line",
+            "brand",
+            "platform",
+            "city",
+            "sentiment",
+            "code",
+            "status",
+            "week",
+            "date"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_mentions",
+    "description": "Read mentions: their text, author, date, sentiment, complaint codes and status. Use for examples and quotes, or pass `ids` to look up specific mentions. To test a pattern, count with `count_mentions` and `group_by` instead. Returns one page at a time; `next_offset` reads the next.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+        },
+        "line": {
+          "type": "string",
+          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform as the export names it."
+        },
+        "city": {
+          "type": "string",
+          "description": "City tag on the mention; most have none."
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "unlabelled"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "description": "One of the client's complaint codes, e.g. `TST`."
+        },
+        "include_excluded": {
+          "type": "boolean",
+          "description": "Also count reposts, spam and unrelated mentions. Default false: only genuine conversations are counted."
+        },
+        "start": {
+          "type": "string",
+          "description": "First day, YYYY-MM-DD. Default: start of data."
+        },
+        "end": {
+          "type": "string",
+          "description": "Last day, YYYY-MM-DD. Default: end of data."
+        },
+        "last_weeks": {
+          "type": "integer",
+          "description": "The N most recent full reporting weeks. Use instead of start and end."
+        },
+        "week": {
+          "type": "string",
+          "description": "Any day of one reporting week, YYYY-MM-DD. Use instead of start and end."
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Mention IDs to look up. Filters are ignored."
+        },
+        "result_id": {
+          "type": "string",
+          "description": "Read the mentions an earlier result counted, by its `R-...` ID. Filters are ignored."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "How many to return. Default 10; at most 50 per call, larger values are capped."
+        },
+        "offset": {
+          "type": "integer",
+          "description": "Skip this many, to read the next page: pass the `next_offset` of the previous call."
+        },
+        "sort": {
+          "type": "string",
+          "enum": [
+            "likes",
+            "earliest"
+          ],
+          "description": "Default `likes`: most liked first."
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "sentiment_trend",
+    "description": "Sentiment week by week for a brand or a product line: net score, % negative and the counts behind them. For a line it also returns the brand overall and the brand without that line. Set `split_by_line` with a brand to see every line side by side, which shows what a brand-level figure hides.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+        },
+        "line": {
+          "type": "string",
+          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform as the export names it."
+        },
+        "city": {
+          "type": "string",
+          "description": "City tag on the mention; most have none."
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "unlabelled"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "description": "One of the client's complaint codes, e.g. `TST`."
+        },
+        "start": {
+          "type": "string",
+          "description": "First day, YYYY-MM-DD. Default: start of data."
+        },
+        "end": {
+          "type": "string",
+          "description": "Last day, YYYY-MM-DD. Default: end of data."
+        },
+        "last_weeks": {
+          "type": "integer",
+          "description": "The N most recent full reporting weeks. Use instead of start and end."
+        },
+        "week": {
+          "type": "string",
+          "description": "Any day of one reporting week, YYYY-MM-DD. Use instead of start and end."
+        },
+        "split_by_line": {
+          "type": "boolean",
+          "description": "With a brand and no line: one series per line."
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "complaint_breakdown",
+    "description": "Complaints by the client's own complaint codes, ranked, each with its owner team, counts by product line and by week, and example mentions. Use for 'what are people complaining about' and for routing a complaint to a team.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+        },
+        "line": {
+          "type": "string",
+          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform as the export names it."
+        },
+        "city": {
+          "type": "string",
+          "description": "City tag on the mention; most have none."
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "unlabelled"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "description": "One of the client's complaint codes, e.g. `TST`."
+        },
+        "start": {
+          "type": "string",
+          "description": "First day, YYYY-MM-DD. Default: start of data."
+        },
+        "end": {
+          "type": "string",
+          "description": "Last day, YYYY-MM-DD. Default: end of data."
+        },
+        "last_weeks": {
+          "type": "integer",
+          "description": "The N most recent full reporting weeks. Use instead of start and end."
+        },
+        "week": {
+          "type": "string",
+          "description": "Any day of one reporting week, YYYY-MM-DD. Use instead of start and end."
+        },
+        "top_n": {
+          "type": "integer",
+          "description": "Only the top N codes. Default all."
+        },
+        "examples": {
+          "type": "integer",
+          "description": "Example mentions per code. Default 2."
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "daily_activity",
+    "description": "Mentions per day against the median day, with unusual days broken down into genuine conversations, spam, reposts and the most repeated texts. Use for 'what happened on <date>' and for spikes. Pass `day` to break down one day.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "First day, YYYY-MM-DD. Default: start of data."
+        },
+        "end": {
+          "type": "string",
+          "description": "Last day, YYYY-MM-DD. Default: end of data."
+        },
+        "last_weeks": {
+          "type": "integer",
+          "description": "The N most recent full reporting weeks. Use instead of start and end."
+        },
+        "week": {
+          "type": "string",
+          "description": "Any day of one reporting week, YYYY-MM-DD. Use instead of start and end."
+        },
+        "day": {
+          "type": "string",
+          "description": "One day to break down, YYYY-MM-DD."
+        },
+        "top": {
+          "type": "integer",
+          "description": "Repeated texts to list. Default 5."
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "exclusions",
+    "description": "What was left out of the counts and why: reposts, spam, mentions of an unrelated or ambiguous entity, duplicate rows. Use to explain how a number was counted.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "description": "First day, YYYY-MM-DD. Default: start of data."
+        },
+        "end": {
+          "type": "string",
+          "description": "Last day, YYYY-MM-DD. Default: end of data."
+        },
+        "last_weeks": {
+          "type": "integer",
+          "description": "The N most recent full reporting weeks. Use instead of start and end."
+        },
+        "week": {
+          "type": "string",
+          "description": "Any day of one reporting week, YYYY-MM-DD. Use instead of start and end."
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "brand_facts",
+    "description": "Dated facts about any brand, the client's own included, from its pages, the client's catalogue and the pricing export: prices, free-shipping thresholds, launches and offers, each with its capture date and age. Also returns changes between observations as date ranges. Use for what a brand launched, charges or changed, and when.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "brand": {
+          "type": "string",
+          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+        },
+        "line": {
+          "type": "string",
+          "description": "Product line, e.g. `Saltmarsh Nitro`."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "price",
+            "free_shipping_threshold",
+            "launch",
+            "offer"
+          ]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "coverage",
+    "description": "What the data does and does not contain. Call it before answering anything that may not be in the data (subscriptions, orders, sales, wholesale prices, causes): pass the `topic` and it returns whether there is data on it, what was found, and what would be needed. With no topic it lists everything the graph holds.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "topic": {
+          "type": "string",
+          "description": "What the question needs, in a few words, e.g. `subscription cancellations`."
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "trace",
+    "description": "Trace IDs back to their source file and row. Takes mention IDs, ad IDs, observation keys, `file:line` references and result IDs (`R-...`). For a node it shows which values were extracted and which inferred, by which rule. For a result ID it returns the original call and every mention ID it counted.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ids"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "answer",
+    "description": "Give the final answer. Call it once, on its own, after the tool results you need.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "answer": {
+          "type": "string",
+          "description": "The answer for the reader, in plain prose."
+        },
+        "claims": {
+          "type": "array",
+          "description": "Every figure or fact the answer states, each with what it rests on.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "claim": {
+                "type": "string"
+              },
+              "cites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Result IDs (`R-...`) for counted figures; mention IDs or `file:row` refs for single items. Only IDs a tool returned in this conversation."
+              }
+            },
+            "required": [
+              "claim",
+              "cites"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "answerable": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "partly",
+            "no"
+          ],
+          "description": "`yes` when the data answers the question; `partly` only when you answer part of what was asked and decline the rest; `no` when it cannot answer the main thing asked. A nearby figure offered in place of the answer is not a part of it: that is still `no`."
+        },
+        "needs": {
+          "type": "string",
+          "description": "The data that would answer what could not be answered, the whole question or a part of it. Empty when nothing is missing."
+        }
+      },
+      "required": [
+        "answer",
+        "claims",
+        "answerable"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

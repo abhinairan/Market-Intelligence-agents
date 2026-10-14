@@ -111,7 +111,9 @@ TOOLS: dict[str, Tool] = {
         Tool(
             "get_mentions",
             "Read mentions: their text, author, date, sentiment, complaint codes and status. Use "
-            "for examples and quotes, or pass `ids` to look up specific mentions.",
+            "for examples and quotes, or pass `ids` to look up specific mentions. To test a "
+            "pattern, count with `count_mentions` and `group_by` instead. Returns one page "
+            "at a time; `next_offset` reads the next.",
             mentions.get_mentions,
             {
                 "ids": {"type": "array", "items": {"type": "string"},
@@ -119,7 +121,10 @@ TOOLS: dict[str, Tool] = {
                 "result_id": {"type": "string",
                               "description": "Read the mentions an earlier result counted, by "
                               "its `R-...` ID. Filters are ignored."},
-                "limit": {"type": "integer", "description": "How many to return. Default 10."},
+                "limit": {"type": "integer", "description": "How many to return. Default 10; "
+                          "at most 50 per call, larger values are capped."},
+                "offset": {"type": "integer", "description": "Skip this many, to read the "
+                           "next page: pass the `next_offset` of the previous call."},
                 "sort": {"type": "string", "enum": list(mentions.SORTS),
                          "description": "Default `likes`: most liked first."},
             },
@@ -196,12 +201,13 @@ TOOLS: dict[str, Tool] = {
             takes_filter=False,
         ),
         Tool(
-            "competitor_observations",
-            "Dated facts about a brand from its own pages and the pricing export: prices, "
-            "free-shipping thresholds, launches and offers, each with its capture date and "
-            "age. Also returns changes between observations as date ranges. Use for what a "
-            "competitor launched, charges or changed, and when.",
-            competitors.competitor_observations,
+            "brand_facts",
+            "Dated facts about any brand, the client's own included, from its pages, the "
+            "client's catalogue and the pricing export: prices, free-shipping thresholds, "
+            "launches and offers, each with its capture date and age. Also returns changes "
+            "between observations as date ranges. Use for what a brand launched, charges or "
+            "changed, and when.",
+            competitors.brand_facts,
             {
                 "brand": FILTER_PARAMETERS["brand"],
                 "line": {"type": "string", "description": "Product line, e.g. `Saltmarsh Nitro`."},
@@ -271,7 +277,7 @@ TOOLS: dict[str, Tool] = {
         Tool(
             "trace",
             "Trace IDs back to their source file and row. Takes mention IDs, ad IDs, "
-            "observation keys and result IDs (`R-...`). For a node it shows which values were "
+            "observation keys, `file:line` references and result IDs (`R-...`). For a node it shows which values were "
             "extracted and which inferred, by which rule. For a result ID it returns the "
             "original call and every mention ID it counted.",
             trace,

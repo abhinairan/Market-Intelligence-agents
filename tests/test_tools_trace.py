@@ -124,10 +124,11 @@ def test_coverage_says_there_is_no_subscription_data(call):  # D-60
     # What the client's own page says, and the complaints that use the word.
     (page,) = data["found"]["pages"]
     assert page["file"] == "brand_site/faq.md"
-    assert any("subscriptions on Classic and Origins" in line for line in page["says"])
+    (line,) = [ln for ln in page["says"] if "subscriptions on Classic and Origins" in ln["text"]]
+    assert line["source_ref"] == "brand_site/faq.md:6"  # the line itself, not the page
     assert "SUB" in data["found"]["complaint_codes"]
     assert data["found"]["mentions"]["count"] > 0 and "not records" in data["found"]["mentions"]["note"]
-    assert r["source_refs"] == ["brand_site/faq.md:2"]
+    assert r["source_refs"] == ["brand_site/faq.md:6"]
 
 
 def test_coverage_says_there_is_no_wholesale_price(call):  # D-60, D-62
@@ -136,7 +137,7 @@ def test_coverage_says_there_is_no_wholesale_price(call):  # D-60, D-62
     assert "D-62" in gap["statement"] and data["has_structured_data"] is False
     (page,) = data["found"]["pages"]
     assert page["file"] == "competitor_snapshots/filterhaus_home_2026-09-10.md"
-    assert any("Trade Portal" in line for line in page["says"])
+    assert any("Trade Portal" in line["text"] for line in page["says"])
 
 
 def test_coverage_of_a_topic_nobody_declared(call):
@@ -147,6 +148,34 @@ def test_coverage_of_a_topic_nobody_declared(call):
 
 # --- every tool, on both stores -------------------------------------------------------
 
+def test_trace_a_file_line_reference(call):
+    """A `file:line` reference resolves to the line itself and to what was read from it."""
+    (page,) = call("trace", ids=["brand_site/faq.md:6"])["data"]["traced"]
+    assert page["type"] == "page line" and "Classic and Origins" in page["text"]
+    fact = call("trace", ids=["brand_site/faq.md:4"])["data"]["traced"]
+    assert [t["type"] for t in fact] == ["page line", "Observation"]  # the shipping threshold
+    row = call("trace", ids=["competitor_pricing.csv:2"])["data"]["traced"]
+    assert [t["id"] for t in row] == [
+        "price:competitor_pricing.csv:2", "saltmarsh:Saltmarsh Nitro Cold Brew",
+    ]  # fmt: skip  # one row is both the price and the product it names
+    r = call("trace", ids=["mentions.csv:159", "brand_site/faq.md:999"])
+    assert [t["id"] for t in r["data"]["traced"]] == ["M10149"] and r["mention_ids"] == ["M10149"]
+    assert r["data"]["not_found"] == ["brand_site/faq.md:999"]
+
+
+def test_every_reference_a_tool_returns_points_at_its_line(ctx, call):
+    """Each `file:line` any tool returns resolves, and a page reference is never the page's
+    capture line when the cited text is further down."""
+    refs = set()
+    for name, args in CALLS:
+        refs.update(call(name, **args)["source_refs"])
+    refs.update(call("coverage", topic="subscriptions")["source_refs"])
+    for ref in sorted(refs):
+        assert not call("trace", ids=[ref])["data"]["not_found"], ref
+    captured_lines = {s["source_ref"] for s in ctx.store.nodes("Source") if s.get("body")}
+    assert not refs & captured_lines
+
+
 CALLS = [
     ("count_mentions", {"brand": "brewbird", "group_by": "line"}),
     ("get_mentions", {"line": "Nitro", "code": "TST", "last_weeks": 3, "limit": 3}),
@@ -155,11 +184,12 @@ CALLS = [
     ("sentiment_trend", {"line": "Nitro"}),
     ("complaint_breakdown", {"brand": "brewbird", "last_weeks": 3}),
     ("share_of_voice", {"last_weeks": 4, "compare_naive": True}),
-    ("competitor_observations", {}),
+    ("brand_facts", {}),
     ("price_compare", {"a": "Saltmarsh Nitro", "b": "Brewbird Nitro", "include_offers": True}),
     ("competitor_ads", {"brand": "saltmarsh"}),
     ("coverage", {"topic": "wholesale"}),
-    ("trace", {"ids": ["M10149", "SM-A-300", "price:competitor_pricing.csv:2", "bluepeak"]}),
+    ("trace", {"ids": ["M10149", "SM-A-300", "price:competitor_pricing.csv:2", "bluepeak",
+                       "brand_site/faq.md:6"]}),
 ]
 
 

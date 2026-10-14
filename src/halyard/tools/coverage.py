@@ -12,6 +12,7 @@ from halyard.tools.base import ToolResult
 from halyard.tools.context import ToolContext
 from halyard.tools.filters import GENUINE, fold
 from halyard.tools.mentions import earliest, ids_of
+from halyard.tools.sources import page_lines
 
 EXAMPLES = 3
 
@@ -57,8 +58,12 @@ def _search(ctx: ToolContext, terms: list[str]) -> dict[str, Any]:
         {
             "file": s["file"],
             "captured_at": s["captured_at"],
-            "says": [line.strip() for line in s["body"].splitlines() if found.search(line)],
-            "source_ref": s["source_ref"],
+            # Each matching line with its own `file:line`, so a claim cites the line itself.
+            "says": [
+                {"text": text, "source_ref": ref}
+                for ref, text in page_lines(s)
+                if found.search(text)
+            ],
         }
         for s in ctx.store.nodes("Source")
         if "body" in s and found.search(s["body"])
@@ -112,7 +117,7 @@ def coverage(ctx: ToolContext, topic: str | None = None) -> ToolResult:
             "has_structured_data": bool(search["observation_kinds"]) and not matched,
         }
         mention_ids = search["mentions"]["example_ids"]
-        source_refs = [p["source_ref"] for p in search["pages"]]
+        source_refs = [line["source_ref"] for p in search["pages"] for line in p["says"]]
     note = (
         "`holds` is read from the graph. `not_in_data` lists what the data pack is known not "
         "to contain, with what would be needed and the nearest thing the data can show. When "

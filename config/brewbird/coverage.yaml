@@ -8,11 +8,12 @@ not_in_data:
     terms: [subscription, subscriber, cancel, churn, order data, order history]
     statement: >-
       The pack has no subscription, order or account data. Public posts are not customer
-      records, so they cannot show who cancelled.
+      records, so they cannot show how many people subscribe or who cancelled. Posts about
+      subscriptions are in the data, though: each shows that its author subscribes or did.
     would_need: Subscription and order records, keyed to customers, from the client.
     nearest: >-
-      Complaints carrying the client's SUB code, and what the client's own pages say about
-      which lines have subscriptions.
+      Conversations carrying the client's SUB code, with their distinct authors, and what
+      the client's own pages say about which lines have subscriptions.
 
   - topic: Wholesale and trade prices
     terms: [wholesale, trade price, trade portal, cafe price, b2b, bulk price]

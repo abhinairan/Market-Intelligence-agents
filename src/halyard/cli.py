@@ -7,7 +7,7 @@ import sys
 from contextlib import contextmanager
 
 from halyard import runtime
-from halyard.settings import HalyardError, load_settings
+from halyard.settings import PROJECT_ROOT, HalyardError, load_settings
 
 
 class NotBuiltYet(HalyardError):
@@ -41,6 +41,34 @@ def cmd_llm_check(args: argparse.Namespace) -> None:
         r = client.complete_json("Reply with ok=true.", "Health check.", schema, "health_check")
         print(f"{purpose}: {r.provider}/{r.model} ok={r.data['ok']} "
               f"({r.input_tokens} in, {r.output_tokens} out)")
+
+    # The agents also need tool calling: one call, its result sent back, then an answer.
+    from halyard.llm import Message, ToolSpec
+
+    tool = ToolSpec("report_status", "Report the health check status.", schema)
+    messages = [Message("user", "Health check. Call report_status with ok=true.")]
+    first = client.run_with_tools("Use the tool.", messages, [tool], require_tool=True)
+    call = first.tool_calls[0]
+    messages += [first.message, Message("tool", '{"received": true}', tool_call_id=call.id)]
+    last = client.run_with_tools("Reply with the word done.", messages, [tool])
+    print(f"agent tools: {first.model} called {call.name}({call.arguments}), "
+          f"then replied {last.text.strip()!r} "
+          f"({first.input_tokens + last.input_tokens} in, "
+          f"{first.output_tokens + last.output_tokens} out)")
+
+
+def cmd_spend(args: argparse.Namespace) -> None:
+    from halyard.llm.spend import summarise
+
+    rows = summarise(run_id=args.run)
+    if not rows:
+        raise HalyardError("No model calls are logged" + (f" for run {args.run}." if args.run else "."))
+    for r in rows:
+        cost = "no price in config/llm_prices.yaml" if r["cost_usd"] is None else f"${r['cost_usd']:.4f}"
+        print(f"{r['model']} ({r['purpose']}): {r['calls']} calls, {r['input_tokens']:,} in "
+              f"({r['cached_input_tokens']:,} cached), {r['output_tokens']:,} out, {cost}")
+    known = [r["cost_usd"] for r in rows if r["cost_usd"] is not None]
+    print(f"Total priced: ${sum(known):.4f}")
 
 
 def cmd_label(args: argparse.Namespace) -> None:
@@ -87,7 +115,6 @@ def cmd_build(args: argparse.Namespace) -> None:
 
 
 def cmd_ontology(args: argparse.Namespace) -> None:
-    from halyard.settings import PROJECT_ROOT
     from halyard.store.schema import render_ontology
 
     path = PROJECT_ROOT / "docs" / "ontology.md"
@@ -95,22 +122,90 @@ def cmd_ontology(args: argparse.Namespace) -> None:
     print(f"Wrote {path.relative_to(PROJECT_ROOT)}.")
 
 
+def cmd_skills(args: argparse.Namespace) -> None:
+    from halyard.agents.skills import write_tools
+
+    for path in write_tools():
+        print(f"Wrote {path.relative_to(PROJECT_ROOT)}.")
+
+
 def cmd_demo(args: argparse.Namespace) -> None:
+    """Up, build, then the demo questions from the client config and the Monday pulse."""
+    from halyard.agents.render import render_run
+
     settings = load_settings()
     if not settings.llm_api_key:
         key = f"{settings.llm_provider.upper()}_API_KEY"
         raise HalyardError(f"{key} is empty in .env; the demo needs it for the agents.")
     runtime.up(settings)
     cmd_build(args)
-    raise NotBuiltYet("demo (the sample questions)", "P4")
+    demo = settings.client.raw["demo"]
+    golden = {q["id"]: q for q in _golden_questions()}
+    failed = []
+    for qid in demo["questions"]:
+        q = golden[qid]
+        print(f"\n=== {qid} ({q['agent']} agent): {q['question']}\n")
+        run, _ = _run(settings, q["agent"], q["question"])
+        print(render_run(run))
+        failed += [qid] if run.status != "answered" else []
+    print(f"\n=== Monday pulse, week of {demo['pulse_week']}\n")
+    run, path = _pulse(settings, str(demo["pulse_week"]))
+    print(path.read_text(encoding="utf-8"))
+    print(f"Wrote {path.relative_to(PROJECT_ROOT)}.")
+    failed += ["pulse"] if run.status != "answered" else []
+    print()
+    cmd_spend(argparse.Namespace(run=None))
+    if failed:
+        raise HalyardError(f"Not answered or not verified: {', '.join(failed)}. See outputs/runs/.")
+
+
+def _golden_questions() -> list[dict]:
+    import yaml
+
+    return yaml.safe_load((PROJECT_ROOT / "eval" / "golden.yaml").read_text())["questions"]
+
+
+def _run(settings, agent: str, request: str, skill: str | None = None):
+    """One agent run with the citation check; the transcript is saved. Returns (run, path)."""
+    from halyard.agents.citations import citation_check
+    from halyard.agents.loop import Limits, run_agent, save_run
+    from halyard.agents.skills import MAIN, load_skill
+    from halyard.llm import get_client
+
+    client = get_client(settings, "agent")
+    with tool_context() as ctx:
+        spec = load_skill(agent, ctx, skill or MAIN)
+        limits = Limits.from_client(settings.client)
+        run = run_agent(client, ctx, spec, request, limits, citation_check(ctx))
+    return run, save_run(run)
+
+
+def _pulse(settings, week: str):
+    from halyard.agents.pulse import pulse_request, pulse_week, write_pulse
+
+    window = pulse_week(settings.client, week)
+    run, _ = _run(settings, "consumer", pulse_request(window), skill="pulse")
+    return run, write_pulse(run, window)
 
 
 def cmd_ask(args: argparse.Namespace) -> None:
-    raise NotBuiltYet("ask", "P4")
+    import json
+
+    from halyard.agents.render import render_run
+
+    run, path = _run(load_settings(), args.agent, args.question)
+    print(json.dumps(run.answer, indent=2, ensure_ascii=False) if args.json else render_run(run))
+    print(f"\nTranscript: {path.relative_to(PROJECT_ROOT)}")
+    if run.status != "answered":
+        raise HalyardError(f"Run {run.run_id} ended as {run.status}; see the transcript.")
 
 
 def cmd_pulse(args: argparse.Namespace) -> None:
-    raise NotBuiltYet("pulse", "P4")
+    run, path = _pulse(load_settings(), args.week)
+    print(path.read_text(encoding="utf-8"))
+    print(f"Wrote {path.relative_to(PROJECT_ROOT)}. Transcript: outputs/runs/{run.run_id}.json")
+    if run.status != "answered":
+        raise HalyardError(f"Run {run.run_id} ended as {run.status}; see the transcript.")
 
 
 @contextmanager
@@ -172,6 +267,9 @@ def parser() -> argparse.ArgumentParser:
     sub.add_parser("llm-check", help="one tiny call per configured model").set_defaults(
         func=cmd_llm_check
     )
+    spend = sub.add_parser("spend", help="tokens and cost from the usage log")
+    spend.add_argument("--run", help="one agent run ID (A-...)")
+    spend.set_defaults(func=cmd_spend)
     sub.add_parser("label", help="label new texts and add them to the label cache").set_defaults(
         func=cmd_label
     )
@@ -185,9 +283,14 @@ def parser() -> argparse.ArgumentParser:
         func=cmd_demo
     )
 
+    sub.add_parser(
+        "skills", help="regenerate each agent's skills/<agent>/tools.json from the tool registry"
+    ).set_defaults(func=cmd_skills)
+
     ask = sub.add_parser("ask", help="ask an agent a question")
-    ask.add_argument("agent", choices=["consumer", "competitor"])
+    ask.add_argument("agent", help="a folder under skills/ with a SKILL.md, e.g. consumer")
     ask.add_argument("question")
+    ask.add_argument("--json", action="store_true", help="print the structured answer")
     ask.set_defaults(func=cmd_ask)
 
     pulse = sub.add_parser("pulse", help="write the Monday pulse for a reporting week")

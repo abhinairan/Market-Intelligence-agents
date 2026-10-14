@@ -417,7 +417,7 @@
             "partly",
             "no"
           ],
-          "description": "`yes` when the data answers the question; `partly` when it answers some of it and the rest is declined; `no` when it cannot answer the main thing asked."
+          "description": "`yes` when the data answers the question; `partly` only when you answer part of what was asked and decline the rest; `no` when it cannot answer the main thing asked. A nearby figure offered in place of the answer is not a part of it: that is still `no`."
         },
         "needs": {
           "type": "string",

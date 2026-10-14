@@ -43,7 +43,7 @@ uv run halyard spend [--run A-...]   # tokens and cost from the usage log
 uv run halyard ask consumer "<question>" [--json]   # needs Neo4j up, a built graph and the API key
 uv run halyard skills    # regenerate skills/<agent>/tools.json from the tool registry
 ```
-`halyard demo | ask | pulse | eval` exist as stubs that fail with the phase they belong to.
+`halyard eval` is a stub that fails with the phase it belongs to (P5).
 
 ## Progress (as of 13 Oct 2026)
 - **P0 done**, merged and pushed to `main` (`a9a5089`): skeleton, compose, Makefile, CLI, `config/brewbird/client.yaml`.
@@ -94,7 +94,7 @@ Query layer: a store interface, twelve tools, a registry, a call log and `halyar
 - The full list of mention IDs stays in the tool-call log under the result ID. **For P4:** send the agent a capped list plus the result ID; a follow-up gets the IDs back with `get_mentions(result_id=...)` or `trace`.
 - `outputs/tool_calls.jsonl` is git-ignored.
 
-## P4 in progress on branch `p4-agents` (from `main` at `9531e79`)
+## P4 done, branch `p4-agents` merged to `main` (from `9531e79`)
 Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 4 committed on 14 Oct.
 
 **Decisions made by Abhinav (13 Oct)**
@@ -138,7 +138,9 @@ Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 4 com
 
 **Step 5 done (14 Oct):** the pulse is the consumer agent's second skill (Abhinav): `skills/consumer/pulse.md` with its own `pulse.tools.json`; an agent folder can hold several skills (`skill_files`, `load_skill(agent, ctx, skill)`, `tools_path`). `src/halyard/agents/pulse.py` (`pulse_week` refuses a day that does not start a reporting week in the data, `pulse_request`, `write_pulse`). `halyard pulse --week 2026-09-28` writes `outputs/pulse-2026-09-28.md` (brief, evidence list, footer). Skill: gather in one or two turns, lead by what matters, route to owner teams, describe a problem by what most posts say with the split, earn every noise verdict with counts, do not repeat the lead; brief = Lead / What changed / Noise / Watch next week, about 350 words. Live (after one tuning round agreed with Abhinav): leads with Nitro TST, 13 of the week's 15, 10 of 13 describe swollen/puffed/bulging cans, QA-owned, 3 IDs; Saltmarsh's 14 running ads are noise because no Brewbird post that week names Saltmarsh and Nitro volume is flat (31, 30); 309 words, $0.0065; every figure checked against the data. 145 tests.
 
-**Steps left**
-6. `halyard demo`, done-check from a clean clone with a key, spend reported, merge to `main`.
+**Step 6 done (14 Oct):** `halyard demo` = up, build, the golden questions listed under `demo:` in `client.yaml` (Q4 consumer, Q8 competitor), the Monday pulse for `demo.pulse_week`, then `halyard spend`; exits non-zero if any run is unanswered or fails its check. `ask`, `pulse` and `demo` share `_run` in `cli.py`. README: OpenAI key needed for the agents, agent commands listed.
 
-After P4: P5 (oracle, golden expected answers, adversarial set, eval report), P6 (outputs and packaging), P7 (clean-clone rehearsal and recording).
+**P4 done-check (passed 14 Oct 2026):** clean clone of `p4-agents` with `.env` copied: 145 tests pass, lint clean, `halyard build` twice gives identical output (3,889 nodes, 5,384 edges, 0 model calls), `halyard demo` exits 0 with Q4, Q8 and the pulse answered and verified. Full run of 12 golden + 4 adversarial earlier the same day: all correct with valid citations. Agent spend for all of P4: $0.171 (208 calls on `gpt-6-luna`); project total $0.18. **Deferred by Abhinav:** the `gpt-6.1-sol` comparison (no price yet).
+
+## Next
+P5: oracle, golden expected answers, the adversarial set grown from `eval/adversarial.yaml` to at least 6 (PLAN §6), eval runner and report, one real failure found, fixed and documented. Then P6 (outputs and packaging) and P7 (clean-clone rehearsal and recording). Start P5 by presenting the approach and plan.

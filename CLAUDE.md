@@ -95,7 +95,7 @@ Query layer: a store interface, twelve tools, a registry, a call log and `halyar
 - The full list of mention IDs stays in the tool-call log under the result ID. **For P4:** send the agent a capped list plus the result ID; a follow-up gets the IDs back with `get_mentions(result_id=...)` or `trace`.
 - `outputs/tool_calls.jsonl` is git-ignored.
 
-## P4 done, branch `p4-agents` merged to `main` (from `9531e79`)
+## P4 done, branch `p4-agents` merged to `main` and pushed (`a75209a`, 14 Oct)
 Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 4 committed on 14 Oct.
 
 **Decisions made by Abhinav (13 Oct)**
@@ -145,3 +145,13 @@ Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 4 com
 
 ## Next
 P5: oracle, golden expected answers, the adversarial set grown from `eval/adversarial.yaml` to at least 6 (PLAN §6), eval runner and report, one real failure found, fixed and documented. Then P6 (outputs and packaging) and P7 (clean-clone rehearsal and recording). Start P5 by presenting the approach and plan.
+
+**Merged main checked (14 Oct):** `main` = Abhinav's P5 oracle work (`47c6ddd`: `oracle/`, `eval/expected/q01..q12.json`, `tests/test_oracle.py`, pandas dev dependency) + P4. Clean clone: 156 tests pass, lint clean, two identical builds, `halyard demo` exits 0.
+
+**P5 findings from comparing the oracle's expected answers with the agents (14 Oct), to address in P5:**
+- Q3: the oracle picks examples by the old D-42; D-42 was amended in P4 (no two examples of a code with the same normalised text), so the oracle must follow it (the agent now cites M10963 for PRC where the oracle has a duplicate text).
+- Q6 rubric: "Nitro is not a subscription product (FAQ)"; the agent does not say it.
+- Q12 rubric: "would need" includes sales and repeat purchase and markets with and without Saltmarsh; the agent names only batch/QA records.
+- Q11 rubric: consented café interviews; the agent sometimes omits it.
+- Q5 rubric: "genuine volume that day was close to normal"; not said outright.
+- D-45 (direction labels) and the D-60 amendment change no oracle figure.

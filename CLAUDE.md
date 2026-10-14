@@ -39,6 +39,9 @@ uv run halyard label      # label new texts into the cache (needs the API key on
 uv run halyard ontology   # regenerate docs/ontology.md from the schema
 uv run halyard tool       # list the query tools; `halyard tool <name> '<json args>'` runs one and logs it
 uv run halyard trace M10149 R-c9ce8b67   # mention, ad, observation or result IDs back to file and row
+uv run halyard spend [--run A-...]   # tokens and cost from the usage log
+uv run halyard ask consumer "<question>" [--json]   # needs Neo4j up, a built graph and the API key
+uv run halyard skills    # regenerate skills/<agent>/tools.json from the tool registry
 ```
 `halyard demo | ask | pulse | eval` exist as stubs that fail with the phase they belong to.
 
@@ -91,30 +94,47 @@ Query layer: a store interface, twelve tools, a registry, a call log and `halyar
 - The full list of mention IDs stays in the tool-call log under the result ID. **For P4:** send the agent a capped list plus the result ID; a follow-up gets the IDs back with `get_mentions(result_id=...)` or `trace`.
 - `outputs/tool_calls.jsonl` is git-ignored.
 
-## Next steps: P4 on branch `p4-agents` (created from `main` at `9531e79`, nothing built yet)
-`main` with P3 is pushed. The approach and steps below were proposed to Abhinav on 13 Oct; he has not yet answered the four decisions. **Start the next session by getting those answers, then begin step 1.** Stop after each step with a short walkthrough, as in P2 and P3.
+## P4 in progress on branch `p4-agents` (from `main` at `9531e79`)
+Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 3 committed on 14 Oct.
 
-**Approach (proposed)**
-- One generic agent loop, two configurations. The loop sends the question and the tool list, runs each tool call through `run_tool`, feeds results back, and stops at a final answer or a turn cap. The consumer and competitor agents differ only in skill file and tool subset.
-- Instructions live in skill files (`skills/consumer/`, `skills/competitor/`), as for labelling: instructions, grounding rules, output format. Tool definitions are generated from the registry (`TOOLS`), never copied. This is also the packaging the brief's deliverable 5 asks for.
-- Tool calling goes through `LLMClient`: a new `run_with_tools` (or similar) on the base class, implemented in both adapters, which translate `Tool.parameters` into each provider's tool format. No agent code imports an SDK. Today `LLMClient` only has `complete_json` (OpenAI uses the Responses API with strict JSON schema).
-- Grounding is checked in code: after the model answers, every mention ID and source ref it cites must have been returned by a tool in that run. An invented or uncited ID fails the answer.
-- Carried over from P3: when a question names no brand the skill says to use the client brand and say so; the agent is sent a capped ID list plus the result ID, and follow-ups use `get_mentions(result_id=...)` or `trace`.
+**Decisions made by Abhinav (13 Oct)**
+1. Agent model: build and debug on `gpt-6-luna`; at the end run the 12 questions on `gpt-6.1-sol` too and keep it only if it answers better.
+2. The final answer is structured JSON (answer text, claims with their cited IDs, an `answerable` field, `yes` / `partly` / `no`, which replaced a `cannot_answer` flag on 14 Oct); the CLI prints it as text. Plan: the answer is itself a tool call (`require_tool`), so it has a schema.
+3. The pulse is an agent run from its own skill file, with the same tools and citation check.
+4. **Tool calling is OpenAI only.** The Anthropic adapter stays for `complete_json` (labelling) and raises "not implemented" for `run_with_tools`. No Anthropic tool-calling code or tests. PLAN §2 and the P4 row say so; the README must too (P6).
 
-**Steps**
-1. `run_with_tools` in `LLMClient` and both adapters, schema translation, usage logged per call. Done when a fake-client test passes for the loop contract and one live call returns a tool call.
-2. Agent loop in `src/halyard/agents/`: turn cap, token cap, tool errors (`ToolError`) fed back to the model, capped results with result IDs, a run transcript. Tested with a scripted fake model.
-3. Consumer skill, `halyard ask consumer`, the citation check. Done when Q1 to Q6 are answered live with correct figures and valid citations, and Q6 declines (D-60).
+**Approach**
+- One generic agent loop, three skill files (`skills/consumer/`, `skills/competitor/`, pulse). They differ only in skill file and tool subset. Tool definitions are generated from the registry (`TOOLS`), never copied.
+- Grounding is checked in code: a claim cites a result ID for an aggregate and mention IDs or `file:row` refs for examples; every cited ID must have been returned by a tool in that run. One retry with the error fed back, then the answer is marked failed.
+- Carried over from P3: when a question names no brand the skill says to use the client brand and say so; follow-ups use `get_mentions(result_id=...)` or `trace`.
+- **Cost controls (agreed 14 Oct):** cap the mention IDs sent to the model (about 20 plus the total and the result ID; `count_mentions` and `share_of_voice` results are about 90% IDs); a turn cap and a total-token cap per question in `client.yaml`, and a run that hits one says so; the skill asks for independent tool calls in one turn; each agent gets only its tool subset; skill text and tool definitions form a stable prefix for prompt caching; tests use a scripted fake model. Usage rows carry a `run_id`. Prices for the two models are not known: report tokens, and ask Abhinav for prices to put in config.
+
+**Step 1 done (14 Oct):** `src/halyard/llm/base.py` gained `ToolSpec`, `ToolCall`, `Message`, `ToolTurn` and `LLMClient.run_with_tools(system, messages, tools, max_tokens, require_tool, run_id)` (rejects unknown tool names and a missing required call; logs `cached_input_tokens` and `run_id`). `openai_client.py` implements it on the Responses API with non-strict function tools (`to_tool`, `to_input`, `to_call`). `halyard llm-check` now also does a tool-call round trip. 114 tests pass. Live: all twelve registry schemas are accepted (2,472 input tokens for the full tool list) and the model asks for two tools in one turn.
+
+**Step 2 done (14 Oct):**
+- `src/halyard/agents/loop.py`: `AgentSpec` (name, instructions, tool names, answer tool), `Limits.from_client` (the `agent:` block in `client.yaml`: 8 turns, 80,000 tokens, 20 IDs sent, 1 answer retry), `run_agent(client, ctx, spec, question, limits, check=None)` returning an `AgentRun` (status `answered` / `failed_check` / `error`, `stopped_by` `turn_cap` / `token_cap`, steps, `results` = every result's full mention IDs and source refs for the citation check, messages, token totals), `cap_result`, `save_run` (transcripts in `outputs/runs/`, git-ignored).
+- Every turn uses `require_tool`; the run ends when the model calls `answer` on its own. At a limit the model gets one last call with only `answer` on offer. `check` is the hook step 3 fills with the citation check; a rejected answer is fed back `answer_retries` times, then kept and marked `failed_check`.
+- `src/halyard/agents/answer.py`: the `ANSWER` tool (`answer`, `claims` = `[{claim, cites}]`, `answerable`, `needs`; `needs` is required unless `answerable` is `yes`) and `shape_problems`.
+- `config/llm_prices.yaml` (not client-specific), `src/halyard/llm/spend.py`, `halyard spend [--run A-...]`. Price given by Abhinav: `gpt-6-luna` $0.10 in, $0.50 out per million tokens. **`gpt-6.1-sol` price still needed** before the comparison run.
+- `tests/test_agent_loop.py` (scripted model, `MemoryStore`). 126 tests pass.
+- Live smoke with a placeholder instruction: two questions, correct figures (Nitro net .33 to -.27; TST 29 on Nitro), the forced answer at a turn cap works, prompt caching is working, about $0.001 a question. All spend to date: $0.013.
+
+**Step 3 built (14 Oct), awaiting Abhinav's sign-off on the last tuning proposals:**
+- Skills: `skills/consumer/SKILL.md` (front matter `name`, `description`, `tools`; instructions with `{{slots}}`), `skills/shared/grounding.md`, `skills/shared/answer_format.md`, `skills/README.md`. Skill files name no brand, line or date (a test enforces it). `skills/<agent>/tools.json` is generated from the registry by `halyard skills`; a test fails if it drifts.
+- `src/halyard/agents/skills.py` (`load_skill`, `render_tools`, `write_tools`), `citations.py` (`citation_check(ctx)`: every cite must be a result ID, mention ID, source ref or data value a tool returned in the run; a claim must cite something; a mention ID or result ID in the prose must be returned and cited), `render.py`, `halyard ask <agent> "<question>" [--json]`.
+- `eval/golden.yaml`: the twelve questions word for word from the brief, with the agent each goes to (expected answers come in P5).
+- **D-42 amended (agreed by Abhinav):** no two examples of a code share the same normalised text. `complaint_breakdown` and its test follow.
+- Live on `gpt-6-luna`, three rounds: Q1 to Q6 correct every time, every citation passed with no retry, Q6 declines. About $0.001 to $0.003 a question; project spend $0.042.
+- **Working rule from Abhinav:** after a live run, report the issues and propose changes; do not edit skills or tools until he agrees.
+- Round 4 changes (agreed by Abhinav): top three codes is fine for Q3 (no rule forcing the full list); unusual days explained from what the data shows (repeated posts, authors, place, time, statuses) with 2 or 3 example IDs; **D-45** direction label on every `sentiment_trend` series (`data.directions`; thresholds `sentiment.direction` in `client.yaml`) and grounding rule 9 (use the tool's word); **D-60** amended: decline only the part needing records, a post is evidence of what its author did, never a count. (Superseded by `answerable`, round 6.) `coverage.yaml` subscriptions entry says posts about subscriptions are in the data.
+- Round 5 changes (agreed by Abhinav): **page references point at the line** (`Source.body_row`; `coverage` returns `says: [{text, source_ref}]` with `file:line` per matched line, e.g. `brand_site/faq.md:6`; the ER-01 `OF_BRAND` edge from a page cites the line naming the sub-brand; `trace` resolves any `file:line` to the page line and every node read from that row; `src/halyard/tools/sources.py`). Audit: every other tool reference already pointed at its row. Output format labels each weekly value with its week; grounding rule 4 says to state "some authors did X" directly with the distinct-author count; the brand note is only for questions naming no brand. Graph counts unchanged (3,889 / 5,384); 136 tests.
+- Round 6 changes (agreed by Abhinav): grounding rule 10 (answer about the thing asked about; a product's conversation is not a reaction to one of its plans or features); `cannot_answer` replaced by `answerable` = `yes` / `partly` / `no`, with `needs` required unless `yes`; the CLI prints "[Partly answerable …]". Live: Q1 yes, A-subscription-usage partly, A-subscription-reaction no longer uses line sentiment as a proxy. Round 7: the `partly` definition was sharpened (a nearby figure offered instead of the answer is `no`) and the A-subscription-reaction expectation changed to `yes`; Q6 still came back `partly` (should be `no`), open.
+- `eval/adversarial.yaml` started: A-teams (full code distribution by owner team), A-subscription-reaction, A-subscription-usage.
+- `coverage` already returns page lines and mentions matching the topic's words (e.g. the FAQ's "Monthly subscriptions on Classic and Origins", `brand_site/faq.md:2`), so the client's page facts are reachable for coverage-type questions without a new tool.
+
+**Steps left**
 4. Competitor skill, `halyard ask competitor`. Done when Q7 to Q12 are answered live; Q11 declines and refuses the login (D-62); Q12 separates shows, suggests and would need (D-61).
 5. `halyard pulse --week 2026-09-28` writing a one-page brief to `outputs/`. It should lead with Nitro TST (13 complaints, QA-owned, with IDs), then what is noise.
 6. `halyard demo`, done-check from a clean clone with a key, spend reported, merge to `main`.
-
-**Decisions awaiting Abhinav (with the recommendation given)**
-1. Agent model. `.env` has `AGENT_MODEL=gpt-6-luna`, not the `gpt-6.1-sol` this file records. Recommended: build and debug on `gpt-6-luna`, then run the 12 questions on both and keep the stronger one only if it answers better.
-2. Structured final answer. Recommended: yes. The last message is JSON (answer text, claims with their cited IDs, a "cannot answer" flag), which makes the citation check exact and gives P5 something to grade; the CLI prints it as text.
-3. Pulse as an agent run or a fixed template. Recommended: an agent run from a pulse-specific skill file with the same tools and citation check, since the brief judges whether it leads with what matters and the eval should test that.
-4. Anthropic adapter. Tool calling will be implemented in both adapters, but only a provider with a key can be tested live. Is there an Anthropic key, or is OpenAI-only live testing fine with Anthropic covered by unit tests?
-
-**Spend:** `outputs/llm_usage.jsonl` has 194 calls, all labelling. P4 is the first phase since labelling that calls the model; report spend after step 3.
 
 After P4: P5 (oracle, golden expected answers, adversarial set, eval report), P6 (outputs and packaging), P7 (clean-clone rehearsal and recording).

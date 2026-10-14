@@ -178,6 +178,7 @@ NODES: dict[str, NodeType] = {
             "url": (EXTRACTED, "Where the page was captured from."),
             "captured_at": (EXTRACTED, "Capture date stated on the page."),
             "body": (EXTRACTED, "Page text."),
+            "body_row": (EXTRACTED, "First line of `body` in the file, for `file:line` refs."),
         },
     ),
     "Observation": NodeType(

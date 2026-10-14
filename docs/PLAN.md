@@ -12,7 +12,7 @@ The brief rewards two things above all: **every number traces back to rows**, an
 |---|---|---|
 | Graph store | Neo4j 5 Community in Docker, behind a `GraphStore` interface | Real graph, visible provenance in Neo4j Browser, MERGE makes rebuilds idempotent. The interface keeps the agents independent of the store. |
 | Second store | SQLite, **stretch only**, and only with a parity test | It shows the storage is swappable. It's cut first if time is short. |
-| LLM | Provider-neutral `LLMClient` with Anthropic and OpenAI adapters; provider and models chosen in `.env` | No pipeline or agent code imports a provider SDK. Tool and output schemas are written once and translated per adapter. Eval results are reported per model. |
+| LLM | Provider-neutral `LLMClient` with Anthropic and OpenAI adapters; provider and models chosen in `.env` | No pipeline or agent code imports a provider SDK. Tool and output schemas are written once and translated per adapter. Eval results are reported per model. Tool calling for the agents is implemented in the OpenAI adapter only (decided in P4: there is no Anthropic key to test with); the Anthropic adapter covers labelling and raises a clear error if used for an agent. |
 | Agents | Two agents on one shared set of query tools | Generality lives in the tools; there's no code written for particular questions. |
 | Oracle | Independent pandas code over the raw CSVs, never the graph | The eval mustn't grade itself. It shares definitions with the pipeline, not code. |
 | Labelling (pipeline) | A small, cheap model (`LABEL_MODEL`) labels every distinct normalised text; results cached in a committed file; deterministic client rules validate and override | Generalises to new text, and a new client only changes the taxonomy and definitions the prompt is built from. Client rules (TST over PKG, the six codes, routing) never depend on the model. See §5a. |
@@ -108,7 +108,7 @@ Each phase ends in something runnable. Total is about 13 hours plus buffer.
 | P1 | `docs/definitions.md` + your review of the label table | 1.5 | Definitions written; every template row marked OK or corrected |
 | P2 | Pipeline: load, dedupe, reposts, spam, collisions, entity resolution, labelling (cached Haiku + client-rule validation, §5a), Neo4j writes, ER log | 3 | `make build` twice gives identical node and edge counts; counts match the forensics within explained differences |
 | P3 | `GraphStore` + `Neo4jStore` + tools + `trace` | 2 | Each tool has a test against a known figure |
-| P4 | Tool calling in both adapters, two agents, grounding rules, CLI, pulse | 2 | All 12 golden questions answered end to end with citations |
+| P4 | Tool calling through `LLMClient` (OpenAI adapter), two agents, grounding rules, CLI, pulse | 2 | All 12 golden questions answered end to end with citations |
 | P5 | Oracle, golden expected answers, rubrics for Q6, Q11, Q12, adversarial set, eval runner and report | 2 | `make eval` writes the report; one real failure found, fixed and documented |
 | P6 | Outputs: pulse, readout PDF, three replies, skills package, ontology note, README, spend and "another week" notes | 1.5 | Everything the "How to submit" section lists exists |
 | P7 | Clean-clone rehearsal and ≤10 min recording | 0.5 | Recorded from `git clone` to the trace of one number |

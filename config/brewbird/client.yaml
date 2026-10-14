@@ -15,12 +15,25 @@ anomaly_median_multiple: 2   # D-43: a day above this many times the median day 
 sentiment:                # D-40
   min_mentions: 10        # a week with fewer labelled conversations is too few to read
   like_share_gap_points: 10   # flag when negative like share exceeds % negative by this much
+  direction:              # D-45: the label on a weekly net-sentiment series
+    steady_below: 0.10      # a change in net smaller than this is steady
+    clear_change: 0.20      # at least this, moving consistently, is rising or falling
+    min_share_of_moves: 0.5 # share of week-to-week moves that must go the same way
 pricing:                  # D-53
   claim_tolerance: 0.05   # O-5: "half the price" (0.5) holds up to a per-unit ratio of 0.55
 # D-51: a customer mention bounds the date of a change when it is about the brand, states
 # the new value, and uses one of these words. Kinds not listed get no mention evidence.
 change_evidence:
   free_shipping_threshold: ["shipping"]
+
+# P4: limits on one agent question. A run that reaches a limit must answer with what it has
+# and the run records which limit stopped it.
+agent:
+  max_turns: 8              # model calls, the final answer included
+  max_total_tokens: 80000   # input plus output over the run, checked between turns
+  max_output_tokens: 4000   # per model call
+  max_ids_sent: 20          # mention IDs sent to the model per result; the rest stay in the log
+  answer_retries: 1         # times a rejected answer may be corrected
 
 # The files of the data pack, relative to data_pack.
 files:

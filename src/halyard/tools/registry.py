@@ -271,7 +271,7 @@ TOOLS: dict[str, Tool] = {
         Tool(
             "trace",
             "Trace IDs back to their source file and row. Takes mention IDs, ad IDs, "
-            "observation keys and result IDs (`R-...`). For a node it shows which values were "
+            "observation keys, `file:line` references and result IDs (`R-...`). For a node it shows which values were "
             "extracted and which inferred, by which rule. For a result ID it returns the "
             "original call and every mention ID it counted.",
             trace,

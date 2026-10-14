@@ -140,6 +140,7 @@ A file of the data pack. Saved web pages keep their text. Key: `file`.
 | `url` | extracted | Where the page was captured from. |
 | `captured_at` | extracted | Capture date stated on the page. |
 | `body` | extracted | Page text. |
+| `body_row` | extracted | First line of `body` in the file, for `file:line` refs. |
 
 ### Observation
 

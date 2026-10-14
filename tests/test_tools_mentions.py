@@ -158,6 +158,20 @@ def test_sentiment_trend_for_a_line_and_its_brand(call):  # D-40
     assert len(r["mention_ids"]) == 211 and data["overall"]["n"] == 211
 
 
+def test_sentiment_trend_direction_labels(call):  # D-45
+    d = call("sentiment_trend", line="Nitro")["data"]["directions"]
+    assert (d["weeks"]["label"], d["weeks"]["change"]) == ("falling", -0.6)
+    assert d["weeks"]["moves_the_same_way"] == "3 of 6"
+    assert d["brand_overall"]["label"] == "steady"
+    assert (d["brand_without_this_line"]["label"], d["brand_without_this_line"]["change"]) == (
+        "mildly rising", 0.13,
+    )  # fmt: skip
+    by_line = call("sentiment_trend", brand="brewbird", split_by_line=True)["data"]["directions"]
+    assert by_line["by_line"]["brewbird:Nitro"]["label"] == "falling"
+    small = call("sentiment_trend", line="Nitro", city="Delhi")["data"]["directions"]["weeks"]
+    assert small["label"] == "too few weeks"
+
+
 def test_sentiment_trend_flags_complaints_that_draw_outsized_likes(call):  # D-40
     weeks = call("sentiment_trend", line="Nitro")["data"]["weeks"]
     flagged = [w["week"] for w in weeks if w.get("complaints_draw_outsized_likes")]
@@ -191,6 +205,9 @@ def test_complaint_breakdown(call):  # D-42, D-34
     assert tst["client_rule"]  # the client's routing rule, verbatim
     assert all(len(c["examples"]) == 2 for c in codes)
     assert tst["examples"][0]["likes"] >= tst["examples"][1]["likes"]
+    # D-42: two examples of a code are two different complaints, not one text posted twice.
+    for c in codes:
+        assert len({e["text"].lower().strip() for e in c["examples"]}) == 2, c["code"]
     assert r["source_refs"][0].startswith("client_complaint_taxonomy.csv:")
 
     nitro = call("complaint_breakdown", line="Nitro", top_n=1, examples=0)["data"]["codes"]

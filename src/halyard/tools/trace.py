@@ -10,6 +10,7 @@ from halyard.store.schema import NODE_PROVENANCE, NODES
 from halyard.tools.base import ToolResult
 from halyard.tools.context import ToolContext
 from halyard.tools.log import RESULT_PREFIX, find
+from halyard.tools.sources import REF, page_lines
 
 # Node types an ID is looked up in, in this order.
 TRACEABLE = ("Mention", "Ad", "Observation", "Product", "ComplaintCode", "Brand", "ProductLine",
@@ -69,6 +70,28 @@ def _result(entry: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _reference(ctx: ToolContext, ref: str, file: str, line: int) -> list[dict[str, Any]]:
+    """A `file:line` reference: the page line it points at, and every node read from it."""
+    found: list[dict[str, Any]] = []
+    source = ctx.store.node("Source", file)
+    text = dict(page_lines(source.props)).get(ref) if source else None
+    if text is not None:
+        found.append({"id": ref, "type": "page line", "source_file": file, "line": line,
+                      "text": text, "captured_at": source.props.get("captured_at")})  # fmt: skip
+    for label in TRACEABLE:
+        if label == "Source":
+            continue
+        key = NODES[label].key
+        for props in ctx.store.nodes(label):
+            rows = props.get("source_rows") or []
+            if props.get("source_ref") == ref or (props.get("source_file") == file
+                                                  and line in rows):  # fmt: skip
+                node = ctx.store.node(label, props[key])
+                if node is not None:
+                    found.append(_node(label, node))
+    return found
+
+
 def trace(ctx: ToolContext, ids: list[str]) -> ToolResult:
     traced, not_found, mention_ids, source_refs = [], [], [], []
     for item in dict.fromkeys(ids):
@@ -77,6 +100,14 @@ def trace(ctx: ToolContext, ids: list[str]) -> ToolResult:
             if entry:
                 traced.append(_result(entry))
             else:
+                not_found.append(item)
+            continue
+        if (ref := REF.match(item)) and ctx.store.node("Source", ref["file"]):
+            found = _reference(ctx, item, ref["file"], int(ref["line"]))
+            traced += found
+            source_refs += [item] if found else []
+            mention_ids += [t["id"] for t in found if t["type"] == "Mention"]
+            if not found:
                 not_found.append(item)
             continue
         for label in TRACEABLE:
@@ -99,7 +130,8 @@ def trace(ctx: ToolContext, ids: list[str]) -> ToolResult:
         "copied from the source; `inferred` names the rule in docs/definitions.md that "
         "computed it; `config` is our own configuration. Each edge carries the source row or "
         "mention it rests on and, when inferred, its rule or model and the text that matched. "
-        "A tool result gives the original call and every mention ID it counted."
+        "A tool result gives the original call and every mention ID it counted. A `file:line` "
+        "reference gives the page line it points at and every node read from that row."
     )
     return ToolResult(
         {"traced": traced, "not_found": not_found}, note, ctx.client.as_of,

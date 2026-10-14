@@ -1,0 +1,7 @@
+# Model prices in USD per million tokens, used only by `halyard spend`.
+# A model not listed here is reported in tokens, with no cost.
+# Cached input is priced as ordinary input, so the cost shown is an upper bound.
+
+gpt-6-luna:               # given by Abhinav, 14 Oct 2026
+  input: 0.10
+  output: 0.50

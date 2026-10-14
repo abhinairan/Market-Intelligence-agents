@@ -120,6 +120,9 @@ def test_lines_and_products(graph):
     assert peak["method"] == "extracted"  # ER-01: Bluepeak's own brands page says so
     assert peak["source_file"].endswith("bluepeak_brands_2026-09-20.md")
     assert peak["captured_at"] == date(2026, 9, 20)
+    pack = load_client("brewbird").data_pack
+    file, line = peak["source_ref"].rsplit(":", 1)
+    assert "Peak Instant" in (pack / file).read_text().splitlines()[int(line) - 1]
     classic = of_brand[(("ProductLine", "brewbird:Classic"), ("Brand", "brewbird"))]
     assert (classic["method"], classic["source_ref"]) == ("extracted", "products.csv:2")
     in_line = _edges(graph, "IN_LINE")

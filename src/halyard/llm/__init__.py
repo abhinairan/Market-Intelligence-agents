@@ -2,10 +2,27 @@
 
 from __future__ import annotations
 
-from halyard.llm.base import JsonResult, LLMClient, LLMError
+from halyard.llm.base import (
+    JsonResult,
+    LLMClient,
+    LLMError,
+    Message,
+    ToolCall,
+    ToolSpec,
+    ToolTurn,
+)
 from halyard.settings import HalyardError, Settings
 
-__all__ = ["JsonResult", "LLMClient", "LLMError", "get_client"]
+__all__ = [
+    "JsonResult",
+    "LLMClient",
+    "LLMError",
+    "Message",
+    "ToolCall",
+    "ToolSpec",
+    "ToolTurn",
+    "get_client",
+]
 
 
 def get_client(settings: Settings, purpose: str) -> LLMClient:

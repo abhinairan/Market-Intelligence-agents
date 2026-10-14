@@ -16,7 +16,7 @@ import yaml
 
 from halyard.ingest.entities import EntityResolver, load_entities_config
 from halyard.ingest.pipeline import Prepared
-from halyard.ingest.records import PackSize
+from halyard.ingest.records import PackSize, PageRecord
 from halyard.settings import PROJECT_ROOT, ClientConfig, HalyardError
 from halyard.store.schema import EDGE_PROVENANCE, EDGES, NODES, inferred_properties
 
@@ -156,6 +156,7 @@ class _Builder:
                 "Source", page.source.file, page.source.file, str(page.source),
                 kind=page.kind, title=page.title, url=page.url,
                 captured_at=page.captured_at, body=page.body,
+                body_row=page.body_row if page.body else None,
             )  # fmt: skip
             # Whose page it is, read from its title and URL (D-20, D-21).
             for ref in self.resolver.resolve(f"{page.title} {page.url}").brands:
@@ -195,9 +196,10 @@ class _Builder:
         if first:  # the client's catalogue names the sub-brand
             where = {"method": "extracted", "source_file": first.source.file,
                          "source_ref": str(first.source)}  # fmt: skip
-        elif page:  # a saved first-party page says so (ER-01)
+        elif page:  # a saved first-party page says so (ER-01): cite the line that names it
             where = {"method": "extracted", "source_file": page.source.file,
-                         "source_ref": str(page.source), "captured_at": page.captured_at}  # fmt: skip
+                         "source_ref": page_line_ref(page, ln["name"]),
+                         "captured_at": page.captured_at}  # fmt: skip
         else:
             where = {"method": "inferred", "rule": "D-24", "source_file": self.entities_file,
                          "source_ref": self.entities_file}  # fmt: skip
@@ -407,3 +409,12 @@ class _Builder:
             for line, matched in self.resolver.lines_for(brand, a.headline):
                 self.g.edge("PROMOTES", ad, self._line(brand, line), method="inferred",
                             rule="D-24", matched=matched, **shared)  # fmt: skip
+
+
+def page_line_ref(page: PageRecord, text: str) -> str:
+    """`file:line` of the first body line that contains `text`, ignoring case; the page's
+    own reference when no line does."""
+    for i, line in enumerate(page.body.splitlines()):
+        if text.lower() in line.lower():
+            return f"{page.source.file}:{page.body_row + i}"
+    return str(page.source)

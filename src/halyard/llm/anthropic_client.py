@@ -1,4 +1,8 @@
-"""Anthropic adapter. Structured output via a single forced tool call."""
+"""Anthropic adapter. Structured output via a single forced tool call.
+
+Labelling only: tool calling for the agents is implemented in the OpenAI adapter alone, so
+`run_with_tools` here raises the base class's "not implemented" error.
+"""
 
 from __future__ import annotations
 

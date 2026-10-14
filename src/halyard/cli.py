@@ -130,31 +130,70 @@ def cmd_skills(args: argparse.Namespace) -> None:
 
 
 def cmd_demo(args: argparse.Namespace) -> None:
+    """Up, build, then the demo questions from the client config and the Monday pulse."""
+    from halyard.agents.render import render_run
+
     settings = load_settings()
     if not settings.llm_api_key:
         key = f"{settings.llm_provider.upper()}_API_KEY"
         raise HalyardError(f"{key} is empty in .env; the demo needs it for the agents.")
     runtime.up(settings)
     cmd_build(args)
-    raise NotBuiltYet("demo (the sample questions)", "P4")
+    demo = settings.client.raw["demo"]
+    golden = {q["id"]: q for q in _golden_questions()}
+    failed = []
+    for qid in demo["questions"]:
+        q = golden[qid]
+        print(f"\n=== {qid} ({q['agent']} agent): {q['question']}\n")
+        run, _ = _run(settings, q["agent"], q["question"])
+        print(render_run(run))
+        failed += [qid] if run.status != "answered" else []
+    print(f"\n=== Monday pulse, week of {demo['pulse_week']}\n")
+    run, path = _pulse(settings, str(demo["pulse_week"]))
+    print(path.read_text(encoding="utf-8"))
+    print(f"Wrote {path.relative_to(PROJECT_ROOT)}.")
+    failed += ["pulse"] if run.status != "answered" else []
+    print()
+    cmd_spend(argparse.Namespace(run=None))
+    if failed:
+        raise HalyardError(f"Not answered or not verified: {', '.join(failed)}. See outputs/runs/.")
+
+
+def _golden_questions() -> list[dict]:
+    import yaml
+
+    return yaml.safe_load((PROJECT_ROOT / "eval" / "golden.yaml").read_text())["questions"]
+
+
+def _run(settings, agent: str, request: str, skill: str | None = None):
+    """One agent run with the citation check; the transcript is saved. Returns (run, path)."""
+    from halyard.agents.citations import citation_check
+    from halyard.agents.loop import Limits, run_agent, save_run
+    from halyard.agents.skills import MAIN, load_skill
+    from halyard.llm import get_client
+
+    client = get_client(settings, "agent")
+    with tool_context() as ctx:
+        spec = load_skill(agent, ctx, skill or MAIN)
+        limits = Limits.from_client(settings.client)
+        run = run_agent(client, ctx, spec, request, limits, citation_check(ctx))
+    return run, save_run(run)
+
+
+def _pulse(settings, week: str):
+    from halyard.agents.pulse import pulse_request, pulse_week, write_pulse
+
+    window = pulse_week(settings.client, week)
+    run, _ = _run(settings, "consumer", pulse_request(window), skill="pulse")
+    return run, write_pulse(run, window)
 
 
 def cmd_ask(args: argparse.Namespace) -> None:
     import json
 
-    from halyard.agents.citations import citation_check
-    from halyard.agents.loop import Limits, run_agent, save_run
     from halyard.agents.render import render_run
-    from halyard.agents.skills import load_skill
-    from halyard.llm import get_client
 
-    settings = load_settings()
-    client = get_client(settings, "agent")
-    with tool_context() as ctx:
-        spec = load_skill(args.agent, ctx)
-        limits = Limits.from_client(settings.client)
-        run = run_agent(client, ctx, spec, args.question, limits, citation_check(ctx))
-    path = save_run(run)
+    run, path = _run(load_settings(), args.agent, args.question)
     print(json.dumps(run.answer, indent=2, ensure_ascii=False) if args.json else render_run(run))
     print(f"\nTranscript: {path.relative_to(PROJECT_ROOT)}")
     if run.status != "answered":
@@ -162,23 +201,9 @@ def cmd_ask(args: argparse.Namespace) -> None:
 
 
 def cmd_pulse(args: argparse.Namespace) -> None:
-    from halyard.agents.citations import citation_check
-    from halyard.agents.loop import Limits, run_agent, save_run
-    from halyard.agents.pulse import pulse_request, pulse_week, write_pulse
-    from halyard.agents.skills import load_skill
-    from halyard.llm import get_client
-
-    settings = load_settings()
-    window = pulse_week(settings.client, args.week)
-    client = get_client(settings, "agent")
-    with tool_context() as ctx:
-        spec = load_skill("consumer", ctx, skill="pulse")
-        limits = Limits.from_client(settings.client)
-        run = run_agent(client, ctx, spec, pulse_request(window), limits, citation_check(ctx))
-    transcript = save_run(run)
-    path = write_pulse(run, window)
+    run, path = _pulse(load_settings(), args.week)
     print(path.read_text(encoding="utf-8"))
-    print(f"Wrote {path.relative_to(PROJECT_ROOT)}. Transcript: {transcript.relative_to(PROJECT_ROOT)}")
+    print(f"Wrote {path.relative_to(PROJECT_ROOT)}. Transcript: outputs/runs/{run.run_id}.json")
     if run.status != "answered":
         raise HalyardError(f"Run {run.run_id} ended as {run.status}; see the transcript.")
 

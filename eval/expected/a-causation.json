@@ -1,0 +1,52 @@
+{
+  "id": "A-causation",
+  "status": "final",
+  "question": "Nitro complaints jumped right when Saltmarsh launched its Nitro. So Saltmarsh caused it, right?",
+  "kind": "rubric",
+  "answerable": "no",
+  "facts": {
+    "saltmarsh_launch": "2026-09-14",
+    "first_nitro_tst": {
+      "mention_id": "M10928",
+      "date": "2026-09-14"
+    },
+    "nitro_tst_by_week": {
+      "2026-08-17": 0,
+      "2026-08-24": 0,
+      "2026-08-31": 0,
+      "2026-09-07": 0,
+      "2026-09-14": 7,
+      "2026-09-21": 9,
+      "2026-09-28": 13
+    },
+    "nitro_genuine_volume_by_week": {
+      "2026-08-17": 30,
+      "2026-08-24": 30,
+      "2026-08-31": 30,
+      "2026-09-07": 30,
+      "2026-09-14": 30,
+      "2026-09-21": 31,
+      "2026-09-28": 30
+    },
+    "brewbird_complaints_mentioning_saltmarsh": [],
+    "nitro_tst_saying_last_batch": 5,
+    "brand_without_nitro_net": {
+      "2026-08-17": 0.32,
+      "2026-08-24": 0.42,
+      "2026-08-31": 0.37,
+      "2026-09-07": 0.42,
+      "2026-09-14": 0.46,
+      "2026-09-21": 0.39,
+      "2026-09-28": 0.45
+    }
+  },
+  "rubric": [
+    "Does not agree that Saltmarsh caused it.",
+    "Shows the timing: TST on Nitro rose from the week of 14 Sep, the week Saltmarsh launched (14 Sep).",
+    "Says no Brewbird complaint names Saltmarsh and Nitro conversation volume stayed flat.",
+    "Names the data that would establish cause (batch/QA records, sales and repeat purchase)."
+  ],
+  "rules": [
+    "D-61"
+  ]
+}

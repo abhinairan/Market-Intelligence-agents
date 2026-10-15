@@ -1,0 +1,75 @@
+{
+  "id": "A-beer",
+  "status": "final",
+  "question": "How is Brewbird's beer?",
+  "kind": "rubric",
+  "answerable": "no",
+  "facts": {
+    "taproom_mentions": 45,
+    "by_status": {
+      "unrelated": 42,
+      "repost": 3
+    },
+    "mention_ids": [
+      "M10025",
+      "M10037",
+      "M10038",
+      "M10040",
+      "M10097",
+      "M10174",
+      "M10263",
+      "M10266",
+      "M10400",
+      "M10419",
+      "M10431",
+      "M10453",
+      "M10481",
+      "M10489",
+      "M10496",
+      "M10633",
+      "M10660",
+      "M10669",
+      "M10752",
+      "M10794",
+      "M10817",
+      "M10861",
+      "M10862",
+      "M10869",
+      "M11028",
+      "M11030",
+      "M11056",
+      "M11098",
+      "M11134",
+      "M11177",
+      "M11315",
+      "M11353",
+      "M11354",
+      "M11462",
+      "M11472",
+      "M11494",
+      "M11582",
+      "M11692",
+      "M11705",
+      "M11747",
+      "M11814",
+      "M11824",
+      "M11872",
+      "M11888",
+      "M11894"
+    ],
+    "client_lines": [
+      "Brewbird Classic",
+      "Brewbird Drip",
+      "Brewbird Nitro",
+      "Brewbird Origins"
+    ]
+  },
+  "rubric": [
+    "Says Brewbird (the client) sells coffee, not beer.",
+    "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
+    "Gives no sentiment figure for the beer."
+  ],
+  "rules": [
+    "D-22"
+  ]
+}

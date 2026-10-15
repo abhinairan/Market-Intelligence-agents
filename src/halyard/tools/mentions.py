@@ -150,6 +150,7 @@ def count_mentions(
                 groups[key].append(m)
         by_time = group_by in ("week", "date")
         ordered = sorted(groups.items(), key=lambda g: g[0] if by_time else (-len(g[1]), g[0]))
+        id_groups = {f"{group_by}/{_plain_key(k)}": ids_of(ms) for k, ms in ordered if ms}
         data["group_by"] = group_by
         data["groups"] = [
             {group_by: key, "count": len(ms), "distinct_authors": len({m.author for m in ms})}
@@ -164,7 +165,14 @@ def count_mentions(
             note += f" `{BRAND_LEVEL}` names the brand and none of its lines (D-24)."
         if group_by in ("line", "brand", "code", "week"):
             note += f" Every {group_by} is listed, with 0 where no mention matched."
-    return ToolResult(data, note, ctx.client.as_of, mention_ids=ids_of(mentions))
+    return ToolResult(
+        data, note, ctx.client.as_of, mention_ids=ids_of(mentions),
+        mention_id_groups=id_groups if group_by else {},
+    )  # fmt: skip
+
+
+def _plain_key(key: Any) -> str:
+    return key.isoformat() if isinstance(key, date) else str(key)
 
 
 # --- get_mentions ---------------------------------------------------------------------
@@ -326,9 +334,15 @@ def daily_activity(
     multiple = ctx.client.raw["anomaly_median_multiple"]
     unusual = [d for d in days if len(by_day[d]) > multiple * typical]
     detailed = [day] if day else unusual
+    genuine = [[m for m in by_day[d] if m.status == GENUINE] for d in days]
+    brands = [b["key"] for b in ctx.names.brands]
     data = {
         "window": {"start": window.start, "end": window.end},
         "median_mentions_per_day": typical,
+        # D-43: whether genuine conversation was itself unusual, once spam and the rest are out.
+        "median_genuine_per_day": {"all_brands": median(len(g) for g in genuine)} | {
+            b: median(sum(1 for m in g if b in m.brands) for g in genuine) for b in brands
+        },
         "unusual_above": multiple * typical,
         "unusual_days": unusual,
         "days": [_day_detail(d, by_day[d], top) | {"unusual": d in unusual} for d in detailed],
@@ -338,7 +352,16 @@ def daily_activity(
         f"Daily totals count every mention in the export, excluded ones included. A day is "
         f"unusual when its total is more than {multiple} times the median day of the window "
         f"({window.describe()}), and it is broken down by status before anything is said about "
-        "the brand (D-43). Spam says nothing about a brand's own promotions (D-14)."
+        "the brand (D-43). `median_genuine_per_day` is the median day of genuine conversations "
+        "only, overall and per brand, to compare a day's genuine volume with. Spam says nothing "
+        "about a brand's own promotions (D-14)."
     )
     ids = [m.mention_id for d in detailed for m in by_day[d]]
-    return ToolResult(data, note, ctx.client.as_of, mention_ids=ids)
+    groups: dict[str, list[str]] = defaultdict(list)
+    for d in detailed:
+        for m in by_day[d]:
+            groups[f"{d.isoformat()}/{m.status}"].append(m.mention_id)
+            if m.status == GENUINE:
+                for b in m.brands:
+                    groups[f"{d.isoformat()}/genuine/{b}"].append(m.mention_id)
+    return ToolResult(data, note, ctx.client.as_of, mention_ids=ids, mention_id_groups=dict(groups))

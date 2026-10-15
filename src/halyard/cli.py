@@ -10,11 +10,6 @@ from halyard import runtime
 from halyard.settings import PROJECT_ROOT, HalyardError, load_settings
 
 
-class NotBuiltYet(HalyardError):
-    def __init__(self, what: str, phase: str):
-        super().__init__(f"`halyard {what}` is not implemented yet ({phase} in docs/PLAN.md).")
-
-
 def cmd_up(args: argparse.Namespace) -> None:
     settings = load_settings()
     runtime.up(settings)
@@ -251,7 +246,43 @@ def cmd_trace(args: argparse.Namespace) -> None:
 
 
 def cmd_eval(args: argparse.Namespace) -> None:
-    raise NotBuiltYet("eval", "P5")
+    """Golden and adversarial questions through the agents, graded against the oracle. A full
+    run writes docs/eval-report.md; a run with --only writes its report beside its results.
+    Exits non-zero only when a run errors: failed grades are findings for the report."""
+    import dataclasses
+    import json
+
+    from halyard.eval.cases import load_cases
+    from halyard.eval.report import REPORT, render_report, report_notes
+    from halyard.eval.runner import EVAL_OUT, run_eval, save_eval
+    from halyard.llm import get_client
+
+    if args.report:
+        path = EVAL_OUT / f"{args.report}.json"
+        if not path.exists():
+            raise HalyardError(f"No saved eval {args.report} in {EVAL_OUT.relative_to(PROJECT_ROOT)}.")
+        notes = report_notes(args.report)
+        REPORT.write_text(render_report(json.loads(path.read_text(encoding="utf-8")), notes), encoding="utf-8")
+        print(f"Wrote {REPORT.relative_to(PROJECT_ROOT)} from {args.report}.")
+        return
+
+    settings = load_settings()
+    only = [x.strip() for x in args.only.split(",")] if args.only else None
+    cases = load_cases(only)
+    judge = None if args.no_judge else get_client(settings, "judge")
+    second = None
+    if args.second_judge:
+        second = get_client(dataclasses.replace(settings, judge_model=args.second_judge), "judge")
+    ev = run_eval(cases, lambda agent, q: _run(settings, agent, q)[0], judge, args.repeat, second, print)
+    saved = save_eval(ev)
+    report = REPORT if only is None else saved.with_suffix(".md")
+    report.write_text(render_report(json.loads(saved.read_text(encoding="utf-8"))), encoding="utf-8")
+    passed = sum(1 for g in ev.grades if g.passed)
+    print(f"\n{passed} of {len(ev.grades)} runs passed. Results: {saved.relative_to(PROJECT_ROOT)}; "
+          f"report: {report.relative_to(PROJECT_ROOT)}.")
+    if ev.errors:
+        raise HalyardError(f"{len(ev.errors)} run(s) ended in an error: "
+                           + ", ".join(g.run_id for g in ev.errors))
 
 
 def parser() -> argparse.ArgumentParser:
@@ -306,9 +337,14 @@ def parser() -> argparse.ArgumentParser:
     tool.add_argument("args", nargs="?", default="{}", help="arguments as JSON")
     tool.set_defaults(func=cmd_tool)
 
-    sub.add_parser("eval", help="run golden and adversarial sets, write the report").set_defaults(
-        func=cmd_eval
-    )
+    ev = sub.add_parser("eval", help="run golden and adversarial sets, write the report")
+    ev.add_argument("--repeat", type=int, default=3, help="runs per question (default 3)")
+    ev.add_argument("--only", help="comma-separated question IDs, e.g. Q3,A-login")
+    ev.add_argument("--no-judge", action="store_true", help="skip the rubric judge")
+    ev.add_argument("--second-judge", metavar="MODEL",
+                    help="also judge the first repeat with MODEL, to calibrate the judge")
+    ev.add_argument("--report", metavar="E-ID", help="rewrite docs/eval-report.md from a saved eval")
+    ev.set_defaults(func=cmd_eval)
     return p
 
 

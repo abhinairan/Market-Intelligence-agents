@@ -3,6 +3,7 @@
   "status": "final",
   "question": "Is Saltmarsh's \"half the price\" claim accurate?",
   "kind": "numeric+rubric",
+  "answerable": "yes",
   "answer": {
     "verdict": "not accurate",
     "list_ratio": 0.818,

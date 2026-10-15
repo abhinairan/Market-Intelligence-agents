@@ -5,3 +5,7 @@
 gpt-6-luna:               # given by Abhinav, 14 Oct 2026
   input: 0.10
   output: 0.50
+
+gpt-6.1-sol:              # given by Abhinav, 14 Oct 2026 (judge in P5)
+  input: 2.00
+  output: 10.00

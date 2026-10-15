@@ -26,9 +26,9 @@ def test_missing_docker_is_a_clear_error(monkeypatch):
         runtime.check_docker()
 
 
-def test_unbuilt_commands_fail_loudly(capsys):
-    assert main(["eval"]) == 1
-    assert "not implemented yet" in capsys.readouterr().err
+def test_missing_saved_eval_is_a_clear_error(capsys):
+    assert main(["eval", "--report", "E-nothere"]) == 1
+    assert "No saved eval E-nothere" in capsys.readouterr().err
 
 
 @pytest.mark.integration

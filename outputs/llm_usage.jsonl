@@ -392,3 +392,857 @@
 {"at": "2026-10-14T12:03:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4539, "output_tokens": 288, "cached_input_tokens": 0, "run_id": "A-27eb22c7"}
 {"at": "2026-10-14T12:03:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 19857, "output_tokens": 508, "cached_input_tokens": 4413, "run_id": "A-27eb22c7"}
 {"at": "2026-10-14T12:03:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 23618, "output_tokens": 2524, "cached_input_tokens": 19731, "run_id": "A-27eb22c7"}
+{"at": "2026-10-14T17:20:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4219, "output_tokens": 127, "cached_input_tokens": 0, "run_id": "A-083ff60c"}
+{"at": "2026-10-14T17:20:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11750, "output_tokens": 107, "cached_input_tokens": 4093, "run_id": "A-083ff60c"}
+{"at": "2026-10-14T17:20:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15440, "output_tokens": 802, "cached_input_tokens": 11624, "run_id": "A-083ff60c"}
+{"at": "2026-10-14T17:20:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1396, "output_tokens": 1017}
+{"at": "2026-10-14T17:20:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 280, "cached_input_tokens": 4077, "run_id": "A-c69ecf46"}
+{"at": "2026-10-14T17:20:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4528, "output_tokens": 235, "cached_input_tokens": 4092, "run_id": "A-c69ecf46"}
+{"at": "2026-10-14T17:21:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6901, "output_tokens": 516, "cached_input_tokens": 4402, "run_id": "A-c69ecf46"}
+{"at": "2026-10-14T17:21:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 920, "output_tokens": 778}
+{"at": "2026-10-14T17:32:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4233, "output_tokens": 43, "cached_input_tokens": 4077, "run_id": "A-065431e2"}
+{"at": "2026-10-14T17:32:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4779, "output_tokens": 265, "cached_input_tokens": 4107, "run_id": "A-065431e2"}
+{"at": "2026-10-14T17:32:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4233, "output_tokens": 87, "cached_input_tokens": 4107, "run_id": "A-8613ab64"}
+{"at": "2026-10-14T17:32:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5628, "output_tokens": 516, "cached_input_tokens": 4107, "run_id": "A-8613ab64"}
+{"at": "2026-10-14T17:32:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4233, "output_tokens": 87, "cached_input_tokens": 4107, "run_id": "A-46325c3c"}
+{"at": "2026-10-14T17:32:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5628, "output_tokens": 599, "cached_input_tokens": 5502, "run_id": "A-46325c3c"}
+{"at": "2026-10-14T17:33:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4230, "output_tokens": 27, "cached_input_tokens": 4077, "run_id": "A-e1f8ef24"}
+{"at": "2026-10-14T17:33:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6376, "output_tokens": 634, "cached_input_tokens": 4104, "run_id": "A-e1f8ef24"}
+{"at": "2026-10-14T17:33:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4230, "output_tokens": 61, "cached_input_tokens": 4104, "run_id": "A-c67a1e40"}
+{"at": "2026-10-14T17:33:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7470, "output_tokens": 521, "cached_input_tokens": 4104, "run_id": "A-c67a1e40"}
+{"at": "2026-10-14T17:33:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4230, "output_tokens": 27, "cached_input_tokens": 4104, "run_id": "A-704da3df"}
+{"at": "2026-10-14T17:33:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4233, "output_tokens": 87, "cached_input_tokens": 4107, "run_id": "A-09199dfa"}
+{"at": "2026-10-14T17:34:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5628, "output_tokens": 537, "cached_input_tokens": 5502, "run_id": "A-09199dfa"}
+{"at": "2026-10-14T17:34:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4233, "output_tokens": 43, "cached_input_tokens": 4107, "run_id": "A-79d4e5bf"}
+{"at": "2026-10-14T17:34:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4779, "output_tokens": 445, "cached_input_tokens": 4653, "run_id": "A-79d4e5bf"}
+{"at": "2026-10-14T17:34:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4233, "output_tokens": 87, "cached_input_tokens": 4107, "run_id": "A-5d8f17ee"}
+{"at": "2026-10-14T17:34:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5628, "output_tokens": 654, "cached_input_tokens": 5502, "run_id": "A-5d8f17ee"}
+{"at": "2026-10-14T17:34:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4230, "output_tokens": 27, "cached_input_tokens": 4104, "run_id": "A-156f7bb8"}
+{"at": "2026-10-14T17:34:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6376, "output_tokens": 621, "cached_input_tokens": 6250, "run_id": "A-156f7bb8"}
+{"at": "2026-10-14T17:34:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4230, "output_tokens": 27, "cached_input_tokens": 4104, "run_id": "A-af376d9f"}
+{"at": "2026-10-14T17:34:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6376, "output_tokens": 624, "cached_input_tokens": 6250, "run_id": "A-af376d9f"}
+{"at": "2026-10-14T17:34:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4230, "output_tokens": 33, "cached_input_tokens": 4104, "run_id": "A-3ac5c22a"}
+{"at": "2026-10-14T17:34:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6382, "output_tokens": 637, "cached_input_tokens": 4104, "run_id": "A-3ac5c22a"}
+{"at": "2026-10-14T17:34:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4229, "output_tokens": 33, "cached_input_tokens": 4077, "run_id": "A-ade61341"}
+{"at": "2026-10-14T17:34:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6200, "output_tokens": 522, "cached_input_tokens": 4103, "run_id": "A-ade61341"}
+{"at": "2026-10-14T17:35:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4229, "output_tokens": 38, "cached_input_tokens": 4103, "run_id": "A-410cbe5c"}
+{"at": "2026-10-14T17:35:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6207, "output_tokens": 594, "cached_input_tokens": 4103, "run_id": "A-410cbe5c"}
+{"at": "2026-10-14T17:35:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4229, "output_tokens": 38, "cached_input_tokens": 4103, "run_id": "A-0345d691"}
+{"at": "2026-10-14T17:35:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6207, "output_tokens": 986, "cached_input_tokens": 6081, "run_id": "A-0345d691"}
+{"at": "2026-10-14T17:35:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4219, "output_tokens": 86, "cached_input_tokens": 4093, "run_id": "A-3ab18f71"}
+{"at": "2026-10-14T17:35:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11756, "output_tokens": 115, "cached_input_tokens": 4093, "run_id": "A-3ab18f71"}
+{"at": "2026-10-14T17:35:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15451, "output_tokens": 689, "cached_input_tokens": 11630, "run_id": "A-3ab18f71"}
+{"at": "2026-10-14T17:35:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1292, "output_tokens": 453}
+{"at": "2026-10-14T17:35:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4219, "output_tokens": 131, "cached_input_tokens": 4093, "run_id": "A-f7591844"}
+{"at": "2026-10-14T17:35:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11750, "output_tokens": 148, "cached_input_tokens": 11624, "run_id": "A-f7591844"}
+{"at": "2026-10-14T17:35:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 13593, "output_tokens": 339, "cached_input_tokens": 11624, "run_id": "A-f7591844"}
+{"at": "2026-10-14T17:36:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14591, "output_tokens": 721, "cached_input_tokens": 13467, "run_id": "A-f7591844"}
+{"at": "2026-10-14T17:36:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1331, "output_tokens": 1117}
+{"at": "2026-10-14T17:36:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4219, "output_tokens": 151, "cached_input_tokens": 4093, "run_id": "A-69b7bd4d"}
+{"at": "2026-10-14T17:36:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11747, "output_tokens": 167, "cached_input_tokens": 4093, "run_id": "A-69b7bd4d"}
+{"at": "2026-10-14T17:36:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 13662, "output_tokens": 1704, "cached_input_tokens": 11621, "run_id": "A-69b7bd4d"}
+{"at": "2026-10-14T17:36:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1289, "output_tokens": 636}
+{"at": "2026-10-14T17:36:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 27, "cached_input_tokens": 4077, "run_id": "A-f531b9f9"}
+{"at": "2026-10-14T17:36:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5793, "output_tokens": 239, "cached_input_tokens": 4088, "run_id": "A-f531b9f9"}
+{"at": "2026-10-14T17:37:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 799, "output_tokens": 709}
+{"at": "2026-10-14T17:37:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 27, "cached_input_tokens": 4088, "run_id": "A-a37a44aa"}
+{"at": "2026-10-14T17:37:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5793, "output_tokens": 322, "cached_input_tokens": 5667, "run_id": "A-a37a44aa"}
+{"at": "2026-10-14T17:37:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 895, "output_tokens": 414}
+{"at": "2026-10-14T17:37:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 27, "cached_input_tokens": 4088, "run_id": "A-c3107e77"}
+{"at": "2026-10-14T17:37:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5793, "output_tokens": 29, "cached_input_tokens": 5667, "run_id": "A-c3107e77"}
+{"at": "2026-10-14T17:37:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6397, "output_tokens": 529, "cached_input_tokens": 5667, "run_id": "A-c3107e77"}
+{"at": "2026-10-14T17:37:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 927, "output_tokens": 572}
+{"at": "2026-10-14T17:37:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4220, "output_tokens": 125, "cached_input_tokens": 4077, "run_id": "A-275919f7"}
+{"at": "2026-10-14T17:37:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5542, "output_tokens": 312, "cached_input_tokens": 4094, "run_id": "A-275919f7"}
+{"at": "2026-10-14T17:37:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5770, "output_tokens": 487, "cached_input_tokens": 5416, "run_id": "A-275919f7"}
+{"at": "2026-10-14T17:37:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 790, "output_tokens": 396}
+{"at": "2026-10-14T17:37:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4220, "output_tokens": 24, "cached_input_tokens": 4094, "run_id": "A-46b5845a"}
+{"at": "2026-10-14T17:37:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5538, "output_tokens": 466, "cached_input_tokens": 4094, "run_id": "A-46b5845a"}
+{"at": "2026-10-14T17:38:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 672, "output_tokens": 282}
+{"at": "2026-10-14T17:38:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4220, "output_tokens": 35, "cached_input_tokens": 4094, "run_id": "A-fde3e400"}
+{"at": "2026-10-14T17:38:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5559, "output_tokens": 307, "cached_input_tokens": 4094, "run_id": "A-fde3e400"}
+{"at": "2026-10-14T17:38:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5787, "output_tokens": 593, "cached_input_tokens": 5433, "run_id": "A-fde3e400"}
+{"at": "2026-10-14T17:38:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 887, "output_tokens": 470}
+{"at": "2026-10-14T17:38:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4554, "output_tokens": 71, "cached_input_tokens": 0, "run_id": "A-fae5df46"}
+{"at": "2026-10-14T17:38:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6070, "output_tokens": 849, "cached_input_tokens": 4428, "run_id": "A-fae5df46"}
+{"at": "2026-10-14T17:38:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4554, "output_tokens": 91, "cached_input_tokens": 4428, "run_id": "A-3971f49b"}
+{"at": "2026-10-14T17:38:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5050, "output_tokens": 28, "cached_input_tokens": 4428, "run_id": "A-3971f49b"}
+{"at": "2026-10-14T17:38:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5933, "output_tokens": 671, "cached_input_tokens": 4924, "run_id": "A-3971f49b"}
+{"at": "2026-10-14T17:38:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4554, "output_tokens": 65, "cached_input_tokens": 4428, "run_id": "A-fc251191"}
+{"at": "2026-10-14T17:38:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5943, "output_tokens": 595, "cached_input_tokens": 4428, "run_id": "A-fc251191"}
+{"at": "2026-10-14T17:39:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4547, "output_tokens": 256, "cached_input_tokens": 4404, "run_id": "A-c71c8e8d"}
+{"at": "2026-10-14T17:39:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7221, "output_tokens": 103, "cached_input_tokens": 4421, "run_id": "A-c71c8e8d"}
+{"at": "2026-10-14T17:39:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8279, "output_tokens": 646, "cached_input_tokens": 7095, "run_id": "A-c71c8e8d"}
+{"at": "2026-10-14T17:39:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1242, "output_tokens": 299}
+{"at": "2026-10-14T17:39:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4547, "output_tokens": 175, "cached_input_tokens": 4421, "run_id": "A-80987ac9"}
+{"at": "2026-10-14T17:39:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6039, "output_tokens": 856, "cached_input_tokens": 4421, "run_id": "A-80987ac9"}
+{"at": "2026-10-14T17:39:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1296, "output_tokens": 576}
+{"at": "2026-10-14T17:39:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4547, "output_tokens": 128, "cached_input_tokens": 4421, "run_id": "A-713cfe8b"}
+{"at": "2026-10-14T17:39:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5951, "output_tokens": 118, "cached_input_tokens": 4421, "run_id": "A-713cfe8b"}
+{"at": "2026-10-14T17:39:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7009, "output_tokens": 669, "cached_input_tokens": 5825, "run_id": "A-713cfe8b"}
+{"at": "2026-10-14T17:40:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1247, "output_tokens": 390}
+{"at": "2026-10-14T17:40:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4562, "output_tokens": 38, "cached_input_tokens": 4404, "run_id": "A-81f68107"}
+{"at": "2026-10-14T17:40:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6287, "output_tokens": 483, "cached_input_tokens": 4436, "run_id": "A-81f68107"}
+{"at": "2026-10-14T17:40:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1033, "output_tokens": 164}
+{"at": "2026-10-14T17:40:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4562, "output_tokens": 38, "cached_input_tokens": 4436, "run_id": "A-6ebea383"}
+{"at": "2026-10-14T17:40:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6287, "output_tokens": 519, "cached_input_tokens": 6161, "run_id": "A-6ebea383"}
+{"at": "2026-10-14T17:40:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1069, "output_tokens": 131}
+{"at": "2026-10-14T17:40:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4562, "output_tokens": 38, "cached_input_tokens": 4436, "run_id": "A-57c1632c"}
+{"at": "2026-10-14T17:40:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6287, "output_tokens": 506, "cached_input_tokens": 6161, "run_id": "A-57c1632c"}
+{"at": "2026-10-14T17:40:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1056, "output_tokens": 200}
+{"at": "2026-10-14T17:40:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4544, "output_tokens": 52, "cached_input_tokens": 4404, "run_id": "A-4f39effc"}
+{"at": "2026-10-14T17:40:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5635, "output_tokens": 842, "cached_input_tokens": 4418, "run_id": "A-4f39effc"}
+{"at": "2026-10-14T17:40:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1125, "output_tokens": 344}
+{"at": "2026-10-14T17:40:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4544, "output_tokens": 21, "cached_input_tokens": 4418, "run_id": "A-66b982d8"}
+{"at": "2026-10-14T17:41:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5635, "output_tokens": 694, "cached_input_tokens": 5509, "run_id": "A-66b982d8"}
+{"at": "2026-10-14T17:41:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1263, "output_tokens": 304}
+{"at": "2026-10-14T17:41:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4544, "output_tokens": 21, "cached_input_tokens": 4418, "run_id": "A-d07885c9"}
+{"at": "2026-10-14T17:41:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5635, "output_tokens": 758, "cached_input_tokens": 5509, "run_id": "A-d07885c9"}
+{"at": "2026-10-14T17:41:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1085, "output_tokens": 337}
+{"at": "2026-10-14T17:41:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4542, "output_tokens": 26, "cached_input_tokens": 4404, "run_id": "A-2a711ea0"}
+{"at": "2026-10-14T17:41:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5862, "output_tokens": 360, "cached_input_tokens": 4416, "run_id": "A-2a711ea0"}
+{"at": "2026-10-14T17:41:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 819, "output_tokens": 438}
+{"at": "2026-10-14T17:41:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4542, "output_tokens": 24, "cached_input_tokens": 4416, "run_id": "A-3257c25d"}
+{"at": "2026-10-14T17:41:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5857, "output_tokens": 138, "cached_input_tokens": 4416, "run_id": "A-3257c25d"}
+{"at": "2026-10-14T17:41:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6340, "output_tokens": 416, "cached_input_tokens": 5731, "run_id": "A-3257c25d"}
+{"at": "2026-10-14T17:41:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 887, "output_tokens": 373}
+{"at": "2026-10-14T17:41:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4542, "output_tokens": 24, "cached_input_tokens": 4416, "run_id": "A-d2518337"}
+{"at": "2026-10-14T17:42:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5857, "output_tokens": 374, "cached_input_tokens": 4416, "run_id": "A-d2518337"}
+{"at": "2026-10-14T17:42:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 789, "output_tokens": 441}
+{"at": "2026-10-14T17:42:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4547, "output_tokens": 126, "cached_input_tokens": 4404, "run_id": "A-6c00cf00"}
+{"at": "2026-10-14T17:42:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5872, "output_tokens": 427, "cached_input_tokens": 4421, "run_id": "A-6c00cf00"}
+{"at": "2026-10-14T17:42:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15711, "output_tokens": 989, "cached_input_tokens": 5746, "run_id": "A-6c00cf00"}
+{"at": "2026-10-14T17:42:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1600, "output_tokens": 827}
+{"at": "2026-10-14T17:42:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4547, "output_tokens": 181, "cached_input_tokens": 4421, "run_id": "A-b4017e65"}
+{"at": "2026-10-14T17:42:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5900, "output_tokens": 391, "cached_input_tokens": 4421, "run_id": "A-b4017e65"}
+{"at": "2026-10-14T17:43:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15359, "output_tokens": 1544, "cached_input_tokens": 5774, "run_id": "A-b4017e65"}
+{"at": "2026-10-14T17:43:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1493, "output_tokens": 404}
+{"at": "2026-10-14T17:43:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4547, "output_tokens": 212, "cached_input_tokens": 4421, "run_id": "A-f797e322"}
+{"at": "2026-10-14T17:43:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5900, "output_tokens": 541, "cached_input_tokens": 4421, "run_id": "A-f797e322"}
+{"at": "2026-10-14T17:43:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14940, "output_tokens": 1497, "cached_input_tokens": 5774, "run_id": "A-f797e322"}
+{"at": "2026-10-14T17:43:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1605, "output_tokens": 521}
+{"at": "2026-10-14T17:43:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 192, "cached_input_tokens": 4077, "run_id": "A-e8c3618e"}
+{"at": "2026-10-14T17:43:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6469, "output_tokens": 344, "cached_input_tokens": 4092, "run_id": "A-e8c3618e"}
+{"at": "2026-10-14T17:43:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 731, "output_tokens": 179}
+{"at": "2026-10-14T17:44:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 150, "cached_input_tokens": 4092, "run_id": "A-55218e1e"}
+{"at": "2026-10-14T17:44:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6469, "output_tokens": 578, "cached_input_tokens": 6343, "run_id": "A-55218e1e"}
+{"at": "2026-10-14T17:44:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 863, "output_tokens": 207}
+{"at": "2026-10-14T17:44:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 75, "cached_input_tokens": 4092, "run_id": "A-3fdfb1bf"}
+{"at": "2026-10-14T17:44:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5636, "output_tokens": 420, "cached_input_tokens": 4092, "run_id": "A-3fdfb1bf"}
+{"at": "2026-10-14T17:44:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 878, "output_tokens": 239}
+{"at": "2026-10-14T17:44:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4216, "output_tokens": 87, "cached_input_tokens": 4077, "run_id": "A-0a22e6e8"}
+{"at": "2026-10-14T17:44:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5542, "output_tokens": 459, "cached_input_tokens": 4090, "run_id": "A-0a22e6e8"}
+{"at": "2026-10-14T17:44:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9516, "output_tokens": 861, "cached_input_tokens": 5416, "run_id": "A-0a22e6e8"}
+{"at": "2026-10-14T17:44:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 911, "output_tokens": 400}
+{"at": "2026-10-14T17:44:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4216, "output_tokens": 111, "cached_input_tokens": 4090, "run_id": "A-e27457a6"}
+{"at": "2026-10-14T17:44:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5544, "output_tokens": 491, "cached_input_tokens": 4090, "run_id": "A-e27457a6"}
+{"at": "2026-10-14T17:45:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10773, "output_tokens": 313, "cached_input_tokens": 5418, "run_id": "A-e27457a6"}
+{"at": "2026-10-14T17:45:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14055, "output_tokens": 1063, "cached_input_tokens": 10647, "run_id": "A-e27457a6"}
+{"at": "2026-10-14T17:45:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 947, "output_tokens": 549}
+{"at": "2026-10-14T17:45:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4216, "output_tokens": 77, "cached_input_tokens": 4090, "run_id": "A-76fa9d8e"}
+{"at": "2026-10-14T17:45:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5548, "output_tokens": 350, "cached_input_tokens": 4090, "run_id": "A-76fa9d8e"}
+{"at": "2026-10-14T17:45:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9535, "output_tokens": 1108, "cached_input_tokens": 5422, "run_id": "A-76fa9d8e"}
+{"at": "2026-10-14T17:45:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 981, "output_tokens": 602}
+{"at": "2026-10-14T17:46:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 48, "cached_input_tokens": 4077, "run_id": "A-437d9ba1"}
+{"at": "2026-10-14T17:46:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5535, "output_tokens": 277, "cached_input_tokens": 4088, "run_id": "A-437d9ba1"}
+{"at": "2026-10-14T17:46:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7612, "output_tokens": 301, "cached_input_tokens": 5409, "run_id": "A-437d9ba1"}
+{"at": "2026-10-14T17:46:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8794, "output_tokens": 336, "cached_input_tokens": 7486, "run_id": "A-437d9ba1"}
+{"at": "2026-10-14T17:46:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 883, "output_tokens": 447}
+{"at": "2026-10-14T17:46:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 81, "cached_input_tokens": 4088, "run_id": "A-d12239ad"}
+{"at": "2026-10-14T17:46:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5542, "output_tokens": 224, "cached_input_tokens": 4088, "run_id": "A-d12239ad"}
+{"at": "2026-10-14T17:47:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6031, "output_tokens": 162, "cached_input_tokens": 5416, "run_id": "A-d12239ad"}
+{"at": "2026-10-14T17:47:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8504, "output_tokens": 700, "cached_input_tokens": 5905, "run_id": "A-d12239ad"}
+{"at": "2026-10-14T17:47:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 911, "output_tokens": 619}
+{"at": "2026-10-14T17:47:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 29, "cached_input_tokens": 4088, "run_id": "A-d1ceb2f8"}
+{"at": "2026-10-14T17:47:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5542, "output_tokens": 181, "cached_input_tokens": 4088, "run_id": "A-d1ceb2f8"}
+{"at": "2026-10-14T17:47:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7619, "output_tokens": 646, "cached_input_tokens": 5416, "run_id": "A-d1ceb2f8"}
+{"at": "2026-10-14T17:47:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 972, "output_tokens": 689}
+{"at": "2026-10-14T17:47:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4555, "output_tokens": 127, "cached_input_tokens": 4404, "run_id": "A-9af80f7c"}
+{"at": "2026-10-14T17:47:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5878, "output_tokens": 109, "cached_input_tokens": 4429, "run_id": "A-9af80f7c"}
+{"at": "2026-10-14T17:47:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6361, "output_tokens": 287, "cached_input_tokens": 5752, "run_id": "A-9af80f7c"}
+{"at": "2026-10-14T17:47:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 841, "output_tokens": 580}
+{"at": "2026-10-14T17:47:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4555, "output_tokens": 32, "cached_input_tokens": 4429, "run_id": "A-9be5e4c9"}
+{"at": "2026-10-14T17:48:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5886, "output_tokens": 290, "cached_input_tokens": 4429, "run_id": "A-9be5e4c9"}
+{"at": "2026-10-14T17:48:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 844, "output_tokens": 435}
+{"at": "2026-10-14T17:48:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4555, "output_tokens": 59, "cached_input_tokens": 4429, "run_id": "A-2d99d53b"}
+{"at": "2026-10-14T17:48:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5883, "output_tokens": 433, "cached_input_tokens": 4429, "run_id": "A-2d99d53b"}
+{"at": "2026-10-14T17:48:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 848, "output_tokens": 603}
+{"at": "2026-10-14T17:48:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4556, "output_tokens": 109, "cached_input_tokens": 4404, "run_id": "A-97e651d2"}
+{"at": "2026-10-14T17:48:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5903, "output_tokens": 476, "cached_input_tokens": 4430, "run_id": "A-97e651d2"}
+{"at": "2026-10-14T17:48:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11837, "output_tokens": 1535, "cached_input_tokens": 5777, "run_id": "A-97e651d2"}
+{"at": "2026-10-14T17:48:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1479, "output_tokens": 445}
+{"at": "2026-10-14T17:48:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4556, "output_tokens": 263, "cached_input_tokens": 4430, "run_id": "A-34ba6584"}
+{"at": "2026-10-14T17:49:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7947, "output_tokens": 677, "cached_input_tokens": 4430, "run_id": "A-34ba6584"}
+{"at": "2026-10-14T17:49:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 17453, "output_tokens": 1444, "cached_input_tokens": 7821, "run_id": "A-34ba6584"}
+{"at": "2026-10-14T17:49:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1710, "output_tokens": 775}
+{"at": "2026-10-14T17:49:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4556, "output_tokens": 109, "cached_input_tokens": 4430, "run_id": "A-39c2d446"}
+{"at": "2026-10-14T17:49:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5911, "output_tokens": 649, "cached_input_tokens": 4430, "run_id": "A-39c2d446"}
+{"at": "2026-10-14T17:49:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 19604, "output_tokens": 1811, "cached_input_tokens": 5785, "run_id": "A-39c2d446"}
+{"at": "2026-10-14T17:50:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1745, "output_tokens": 856}
+{"at": "2026-10-14T17:50:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 331, "cached_input_tokens": 4092, "run_id": "A-daea3249"}
+{"at": "2026-10-14T17:50:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4427, "output_tokens": 213, "cached_input_tokens": 4092, "run_id": "A-daea3249"}
+{"at": "2026-10-14T17:50:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6130, "output_tokens": 474, "cached_input_tokens": 4301, "run_id": "A-daea3249"}
+{"at": "2026-10-14T17:50:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 932, "output_tokens": 273}
+{"at": "2026-10-14T17:50:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 295, "cached_input_tokens": 4092, "run_id": "A-78f61ac3"}
+{"at": "2026-10-14T17:50:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4427, "output_tokens": 163, "cached_input_tokens": 4301, "run_id": "A-78f61ac3"}
+{"at": "2026-10-14T17:50:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6130, "output_tokens": 448, "cached_input_tokens": 6004, "run_id": "A-78f61ac3"}
+{"at": "2026-10-14T17:50:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 884, "output_tokens": 265}
+{"at": "2026-10-14T17:50:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 293, "cached_input_tokens": 4092, "run_id": "A-2c25a633"}
+{"at": "2026-10-14T17:50:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4427, "output_tokens": 173, "cached_input_tokens": 4301, "run_id": "A-2c25a633"}
+{"at": "2026-10-14T17:50:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6130, "output_tokens": 463, "cached_input_tokens": 6004, "run_id": "A-2c25a633"}
+{"at": "2026-10-14T17:51:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 935, "output_tokens": 278}
+{"at": "2026-10-14T17:51:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 211, "cached_input_tokens": 4077, "run_id": "A-2d2a3f4c"}
+{"at": "2026-10-14T17:51:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10187, "output_tokens": 155, "cached_input_tokens": 4088, "run_id": "A-2d2a3f4c"}
+{"at": "2026-10-14T17:51:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11250, "output_tokens": 451, "cached_input_tokens": 10061, "run_id": "A-2d2a3f4c"}
+{"at": "2026-10-14T17:51:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 756, "output_tokens": 304}
+{"at": "2026-10-14T17:51:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 242, "cached_input_tokens": 4088, "run_id": "A-381ea475"}
+{"at": "2026-10-14T17:51:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4392, "output_tokens": 296, "cached_input_tokens": 4088, "run_id": "A-381ea475"}
+{"at": "2026-10-14T17:51:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6870, "output_tokens": 623, "cached_input_tokens": 4266, "run_id": "A-381ea475"}
+{"at": "2026-10-14T17:51:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 645, "output_tokens": 283}
+{"at": "2026-10-14T17:51:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4214, "output_tokens": 173, "cached_input_tokens": 4088, "run_id": "A-3eb44363"}
+{"at": "2026-10-14T17:51:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4299, "output_tokens": 183, "cached_input_tokens": 4088, "run_id": "A-3eb44363"}
+{"at": "2026-10-14T17:51:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4828, "output_tokens": 466, "cached_input_tokens": 4173, "run_id": "A-3eb44363"}
+{"at": "2026-10-14T17:51:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 705, "output_tokens": 203}
+{"at": "2026-10-14T17:51:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4549, "output_tokens": 33, "cached_input_tokens": 4404, "run_id": "A-bc62ab63"}
+{"at": "2026-10-14T17:51:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4623, "output_tokens": 59, "cached_input_tokens": 4423, "run_id": "A-bc62ab63"}
+{"at": "2026-10-14T17:52:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5570, "output_tokens": 221, "cached_input_tokens": 4497, "run_id": "A-bc62ab63"}
+{"at": "2026-10-14T17:52:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 662, "output_tokens": 248}
+{"at": "2026-10-14T17:52:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4549, "output_tokens": 24, "cached_input_tokens": 4423, "run_id": "A-c3c2ba54"}
+{"at": "2026-10-14T17:52:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5496, "output_tokens": 241, "cached_input_tokens": 4423, "run_id": "A-c3c2ba54"}
+{"at": "2026-10-14T17:52:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 704, "output_tokens": 392}
+{"at": "2026-10-14T17:52:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4549, "output_tokens": 24, "cached_input_tokens": 4423, "run_id": "A-65294ca8"}
+{"at": "2026-10-14T17:52:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5496, "output_tokens": 212, "cached_input_tokens": 5370, "run_id": "A-65294ca8"}
+{"at": "2026-10-14T17:52:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 729, "output_tokens": 283}
+{"at": "2026-10-14T17:52:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4546, "output_tokens": 44, "cached_input_tokens": 4404, "run_id": "A-12e331e8"}
+{"at": "2026-10-14T17:52:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4752, "output_tokens": 68, "cached_input_tokens": 4420, "run_id": "A-12e331e8"}
+{"at": "2026-10-14T17:52:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5598, "output_tokens": 758, "cached_input_tokens": 4626, "run_id": "A-12e331e8"}
+{"at": "2026-10-14T17:52:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 921, "output_tokens": 322}
+{"at": "2026-10-14T17:52:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4546, "output_tokens": 44, "cached_input_tokens": 4420, "run_id": "A-55a2a57a"}
+{"at": "2026-10-14T17:52:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4752, "output_tokens": 67, "cached_input_tokens": 4626, "run_id": "A-55a2a57a"}
+{"at": "2026-10-14T17:52:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5591, "output_tokens": 507, "cached_input_tokens": 4626, "run_id": "A-55a2a57a"}
+{"at": "2026-10-14T17:53:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 902, "output_tokens": 220}
+{"at": "2026-10-14T17:53:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4546, "output_tokens": 119, "cached_input_tokens": 4420, "run_id": "A-7190cf1b"}
+{"at": "2026-10-14T17:53:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5385, "output_tokens": 449, "cached_input_tokens": 4420, "run_id": "A-7190cf1b"}
+{"at": "2026-10-14T17:53:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 830, "output_tokens": 289}
+{"at": "2026-10-14T17:53:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4216, "output_tokens": 59, "cached_input_tokens": 4077, "run_id": "A-9834b548"}
+{"at": "2026-10-14T17:53:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4515, "output_tokens": 342, "cached_input_tokens": 4090, "run_id": "A-9834b548"}
+{"at": "2026-10-14T17:53:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 608, "output_tokens": 486}
+{"at": "2026-10-14T17:53:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4216, "output_tokens": 51, "cached_input_tokens": 4090, "run_id": "A-47c8b34c"}
+{"at": "2026-10-14T17:53:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4515, "output_tokens": 380, "cached_input_tokens": 4389, "run_id": "A-47c8b34c"}
+{"at": "2026-10-14T17:53:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 617, "output_tokens": 308}
+{"at": "2026-10-14T17:53:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4216, "output_tokens": 62, "cached_input_tokens": 4090, "run_id": "A-25d0cf90"}
+{"at": "2026-10-14T17:53:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4515, "output_tokens": 203, "cached_input_tokens": 4389, "run_id": "A-25d0cf90"}
+{"at": "2026-10-14T17:53:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 597, "output_tokens": 268}
+{"at": "2026-10-14T17:53:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 180, "cached_input_tokens": 4077, "run_id": "A-fcca1973"}
+{"at": "2026-10-14T17:53:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7943, "output_tokens": 50, "cached_input_tokens": 4092, "run_id": "A-fcca1973"}
+{"at": "2026-10-14T17:54:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9493, "output_tokens": 923, "cached_input_tokens": 7817, "run_id": "A-fcca1973"}
+{"at": "2026-10-14T17:54:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1240, "output_tokens": 404}
+{"at": "2026-10-14T17:54:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 205, "cached_input_tokens": 4092, "run_id": "A-1805a94a"}
+{"at": "2026-10-14T17:54:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11746, "output_tokens": 110, "cached_input_tokens": 4092, "run_id": "A-1805a94a"}
+{"at": "2026-10-14T17:54:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 13280, "output_tokens": 579, "cached_input_tokens": 11620, "run_id": "A-1805a94a"}
+{"at": "2026-10-14T17:54:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1150, "output_tokens": 317}
+{"at": "2026-10-14T17:54:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4218, "output_tokens": 179, "cached_input_tokens": 4092, "run_id": "A-2b3f3315"}
+{"at": "2026-10-14T17:54:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11749, "output_tokens": 159, "cached_input_tokens": 4092, "run_id": "A-2b3f3315"}
+{"at": "2026-10-14T17:54:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15439, "output_tokens": 867, "cached_input_tokens": 11623, "run_id": "A-2b3f3315"}
+{"at": "2026-10-14T17:54:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1264, "output_tokens": 318}
+{"at": "2026-10-15T01:44:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4627, "output_tokens": 141, "cached_input_tokens": 0, "run_id": "A-04f7968f"}
+{"at": "2026-10-15T01:44:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6024, "output_tokens": 609, "cached_input_tokens": 4501, "run_id": "A-04f7968f"}
+{"at": "2026-10-15T01:44:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4627, "output_tokens": 185, "cached_input_tokens": 4501, "run_id": "A-0a13caef"}
+{"at": "2026-10-15T01:44:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6024, "output_tokens": 457, "cached_input_tokens": 5898, "run_id": "A-0a13caef"}
+{"at": "2026-10-15T01:44:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4627, "output_tokens": 87, "cached_input_tokens": 4501, "run_id": "A-1eb7f148"}
+{"at": "2026-10-15T01:44:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6024, "output_tokens": 550, "cached_input_tokens": 5898, "run_id": "A-1eb7f148"}
+{"at": "2026-10-15T01:44:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4624, "output_tokens": 61, "cached_input_tokens": 4471, "run_id": "A-14af50f8"}
+{"at": "2026-10-15T01:44:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7863, "output_tokens": 748, "cached_input_tokens": 4498, "run_id": "A-14af50f8"}
+{"at": "2026-10-15T01:44:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4624, "output_tokens": 33, "cached_input_tokens": 4498, "run_id": "A-5ee325d8"}
+{"at": "2026-10-15T01:45:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6776, "output_tokens": 674, "cached_input_tokens": 4498, "run_id": "A-5ee325d8"}
+{"at": "2026-10-15T01:45:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4624, "output_tokens": 33, "cached_input_tokens": 4498, "run_id": "A-29e9dd83"}
+{"at": "2026-10-15T01:45:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6776, "output_tokens": 653, "cached_input_tokens": 6650, "run_id": "A-29e9dd83"}
+{"at": "2026-10-15T01:45:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4623, "output_tokens": 65, "cached_input_tokens": 4471, "run_id": "A-abf692c5"}
+{"at": "2026-10-15T01:45:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7426, "output_tokens": 1043, "cached_input_tokens": 4497, "run_id": "A-abf692c5"}
+{"at": "2026-10-15T01:45:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4623, "output_tokens": 174, "cached_input_tokens": 4497, "run_id": "A-3e3d4e37"}
+{"at": "2026-10-15T01:45:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7426, "output_tokens": 870, "cached_input_tokens": 7300, "run_id": "A-3e3d4e37"}
+{"at": "2026-10-15T01:46:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4623, "output_tokens": 65, "cached_input_tokens": 4497, "run_id": "A-f3e40ac4"}
+{"at": "2026-10-15T01:46:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7426, "output_tokens": 957, "cached_input_tokens": 7300, "run_id": "A-f3e40ac4"}
+{"at": "2026-10-15T01:46:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4613, "output_tokens": 86, "cached_input_tokens": 4471, "run_id": "A-01bfd916"}
+{"at": "2026-10-15T01:46:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 13032, "output_tokens": 248, "cached_input_tokens": 4487, "run_id": "A-01bfd916"}
+{"at": "2026-10-15T01:46:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15218, "output_tokens": 689, "cached_input_tokens": 12906, "run_id": "A-01bfd916"}
+{"at": "2026-10-15T01:47:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15788, "output_tokens": 1852, "cached_input_tokens": 15092, "run_id": "A-01bfd916"}
+{"at": "2026-10-15T01:47:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 16811, "output_tokens": 969, "cached_input_tokens": 15662, "run_id": "A-01bfd916"}
+{"at": "2026-10-15T01:47:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1707, "output_tokens": 871}
+{"at": "2026-10-15T01:47:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4613, "output_tokens": 150, "cached_input_tokens": 4487, "run_id": "A-7b60599c"}
+{"at": "2026-10-15T01:47:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12218, "output_tokens": 673, "cached_input_tokens": 4487, "run_id": "A-7b60599c"}
+{"at": "2026-10-15T01:47:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14872, "output_tokens": 1769, "cached_input_tokens": 12092, "run_id": "A-7b60599c"}
+{"at": "2026-10-15T01:47:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1408, "output_tokens": 663}
+{"at": "2026-10-15T01:48:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4613, "output_tokens": 141, "cached_input_tokens": 4487, "run_id": "A-719d6b5e"}
+{"at": "2026-10-15T01:48:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12218, "output_tokens": 186, "cached_input_tokens": 12092, "run_id": "A-719d6b5e"}
+{"at": "2026-10-15T01:48:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 16814, "output_tokens": 358, "cached_input_tokens": 12092, "run_id": "A-719d6b5e"}
+{"at": "2026-10-15T01:48:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 17962, "output_tokens": 1785, "cached_input_tokens": 16688, "run_id": "A-719d6b5e"}
+{"at": "2026-10-15T01:48:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1658, "output_tokens": 559}
+{"at": "2026-10-15T01:48:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 398, "cached_input_tokens": 4471, "run_id": "A-e3423fa3"}
+{"at": "2026-10-15T01:48:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10321, "output_tokens": 911, "cached_input_tokens": 4482, "run_id": "A-e3423fa3"}
+{"at": "2026-10-15T01:48:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1338, "output_tokens": 835}
+{"at": "2026-10-15T01:48:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 27, "cached_input_tokens": 4482, "run_id": "A-5f26259d"}
+{"at": "2026-10-15T01:49:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6261, "output_tokens": 604, "cached_input_tokens": 4482, "run_id": "A-5f26259d"}
+{"at": "2026-10-15T01:49:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6958, "output_tokens": 337, "cached_input_tokens": 6135, "run_id": "A-5f26259d"}
+{"at": "2026-10-15T01:49:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9630, "output_tokens": 842, "cached_input_tokens": 6832, "run_id": "A-5f26259d"}
+{"at": "2026-10-15T01:49:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1259, "output_tokens": 622}
+{"at": "2026-10-15T01:49:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 23, "cached_input_tokens": 4482, "run_id": "A-e334c13a"}
+{"at": "2026-10-15T01:49:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6258, "output_tokens": 491, "cached_input_tokens": 4482, "run_id": "A-e334c13a"}
+{"at": "2026-10-15T01:49:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1180, "output_tokens": 931}
+{"at": "2026-10-15T01:50:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4614, "output_tokens": 21, "cached_input_tokens": 4471, "run_id": "A-90d1c336"}
+{"at": "2026-10-15T01:50:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6017, "output_tokens": 400, "cached_input_tokens": 4488, "run_id": "A-90d1c336"}
+{"at": "2026-10-15T01:50:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7078, "output_tokens": 674, "cached_input_tokens": 5891, "run_id": "A-90d1c336"}
+{"at": "2026-10-15T01:50:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 990, "output_tokens": 551}
+{"at": "2026-10-15T01:50:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4614, "output_tokens": 75, "cached_input_tokens": 4488, "run_id": "A-57336460"}
+{"at": "2026-10-15T01:50:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7210, "output_tokens": 175, "cached_input_tokens": 4488, "run_id": "A-57336460"}
+{"at": "2026-10-15T01:50:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7740, "output_tokens": 757, "cached_input_tokens": 7084, "run_id": "A-57336460"}
+{"at": "2026-10-15T01:51:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 986, "output_tokens": 421}
+{"at": "2026-10-15T01:51:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4614, "output_tokens": 21, "cached_input_tokens": 4488, "run_id": "A-e7df5f04"}
+{"at": "2026-10-15T01:51:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6017, "output_tokens": 451, "cached_input_tokens": 5891, "run_id": "A-e7df5f04"}
+{"at": "2026-10-15T01:51:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7078, "output_tokens": 671, "cached_input_tokens": 6952, "run_id": "A-e7df5f04"}
+{"at": "2026-10-15T01:51:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 987, "output_tokens": 382}
+{"at": "2026-10-15T01:51:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4995, "output_tokens": 181, "cached_input_tokens": 0, "run_id": "A-d18d3250"}
+{"at": "2026-10-15T01:51:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8020, "output_tokens": 35, "cached_input_tokens": 4869, "run_id": "A-d18d3250"}
+{"at": "2026-10-15T01:51:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8903, "output_tokens": 685, "cached_input_tokens": 7894, "run_id": "A-d18d3250"}
+{"at": "2026-10-15T01:51:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4995, "output_tokens": 195, "cached_input_tokens": 4869, "run_id": "A-84db452a"}
+{"at": "2026-10-15T01:52:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7737, "output_tokens": 35, "cached_input_tokens": 4869, "run_id": "A-84db452a"}
+{"at": "2026-10-15T01:52:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8620, "output_tokens": 497, "cached_input_tokens": 7611, "run_id": "A-84db452a"}
+{"at": "2026-10-15T01:52:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4995, "output_tokens": 121, "cached_input_tokens": 4869, "run_id": "A-0a213955"}
+{"at": "2026-10-15T01:52:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7872, "output_tokens": 52, "cached_input_tokens": 4869, "run_id": "A-0a213955"}
+{"at": "2026-10-15T01:52:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8090, "output_tokens": 95, "cached_input_tokens": 7746, "run_id": "A-0a213955"}
+{"at": "2026-10-15T01:52:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9163, "output_tokens": 932, "cached_input_tokens": 7964, "run_id": "A-0a213955"}
+{"at": "2026-10-15T01:52:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4988, "output_tokens": 125, "cached_input_tokens": 4845, "run_id": "A-61bb3fbd"}
+{"at": "2026-10-15T01:52:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5416, "output_tokens": 41, "cached_input_tokens": 4862, "run_id": "A-61bb3fbd"}
+{"at": "2026-10-15T01:52:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6470, "output_tokens": 893, "cached_input_tokens": 5290, "run_id": "A-61bb3fbd"}
+{"at": "2026-10-15T01:52:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1349, "output_tokens": 417}
+{"at": "2026-10-15T01:52:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4988, "output_tokens": 91, "cached_input_tokens": 4862, "run_id": "A-fba60edc"}
+{"at": "2026-10-15T01:53:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5416, "output_tokens": 41, "cached_input_tokens": 5290, "run_id": "A-fba60edc"}
+{"at": "2026-10-15T01:53:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6470, "output_tokens": 927, "cached_input_tokens": 6344, "run_id": "A-fba60edc"}
+{"at": "2026-10-15T01:53:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1443, "output_tokens": 366}
+{"at": "2026-10-15T01:53:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4988, "output_tokens": 151, "cached_input_tokens": 4862, "run_id": "A-630e2a67"}
+{"at": "2026-10-15T01:53:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7662, "output_tokens": 50, "cached_input_tokens": 4862, "run_id": "A-630e2a67"}
+{"at": "2026-10-15T01:53:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7878, "output_tokens": 52, "cached_input_tokens": 7536, "run_id": "A-630e2a67"}
+{"at": "2026-10-15T01:53:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8945, "output_tokens": 694, "cached_input_tokens": 7752, "run_id": "A-630e2a67"}
+{"at": "2026-10-15T01:53:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1387, "output_tokens": 495}
+{"at": "2026-10-15T01:53:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5003, "output_tokens": 38, "cached_input_tokens": 4845, "run_id": "A-094b4f03"}
+{"at": "2026-10-15T01:54:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6728, "output_tokens": 522, "cached_input_tokens": 4877, "run_id": "A-094b4f03"}
+{"at": "2026-10-15T01:54:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1175, "output_tokens": 204}
+{"at": "2026-10-15T01:54:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5003, "output_tokens": 38, "cached_input_tokens": 4877, "run_id": "A-40074d23"}
+{"at": "2026-10-15T01:54:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6728, "output_tokens": 623, "cached_input_tokens": 6602, "run_id": "A-40074d23"}
+{"at": "2026-10-15T01:54:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1289, "output_tokens": 187}
+{"at": "2026-10-15T01:54:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5003, "output_tokens": 38, "cached_input_tokens": 4877, "run_id": "A-0b699064"}
+{"at": "2026-10-15T01:55:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6728, "output_tokens": 535, "cached_input_tokens": 6602, "run_id": "A-0b699064"}
+{"at": "2026-10-15T01:55:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1201, "output_tokens": 148}
+{"at": "2026-10-15T01:55:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4985, "output_tokens": 21, "cached_input_tokens": 4845, "run_id": "A-1c29b32b"}
+{"at": "2026-10-15T01:55:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6076, "output_tokens": 834, "cached_input_tokens": 4859, "run_id": "A-1c29b32b"}
+{"at": "2026-10-15T01:55:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1266, "output_tokens": 301}
+{"at": "2026-10-15T01:55:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4985, "output_tokens": 21, "cached_input_tokens": 4859, "run_id": "A-483003f9"}
+{"at": "2026-10-15T01:55:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6076, "output_tokens": 866, "cached_input_tokens": 5950, "run_id": "A-483003f9"}
+{"at": "2026-10-15T01:55:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1236, "output_tokens": 476}
+{"at": "2026-10-15T01:55:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4985, "output_tokens": 21, "cached_input_tokens": 4859, "run_id": "A-a02fc19a"}
+{"at": "2026-10-15T01:56:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6076, "output_tokens": 567, "cached_input_tokens": 5950, "run_id": "A-a02fc19a"}
+{"at": "2026-10-15T01:56:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1196, "output_tokens": 233}
+{"at": "2026-10-15T01:56:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4983, "output_tokens": 23, "cached_input_tokens": 4845, "run_id": "A-a753e223"}
+{"at": "2026-10-15T01:56:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6341, "output_tokens": 101, "cached_input_tokens": 4857, "run_id": "A-a753e223"}
+{"at": "2026-10-15T01:56:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6824, "output_tokens": 587, "cached_input_tokens": 6215, "run_id": "A-a753e223"}
+{"at": "2026-10-15T01:56:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1036, "output_tokens": 279}
+{"at": "2026-10-15T01:56:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4983, "output_tokens": 23, "cached_input_tokens": 4857, "run_id": "A-452d7a51"}
+{"at": "2026-10-15T01:56:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6341, "output_tokens": 87, "cached_input_tokens": 6215, "run_id": "A-452d7a51"}
+{"at": "2026-10-15T01:56:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6824, "output_tokens": 631, "cached_input_tokens": 6698, "run_id": "A-452d7a51"}
+{"at": "2026-10-15T01:57:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1074, "output_tokens": 569}
+{"at": "2026-10-15T01:57:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4983, "output_tokens": 24, "cached_input_tokens": 4857, "run_id": "A-0846027c"}
+{"at": "2026-10-15T01:57:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6343, "output_tokens": 71, "cached_input_tokens": 4857, "run_id": "A-0846027c"}
+{"at": "2026-10-15T01:57:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6826, "output_tokens": 559, "cached_input_tokens": 6217, "run_id": "A-0846027c"}
+{"at": "2026-10-15T01:57:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1037, "output_tokens": 374}
+{"at": "2026-10-15T01:57:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4988, "output_tokens": 137, "cached_input_tokens": 4845, "run_id": "A-b581e492"}
+{"at": "2026-10-15T01:57:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6323, "output_tokens": 596, "cached_input_tokens": 4862, "run_id": "A-b581e492"}
+{"at": "2026-10-15T01:57:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 13793, "output_tokens": 1128, "cached_input_tokens": 6197, "run_id": "A-b581e492"}
+{"at": "2026-10-15T01:58:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1859, "output_tokens": 560}
+{"at": "2026-10-15T01:58:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4988, "output_tokens": 144, "cached_input_tokens": 4862, "run_id": "A-7d6682bd"}
+{"at": "2026-10-15T01:58:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6343, "output_tokens": 393, "cached_input_tokens": 4862, "run_id": "A-7d6682bd"}
+{"at": "2026-10-15T01:58:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12079, "output_tokens": 1531, "cached_input_tokens": 6217, "run_id": "A-7d6682bd"}
+{"at": "2026-10-15T01:58:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1741, "output_tokens": 1054}
+{"at": "2026-10-15T01:58:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4988, "output_tokens": 280, "cached_input_tokens": 4862, "run_id": "A-39d827c2"}
+{"at": "2026-10-15T01:59:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6489, "output_tokens": 418, "cached_input_tokens": 4862, "run_id": "A-39d827c2"}
+{"at": "2026-10-15T01:59:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15991, "output_tokens": 1331, "cached_input_tokens": 6363, "run_id": "A-39d827c2"}
+{"at": "2026-10-15T01:59:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1781, "output_tokens": 572}
+{"at": "2026-10-15T01:59:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 104, "cached_input_tokens": 4471, "run_id": "A-f98cdda2"}
+{"at": "2026-10-15T01:59:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6861, "output_tokens": 1171, "cached_input_tokens": 4486, "run_id": "A-f98cdda2"}
+{"at": "2026-10-15T01:59:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1019, "output_tokens": 229}
+{"at": "2026-10-15T02:00:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 305, "cached_input_tokens": 4486, "run_id": "A-a4626069"}
+{"at": "2026-10-15T02:00:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6861, "output_tokens": 348, "cached_input_tokens": 6735, "run_id": "A-a4626069"}
+{"at": "2026-10-15T02:00:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7393, "output_tokens": 997, "cached_input_tokens": 6735, "run_id": "A-a4626069"}
+{"at": "2026-10-15T02:00:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1180, "output_tokens": 253}
+{"at": "2026-10-15T02:00:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 118, "cached_input_tokens": 4486, "run_id": "A-63a89401"}
+{"at": "2026-10-15T02:00:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6861, "output_tokens": 500, "cached_input_tokens": 6735, "run_id": "A-63a89401"}
+{"at": "2026-10-15T02:01:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8795, "output_tokens": 931, "cached_input_tokens": 6735, "run_id": "A-63a89401"}
+{"at": "2026-10-15T02:01:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1202, "output_tokens": 280}
+{"at": "2026-10-15T02:01:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4610, "output_tokens": 98, "cached_input_tokens": 4471, "run_id": "A-2097d1cc"}
+{"at": "2026-10-15T02:01:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6008, "output_tokens": 576, "cached_input_tokens": 4484, "run_id": "A-2097d1cc"}
+{"at": "2026-10-15T02:01:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12597, "output_tokens": 369, "cached_input_tokens": 5882, "run_id": "A-2097d1cc"}
+{"at": "2026-10-15T02:01:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 16017, "output_tokens": 962, "cached_input_tokens": 12471, "run_id": "A-2097d1cc"}
+{"at": "2026-10-15T02:02:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1149, "output_tokens": 665}
+{"at": "2026-10-15T02:02:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4610, "output_tokens": 84, "cached_input_tokens": 4484, "run_id": "A-9ee40f2e"}
+{"at": "2026-10-15T02:02:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6008, "output_tokens": 532, "cached_input_tokens": 5882, "run_id": "A-9ee40f2e"}
+{"at": "2026-10-15T02:02:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10824, "output_tokens": 727, "cached_input_tokens": 5882, "run_id": "A-9ee40f2e"}
+{"at": "2026-10-15T02:02:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1051, "output_tokens": 342}
+{"at": "2026-10-15T02:02:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4610, "output_tokens": 105, "cached_input_tokens": 4484, "run_id": "A-bf4a19a1"}
+{"at": "2026-10-15T02:02:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6008, "output_tokens": 657, "cached_input_tokens": 5882, "run_id": "A-bf4a19a1"}
+{"at": "2026-10-15T02:03:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10806, "output_tokens": 812, "cached_input_tokens": 5882, "run_id": "A-bf4a19a1"}
+{"at": "2026-10-15T02:03:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1224, "output_tokens": 611}
+{"at": "2026-10-15T02:03:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 70, "cached_input_tokens": 4471, "run_id": "A-54a48fbd"}
+{"at": "2026-10-15T02:03:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6006, "output_tokens": 425, "cached_input_tokens": 4482, "run_id": "A-54a48fbd"}
+{"at": "2026-10-15T02:03:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9067, "output_tokens": 821, "cached_input_tokens": 5880, "run_id": "A-54a48fbd"}
+{"at": "2026-10-15T02:03:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1045, "output_tokens": 390}
+{"at": "2026-10-15T02:04:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 125, "cached_input_tokens": 4482, "run_id": "A-bf83bc80"}
+{"at": "2026-10-15T02:04:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6006, "output_tokens": 360, "cached_input_tokens": 5880, "run_id": "A-bf83bc80"}
+{"at": "2026-10-15T02:04:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7672, "output_tokens": 282, "cached_input_tokens": 5880, "run_id": "A-bf83bc80"}
+{"at": "2026-10-15T02:04:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10052, "output_tokens": 856, "cached_input_tokens": 7546, "run_id": "A-bf83bc80"}
+{"at": "2026-10-15T02:04:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1052, "output_tokens": 527}
+{"at": "2026-10-15T02:04:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 48, "cached_input_tokens": 4482, "run_id": "A-c820c656"}
+{"at": "2026-10-15T02:04:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6840, "output_tokens": 296, "cached_input_tokens": 4482, "run_id": "A-c820c656"}
+{"at": "2026-10-15T02:05:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9596, "output_tokens": 1177, "cached_input_tokens": 6714, "run_id": "A-c820c656"}
+{"at": "2026-10-15T02:05:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1115, "output_tokens": 562}
+{"at": "2026-10-15T02:05:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4996, "output_tokens": 50, "cached_input_tokens": 4845, "run_id": "A-62951af2"}
+{"at": "2026-10-15T02:05:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6350, "output_tokens": 439, "cached_input_tokens": 4870, "run_id": "A-62951af2"}
+{"at": "2026-10-15T02:05:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1000, "output_tokens": 425}
+{"at": "2026-10-15T02:05:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4996, "output_tokens": 46, "cached_input_tokens": 4870, "run_id": "A-541c9347"}
+{"at": "2026-10-15T02:05:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6346, "output_tokens": 107, "cached_input_tokens": 4870, "run_id": "A-541c9347"}
+{"at": "2026-10-15T02:06:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6829, "output_tokens": 648, "cached_input_tokens": 6220, "run_id": "A-541c9347"}
+{"at": "2026-10-15T02:06:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1021, "output_tokens": 747}
+{"at": "2026-10-15T02:06:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4996, "output_tokens": 120, "cached_input_tokens": 4870, "run_id": "A-46875c39"}
+{"at": "2026-10-15T02:06:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6843, "output_tokens": 384, "cached_input_tokens": 4870, "run_id": "A-46875c39"}
+{"at": "2026-10-15T02:06:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1041, "output_tokens": 501}
+{"at": "2026-10-15T02:06:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4997, "output_tokens": 86, "cached_input_tokens": 4845, "run_id": "A-b84f33e7"}
+{"at": "2026-10-15T02:07:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6485, "output_tokens": 665, "cached_input_tokens": 4871, "run_id": "A-b84f33e7"}
+{"at": "2026-10-15T02:07:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 17558, "output_tokens": 1401, "cached_input_tokens": 6359, "run_id": "A-b84f33e7"}
+{"at": "2026-10-15T02:07:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1801, "output_tokens": 560}
+{"at": "2026-10-15T02:07:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4997, "output_tokens": 449, "cached_input_tokens": 4871, "run_id": "A-9b390547"}
+{"at": "2026-10-15T02:08:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9945, "output_tokens": 407, "cached_input_tokens": 4871, "run_id": "A-9b390547"}
+{"at": "2026-10-15T02:08:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11075, "output_tokens": 1172, "cached_input_tokens": 9819, "run_id": "A-9b390547"}
+{"at": "2026-10-15T02:08:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1674, "output_tokens": 578}
+{"at": "2026-10-15T02:08:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4997, "output_tokens": 714, "cached_input_tokens": 4871, "run_id": "A-0a2788aa"}
+{"at": "2026-10-15T02:09:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10642, "output_tokens": 1614, "cached_input_tokens": 4871, "run_id": "A-0a2788aa"}
+{"at": "2026-10-15T02:09:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1733, "output_tokens": 410}
+{"at": "2026-10-15T02:09:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 339, "cached_input_tokens": 4471, "run_id": "A-d9c33793"}
+{"at": "2026-10-15T02:09:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4821, "output_tokens": 153, "cached_input_tokens": 4486, "run_id": "A-d9c33793"}
+{"at": "2026-10-15T02:09:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6524, "output_tokens": 205, "cached_input_tokens": 4695, "run_id": "A-d9c33793"}
+{"at": "2026-10-15T02:09:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8013, "output_tokens": 609, "cached_input_tokens": 6398, "run_id": "A-d9c33793"}
+{"at": "2026-10-15T02:10:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1178, "output_tokens": 385}
+{"at": "2026-10-15T02:10:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 327, "cached_input_tokens": 4486, "run_id": "A-0455646a"}
+{"at": "2026-10-15T02:10:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5625, "output_tokens": 151, "cached_input_tokens": 4486, "run_id": "A-0455646a"}
+{"at": "2026-10-15T02:10:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7328, "output_tokens": 282, "cached_input_tokens": 5499, "run_id": "A-0455646a"}
+{"at": "2026-10-15T02:10:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8817, "output_tokens": 546, "cached_input_tokens": 7202, "run_id": "A-0455646a"}
+{"at": "2026-10-15T02:10:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1024, "output_tokens": 352}
+{"at": "2026-10-15T02:10:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 385, "cached_input_tokens": 4486, "run_id": "A-9c11e6e9"}
+{"at": "2026-10-15T02:10:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5625, "output_tokens": 148, "cached_input_tokens": 5499, "run_id": "A-9c11e6e9"}
+{"at": "2026-10-15T02:10:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7328, "output_tokens": 160, "cached_input_tokens": 7202, "run_id": "A-9c11e6e9"}
+{"at": "2026-10-15T02:11:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7997, "output_tokens": 825, "cached_input_tokens": 7202, "run_id": "A-9c11e6e9"}
+{"at": "2026-10-15T02:11:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1359, "output_tokens": 322}
+{"at": "2026-10-15T02:11:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 150, "cached_input_tokens": 4471, "run_id": "A-67ae62ec"}
+{"at": "2026-10-15T02:11:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7169, "output_tokens": 356, "cached_input_tokens": 4482, "run_id": "A-67ae62ec"}
+{"at": "2026-10-15T02:11:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8602, "output_tokens": 698, "cached_input_tokens": 7043, "run_id": "A-67ae62ec"}
+{"at": "2026-10-15T02:12:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 997, "output_tokens": 430}
+{"at": "2026-10-15T02:12:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 137, "cached_input_tokens": 4482, "run_id": "A-40a63b41"}
+{"at": "2026-10-15T02:12:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5699, "output_tokens": 367, "cached_input_tokens": 4482, "run_id": "A-40a63b41"}
+{"at": "2026-10-15T02:12:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 13880, "output_tokens": 605, "cached_input_tokens": 5573, "run_id": "A-40a63b41"}
+{"at": "2026-10-15T02:12:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 18366, "output_tokens": 330, "cached_input_tokens": 13754, "run_id": "A-40a63b41"}
+{"at": "2026-10-15T02:12:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 971, "output_tokens": 261}
+{"at": "2026-10-15T02:12:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4608, "output_tokens": 287, "cached_input_tokens": 4482, "run_id": "A-a37b3fdc"}
+{"at": "2026-10-15T02:12:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14762, "output_tokens": 427, "cached_input_tokens": 4482, "run_id": "A-a37b3fdc"}
+{"at": "2026-10-15T02:13:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 16215, "output_tokens": 369, "cached_input_tokens": 14636, "run_id": "A-a37b3fdc"}
+{"at": "2026-10-15T02:13:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 805, "output_tokens": 493}
+{"at": "2026-10-15T02:13:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4990, "output_tokens": 33, "cached_input_tokens": 4845, "run_id": "A-04a2c1ad"}
+{"at": "2026-10-15T02:13:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5064, "output_tokens": 116, "cached_input_tokens": 4864, "run_id": "A-04a2c1ad"}
+{"at": "2026-10-15T02:13:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7125, "output_tokens": 274, "cached_input_tokens": 4938, "run_id": "A-04a2c1ad"}
+{"at": "2026-10-15T02:13:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 905, "output_tokens": 261}
+{"at": "2026-10-15T02:14:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4990, "output_tokens": 61, "cached_input_tokens": 4864, "run_id": "A-d3bd152b"}
+{"at": "2026-10-15T02:14:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5064, "output_tokens": 118, "cached_input_tokens": 4938, "run_id": "A-d3bd152b"}
+{"at": "2026-10-15T02:14:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7121, "output_tokens": 382, "cached_input_tokens": 4938, "run_id": "A-d3bd152b"}
+{"at": "2026-10-15T02:14:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 892, "output_tokens": 340}
+{"at": "2026-10-15T02:14:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4990, "output_tokens": 33, "cached_input_tokens": 4864, "run_id": "A-a6d936e8"}
+{"at": "2026-10-15T02:14:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5064, "output_tokens": 67, "cached_input_tokens": 4938, "run_id": "A-a6d936e8"}
+{"at": "2026-10-15T02:15:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6011, "output_tokens": 445, "cached_input_tokens": 4938, "run_id": "A-a6d936e8"}
+{"at": "2026-10-15T02:15:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 960, "output_tokens": 256}
+{"at": "2026-10-15T02:15:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4987, "output_tokens": 45, "cached_input_tokens": 4845, "run_id": "A-a427851b"}
+{"at": "2026-10-15T02:15:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5826, "output_tokens": 220, "cached_input_tokens": 4861, "run_id": "A-a427851b"}
+{"at": "2026-10-15T02:15:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6884, "output_tokens": 866, "cached_input_tokens": 5700, "run_id": "A-a427851b"}
+{"at": "2026-10-15T02:16:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1318, "output_tokens": 717}
+{"at": "2026-10-15T02:16:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4987, "output_tokens": 214, "cached_input_tokens": 4861, "run_id": "A-6e6f5d46"}
+{"at": "2026-10-15T02:16:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5826, "output_tokens": 96, "cached_input_tokens": 5700, "run_id": "A-6e6f5d46"}
+{"at": "2026-10-15T02:16:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6884, "output_tokens": 988, "cached_input_tokens": 6758, "run_id": "A-6e6f5d46"}
+{"at": "2026-10-15T02:16:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1220, "output_tokens": 239}
+{"at": "2026-10-15T02:16:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4987, "output_tokens": 104, "cached_input_tokens": 4861, "run_id": "A-3218df98"}
+{"at": "2026-10-15T02:17:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5826, "output_tokens": 120, "cached_input_tokens": 5700, "run_id": "A-3218df98"}
+{"at": "2026-10-15T02:17:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6884, "output_tokens": 966, "cached_input_tokens": 6758, "run_id": "A-3218df98"}
+{"at": "2026-10-15T02:17:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1363, "output_tokens": 377}
+{"at": "2026-10-15T02:17:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4610, "output_tokens": 21, "cached_input_tokens": 4471, "run_id": "A-9e26dc54"}
+{"at": "2026-10-15T02:17:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4909, "output_tokens": 236, "cached_input_tokens": 4484, "run_id": "A-9e26dc54"}
+{"at": "2026-10-15T02:17:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 748, "output_tokens": 237}
+{"at": "2026-10-15T02:17:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4610, "output_tokens": 21, "cached_input_tokens": 4484, "run_id": "A-6a384b87"}
+{"at": "2026-10-15T02:17:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4909, "output_tokens": 278, "cached_input_tokens": 4783, "run_id": "A-6a384b87"}
+{"at": "2026-10-15T02:18:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 755, "output_tokens": 301}
+{"at": "2026-10-15T02:18:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4610, "output_tokens": 25, "cached_input_tokens": 4484, "run_id": "A-eb768ad7"}
+{"at": "2026-10-15T02:18:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4914, "output_tokens": 203, "cached_input_tokens": 4484, "run_id": "A-eb768ad7"}
+{"at": "2026-10-15T02:18:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 731, "output_tokens": 241}
+{"at": "2026-10-15T02:18:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 177, "cached_input_tokens": 4471, "run_id": "A-c8333c8f"}
+{"at": "2026-10-15T02:18:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9172, "output_tokens": 291, "cached_input_tokens": 4486, "run_id": "A-c8333c8f"}
+{"at": "2026-10-15T02:18:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12506, "output_tokens": 988, "cached_input_tokens": 9046, "run_id": "A-c8333c8f"}
+{"at": "2026-10-15T02:18:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1301, "output_tokens": 312}
+{"at": "2026-10-15T02:18:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 189, "cached_input_tokens": 4486, "run_id": "A-a7e06e73"}
+{"at": "2026-10-15T02:18:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9172, "output_tokens": 319, "cached_input_tokens": 9046, "run_id": "A-a7e06e73"}
+{"at": "2026-10-15T02:19:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12467, "output_tokens": 1121, "cached_input_tokens": 9046, "run_id": "A-a7e06e73"}
+{"at": "2026-10-15T02:19:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1291, "output_tokens": 421}
+{"at": "2026-10-15T02:19:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4612, "output_tokens": 268, "cached_input_tokens": 4486, "run_id": "A-ad6ff708"}
+{"at": "2026-10-15T02:19:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9172, "output_tokens": 216, "cached_input_tokens": 9046, "run_id": "A-ad6ff708"}
+{"at": "2026-10-15T02:19:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11755, "output_tokens": 837, "cached_input_tokens": 9046, "run_id": "A-ad6ff708"}
+{"at": "2026-10-15T02:19:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1332, "output_tokens": 270}
+{"at": "2026-10-15T02:38:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4682, "output_tokens": 108, "cached_input_tokens": 0, "run_id": "A-b7697135"}
+{"at": "2026-10-15T02:38:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7485, "output_tokens": 229, "cached_input_tokens": 4556, "run_id": "A-b7697135"}
+{"at": "2026-10-15T02:38:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8024, "output_tokens": 1152, "cached_input_tokens": 7359, "run_id": "A-b7697135"}
+{"at": "2026-10-15T02:38:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4682, "output_tokens": 65, "cached_input_tokens": 4556, "run_id": "A-744580fd"}
+{"at": "2026-10-15T02:38:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7485, "output_tokens": 475, "cached_input_tokens": 7359, "run_id": "A-744580fd"}
+{"at": "2026-10-15T02:38:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9270, "output_tokens": 1287, "cached_input_tokens": 7359, "run_id": "A-744580fd"}
+{"at": "2026-10-15T02:38:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4682, "output_tokens": 65, "cached_input_tokens": 4556, "run_id": "A-225e2387"}
+{"at": "2026-10-15T02:38:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7485, "output_tokens": 292, "cached_input_tokens": 7359, "run_id": "A-225e2387"}
+{"at": "2026-10-15T02:38:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8024, "output_tokens": 576, "cached_input_tokens": 7898, "run_id": "A-225e2387"}
+{"at": "2026-10-15T02:38:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8700, "output_tokens": 659, "cached_input_tokens": 7898, "run_id": "A-225e2387"}
+{"at": "2026-10-15T02:38:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5098, "output_tokens": 38, "cached_input_tokens": 0, "run_id": "A-0d03cce0"}
+{"at": "2026-10-15T02:39:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6859, "output_tokens": 904, "cached_input_tokens": 4972, "run_id": "A-0d03cce0"}
+{"at": "2026-10-15T02:39:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1406, "output_tokens": 281}
+{"at": "2026-10-15T02:39:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5098, "output_tokens": 38, "cached_input_tokens": 4972, "run_id": "A-e1e01d02"}
+{"at": "2026-10-15T02:39:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6859, "output_tokens": 690, "cached_input_tokens": 6733, "run_id": "A-e1e01d02"}
+{"at": "2026-10-15T02:39:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1368, "output_tokens": 255}
+{"at": "2026-10-15T02:39:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5098, "output_tokens": 38, "cached_input_tokens": 4972, "run_id": "A-79037120"}
+{"at": "2026-10-15T02:39:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6859, "output_tokens": 725, "cached_input_tokens": 6733, "run_id": "A-79037120"}
+{"at": "2026-10-15T02:39:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1404, "output_tokens": 255}
+{"at": "2026-10-15T02:39:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 46, "cached_input_tokens": 4530, "run_id": "A-c4962b49"}
+{"at": "2026-10-15T02:39:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6102, "output_tokens": 480, "cached_input_tokens": 4543, "run_id": "A-c4962b49"}
+{"at": "2026-10-15T02:39:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7619, "output_tokens": 235, "cached_input_tokens": 5976, "run_id": "A-c4962b49"}
+{"at": "2026-10-15T02:40:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10941, "output_tokens": 924, "cached_input_tokens": 7493, "run_id": "A-c4962b49"}
+{"at": "2026-10-15T02:40:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1103, "output_tokens": 495}
+{"at": "2026-10-15T02:40:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 104, "cached_input_tokens": 4543, "run_id": "A-33d9069d"}
+{"at": "2026-10-15T02:40:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6102, "output_tokens": 484, "cached_input_tokens": 5976, "run_id": "A-33d9069d"}
+{"at": "2026-10-15T02:40:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10017, "output_tokens": 879, "cached_input_tokens": 5976, "run_id": "A-33d9069d"}
+{"at": "2026-10-15T02:40:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1123, "output_tokens": 672}
+{"at": "2026-10-15T02:40:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 175, "cached_input_tokens": 4543, "run_id": "A-5ae1e8a7"}
+{"at": "2026-10-15T02:40:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7514, "output_tokens": 330, "cached_input_tokens": 4543, "run_id": "A-5ae1e8a7"}
+{"at": "2026-10-15T02:40:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11633, "output_tokens": 182, "cached_input_tokens": 7388, "run_id": "A-5ae1e8a7"}
+{"at": "2026-10-15T02:41:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12318, "output_tokens": 788, "cached_input_tokens": 11507, "run_id": "A-5ae1e8a7"}
+{"at": "2026-10-15T02:41:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1111, "output_tokens": 486}
+{"at": "2026-10-15T02:41:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 57, "cached_input_tokens": 4530, "run_id": "A-b131ad97"}
+{"at": "2026-10-15T02:41:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6400, "output_tokens": 189, "cached_input_tokens": 4541, "run_id": "A-b131ad97"}
+{"at": "2026-10-15T02:41:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9104, "output_tokens": 221, "cached_input_tokens": 6274, "run_id": "A-b131ad97"}
+{"at": "2026-10-15T02:41:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10290, "output_tokens": 1281, "cached_input_tokens": 8978, "run_id": "A-b131ad97"}
+{"at": "2026-10-15T02:41:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1078, "output_tokens": 496}
+{"at": "2026-10-15T02:41:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 63, "cached_input_tokens": 4541, "run_id": "A-91e61ae9"}
+{"at": "2026-10-15T02:41:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6104, "output_tokens": 522, "cached_input_tokens": 4541, "run_id": "A-91e61ae9"}
+{"at": "2026-10-15T02:41:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9891, "output_tokens": 741, "cached_input_tokens": 5978, "run_id": "A-91e61ae9"}
+{"at": "2026-10-15T02:42:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1085, "output_tokens": 399}
+{"at": "2026-10-15T02:42:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 80, "cached_input_tokens": 4541, "run_id": "A-ac009040"}
+{"at": "2026-10-15T02:42:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6105, "output_tokens": 203, "cached_input_tokens": 4541, "run_id": "A-ac009040"}
+{"at": "2026-10-15T02:42:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8809, "output_tokens": 278, "cached_input_tokens": 5979, "run_id": "A-ac009040"}
+{"at": "2026-10-15T02:42:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9995, "output_tokens": 1208, "cached_input_tokens": 8683, "run_id": "A-ac009040"}
+{"at": "2026-10-15T02:42:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1060, "output_tokens": 364}
+{"at": "2026-10-15T02:42:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 212, "cached_input_tokens": 4530, "run_id": "A-9cfd788d"}
+{"at": "2026-10-15T02:42:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7275, "output_tokens": 370, "cached_input_tokens": 4541, "run_id": "A-9cfd788d"}
+{"at": "2026-10-15T02:42:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8444, "output_tokens": 620, "cached_input_tokens": 7149, "run_id": "A-9cfd788d"}
+{"at": "2026-10-15T02:42:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 878, "output_tokens": 329}
+{"at": "2026-10-15T02:42:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 253, "cached_input_tokens": 4541, "run_id": "A-bcd21c28"}
+{"at": "2026-10-15T02:43:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5863, "output_tokens": 340, "cached_input_tokens": 4541, "run_id": "A-bcd21c28"}
+{"at": "2026-10-15T02:43:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8114, "output_tokens": 596, "cached_input_tokens": 5737, "run_id": "A-bcd21c28"}
+{"at": "2026-10-15T02:43:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 860, "output_tokens": 289}
+{"at": "2026-10-15T02:43:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 287, "cached_input_tokens": 4541, "run_id": "A-8fe8dfa2"}
+{"at": "2026-10-15T02:43:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14868, "output_tokens": 406, "cached_input_tokens": 4541, "run_id": "A-8fe8dfa2"}
+{"at": "2026-10-15T02:43:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 16304, "output_tokens": 595, "cached_input_tokens": 14742, "run_id": "A-8fe8dfa2"}
+{"at": "2026-10-15T02:43:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 863, "output_tokens": 302}
+{"at": "2026-10-15T02:59:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4686, "output_tokens": 172, "cached_input_tokens": 4530, "run_id": "A-15c75d66"}
+{"at": "2026-10-15T02:59:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6083, "output_tokens": 491, "cached_input_tokens": 4560, "run_id": "A-15c75d66"}
+{"at": "2026-10-15T02:59:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4686, "output_tokens": 188, "cached_input_tokens": 4560, "run_id": "A-ac80e194"}
+{"at": "2026-10-15T02:59:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6083, "output_tokens": 499, "cached_input_tokens": 5957, "run_id": "A-ac80e194"}
+{"at": "2026-10-15T02:59:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4686, "output_tokens": 87, "cached_input_tokens": 4560, "run_id": "A-cae22a5b"}
+{"at": "2026-10-15T03:00:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6083, "output_tokens": 808, "cached_input_tokens": 5957, "run_id": "A-cae22a5b"}
+{"at": "2026-10-15T03:00:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4683, "output_tokens": 55, "cached_input_tokens": 4530, "run_id": "A-aa79b393"}
+{"at": "2026-10-15T03:00:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7661, "output_tokens": 945, "cached_input_tokens": 4557, "run_id": "A-aa79b393"}
+{"at": "2026-10-15T03:00:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4683, "output_tokens": 55, "cached_input_tokens": 4557, "run_id": "A-d4933a44"}
+{"at": "2026-10-15T03:00:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7661, "output_tokens": 710, "cached_input_tokens": 7535, "run_id": "A-d4933a44"}
+{"at": "2026-10-15T03:00:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4683, "output_tokens": 116, "cached_input_tokens": 4557, "run_id": "A-40e91da6"}
+{"at": "2026-10-15T03:00:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6828, "output_tokens": 566, "cached_input_tokens": 4557, "run_id": "A-40e91da6"}
+{"at": "2026-10-15T03:00:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4682, "output_tokens": 65, "cached_input_tokens": 4556, "run_id": "A-c3fcff2f"}
+{"at": "2026-10-15T03:00:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7485, "output_tokens": 328, "cached_input_tokens": 7359, "run_id": "A-c3fcff2f"}
+{"at": "2026-10-15T03:00:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8501, "output_tokens": 813, "cached_input_tokens": 7359, "run_id": "A-c3fcff2f"}
+{"at": "2026-10-15T03:00:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4682, "output_tokens": 65, "cached_input_tokens": 4556, "run_id": "A-3322e556"}
+{"at": "2026-10-15T03:00:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7485, "output_tokens": 440, "cached_input_tokens": 7359, "run_id": "A-3322e556"}
+{"at": "2026-10-15T03:01:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9343, "output_tokens": 558, "cached_input_tokens": 7359, "run_id": "A-3322e556"}
+{"at": "2026-10-15T03:01:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4682, "output_tokens": 70, "cached_input_tokens": 4556, "run_id": "A-6cbbede9"}
+{"at": "2026-10-15T03:01:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7493, "output_tokens": 563, "cached_input_tokens": 4556, "run_id": "A-6cbbede9"}
+{"at": "2026-10-15T03:01:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4672, "output_tokens": 147, "cached_input_tokens": 4530, "run_id": "A-90be52a9"}
+{"at": "2026-10-15T03:01:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12275, "output_tokens": 446, "cached_input_tokens": 4546, "run_id": "A-90be52a9"}
+{"at": "2026-10-15T03:01:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14359, "output_tokens": 395, "cached_input_tokens": 12149, "run_id": "A-90be52a9"}
+{"at": "2026-10-15T03:01:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14938, "output_tokens": 1340, "cached_input_tokens": 14233, "run_id": "A-90be52a9"}
+{"at": "2026-10-15T03:01:49+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15823, "output_tokens": 845, "cached_input_tokens": 14812, "run_id": "A-90be52a9"}
+{"at": "2026-10-15T03:01:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1579, "output_tokens": 717}
+{"at": "2026-10-15T03:01:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4672, "output_tokens": 133, "cached_input_tokens": 4546, "run_id": "A-125aae68"}
+{"at": "2026-10-15T03:02:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12277, "output_tokens": 239, "cached_input_tokens": 4546, "run_id": "A-125aae68"}
+{"at": "2026-10-15T03:02:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 16040, "output_tokens": 544, "cached_input_tokens": 12151, "run_id": "A-125aae68"}
+{"at": "2026-10-15T03:02:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 17419, "output_tokens": 1226, "cached_input_tokens": 15914, "run_id": "A-125aae68"}
+{"at": "2026-10-15T03:02:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1484, "output_tokens": 720}
+{"at": "2026-10-15T03:02:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4672, "output_tokens": 131, "cached_input_tokens": 4546, "run_id": "A-c5f74942"}
+{"at": "2026-10-15T03:02:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12291, "output_tokens": 167, "cached_input_tokens": 4546, "run_id": "A-c5f74942"}
+{"at": "2026-10-15T03:02:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14403, "output_tokens": 382, "cached_input_tokens": 12165, "run_id": "A-c5f74942"}
+{"at": "2026-10-15T03:02:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14973, "output_tokens": 1003, "cached_input_tokens": 14277, "run_id": "A-c5f74942"}
+{"at": "2026-10-15T03:03:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1431, "output_tokens": 857}
+{"at": "2026-10-15T03:03:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 23, "cached_input_tokens": 4530, "run_id": "A-fe52f6b4"}
+{"at": "2026-10-15T03:03:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6317, "output_tokens": 670, "cached_input_tokens": 4541, "run_id": "A-fe52f6b4"}
+{"at": "2026-10-15T03:03:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1088, "output_tokens": 741}
+{"at": "2026-10-15T03:03:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 105, "cached_input_tokens": 4541, "run_id": "A-7772610e"}
+{"at": "2026-10-15T03:03:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7317, "output_tokens": 761, "cached_input_tokens": 4541, "run_id": "A-7772610e"}
+{"at": "2026-10-15T03:03:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1012, "output_tokens": 577}
+{"at": "2026-10-15T03:03:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 71, "cached_input_tokens": 4541, "run_id": "A-72277415"}
+{"at": "2026-10-15T03:03:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6317, "output_tokens": 333, "cached_input_tokens": 6191, "run_id": "A-72277415"}
+{"at": "2026-10-15T03:04:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6924, "output_tokens": 850, "cached_input_tokens": 6191, "run_id": "A-72277415"}
+{"at": "2026-10-15T03:04:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7927, "output_tokens": 841, "cached_input_tokens": 6798, "run_id": "A-72277415"}
+{"at": "2026-10-15T03:04:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1163, "output_tokens": 681}
+{"at": "2026-10-15T03:04:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4673, "output_tokens": 75, "cached_input_tokens": 4530, "run_id": "A-f18747e7"}
+{"at": "2026-10-15T03:04:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7301, "output_tokens": 279, "cached_input_tokens": 4547, "run_id": "A-f18747e7"}
+{"at": "2026-10-15T03:04:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8669, "output_tokens": 669, "cached_input_tokens": 7175, "run_id": "A-f18747e7"}
+{"at": "2026-10-15T03:04:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 997, "output_tokens": 397}
+{"at": "2026-10-15T03:04:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4673, "output_tokens": 106, "cached_input_tokens": 4547, "run_id": "A-81f454cd"}
+{"at": "2026-10-15T03:04:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6105, "output_tokens": 336, "cached_input_tokens": 4547, "run_id": "A-81f454cd"}
+{"at": "2026-10-15T03:04:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7448, "output_tokens": 925, "cached_input_tokens": 5979, "run_id": "A-81f454cd"}
+{"at": "2026-10-15T03:05:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1011, "output_tokens": 496}
+{"at": "2026-10-15T03:05:09+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4673, "output_tokens": 97, "cached_input_tokens": 4547, "run_id": "A-652726cf"}
+{"at": "2026-10-15T03:05:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6108, "output_tokens": 426, "cached_input_tokens": 4547, "run_id": "A-652726cf"}
+{"at": "2026-10-15T03:05:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7169, "output_tokens": 725, "cached_input_tokens": 5982, "run_id": "A-652726cf"}
+{"at": "2026-10-15T03:05:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1074, "output_tokens": 1492}
+{"at": "2026-10-15T03:05:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5090, "output_tokens": 102, "cached_input_tokens": 4940, "run_id": "A-9fb579eb"}
+{"at": "2026-10-15T03:05:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5586, "output_tokens": 193, "cached_input_tokens": 4964, "run_id": "A-9fb579eb"}
+{"at": "2026-10-15T03:05:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8715, "output_tokens": 690, "cached_input_tokens": 5460, "run_id": "A-9fb579eb"}
+{"at": "2026-10-15T03:05:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5090, "output_tokens": 108, "cached_input_tokens": 4964, "run_id": "A-be02e7ac"}
+{"at": "2026-10-15T03:05:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7967, "output_tokens": 62, "cached_input_tokens": 4964, "run_id": "A-be02e7ac"}
+{"at": "2026-10-15T03:06:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8170, "output_tokens": 39, "cached_input_tokens": 7841, "run_id": "A-be02e7ac"}
+{"at": "2026-10-15T03:06:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9060, "output_tokens": 124, "cached_input_tokens": 8044, "run_id": "A-be02e7ac"}
+{"at": "2026-10-15T03:06:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10080, "output_tokens": 793, "cached_input_tokens": 8934, "run_id": "A-be02e7ac"}
+{"at": "2026-10-15T03:06:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5090, "output_tokens": 80, "cached_input_tokens": 4964, "run_id": "A-b97c8c97"}
+{"at": "2026-10-15T03:06:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5586, "output_tokens": 62, "cached_input_tokens": 5460, "run_id": "A-b97c8c97"}
+{"at": "2026-10-15T03:06:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7838, "output_tokens": 37, "cached_input_tokens": 5460, "run_id": "A-b97c8c97"}
+{"at": "2026-10-15T03:06:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8041, "output_tokens": 35, "cached_input_tokens": 7712, "run_id": "A-b97c8c97"}
+{"at": "2026-10-15T03:06:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8926, "output_tokens": 714, "cached_input_tokens": 7915, "run_id": "A-b97c8c97"}
+{"at": "2026-10-15T03:06:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5083, "output_tokens": 191, "cached_input_tokens": 4940, "run_id": "A-5ec055a7"}
+{"at": "2026-10-15T03:06:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7751, "output_tokens": 50, "cached_input_tokens": 4957, "run_id": "A-5ec055a7"}
+{"at": "2026-10-15T03:06:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7967, "output_tokens": 100, "cached_input_tokens": 7625, "run_id": "A-5ec055a7"}
+{"at": "2026-10-15T03:06:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9031, "output_tokens": 667, "cached_input_tokens": 7841, "run_id": "A-5ec055a7"}
+{"at": "2026-10-15T03:06:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1379, "output_tokens": 672}
+{"at": "2026-10-15T03:06:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5083, "output_tokens": 192, "cached_input_tokens": 4957, "run_id": "A-e45c67b7"}
+{"at": "2026-10-15T03:06:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7751, "output_tokens": 83, "cached_input_tokens": 7625, "run_id": "A-e45c67b7"}
+{"at": "2026-10-15T03:07:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7967, "output_tokens": 52, "cached_input_tokens": 7841, "run_id": "A-e45c67b7"}
+{"at": "2026-10-15T03:07:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9034, "output_tokens": 463, "cached_input_tokens": 7841, "run_id": "A-e45c67b7"}
+{"at": "2026-10-15T03:07:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1156, "output_tokens": 769}
+{"at": "2026-10-15T03:07:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5083, "output_tokens": 39, "cached_input_tokens": 4957, "run_id": "A-ec33961a"}
+{"at": "2026-10-15T03:07:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5284, "output_tokens": 144, "cached_input_tokens": 4957, "run_id": "A-ec33961a"}
+{"at": "2026-10-15T03:07:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6783, "output_tokens": 859, "cached_input_tokens": 5158, "run_id": "A-ec33961a"}
+{"at": "2026-10-15T03:07:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1393, "output_tokens": 438}
+{"at": "2026-10-15T03:07:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5098, "output_tokens": 38, "cached_input_tokens": 4972, "run_id": "A-b04c2c8f"}
+{"at": "2026-10-15T03:07:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6859, "output_tokens": 688, "cached_input_tokens": 6733, "run_id": "A-b04c2c8f"}
+{"at": "2026-10-15T03:07:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1367, "output_tokens": 224}
+{"at": "2026-10-15T03:07:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5098, "output_tokens": 38, "cached_input_tokens": 4972, "run_id": "A-20fbe633"}
+{"at": "2026-10-15T03:08:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6859, "output_tokens": 928, "cached_input_tokens": 6733, "run_id": "A-20fbe633"}
+{"at": "2026-10-15T03:08:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1462, "output_tokens": 235}
+{"at": "2026-10-15T03:08:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5098, "output_tokens": 38, "cached_input_tokens": 4972, "run_id": "A-feef3cfe"}
+{"at": "2026-10-15T03:08:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6859, "output_tokens": 889, "cached_input_tokens": 6733, "run_id": "A-feef3cfe"}
+{"at": "2026-10-15T03:08:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1405, "output_tokens": 236}
+{"at": "2026-10-15T03:08:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5080, "output_tokens": 49, "cached_input_tokens": 4940, "run_id": "A-5bf7d92a"}
+{"at": "2026-10-15T03:08:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6171, "output_tokens": 726, "cached_input_tokens": 4954, "run_id": "A-5bf7d92a"}
+{"at": "2026-10-15T03:08:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1182, "output_tokens": 411}
+{"at": "2026-10-15T03:08:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5080, "output_tokens": 21, "cached_input_tokens": 4954, "run_id": "A-9be384b3"}
+{"at": "2026-10-15T03:08:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6171, "output_tokens": 806, "cached_input_tokens": 6045, "run_id": "A-9be384b3"}
+{"at": "2026-10-15T03:09:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1272, "output_tokens": 283}
+{"at": "2026-10-15T03:09:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5080, "output_tokens": 57, "cached_input_tokens": 4954, "run_id": "A-cd83138d"}
+{"at": "2026-10-15T03:09:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6171, "output_tokens": 735, "cached_input_tokens": 6045, "run_id": "A-cd83138d"}
+{"at": "2026-10-15T03:09:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1176, "output_tokens": 428}
+{"at": "2026-10-15T03:09:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5078, "output_tokens": 27, "cached_input_tokens": 4940, "run_id": "A-adce7b83"}
+{"at": "2026-10-15T03:09:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6467, "output_tokens": 75, "cached_input_tokens": 4952, "run_id": "A-adce7b83"}
+{"at": "2026-10-15T03:09:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6950, "output_tokens": 573, "cached_input_tokens": 6341, "run_id": "A-adce7b83"}
+{"at": "2026-10-15T03:09:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1005, "output_tokens": 431}
+{"at": "2026-10-15T03:09:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5078, "output_tokens": 59, "cached_input_tokens": 4952, "run_id": "A-ac5d56e6"}
+{"at": "2026-10-15T03:09:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6952, "output_tokens": 452, "cached_input_tokens": 4952, "run_id": "A-ac5d56e6"}
+{"at": "2026-10-15T03:10:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 963, "output_tokens": 329}
+{"at": "2026-10-15T03:10:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5078, "output_tokens": 59, "cached_input_tokens": 4952, "run_id": "A-845f74e4"}
+{"at": "2026-10-15T03:10:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6952, "output_tokens": 754, "cached_input_tokens": 6826, "run_id": "A-845f74e4"}
+{"at": "2026-10-15T03:10:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1157, "output_tokens": 384}
+{"at": "2026-10-15T03:10:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5083, "output_tokens": 147, "cached_input_tokens": 4940, "run_id": "A-8b167044"}
+{"at": "2026-10-15T03:10:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6459, "output_tokens": 445, "cached_input_tokens": 4957, "run_id": "A-8b167044"}
+{"at": "2026-10-15T03:10:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15915, "output_tokens": 1533, "cached_input_tokens": 6333, "run_id": "A-8b167044"}
+{"at": "2026-10-15T03:11:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 2078, "output_tokens": 498}
+{"at": "2026-10-15T03:11:04+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5083, "output_tokens": 243, "cached_input_tokens": 4957, "run_id": "A-7f34ed10"}
+{"at": "2026-10-15T03:11:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6444, "output_tokens": 391, "cached_input_tokens": 4957, "run_id": "A-7f34ed10"}
+{"at": "2026-10-15T03:11:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12214, "output_tokens": 1627, "cached_input_tokens": 6318, "run_id": "A-7f34ed10"}
+{"at": "2026-10-15T03:11:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1744, "output_tokens": 636}
+{"at": "2026-10-15T03:11:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5083, "output_tokens": 634, "cached_input_tokens": 4957, "run_id": "A-3a9bcef6"}
+{"at": "2026-10-15T03:11:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12279, "output_tokens": 1370, "cached_input_tokens": 4957, "run_id": "A-3a9bcef6"}
+{"at": "2026-10-15T03:12:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1750, "output_tokens": 475}
+{"at": "2026-10-15T03:12:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 384, "cached_input_tokens": 4530, "run_id": "A-8c7904cf"}
+{"at": "2026-10-15T03:12:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6920, "output_tokens": 857, "cached_input_tokens": 4545, "run_id": "A-8c7904cf"}
+{"at": "2026-10-15T03:12:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 999, "output_tokens": 291}
+{"at": "2026-10-15T03:12:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 144, "cached_input_tokens": 4545, "run_id": "A-0e97dc1f"}
+{"at": "2026-10-15T03:12:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6920, "output_tokens": 911, "cached_input_tokens": 6794, "run_id": "A-0e97dc1f"}
+{"at": "2026-10-15T03:12:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1066, "output_tokens": 364}
+{"at": "2026-10-15T03:12:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 105, "cached_input_tokens": 4545, "run_id": "A-9993109c"}
+{"at": "2026-10-15T03:12:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6920, "output_tokens": 661, "cached_input_tokens": 6794, "run_id": "A-9993109c"}
+{"at": "2026-10-15T03:12:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 971, "output_tokens": 185}
+{"at": "2026-10-15T03:13:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 133, "cached_input_tokens": 4530, "run_id": "A-bd7448dc"}
+{"at": "2026-10-15T03:13:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6102, "output_tokens": 331, "cached_input_tokens": 4543, "run_id": "A-bd7448dc"}
+{"at": "2026-10-15T03:13:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8971, "output_tokens": 278, "cached_input_tokens": 5976, "run_id": "A-bd7448dc"}
+{"at": "2026-10-15T03:13:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11347, "output_tokens": 912, "cached_input_tokens": 8845, "run_id": "A-bd7448dc"}
+{"at": "2026-10-15T03:13:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1072, "output_tokens": 701}
+{"at": "2026-10-15T03:13:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 103, "cached_input_tokens": 4543, "run_id": "A-34295e1e"}
+{"at": "2026-10-15T03:13:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6102, "output_tokens": 367, "cached_input_tokens": 5976, "run_id": "A-34295e1e"}
+{"at": "2026-10-15T03:13:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14618, "output_tokens": 259, "cached_input_tokens": 5976, "run_id": "A-34295e1e"}
+{"at": "2026-10-15T03:13:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 18024, "output_tokens": 1065, "cached_input_tokens": 14492, "run_id": "A-34295e1e"}
+{"at": "2026-10-15T03:13:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1299, "output_tokens": 430}
+{"at": "2026-10-15T03:14:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 98, "cached_input_tokens": 4543, "run_id": "A-3dd3e368"}
+{"at": "2026-10-15T03:14:05+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6102, "output_tokens": 351, "cached_input_tokens": 5976, "run_id": "A-3dd3e368"}
+{"at": "2026-10-15T03:14:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8435, "output_tokens": 851, "cached_input_tokens": 5976, "run_id": "A-3dd3e368"}
+{"at": "2026-10-15T03:14:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1269, "output_tokens": 362}
+{"at": "2026-10-15T03:14:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 59, "cached_input_tokens": 4530, "run_id": "A-aad90a82"}
+{"at": "2026-10-15T03:14:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6100, "output_tokens": 169, "cached_input_tokens": 4541, "run_id": "A-aad90a82"}
+{"at": "2026-10-15T03:14:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9887, "output_tokens": 745, "cached_input_tokens": 5974, "run_id": "A-aad90a82"}
+{"at": "2026-10-15T03:14:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1072, "output_tokens": 405}
+{"at": "2026-10-15T03:14:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 106, "cached_input_tokens": 4541, "run_id": "A-cb7aa75a"}
+{"at": "2026-10-15T03:14:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6100, "output_tokens": 543, "cached_input_tokens": 5974, "run_id": "A-cb7aa75a"}
+{"at": "2026-10-15T03:15:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7766, "output_tokens": 1217, "cached_input_tokens": 5974, "run_id": "A-cb7aa75a"}
+{"at": "2026-10-15T03:15:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 981, "output_tokens": 485}
+{"at": "2026-10-15T03:15:14+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 50, "cached_input_tokens": 4541, "run_id": "A-7fc6da5e"}
+{"at": "2026-10-15T03:15:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6100, "output_tokens": 413, "cached_input_tokens": 4541, "run_id": "A-7fc6da5e"}
+{"at": "2026-10-15T03:15:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7956, "output_tokens": 762, "cached_input_tokens": 5974, "run_id": "A-7fc6da5e"}
+{"at": "2026-10-15T03:15:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8382, "output_tokens": 380, "cached_input_tokens": 7830, "run_id": "A-7fc6da5e"}
+{"at": "2026-10-15T03:15:40+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1038, "output_tokens": 293}
+{"at": "2026-10-15T03:15:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5091, "output_tokens": 56, "cached_input_tokens": 4940, "run_id": "A-83c795bb"}
+{"at": "2026-10-15T03:15:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6464, "output_tokens": 274, "cached_input_tokens": 4965, "run_id": "A-83c795bb"}
+{"at": "2026-10-15T03:15:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 920, "output_tokens": 404}
+{"at": "2026-10-15T03:15:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5091, "output_tokens": 63, "cached_input_tokens": 4965, "run_id": "A-5b9ada2e"}
+{"at": "2026-10-15T03:16:02+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6471, "output_tokens": 112, "cached_input_tokens": 4965, "run_id": "A-5b9ada2e"}
+{"at": "2026-10-15T03:16:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6954, "output_tokens": 699, "cached_input_tokens": 6345, "run_id": "A-5b9ada2e"}
+{"at": "2026-10-15T03:16:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1076, "output_tokens": 347}
+{"at": "2026-10-15T03:16:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5091, "output_tokens": 22, "cached_input_tokens": 4965, "run_id": "A-c8f61160"}
+{"at": "2026-10-15T03:16:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6471, "output_tokens": 94, "cached_input_tokens": 6345, "run_id": "A-c8f61160"}
+{"at": "2026-10-15T03:16:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6954, "output_tokens": 519, "cached_input_tokens": 6828, "run_id": "A-c8f61160"}
+{"at": "2026-10-15T03:16:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1083, "output_tokens": 308}
+{"at": "2026-10-15T03:16:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5092, "output_tokens": 288, "cached_input_tokens": 4940, "run_id": "A-e296ca4d"}
+{"at": "2026-10-15T03:16:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6467, "output_tokens": 433, "cached_input_tokens": 4966, "run_id": "A-e296ca4d"}
+{"at": "2026-10-15T03:17:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10172, "output_tokens": 2019, "cached_input_tokens": 6341, "run_id": "A-e296ca4d"}
+{"at": "2026-10-15T03:17:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 2004, "output_tokens": 882}
+{"at": "2026-10-15T03:17:30+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5092, "output_tokens": 414, "cached_input_tokens": 4966, "run_id": "A-2efa7120"}
+{"at": "2026-10-15T03:17:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10077, "output_tokens": 300, "cached_input_tokens": 4966, "run_id": "A-2efa7120"}
+{"at": "2026-10-15T03:17:46+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11122, "output_tokens": 368, "cached_input_tokens": 9951, "run_id": "A-2efa7120"}
+{"at": "2026-10-15T03:18:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11690, "output_tokens": 1409, "cached_input_tokens": 10996, "run_id": "A-2efa7120"}
+{"at": "2026-10-15T03:18:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1699, "output_tokens": 981}
+{"at": "2026-10-15T03:18:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5092, "output_tokens": 99, "cached_input_tokens": 4966, "run_id": "A-2abec7ff"}
+{"at": "2026-10-15T03:18:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6475, "output_tokens": 280, "cached_input_tokens": 4966, "run_id": "A-2abec7ff"}
+{"at": "2026-10-15T03:18:33+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10763, "output_tokens": 1223, "cached_input_tokens": 6349, "run_id": "A-2abec7ff"}
+{"at": "2026-10-15T03:18:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1589, "output_tokens": 902}
+{"at": "2026-10-15T03:18:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 391, "cached_input_tokens": 4530, "run_id": "A-4c00f03a"}
+{"at": "2026-10-15T03:18:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5683, "output_tokens": 144, "cached_input_tokens": 4545, "run_id": "A-4c00f03a"}
+{"at": "2026-10-15T03:19:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7393, "output_tokens": 513, "cached_input_tokens": 5557, "run_id": "A-4c00f03a"}
+{"at": "2026-10-15T03:19:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1037, "output_tokens": 329}
+{"at": "2026-10-15T03:19:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 332, "cached_input_tokens": 4545, "run_id": "A-e77ef1b2"}
+{"at": "2026-10-15T03:19:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5684, "output_tokens": 143, "cached_input_tokens": 4545, "run_id": "A-e77ef1b2"}
+{"at": "2026-10-15T03:19:18+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7387, "output_tokens": 174, "cached_input_tokens": 5558, "run_id": "A-e77ef1b2"}
+{"at": "2026-10-15T03:19:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8056, "output_tokens": 570, "cached_input_tokens": 7261, "run_id": "A-e77ef1b2"}
+{"at": "2026-10-15T03:19:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1110, "output_tokens": 321}
+{"at": "2026-10-15T03:19:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 462, "cached_input_tokens": 4545, "run_id": "A-fb34ad15"}
+{"at": "2026-10-15T03:19:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5779, "output_tokens": 221, "cached_input_tokens": 4545, "run_id": "A-fb34ad15"}
+{"at": "2026-10-15T03:19:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8156, "output_tokens": 564, "cached_input_tokens": 5653, "run_id": "A-fb34ad15"}
+{"at": "2026-10-15T03:19:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1165, "output_tokens": 348}
+{"at": "2026-10-15T03:20:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 189, "cached_input_tokens": 4530, "run_id": "A-f06ff475"}
+{"at": "2026-10-15T03:20:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5863, "output_tokens": 310, "cached_input_tokens": 4541, "run_id": "A-f06ff475"}
+{"at": "2026-10-15T03:20:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8114, "output_tokens": 594, "cached_input_tokens": 5737, "run_id": "A-f06ff475"}
+{"at": "2026-10-15T03:20:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 795, "output_tokens": 407}
+{"at": "2026-10-15T03:20:26+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 307, "cached_input_tokens": 4541, "run_id": "A-208fa536"}
+{"at": "2026-10-15T03:20:28+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11048, "output_tokens": 152, "cached_input_tokens": 4541, "run_id": "A-208fa536"}
+{"at": "2026-10-15T03:20:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 13656, "output_tokens": 373, "cached_input_tokens": 10922, "run_id": "A-208fa536"}
+{"at": "2026-10-15T03:20:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14477, "output_tokens": 657, "cached_input_tokens": 13530, "run_id": "A-208fa536"}
+{"at": "2026-10-15T03:20:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 932, "output_tokens": 323}
+{"at": "2026-10-15T03:20:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4667, "output_tokens": 147, "cached_input_tokens": 4541, "run_id": "A-167e544c"}
+{"at": "2026-10-15T03:20:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5863, "output_tokens": 182, "cached_input_tokens": 5737, "run_id": "A-167e544c"}
+{"at": "2026-10-15T03:21:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8098, "output_tokens": 741, "cached_input_tokens": 5737, "run_id": "A-167e544c"}
+{"at": "2026-10-15T03:21:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 862, "output_tokens": 308}
+{"at": "2026-10-15T03:21:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5085, "output_tokens": 57, "cached_input_tokens": 4940, "run_id": "A-ac384845"}
+{"at": "2026-10-15T03:21:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5159, "output_tokens": 57, "cached_input_tokens": 4959, "run_id": "A-ac384845"}
+{"at": "2026-10-15T03:21:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6106, "output_tokens": 264, "cached_input_tokens": 5033, "run_id": "A-ac384845"}
+{"at": "2026-10-15T03:21:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 897, "output_tokens": 213}
+{"at": "2026-10-15T03:21:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5085, "output_tokens": 33, "cached_input_tokens": 4959, "run_id": "A-1ba2086a"}
+{"at": "2026-10-15T03:21:27+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5159, "output_tokens": 53, "cached_input_tokens": 5033, "run_id": "A-1ba2086a"}
+{"at": "2026-10-15T03:21:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6106, "output_tokens": 341, "cached_input_tokens": 5980, "run_id": "A-1ba2086a"}
+{"at": "2026-10-15T03:21:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 904, "output_tokens": 327}
+{"at": "2026-10-15T03:21:44+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5085, "output_tokens": 33, "cached_input_tokens": 4959, "run_id": "A-ce608f7c"}
+{"at": "2026-10-15T03:21:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5159, "output_tokens": 169, "cached_input_tokens": 5033, "run_id": "A-ce608f7c"}
+{"at": "2026-10-15T03:21:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7244, "output_tokens": 375, "cached_input_tokens": 5033, "run_id": "A-ce608f7c"}
+{"at": "2026-10-15T03:21:58+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 933, "output_tokens": 322}
+{"at": "2026-10-15T03:22:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5082, "output_tokens": 125, "cached_input_tokens": 4940, "run_id": "A-17086de1"}
+{"at": "2026-10-15T03:22:13+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5921, "output_tokens": 904, "cached_input_tokens": 4956, "run_id": "A-17086de1"}
+{"at": "2026-10-15T03:22:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1163, "output_tokens": 270}
+{"at": "2026-10-15T03:22:22+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5082, "output_tokens": 45, "cached_input_tokens": 4956, "run_id": "A-61c3063b"}
+{"at": "2026-10-15T03:22:25+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5921, "output_tokens": 122, "cached_input_tokens": 5795, "run_id": "A-61c3063b"}
+{"at": "2026-10-15T03:22:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6979, "output_tokens": 930, "cached_input_tokens": 5795, "run_id": "A-61c3063b"}
+{"at": "2026-10-15T03:22:43+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1306, "output_tokens": 450}
+{"at": "2026-10-15T03:22:48+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5082, "output_tokens": 316, "cached_input_tokens": 4956, "run_id": "A-061c3861"}
+{"at": "2026-10-15T03:22:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7158, "output_tokens": 579, "cached_input_tokens": 4956, "run_id": "A-061c3861"}
+{"at": "2026-10-15T03:23:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1261, "output_tokens": 621}
+{"at": "2026-10-15T03:23:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 21, "cached_input_tokens": 4530, "run_id": "A-88814299"}
+{"at": "2026-10-15T03:23:10+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4968, "output_tokens": 247, "cached_input_tokens": 4543, "run_id": "A-88814299"}
+{"at": "2026-10-15T03:23:17+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 741, "output_tokens": 300}
+{"at": "2026-10-15T03:23:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 25, "cached_input_tokens": 4543, "run_id": "A-aa399de7"}
+{"at": "2026-10-15T03:23:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4975, "output_tokens": 157, "cached_input_tokens": 4543, "run_id": "A-aa399de7"}
+{"at": "2026-10-15T03:23:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 775, "output_tokens": 291}
+{"at": "2026-10-15T03:23:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4669, "output_tokens": 21, "cached_input_tokens": 4543, "run_id": "A-510a1d1d"}
+{"at": "2026-10-15T03:23:36+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4968, "output_tokens": 359, "cached_input_tokens": 4842, "run_id": "A-510a1d1d"}
+{"at": "2026-10-15T03:23:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 753, "output_tokens": 239}
+{"at": "2026-10-15T03:23:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 160, "cached_input_tokens": 4530, "run_id": "A-48934ab5"}
+{"at": "2026-10-15T03:23:51+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10051, "output_tokens": 280, "cached_input_tokens": 4545, "run_id": "A-48934ab5"}
+{"at": "2026-10-15T03:24:01+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11585, "output_tokens": 966, "cached_input_tokens": 9925, "run_id": "A-48934ab5"}
+{"at": "2026-10-15T03:24:11+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1136, "output_tokens": 285}
+{"at": "2026-10-15T03:24:16+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 200, "cached_input_tokens": 4545, "run_id": "A-fed184c4"}
+{"at": "2026-10-15T03:24:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 10051, "output_tokens": 167, "cached_input_tokens": 9925, "run_id": "A-fed184c4"}
+{"at": "2026-10-15T03:24:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 11585, "output_tokens": 357, "cached_input_tokens": 11459, "run_id": "A-fed184c4"}
+{"at": "2026-10-15T03:24:34+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1032, "output_tokens": 469}
+{"at": "2026-10-15T03:24:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4671, "output_tokens": 153, "cached_input_tokens": 4545, "run_id": "A-41986e76"}
+{"at": "2026-10-15T03:24:47+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 9231, "output_tokens": 776, "cached_input_tokens": 4545, "run_id": "A-41986e76"}
+{"at": "2026-10-15T03:24:55+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1289, "output_tokens": 227}
+{"at": "2026-10-15T03:32:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4694, "output_tokens": 27, "cached_input_tokens": 0, "run_id": "A-baf44613"}
+{"at": "2026-10-15T03:32:20+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6347, "output_tokens": 862, "cached_input_tokens": 4568, "run_id": "A-baf44613"}
+{"at": "2026-10-15T03:32:37+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1064, "output_tokens": 515}
+{"at": "2026-10-15T03:32:42+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4694, "output_tokens": 23, "cached_input_tokens": 4568, "run_id": "A-71489e90"}
+{"at": "2026-10-15T03:32:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6344, "output_tokens": 419, "cached_input_tokens": 4568, "run_id": "A-71489e90"}
+{"at": "2026-10-15T03:33:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7947, "output_tokens": 682, "cached_input_tokens": 6218, "run_id": "A-71489e90"}
+{"at": "2026-10-15T03:33:12+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1208, "output_tokens": 420}
+{"at": "2026-10-15T03:33:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4694, "output_tokens": 27, "cached_input_tokens": 4568, "run_id": "A-5a3f71fd"}
+{"at": "2026-10-15T03:33:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6347, "output_tokens": 729, "cached_input_tokens": 6221, "run_id": "A-5a3f71fd"}
+{"at": "2026-10-15T03:33:41+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1077, "output_tokens": 758}
+{"at": "2026-10-15T03:37:54+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4738, "output_tokens": 27, "cached_input_tokens": 0, "run_id": "A-c17347c6"}
+{"at": "2026-10-15T03:37:59+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6955, "output_tokens": 543, "cached_input_tokens": 4612, "run_id": "A-c17347c6"}
+{"at": "2026-10-15T03:38:21+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1258, "output_tokens": 864}
+{"at": "2026-10-15T03:38:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4738, "output_tokens": 23, "cached_input_tokens": 4612, "run_id": "A-4ed926bd"}
+{"at": "2026-10-15T03:38:29+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6388, "output_tokens": 532, "cached_input_tokens": 4612, "run_id": "A-4ed926bd"}
+{"at": "2026-10-15T03:38:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6543, "output_tokens": 144, "cached_input_tokens": 6262, "run_id": "A-4ed926bd"}
+{"at": "2026-10-15T03:38:39+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7546, "output_tokens": 879, "cached_input_tokens": 6417, "run_id": "A-4ed926bd"}
+{"at": "2026-10-15T03:38:53+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1254, "output_tokens": 443}
+{"at": "2026-10-15T03:38:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4738, "output_tokens": 106, "cached_input_tokens": 4612, "run_id": "A-5b32206a"}
+{"at": "2026-10-15T03:39:03+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 6391, "output_tokens": 879, "cached_input_tokens": 4612, "run_id": "A-5b32206a"}
+{"at": "2026-10-15T03:39:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 1355, "output_tokens": 447}
+{"at": "2026-10-15T03:42:03+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "judge", "input_tokens": 795, "output_tokens": 260}
+{"at": "2026-10-15T03:42:08+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "judge", "input_tokens": 932, "output_tokens": 144}
+{"at": "2026-10-15T03:42:15+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "judge", "input_tokens": 862, "output_tokens": 223}
+{"at": "2026-10-15T03:42:23+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "judge", "input_tokens": 1072, "output_tokens": 270}
+{"at": "2026-10-15T03:42:27+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "judge", "input_tokens": 1272, "output_tokens": 131}
+{"at": "2026-10-15T03:45:06+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4753, "output_tokens": 232, "cached_input_tokens": 0, "run_id": "A-73a6ace9"}
+{"at": "2026-10-15T03:45:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8178, "output_tokens": 437, "cached_input_tokens": 4627, "run_id": "A-73a6ace9"}
+{"at": "2026-10-15T03:45:31+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 821, "output_tokens": 258}
+{"at": "2026-10-15T03:45:38+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4753, "output_tokens": 173, "cached_input_tokens": 4627, "run_id": "A-de03181a"}
+{"at": "2026-10-15T03:45:45+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7361, "output_tokens": 310, "cached_input_tokens": 4627, "run_id": "A-de03181a"}
+{"at": "2026-10-15T03:45:57+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8182, "output_tokens": 745, "cached_input_tokens": 7235, "run_id": "A-de03181a"}
+{"at": "2026-10-15T03:46:08+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 953, "output_tokens": 202}
+{"at": "2026-10-15T03:46:15+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4753, "output_tokens": 131, "cached_input_tokens": 4627, "run_id": "A-3bd1fa81"}
+{"at": "2026-10-15T03:46:24+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7361, "output_tokens": 357, "cached_input_tokens": 7235, "run_id": "A-3bd1fa81"}
+{"at": "2026-10-15T03:46:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8182, "output_tokens": 616, "cached_input_tokens": 8056, "run_id": "A-3bd1fa81"}
+{"at": "2026-10-15T03:46:50+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "judge", "input_tokens": 974, "output_tokens": 305}

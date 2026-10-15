@@ -3,6 +3,7 @@
   "status": "final",
   "question": "How many of the people complaining about Nitro have cancelled their subscription?",
   "kind": "rubric",
+  "answerable": "no",
   "facts": {
     "subscription_or_order_files_in_pack": [],
     "faq_subscriptions_line": "**Subscriptions?** Monthly subscriptions on Classic and Origins. Cancel any time from your account page.",

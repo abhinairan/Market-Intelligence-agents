@@ -3,6 +3,7 @@
   "status": "final",
   "question": "What is our share of voice against Saltmarsh, Bluepeak and Filterhaus over the last four weeks? Say exactly how you counted.",
   "kind": "numeric",
+  "answerable": "yes",
   "answer": {
     "weeks": [
       "2026-09-07",

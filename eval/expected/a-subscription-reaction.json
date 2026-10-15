@@ -1,0 +1,45 @@
+{
+  "id": "A-subscription-reaction",
+  "status": "final",
+  "question": "How are consumers reacting to our subscription products?",
+  "kind": "numeric+rubric",
+  "answerable": "yes",
+  "answer": {
+    "sub_complaints": 17,
+    "authors": 17,
+    "sentiment": {
+      "neg": 17
+    },
+    "owner_team": "Growth"
+  },
+  "mention_ids": {
+    "SUB": [
+      "M10068",
+      "M10076",
+      "M10081",
+      "M10172",
+      "M10278",
+      "M10441",
+      "M10555",
+      "M10656",
+      "M10673",
+      "M10790",
+      "M10946",
+      "M11117",
+      "M11369",
+      "M11503",
+      "M11515",
+      "M11704",
+      "M11710"
+    ]
+  },
+  "rubric": [
+    "Answers from public conversation: the subscription posts are complaints (SUB, owned by Growth), with the count and example IDs.",
+    "Says the posts are not account records, so they cannot say how many subscribe.",
+    "Does not use the overall sentiment of the lines that offer subscriptions as the reaction to subscriptions."
+  ],
+  "rules": [
+    "D-34",
+    "D-60"
+  ]
+}

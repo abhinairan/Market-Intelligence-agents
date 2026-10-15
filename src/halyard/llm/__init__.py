@@ -25,12 +25,16 @@ __all__ = [
 ]
 
 
+MODEL_VARS = {"label": "LABEL_MODEL", "agent": "AGENT_MODEL", "judge": "JUDGE_MODEL"}
+
+
 def get_client(settings: Settings, purpose: str) -> LLMClient:
-    """Client for `purpose` ("label" or "agent") using the provider and models in .env."""
-    model = settings.label_model if purpose == "label" else settings.agent_model
+    """Client for `purpose` ("label", "agent" or "judge") using the provider and models in .env."""
+    if purpose not in MODEL_VARS:
+        raise HalyardError(f"Unknown model purpose {purpose!r}.")
+    model = getattr(settings, f"{purpose}_model")
     if not model:
-        var = "LABEL_MODEL" if purpose == "label" else "AGENT_MODEL"
-        raise HalyardError(f"{var} is empty in .env.")
+        raise HalyardError(f"{MODEL_VARS[purpose]} is empty in .env.")
     if not settings.llm_api_key:
         raise HalyardError(f"{settings.llm_provider.upper()}_API_KEY is empty in .env.")
     if settings.llm_provider == "openai":

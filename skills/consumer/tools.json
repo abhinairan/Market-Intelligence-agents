@@ -382,7 +382,7 @@
       "properties": {
         "topic": {
           "type": "string",
-          "description": "What the question needs, in a few words, e.g. `subscription cancellations`."
+          "description": "The thing itself in one or two words, as posts would name it, e.g. `beer`, `subscription cancellations`, `wholesale`."
         }
       },
       "required": [],

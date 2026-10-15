@@ -14,6 +14,11 @@ WINDOW_START = pd.Timestamp("2026-08-17", tz=IST)          # D-03
 AS_OF = pd.Timestamp("2026-10-04", tz=IST)                  # D-03
 WEEKS = [d.date() for d in pd.date_range("2026-08-17", "2026-09-28", freq="7D")]  # D-02
 
+# D-45 direction thresholds, the values set in config/brewbird/client.yaml (sentiment.direction).
+DIRECTION_STEADY_BELOW = 0.10
+DIRECTION_CLEAR_CHANGE = 0.20
+DIRECTION_MIN_SHARE = 0.5
+
 BRAND_CODES = {                                             # label table brand column
     "BB": ["Brewbird"], "SM": ["Saltmarsh"], "BP": ["Bluepeak"], "FH": ["Filterhaus"],
     "SM+BP": ["Saltmarsh", "Bluepeak"], "SPAM": [], "TAP": [], "BB?": [],

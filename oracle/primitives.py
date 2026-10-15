@@ -4,6 +4,7 @@ Each returns plain Python data with the mention IDs or source references behind 
 question can be answered in a few lines and every number stays traceable.
 """
 import re
+from itertools import pairwise
 
 import pandas as pd
 
@@ -68,6 +69,26 @@ def weekly_sentiment(df, line=None, exclude_line=None) -> dict:
             for w in rules.WEEKS}
 
 
+def direction(series: dict) -> dict:
+    """D-45: one label for a weekly sentiment series, from the net scores of its readable weeks."""
+    readable = [(w, s["net"]) for w, s in series.items() if s["net"] is not None]
+    if len(readable) < 3:
+        return {"label": "too few weeks", "readable_weeks": len(readable)}
+    nets = [n for _, n in readable]
+    change = round(nets[-1] - nets[0], 2)
+    moves = [round(b - a, 2) for a, b in pairwise(nets)]
+    same_way = sum(1 for m in moves if m * change > 0) / len(moves)
+    word = "rising" if change > 0 else "falling"
+    if abs(change) < rules.DIRECTION_STEADY_BELOW:
+        label = "steady"
+    elif abs(change) >= rules.DIRECTION_CLEAR_CHANGE and same_way >= rules.DIRECTION_MIN_SHARE:
+        label = word
+    else:
+        label = f"mildly {word}"
+    return {"label": label, "first_week": readable[0][0], "last_week": readable[-1][0],
+            "change": change, "moves": moves}
+
+
 def complaint_ranking(df, weeks, examples=2) -> list[dict]:
     """D-31, D-34, D-42: Brewbird complaint codes ranked, with deterministic examples and owners."""
     tax = load.taxonomy().set_index("code")
@@ -75,7 +96,8 @@ def complaint_ranking(df, weeks, examples=2) -> list[dict]:
     g = g[g["week_ist"].isin(weeks) & (g["code"] != "")]
     rows = []
     for code, part in g.groupby("code"):
-        ex = part.sort_values(["likes", "ts"], ascending=[False, True]).head(examples)
+        # D-42: highest likes, then earliest; skip a text (D-12) already picked; fewer if too few texts.
+        ex = part.sort_values(["likes", "ts"], ascending=[False, True]).drop_duplicates("norm").head(examples)
         rows.append({
             "code": code, "name": tax.at[code, "name"], "owner_team": tax.at[code, "owner_team"],
             "conversations": len(part),

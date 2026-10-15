@@ -184,8 +184,9 @@ def _call_tool(ctx: ToolContext, call: ToolCall, run: AgentRun, limits: Limits) 
 
 
 def cap_result(result: dict[str, Any], max_ids: int) -> dict[str, Any]:
-    """The result as sent to the model: at most `max_ids` mention IDs. The figures are
-    untouched and the full list stays in the tool-call log under the result ID."""
+    """The result as sent to the model: at most `max_ids` mention IDs and no ID groups. The
+    figures are untouched and the full lists stay in the tool-call log under the result ID."""
+    result = {k: v for k, v in result.items() if k != "mention_id_groups"}
     ids = result["mention_ids"]
     if len(ids) <= max_ids:
         return result

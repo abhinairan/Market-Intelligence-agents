@@ -3,6 +3,7 @@
   "status": "final",
   "question": "How many unique, genuine conversations about Brewbird were there between 17 August and 4 October, broken down by product line?",
   "kind": "numeric",
+  "answerable": "yes",
   "answer": {
     "total": 987,
     "authors": 984,

@@ -1,0 +1,371 @@
+[
+  {
+    "run_id": "A-f06ff475",
+    "case_id": "A-beer",
+    "old": {
+      "model": "gpt-6-luna",
+      "items": [
+        {
+          "item": "Says Brewbird (the client) sells coffee, not beer.",
+          "met": false,
+          "quote": "",
+          "reason": "It calls Brewbird a coffee brand but does not clearly say Brewbird sells coffee and not beer.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
+          "met": true,
+          "quote": "The 12 posts matching “beer” were excluded because they refer to Brewbird taproom, Pune",
+          "reason": "It identifies the beer-matching posts as about an unrelated taproom and gives their count.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Gives no sentiment figure for the beer.",
+          "met": true,
+          "quote": "I can’t assess Brewbird’s beer from this data",
+          "reason": "It gives no sentiment figure for the beer.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 795,
+        "output": 407
+      },
+      "cost_usd": 0.000283
+    },
+    "new": {
+      "model": "gpt-6.1-sol",
+      "items": [
+        {
+          "item": "Says Brewbird (the client) sells coffee, not beer.",
+          "met": false,
+          "quote": "",
+          "reason": "The answer identifies Brewbird as a coffee brand but does not say it sells coffee rather than beer.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
+          "met": true,
+          "quote": "The 12 posts matching “beer” were excluded because they refer to Brewbird taproom, Pune—not the coffee brand’s products; 42 posts about that unrelated taproom were excluded overall in the data window.",
+          "reason": "The answer identifies the unrelated taproom, states that its posts were excluded, and supplies the counts.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Gives no sentiment figure for the beer.",
+          "met": true,
+          "quote": "I can’t assess Brewbird’s beer from this data",
+          "reason": "The answer declines to assess the beer and gives no beer sentiment figure.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 795,
+        "output": 260
+      }
+    }
+  },
+  {
+    "run_id": "A-208fa536",
+    "case_id": "A-beer",
+    "old": {
+      "model": "gpt-6-luna",
+      "items": [
+        {
+          "item": "Says Brewbird (the client) sells coffee, not beer.",
+          "met": false,
+          "quote": "",
+          "reason": "The answer does not say Brewbird sells coffee rather than beer.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
+          "met": true,
+          "quote": "The beer-word search found 12 posts, all excluded as unrelated to the brand because they referred to the Brewbird taproom in Pune",
+          "reason": "It identifies the posts as unrelated taproom posts, says they were excluded, and gives the count.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Gives no sentiment figure for the beer.",
+          "met": true,
+          "quote": "The beer search found zero genuine conversations",
+          "reason": "The answer gives no sentiment figure for the beer.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 932,
+        "output": 323
+      },
+      "cost_usd": 0.0002547
+    },
+    "new": {
+      "model": "gpt-6.1-sol",
+      "items": [
+        {
+          "item": "Says Brewbird (the client) sells coffee, not beer.",
+          "met": false,
+          "quote": "",
+          "reason": "The answer does not say that Brewbird sells coffee rather than beer.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
+          "met": true,
+          "quote": "The beer-word search found 12 posts, all excluded as unrelated to the brand because they referred to the Brewbird taproom in Pune",
+          "reason": "It identifies the unrelated taproom, states that its beer posts were excluded, and gives their count.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Gives no sentiment figure for the beer.",
+          "met": true,
+          "quote": "I can’t assess Brewbird’s beer from this data",
+          "reason": "The answer gives search and exclusion counts but no beer sentiment figure.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 932,
+        "output": 144
+      }
+    }
+  },
+  {
+    "run_id": "A-167e544c",
+    "case_id": "A-beer",
+    "old": {
+      "model": "gpt-6-luna",
+      "items": [
+        {
+          "item": "Says Brewbird (the client) sells coffee, not beer.",
+          "met": false,
+          "quote": "",
+          "reason": "It identifies Brewbird Coffee Co. and says there is no beer product, but does not say Brewbird sells coffee.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
+          "met": true,
+          "quote": "The 12 posts matching “beer” are about Brewbird taproom, Pune—an unrelated entity—and were excluded",
+          "reason": "It identifies the posts as about an unrelated taproom, says they were excluded, and gives the count.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Gives no sentiment figure for the beer.",
+          "met": true,
+          "quote": "I can’t assess Brewbird beer: the data has no Brewbird beer product or genuine consumer conversation about one.",
+          "reason": "The answer gives no sentiment figure for the beer.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 862,
+        "output": 308
+      },
+      "cost_usd": 0.00024019999999999998
+    },
+    "new": {
+      "model": "gpt-6.1-sol",
+      "items": [
+        {
+          "item": "Says Brewbird (the client) sells coffee, not beer.",
+          "met": false,
+          "quote": "",
+          "reason": "The answer names Brewbird Coffee Co. and says there is no beer product in the data, but does not state that the client sells coffee rather than beer.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
+          "met": true,
+          "quote": "The 12 posts matching “beer” are about Brewbird taproom, Pune—an unrelated entity—and were excluded",
+          "reason": "The answer identifies the unrelated taproom, states that its posts were excluded, and gives the count of 12.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Gives no sentiment figure for the beer.",
+          "met": true,
+          "quote": "I can’t assess Brewbird beer: the data has no Brewbird beer product or genuine consumer conversation about one.",
+          "reason": "The answer declines to assess the beer and provides no beer sentiment figure.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 862,
+        "output": 223
+      }
+    }
+  },
+  {
+    "run_id": "A-bd7448dc",
+    "case_id": "A-subscription-reaction",
+    "old": {
+      "model": "gpt-6-luna",
+      "items": [
+        {
+          "item": "Answers from public conversation: the subscription posts are complaints (SUB, owned by Growth), with the count and example IDs.",
+          "met": false,
+          "quote": "“Public subscription-related conversation is negative: all 17 genuine conversations from 17 distinct authors were coded **SUB — Subscription & billing** (owner: Growth).” … ““charged my subscription twice this month” (M10790)” … ““cancelled my brewbird subscription but still got billed” (M11515)”",
+          "reason": "It identifies the public posts as negative SUB conversations owned by Growth, gives the count, and includes complaint examples with IDs.",
+          "judge_met": true,
+          "quote_found": false
+        },
+        {
+          "item": "Says the posts are not account records, so they cannot say how many subscribe.",
+          "met": false,
+          "quote": "",
+          "reason": "It says the posts are not subscription or customer records but does not say they cannot establish how many people subscribe.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Does not use the overall sentiment of the lines that offer subscriptions as the reaction to subscriptions.",
+          "met": false,
+          "quote": "“Public subscription-related conversation is negative: all 17 genuine conversations from 17 distinct authors were coded **SUB — Subscription & billing** (owner: Growth).”",
+          "reason": "It bases the reaction on coded public conversations, not on the FAQ’s offer of subscriptions.",
+          "judge_met": true,
+          "quote_found": false
+        }
+      ],
+      "met": 0,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 1072,
+        "output": 701
+      },
+      "cost_usd": 0.0004577
+    },
+    "new": {
+      "model": "gpt-6.1-sol",
+      "items": [
+        {
+          "item": "Answers from public conversation: the subscription posts are complaints (SUB, owned by Growth), with the count and example IDs.",
+          "met": true,
+          "quote": "Public subscription-related conversation is negative: all 17 genuine conversations from 17 distinct authors were coded **SUB — Subscription & billing** (owner: Growth). … | Duplicate charge | “charged my subscription twice this month” (M10790) |\n| Billed after cancellation | “cancelled my brewbird subscription but still got billed” (M11515) |",
+          "reason": "The answer describes public subscription complaints, gives their count and SUB ownership, and supplies example IDs.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Says the posts are not account records, so they cannot say how many subscribe.",
+          "met": false,
+          "quote": "",
+          "reason": "The answer says the posts are not subscription or customer records but does not say they cannot establish how many consumers subscribe.",
+          "judge_met": false,
+          "quote_found": false
+        },
+        {
+          "item": "Does not use the overall sentiment of the lines that offer subscriptions as the reaction to subscriptions.",
+          "met": true,
+          "quote": "Public subscription-related conversation is negative: all 17 genuine conversations from 17 distinct authors were coded **SUB — Subscription & billing** (owner: Growth).",
+          "reason": "The answer bases subscription reaction on subscription-specific conversations rather than overall sentiment toward the product lines.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 3,
+      "passed": false,
+      "tokens": {
+        "input": 1072,
+        "output": 270
+      }
+    }
+  },
+  {
+    "run_id": "A-9be384b3",
+    "case_id": "Q10",
+    "old": {
+      "model": "gpt-6-luna",
+      "items": [
+        {
+          "item": "Gives the change as a date range, not the 20 Sep capture date.",
+          "met": false,
+          "quote": "changed after 3 Nov 2025 and no later than 18 Aug 2026",
+          "reason": "It gives the change as a bounded date range rather than using the 20 Sep capture date as the change date.",
+          "judge_met": true,
+          "quote_found": false
+        },
+        {
+          "item": "Says single or missing snapshots are 'no evidence of change', not 'no change'.",
+          "met": true,
+          "quote": "only one observation, so whether it changed is unknown … No shipping-threshold facts in this data, so whether it changed is unknown.",
+          "reason": "It treats the single observation and missing facts as unknown, rather than claiming there was no change.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 1,
+      "of": 2,
+      "passed": false,
+      "tokens": {
+        "input": 1272,
+        "output": 283
+      },
+      "cost_usd": 0.00026869999999999997
+    },
+    "new": {
+      "model": "gpt-6.1-sol",
+      "items": [
+        {
+          "item": "Gives the change as a date range, not the 20 Sep capture date.",
+          "met": true,
+          "quote": "the change happened after 3 Nov 2025 and no later than 18 Aug 2026.",
+          "reason": "The answer gives a bounded date range rather than treating the 20 Sep capture as the change date.",
+          "judge_met": true,
+          "quote_found": true
+        },
+        {
+          "item": "Says single or missing snapshots are 'no evidence of change', not 'no change'.",
+          "met": true,
+          "quote": "only one observation, so whether it changed is unknown. … No shipping-threshold facts in this data, so whether it changed is unknown.",
+          "reason": "For both single and missing observations, the answer expresses insufficient evidence rather than asserting no change.",
+          "judge_met": true,
+          "quote_found": true
+        }
+      ],
+      "met": 2,
+      "of": 2,
+      "passed": true,
+      "tokens": {
+        "input": 1272,
+        "output": 131
+      }
+    }
+  }
+]

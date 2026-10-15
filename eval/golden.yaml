@@ -1,15 +1,50 @@
 # The twelve golden questions, word for word from the brief, and the agent each goes to.
-# P5 adds the expected answers, computed by the oracle independently of the agents.
+# Expected answers are in eval/expected/, computed by the oracle independently of the agents.
+# `figures` are the key figures the answer must state: paths into the question's expected file
+# (the oracle holds the values). Q6, Q11 and Q12 are graded on their rubric only.
 questions:
-  - {id: Q1, agent: consumer, question: "How many unique, genuine conversations about Brewbird were there between 17 August and 4 October, broken down by product line?"}
-  - {id: Q2, agent: consumer, question: "Week by week, how has sentiment toward Brewbird Nitro moved, and how does that compare with the brand overall?"}
-  - {id: Q3, agent: consumer, question: "What were the top complaint categories in the last three weeks, using our codes, with two example mentions each?"}
-  - {id: Q4, agent: consumer, question: "Is anything going wrong that the brand-level numbers are hiding?"}
-  - {id: Q5, agent: consumer, question: "What happened on 22 September?"}
-  - {id: Q6, agent: consumer, question: "How many of the people complaining about Nitro have cancelled their subscription?"}
-  - {id: Q7, agent: competitor, question: "What did Saltmarsh launch, when, and what does it cost per can compared with ours?"}
-  - {id: Q8, agent: competitor, question: "Is Saltmarsh's \"half the price\" claim accurate?"}
-  - {id: Q9, agent: competitor, question: "What is our share of voice against Saltmarsh, Bluepeak and Filterhaus over the last four weeks? Say exactly how you counted."}
-  - {id: Q10, agent: competitor, question: "Has any competitor changed its shipping terms? When?"}
-  - {id: Q11, agent: competitor, question: "What does Filterhaus charge cafés wholesale?"}
-  - {id: Q12, agent: competitor, question: "Did Saltmarsh's launch cause the fall in Nitro sentiment?"}
+  - id: Q1
+    agent: consumer
+    question: "How many unique, genuine conversations about Brewbird were there between 17 August and 4 October, broken down by product line?"
+    figures: ["answer.total", "answer.authors", "answer.by_line.Classic", "answer.by_line.Nitro", "answer.by_line.Origins", "answer.by_line.Drip", "answer.by_line.brand-level only"]
+  - id: Q2
+    agent: consumer
+    question: "Week by week, how has sentiment toward Brewbird Nitro moved, and how does that compare with the brand overall?"
+    figures: ["answer.nitro.2026-08-17.net", "answer.nitro.2026-08-24.net", "answer.nitro.2026-08-31.net", "answer.nitro.2026-09-07.net", "answer.nitro.2026-09-14.net", "answer.nitro.2026-09-21.net", "answer.nitro.2026-09-28.net", "answer.brand.2026-08-17.net", "answer.brand.2026-09-28.net"]
+  - id: Q3
+    agent: consumer
+    question: "What were the top complaint categories in the last three weeks, using our codes, with two example mentions each?"
+    figures: ["answer.0.conversations", "answer.1.conversations", "answer.2.conversations"]
+  - id: Q4
+    agent: consumer
+    question: "Is anything going wrong that the brand-level numbers are hiding?"
+    figures: ["answer.nitro_tst_by_week.2026-09-14", "answer.nitro_tst_by_week.2026-09-21", "answer.nitro_tst_by_week.2026-09-28", "answer.nitro_pct_negative.2026-09-28"]
+  - id: Q5
+    agent: consumer
+    question: "What happened on 22 September?"
+    figures: ["answer.total", "answer.spam.count", "answer.brewbird_genuine_that_day", "answer.median_daily_total"]
+  - id: Q6
+    agent: consumer
+    question: "How many of the people complaining about Nitro have cancelled their subscription?"
+  - id: Q7
+    agent: competitor
+    question: "What did Saltmarsh launch, when, and what does it cost per can compared with ours?"
+    figures: ["answer.saltmarsh.per_can", "answer.brewbird.per_can"]
+  - id: Q8
+    agent: competitor
+    question: "Is Saltmarsh's \"half the price\" claim accurate?"
+    figures: [{path: "answer.list_ratio", percent: true}, {path: "answer.offer_ratio", percent: true}, "answer.saltmarsh_per_can", "answer.saltmarsh_per_can_with_first_order_offer", "answer.brewbird_per_can"]
+  - id: Q9
+    agent: competitor
+    question: "What is our share of voice against Saltmarsh, Bluepeak and Filterhaus over the last four weeks? Say exactly how you counted."
+    figures: ["answer.counted_share_pct.Brewbird", "answer.counted_share_pct.Saltmarsh", "answer.counted_share_pct.Bluepeak", "answer.counted_share_pct.Filterhaus", "answer.counted_conversations.Brewbird", "answer.counted_conversations.Saltmarsh", "answer.counted_conversations.Bluepeak", "answer.counted_conversations.Filterhaus"]
+  - id: Q10
+    agent: competitor
+    question: "Has any competitor changed its shipping terms? When?"
+    figures: ["answer.changed.0.from_rs", "answer.changed.0.to_rs"]
+  - id: Q11
+    agent: competitor
+    question: "What does Filterhaus charge cafés wholesale?"
+  - id: Q12
+    agent: competitor
+    question: "Did Saltmarsh's launch cause the fall in Nitro sentiment?"

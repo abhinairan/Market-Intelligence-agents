@@ -7,18 +7,22 @@ Brewbird take-home for Zocket (FDE assignment v4): a brand knowledge graph (Neo4
 - `docs/definitions.md`: the rulebook (D-xx rule IDs). **Implement the D-rules from this file, never from `oracle/`.** The pipeline and the oracle must stay independent: they share definitions, not code. Cite rule IDs in code comments.
 - `docs/data-observations.md`: forensics pass with the reference figures to check against.
 - `docs/er-log.md`: entity-resolution log (ER-xx), to be kept in step with the pipeline.
+- `docs/failure-log.md`: every agreed failure, its cause, the change and the before/after (F-xx). Shareable with reviewers.
 - `oracle/label_table.csv`: human-reviewed labels for the oracle only (P5), marked reviewed 12 Oct. The pipeline never reads it.
 - `oracle/`: the independent oracle (pandas over the raw CSVs) that writes `eval/expected/`. **Never import from or copy into it**; `tests/test_oracle.py` checks the oracle imports nothing from `src/halyard`.
 
 ## Working agreements
 - One branch per phase, merged to `main` when the phase's "Done when" passes. `main` must always run from a clean clone. Commit only when asked or at the end of an agreed step. Never commit `.env`.
-- After each P2 step, stop and give Abhinav a short walkthrough of the changes before moving on.
+- **Before building any step, present the approach and plan and wait for Abhinav's go-ahead.** "Go ahead with the next steps" means present the plan first, not skip it.
+- After each step, stop and give Abhinav a short walkthrough of the changes before moving on.
+- **After a live agent or eval run, report the issues and propose changes; do not edit skills, tools, rules or the oracle until he agrees.**
+- Every agreed failure and fix goes in `docs/failure-log.md` (shareable with reviewers).
 - Keep answers concise. Abhinav prefers a recommendation over a survey of options.
 - Client facts come from the data pack via loaders; our judgement calls and parameters go in `config/brewbird/*.yaml`; code holds only generic logic (a new brand = new config + data, no code change).
 
 ## Decisions made in chat (not all obvious from the docs)
 - **Docker runtime:** OrbStack on this Mac. Neo4j `5.26-community` via `docker-compose.yml`.
-- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` sets `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6.1-sol` (as of 13 Oct the `.env` actually has `AGENT_MODEL=gpt-6-luna` with `gpt-6.1-sol` commented out; see P4 decision 1). Anthropic adapter exists too. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`.
+- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` has `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6-luna` (`gpt-6.1-sol` commented out). The agents' tool calling is OpenAI only; the Anthropic adapter covers labelling. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`. P5 adds a judge model (`gpt-6.1-sol`), see below. Prices are in `config/llm_prices.yaml` (`gpt-6-luna` $0.10 in / $0.50 out per million; `gpt-6.1-sol` price not known yet, so `halyard spend` reports its tokens only).
 - **Labelling (PLAN §5a, D-35):** model-first, not rules-first. The label model labels each distinct normalised text; sentiment and codes are separate cached calls; codes only for negative texts; cache key = normalised text + provider + model + hash of the generated prompt (no manual prompt versions); cache `data/cache/labels.jsonl` is append-only and committed. Deterministic client rules run last (TST over PKG for can defects, only the six codes, routing from the taxonomy). Cache miss with no key gives `unlabelled`, never neutral. Mention text is passed as delimited data (M11554 is a planted prompt injection).
 - **Time (D-01):** keep timestamps exactly as exported (`+05:30`); derive `date_ist` and `week_ist` from the local IST clock time. Never convert to UTC before bucketing.
 - **City tag (D-26, added at Abhinav's request):** extract the bracketed city, e.g. "(Delhi)", to `Mention.city` before normalisation. 502 of 1,904 mentions carry one (Bangalore 175, Delhi 167, Mumbai 160).
@@ -44,9 +48,9 @@ uv run halyard spend [--run A-...]   # tokens and cost from the usage log
 uv run halyard ask consumer "<question>" [--json]   # needs Neo4j up, a built graph and the API key
 uv run halyard skills    # regenerate skills/<agent>/tools.json from the tool registry
 ```
-`halyard eval` is a stub that fails with the phase it belongs to (P5).
+`uv run halyard eval [--repeat 3] [--only Q3,A-login] [--report E-id]` runs the golden and adversarial questions through the agents and grades them against `eval/expected/` (needs Neo4j, a built graph and the API key; a full run is about $0.20 and 25 minutes). `python -m oracle.run` regenerates the expected answers.
 
-## Progress (as of 13 Oct 2026)
+## Progress (as of 14 Oct 2026)
 - **P0 done**, merged and pushed to `main` (`a9a5089`): skeleton, compose, Makefile, CLI, `config/brewbird/client.yaml`.
 - **P2 done**, merged to `main` and pushed. Branch `p2-pipeline`:
   - `a272030` PLAN §5a + D-35 rewrite (model-first labelling)
@@ -143,15 +147,22 @@ Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 4 com
 
 **P4 done-check (passed 14 Oct 2026):** clean clone of `p4-agents` with `.env` copied: 145 tests pass, lint clean, `halyard build` twice gives identical output (3,889 nodes, 5,384 edges, 0 model calls), `halyard demo` exits 0 with Q4, Q8 and the pulse answered and verified. Full run of 12 golden + 4 adversarial earlier the same day: all correct with valid citations. Agent spend for all of P4: $0.171 (208 calls on `gpt-6-luna`); project total $0.18. **Deferred by Abhinav:** the `gpt-6.1-sol` comparison (no price yet).
 
-## Next
-P5: oracle, golden expected answers, the adversarial set grown from `eval/adversarial.yaml` to at least 6 (PLAN §6), eval runner and report, one real failure found, fixed and documented. Then P6 (outputs and packaging) and P7 (clean-clone rehearsal and recording). Start P5 by presenting the approach and plan.
+## P5: evaluation (done 15 Oct 2026, branch `p5-eval`; done-check and merge pending)
+Recorded result: **58 of 69 runs** (23 questions x 3): golden 32 of 36, adversarial 26 of 33. Full evals went 19 -> 47 -> 51 of 69 (`E-d583c183`, `E-2824e5be`, `E-07443f38`); 58 adds the Q5 and A-beer fixes re-run after the last one and a Q10 judge error. `docs/eval-report.md` is `E-07443f38` plus `eval/report_notes.md`; kept reports in `docs/eval-runs/`. Failure log F-P5-1 to F-P5-11.
 
-**Merged main checked (14 Oct):** `main` = Abhinav's P5 oracle work (`47c6ddd`: `oracle/`, `eval/expected/q01..q12.json`, `tests/test_oracle.py`, pandas dev dependency) + P4. Clean clone: 156 tests pass, lint clean, two identical builds, `halyard demo` exits 0.
+**Built**
+- Oracle (`oracle/`, from `docs/definitions.md` only): amended D-42 (no two examples share a normalised text), D-45 directions, `oracle/adversarial.py`, `answerable` and rubric in every expected file, Brewbird's genuine count on 22 Sep (26) and median genuine day (20).
+- `eval/adversarial.yaml`: 11 questions (A-teams, A-subscription-reaction, A-subscription-usage, A-login, A-causation, A-injection (M11554), A-beer, A-stale, A-uae, A-reply, A-leading). Key `figures` for each question are paths into its expected file, in both YAMLs.
+- `src/halyard/eval/`: `cases.py`, `grade.py` (figures at the answer's precision, words for small numbers; cited-ID precision/recall against the best-matching cited set, including parts of a result's breakdown; pass rule), `judge.py` (a met item counts only when its quote, or ellipsis-joined fragments, is in the answer), `runner.py`, `report.py` (`report_notes` for one eval). `halyard eval [--repeat 3] [--only ...] [--no-judge] [--second-judge MODEL] [--report E-id]`; an `--only` run writes its report to `outputs/eval/` (git-ignored); exits non-zero only when a run errors.
+- `get_client(settings, "judge")`, `JUDGE_MODEL` in `.env` / `.env.example`; judge prompt `skills/eval/judge.md`. `gpt-6.1-sol` price in `config/llm_prices.yaml` ($2.00 in, $10.00 out per million).
+- Tools: `mention_id_groups` on breakdown results (`count_mentions` with `group_by`, `complaint_breakdown`, `sentiment_trend`, `daily_activity`), kept in the log and run, never sent to the model; `daily_activity` `median_genuine_per_day`; `coverage` lists excluded posts matching the topic with reason, entity name and total for that reason.
+- Skills: grounding rules 4 (decline: say there are no records, name each part declined), 7 (drafts for a person to approve), 11 (check the premise; say what is true instead), 12 (excluded is not absent); consumer rules 6 (unusual day: total vs median day, genuine vs median genuine day, burst accounts and span), 8 (every total with its author count), 9, 10 (reply drafts); competitor rules 4 (price history), 6 (nearest like-for-like comparison), 9 (SOV left-out sizes, sub-brand counts), 10 (what would establish cause), 11 (three lawful routes); answer format: a ranking gives its counts.
 
-**P5 findings from comparing the oracle's expected answers with the agents (14 Oct), to address in P5:**
-- Q3: the oracle picks examples by the old D-42; D-42 was amended in P4 (no two examples of a code with the same normalised text), so the oracle must follow it (the agent now cites M10963 for PRC where the oracle has a duplicate text).
-- Q6 rubric: "Nitro is not a subscription product (FAQ)"; the agent does not say it.
-- Q12 rubric: "would need" includes sales and repeat purchase and markets with and without Saltmarsh; the agent names only batch/QA records.
-- Q11 rubric: consented café interviews; the agent sometimes omits it.
-- Q5 rubric: "genuine volume that day was close to normal"; not said outright.
-- D-45 (direction labels) and the D-60 amendment change no oracle figure.
+**Decisions by Abhinav (14 and 15 Oct)**
+- Judge model `gpt-6-luna`, not `gpt-6.1-sol`; no full calibration run. A spot re-judge of 5 runs with `gpt-6.1-sol` agreed on 11 of 14 items (`docs/eval-runs/E-07443f38-rejudge-gpt-6.1-sol.json`).
+- `answerable` stays in the answer but is not graded (the brief asks only that a question the data cannot answer is declined with the reason; rubric items check that).
+- Rubric corrections where the expectation asked more than the question: Q11 credentials item dropped; A-beer key figure dropped; the two subscription items trimmed.
+- Record 58 of 69 without a further full run.
+- After a live run, report issues and propose fixes before changing anything (still applies).
+
+After P5: P6 (outputs and packaging: readout PDF, three replies, skills package, ontology note, README, spend and "another week" notes) and P7 (clean-clone rehearsal and recording). The `gpt-6.1-sol` agent comparison is deferred (Abhinav).

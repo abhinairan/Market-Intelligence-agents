@@ -22,7 +22,7 @@ Brewbird take-home for Zocket (FDE assignment v4): a brand knowledge graph (Neo4
 
 ## Decisions made in chat (not all obvious from the docs)
 - **Docker runtime:** OrbStack on this Mac. Neo4j `5.26-community` via `docker-compose.yml`.
-- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` has `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6-luna` (`gpt-6.1-sol` commented out). The agents' tool calling is OpenAI only; the Anthropic adapter covers labelling. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`. P5 adds a judge model (`gpt-6.1-sol`), see below. Prices are in `config/llm_prices.yaml` (`gpt-6-luna` $0.10 in / $0.50 out per million; `gpt-6.1-sol` price not known yet, so `halyard spend` reports its tokens only).
+- **LLM:** provider-neutral `LLMClient` (`src/halyard/llm/`). `.env` has `LLM_PROVIDER=openai`, `LABEL_MODEL=gpt-6-luna`, `AGENT_MODEL=gpt-6-luna` (`gpt-6.1-sol` commented out). The agents' tool calling is OpenAI only; the Anthropic adapter covers labelling. No pipeline/agent code imports an SDK directly; use `get_client(settings, "label" | "agent")`. P5 adds a judge model (`gpt-6.1-sol`), see below. Prices are in `config/llm_prices.yaml` (`gpt-6-luna` $0.10 in, $0.01 cached input, $0.50 out per million; `gpt-6.1-sol` $2.00 in, $10.00 out). `halyard spend` prices cached input at `cached_input`; it reports $0.45 against $0.51 billed by OpenAI (OpenAI counts about 5% more tokens and charges cache writes at $0.125).
 - **Labelling (PLAN §5a, D-35):** model-first, not rules-first. The label model labels each distinct normalised text; sentiment and codes are separate cached calls; codes only for negative texts; cache key = normalised text + provider + model + hash of the generated prompt (no manual prompt versions); cache `data/cache/labels.jsonl` is append-only and committed. Deterministic client rules run last (TST over PKG for can defects, only the six codes, routing from the taxonomy). Cache miss with no key gives `unlabelled`, never neutral. Mention text is passed as delimited data (M11554 is a planted prompt injection).
 - **Time (D-01):** keep timestamps exactly as exported (`+05:30`); derive `date_ist` and `week_ist` from the local IST clock time. Never convert to UTC before bucketing.
 - **City tag (D-26, added at Abhinav's request):** extract the bracketed city, e.g. "(Delhi)", to `Mention.city` before normalisation. 502 of 1,904 mentions carry one (Bangalore 175, Delhi 167, Mumbai 160).
@@ -39,7 +39,7 @@ uv run pytest           # tests (integration test skips if Neo4j is down)
 uv run ruff check src tests
 ```
 ```
-uv run halyard build      # wipe and rebuild the graph in Neo4j; prints counts
+uv run halyard build      # start Neo4j if needed, wipe and rebuild the graph; prints counts
 uv run halyard label      # label new texts into the cache (needs the API key only for new text)
 uv run halyard ontology   # regenerate docs/ontology.md from the schema
 uv run halyard tool       # list the query tools; `halyard tool <name> '<json args>'` runs one and logs it
@@ -48,9 +48,9 @@ uv run halyard spend [--run A-...]   # tokens and cost from the usage log
 uv run halyard ask consumer "<question>" [--json]   # needs Neo4j up, a built graph and the API key
 uv run halyard skills    # regenerate skills/<agent>/tools.json from the tool registry
 ```
-`uv run halyard eval [--repeat 3] [--only Q3,A-login] [--report E-id]` runs the golden and adversarial questions through the agents and grades them against `eval/expected/` (needs Neo4j, a built graph and the API key; a full run is about $0.20 and 25 minutes). `python -m oracle.run` regenerates the expected answers.
+`uv run halyard eval [--repeat 3] [--only Q3,A-login] [--report E-id]` runs the golden and adversarial questions through the agents and grades them against `eval/expected/` (needs Neo4j, a built graph and the API key; a full run is about $0.09 and 25 minutes). `python -m oracle.run` regenerates the expected answers.
 
-## Progress (as of 14 Oct 2026)
+## Progress (as of 15 Oct 2026)
 - **P0 done**, merged and pushed to `main` (`a9a5089`): skeleton, compose, Makefile, CLI, `config/brewbird/client.yaml`.
 - **P2 done**, merged to `main` and pushed. Branch `p2-pipeline`:
   - `a272030` PLAN §5a + D-35 rewrite (model-first labelling)
@@ -166,4 +166,22 @@ Recorded result: **58 of 69 runs** (23 questions x 3): golden 32 of 36, adversar
 - Record 58 of 69 without a further full run.
 - After a live run, report issues and propose fixes before changing anything (still applies).
 
-After P5: P6 (outputs and packaging: readout PDF, three replies, skills package, ontology note, README, spend and "another week" notes) and P7 (clean-clone rehearsal and recording). The `gpt-6.1-sol` agent comparison is deferred (Abhinav).
+## P6: outputs and packaging (15 Oct 2026, branch `p6-outputs`)
+Built in a separate worktree (`../Market-Intelligence-agents-p6`) while P5 finished, then rebased onto `main` after the P5 merge. Each output reviewed by Abhinav before commit.
+
+**Outputs** (all linked from the README's deliverables table)
+- `docs/ontology-note.md`: why the graph is shaped this way, from the questions (hand-written; `docs/ontology.md` stays the generated reference).
+- `skills/README.md`: the skills package guide: the four parts per agent, reusable vs Brewbird config (each `config/brewbird/*.yaml`), redeploy steps, limits of config-only (fixed input columns, tests check Brewbird figures, labels re-made), client asks needing core product changes (subscription connector, reply queue, same-day QA alerts, chat interface, pulse scheduler; the Filterhaus login is a boundary, not a product gap).
+- `docs/replies.md`: Ishita (prompt injection M11554 named; reply queue with a person approving; no rule IDs), Kunal (portal terms; retail Rs 380/250 g as a ceiling, consented café conversations, ask Filterhaus), Dev (method first, then 1,183 posts -> 1,023 conversations -> 1,041 brand mentions; Brewbird 585 = 56%, naive 66%, Bluepeak 19% vs naive 9%). SOV divides by brand mentions (1,041), not conversations (1,023).
+- `docs/readout.md` and `docs/readout.pdf` (one A4 page, Markdown -> HTML -> headless Chrome `--print-to-pdf`): finding = Nitro can defects (TST 0,0,0,0,7,9,13; 29 posts, 22 swollen/puffed, 7 flat/sour; 11 mention box/leak/delivery) hidden by steady brand sentiment; not Saltmarsh (0 of 57 negative Nitro posts name it, volume 30 a week). Metric: share of Nitro can-defect posts 12 to 18 Oct logged by QA within 24 hours, target 90%, baseline about 0 (Farah). "What success looks like": QA matches the defect to batches (Abhinav chose routing as the metric, batches as the success line).
+- `docs/another-week.md`: daily QA alert, reply queue, run on the next export, competitor claim watch, per-team weekly scorecard, harden the agents, benchmark models and providers; not subscription data. Spend: $0.51 billed.
+- `README.md` rewritten: one build command, agents, eval, `make demo`, deliverables table, "which key you need", how it works.
+
+**Code and config changes (agreed)**
+- Tool descriptions in `registry.py` name no client (no Saltmarsh/TST/beer examples); `price_compare` a/b "named as `brand_facts` returns it". Checked after the recorded eval: `E-8a88f98f` 7 of 7, `E-15aa5fe9` Q7/Q8 4 of 4 (noted in `eval/report_notes.md`; recorded 58 of 69 stands).
+- `cached_input` price for `gpt-6-luna`; `cost_usd(..., cached_input_tokens)` used by `spend`, the answer footer and the eval runner. Eval report notes say E-07443f38's costs predate it (about 2.4x billed).
+- `halyard build` calls `runtime.up` (starts Neo4j if needed; compose project name is fixed, so any folder reuses `halyard-neo4j`). `.env.example` sets `AGENT_MODEL=gpt-6-luna`.
+
+**Known limits stated in the docs:** agents and eval need an OpenAI key (no Anthropic tool calling, no Gemini adapter); keep `LLM_PROVIDER=openai` and `LABEL_MODEL=gpt-6-luna` for a no-key build, or every text is re-labelled.
+
+Next: P6 done-check (clean clone: tests, lint, two identical builds, `halyard demo`, README links), merge `p6-outputs` to `main`, push, remove the worktree. Then P7 (clean-clone rehearsal and recording; add the recording link to the README). The `gpt-6.1-sol` agent comparison is deferred (Abhinav).

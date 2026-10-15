@@ -193,3 +193,14 @@ def test_spend_prices_known_models_only(tmp_path):
     assert [r["purpose"] for r in summarise(log, prices)] == ["agent", "label"]
     (one,) = summarise(log, prices, run_id="A-1")
     assert one["cost_usd"] == pytest.approx(0.20) and one["cached_input_tokens"] == 500
+
+
+def test_spend_prices_cached_input_at_its_own_rate(tmp_path):
+    prices = {"gpt-6-luna": {"input": 0.10, "cached_input": 0.01, "output": 0.50}}
+    # 1M uncached at 0.10 + 1M cached at 0.01 + 1M out at 0.50
+    assert cost_usd("gpt-6-luna", 2_000_000, 1_000_000, prices, 1_000_000) == pytest.approx(0.61)
+    log = tmp_path / "u.jsonl"
+    log.write_text(json.dumps({"model": "gpt-6-luna", "purpose": "agent", "input_tokens": 2_000_000,
+                               "output_tokens": 0, "cached_input_tokens": 1_000_000}) + "\n")
+    (row,) = summarise(log, prices)
+    assert row["cost_usd"] == pytest.approx(0.11)

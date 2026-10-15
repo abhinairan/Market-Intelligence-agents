@@ -19,13 +19,26 @@ def load_prices(path: Path = PRICES) -> dict[str, dict[str, float]]:
 
 
 def cost_usd(
-    model: str, input_tokens: int, output_tokens: int, prices: dict[str, dict[str, float]]
+    model: str,
+    input_tokens: int,
+    output_tokens: int,
+    prices: dict[str, dict[str, float]],
+    cached_input_tokens: int = 0,
 ) -> float | None:
-    """Cost of these tokens, or None when the model has no price in the config."""
+    """Cost of these tokens, or None when the model has no price in the config.
+
+    `cached_input_tokens` is the part of `input_tokens` read from the provider's cache, priced
+    at `cached_input` when the config gives one and as ordinary input otherwise.
+    """
     price = prices.get(model)
     if price is None:
         return None
-    return (input_tokens * price["input"] + output_tokens * price["output"]) / 1_000_000
+    cached_price = price.get("cached_input", price["input"])
+    return (
+        (input_tokens - cached_input_tokens) * price["input"]
+        + cached_input_tokens * cached_price
+        + output_tokens * price["output"]
+    ) / 1_000_000
 
 
 def summarise(
@@ -52,5 +65,8 @@ def summarise(
             for key in ("input_tokens", "output_tokens", "cached_input_tokens"):
                 row[key] += call.get(key, 0)
     for row in rows.values():
-        row["cost_usd"] = cost_usd(row["model"], row["input_tokens"], row["output_tokens"], prices)
+        row["cost_usd"] = cost_usd(
+            row["model"], row["input_tokens"], row["output_tokens"], prices,
+            row["cached_input_tokens"],
+        )  # fmt: skip
     return list(rows.values())

@@ -33,7 +33,9 @@ def render_run(run: AgentRun) -> str:
 
 
 def _footer(run: AgentRun) -> str:
-    cost = cost_usd(run.model or "", run.input_tokens, run.output_tokens, load_prices())
+    cost = cost_usd(
+        run.model or "", run.input_tokens, run.output_tokens, load_prices(), run.cached_input_tokens
+    )
     parts = [
         f"Run {run.run_id}",
         f"{run.agent} agent on {run.model}",

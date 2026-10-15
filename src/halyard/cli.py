@@ -86,7 +86,7 @@ def cmd_build(args: argparse.Namespace) -> None:
     from halyard.store.neo4j_writer import connect, stored_counts, write_graph
 
     settings = load_settings()
-    runtime.wait_for_neo4j(settings, timeout_s=10)
+    runtime.up(settings)  # starts Neo4j if it is not running, so build is one command
     p = prepare(settings)
     graph = build_graph(p, settings.client)
     with connect(settings) as driver:
@@ -304,7 +304,7 @@ def parser() -> argparse.ArgumentParser:
     sub.add_parser("label", help="label new texts and add them to the label cache").set_defaults(
         func=cmd_label
     )
-    sub.add_parser("build", help="wipe and rebuild the graph from the raw pack").set_defaults(
+    sub.add_parser("build", help="start Neo4j if needed, then wipe and rebuild the graph from the raw pack").set_defaults(
         func=cmd_build
     )
     sub.add_parser("ontology", help="regenerate docs/ontology.md from the schema").set_defaults(

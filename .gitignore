@@ -20,3 +20,6 @@ outputs/runs/
 
 # Eval results: one file per `halyard eval` run
 outputs/eval/
+
+# Working notes for the coding assistant: kept locally, not published
+CLAUDE.md

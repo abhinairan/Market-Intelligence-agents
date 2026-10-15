@@ -38,22 +38,26 @@ conversation with Brewbird and Halyard's product team, not a week of building.
 
 ## Model spend
 
-**Total: $0.51, as billed by OpenAI** for the whole build. Our own usage log
-(`outputs/llm_usage.jsonl`, reported by `halyard spend`) gives $0.45 at the prices in
-`config/llm_prices.yaml`: `gpt-6-luna` $0.10 per million input tokens, $0.01 per million
-cached input tokens and $0.50 per million output tokens; `gpt-6.1-sol` $2.00 in and $10.00 out.
-The $0.06 gap is the part the log cannot see: OpenAI counts about 5% more tokens than we
-logged, and charges cache writes slightly above the input rate.
+**Total: about $0.72** for the whole build, from our usage log (`outputs/llm_usage.jsonl`,
+reported by `halyard spend`) at the prices in `config/llm_prices.yaml`: `gpt-6-luna` $0.10 per
+million input tokens, $0.01 per million cached input tokens and $0.50 per million output
+tokens; `gpt-6.1-sol` $2.00 in and $10.00 out. OpenAI's own bill runs slightly above our log:
+at an earlier check it was $0.51 against our $0.45, because OpenAI counts about 5% more tokens
+than we logged and charges cache writes slightly above the input rate.
 
 | Use | Model | Calls | Cost (our log) |
 |---|---|---|---|
 | Labelling the mentions | `gpt-6-luna` | 194 | $0.011 |
-| Agents: building, tuning and the eval runs | `gpt-6-luna` | 887 | $0.347 |
+| Agents: building, tuning and the eval runs | `gpt-6-luna` | 905 | $0.366 |
 | Eval judge | `gpt-6-luna` | 199 | $0.067 |
+| Monday pulse (from 15 Oct) | `gpt-6.1-sol` | 6 | $0.255 |
 | Judge spot check | `gpt-6.1-sol` | 5 | $0.020 |
 | Model check | `gpt-6.1-sol` | 1 | under $0.001 |
 
-Most of it went on running the evaluation repeatedly, which is where it should go.
+Most of it went on running the evaluation repeatedly, which is where it should go. The pulse
+runs on the stronger `gpt-6.1-sol`: on `gpt-6-luna` each of three runs slipped one figure, and
+the pulse is forwarded without editing. Its cost here is an upper bound, since we have no
+cached-input price for that model and price its cached tokens as ordinary input.
 
 **Why it is low:**
 
@@ -63,10 +67,10 @@ Most of it went on running the evaluation repeatedly, which is where it should g
 - **Agents get only what they need.** Each agent gets only its own tools; results send at most
   20 mention IDs to the model, with the full list kept in the log; each question is capped at
   8 turns and 80,000 tokens.
-- **Prompt caching.** The skill and tool definitions form a fixed prefix, so 78% of agent input
+- **Prompt caching.** The skill and tool definitions form a fixed prefix, so 77% of agent input
   tokens were read from the cache, at a tenth of the input price.
 
 **Running it for Brewbird:** an agent question costs about $0.001 (at most $0.003), the Monday
-pulse under a cent, a full eval (23 questions, three times each, with the judge) about $0.09,
-and labelling a new week's texts a fraction of a cent. At this volume, daily use costs well
-under a dollar a month.
+pulse about $0.13, a full eval (23 questions, three times each, with the judge) about $0.09,
+and labelling a new week's texts a fraction of a cent. A weekly pulse and twenty questions a
+day come to about $1 to $2 a month.

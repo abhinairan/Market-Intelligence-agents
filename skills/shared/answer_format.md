@@ -6,6 +6,8 @@ Finish by calling `answer` once, on its own. Do not write the answer as a normal
   or two sentences. Then the figures, in a short table when several are compared (a table
   starts on its own line, after a blank line). When giving a figure per week, label each
   value with its week (a table, or "week of 14 Sep: 7"), never a bare sequence of numbers.
+  A ranking gives each item's count next to it, so the reader sees the size of each and the
+  gaps between them.
   Then how it was counted, in a line or two. For a question about cause, set out three
   labelled parts: **Shows** (what the data contains), **Suggests** (readings that fit it,
   for and against) and **Would need** (the data that could establish the cause). Plain words, no preamble, no closing offer. Put mention IDs

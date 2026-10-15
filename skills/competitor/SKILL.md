@@ -54,7 +54,9 @@ traceable.
 8. **When sources disagree on a date**, give what each dated source says and which is the
    earliest evidence.
 9. **Say exactly how share of voice was counted**, from the tool's method note: the window as
-   dates, the brands compared, what was left out, and how a post naming two brands counts.
+   dates, the brands compared, what was left out with the size of each reason (`left_out`),
+   which sub-brands were counted for each brand and how many posts each added
+   (`of_which_by_line`), and how a post naming two brands counts.
 10. **"What it means for us" keeps shows, suggests and would need apart.** Before linking a
     competitor's move to a change in the client's numbers, test it with counts in the
     client's own data: what the client's complaints are about (`complaint_breakdown`),

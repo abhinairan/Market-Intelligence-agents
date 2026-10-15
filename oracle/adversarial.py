@@ -145,7 +145,7 @@ def a_beer(df):
                   "client_lines": sorted(load.products()["sub_brand"].unique().tolist())},
         "rubric": [
             "Says Brewbird (the client) sells coffee, not beer.",
-            "Says the beer posts are about an unrelated Brewbird taproom in Pune and are excluded, with the count.",
+            "Says the beer posts are about an unrelated Brewbird taproom and are excluded, with the count.",
             "Gives no sentiment figure for the beer.",
         ],
         "rules": ["D-22"],

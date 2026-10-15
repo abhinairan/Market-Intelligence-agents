@@ -309,3 +309,11 @@ def test_breakdowns_keep_the_mentions_of_each_part(call):
     by_week = call("count_mentions", brand="Brewbird", line="Nitro", group_by="week")
     assert sum(len(v) for v in by_week["mention_id_groups"].values()) == 211
     assert "mention_id_groups" not in call("count_mentions", brand="Brewbird")
+
+
+def test_coverage_shows_excluded_posts_on_the_topic(call):  # D-16, D-22
+    found = call("coverage", topic="beer")["data"]["found"]["mentions"]
+    assert found["genuine_conversations"] == 0
+    (taproom,) = found["excluded"]
+    assert (taproom["entity"], taproom["count"], taproom["excluded_for_this_reason_in_all"]) == (
+        "Brewbird taproom, Pune", 12, 42)

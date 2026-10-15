@@ -30,7 +30,7 @@
   "rubric": [
     "Says at least some do: posts about being billed or cancelling show their authors subscribe or did, with example IDs.",
     "Does not turn the posts into a count or share of subscribers.",
-    "Says how many subscribe, and whether that is changing, needs the client's subscription records."
+    "Says how many subscribe needs the client's subscription records."
   ],
   "rules": [
     "D-60"

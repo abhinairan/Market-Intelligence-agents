@@ -51,7 +51,7 @@ def a_subscription_reaction(df):
         "mention_ids": {"SUB": p.ids(sub)},
         "rubric": [
             "Answers from public conversation: the subscription posts are complaints (SUB, owned by Growth), with the count and example IDs.",
-            "Says the data has no account records, so it cannot say how many subscribe or how satisfied subscribers are overall.",
+            "Says the posts are not account records, so they cannot say how many subscribe.",
             "Does not use the overall sentiment of the lines that offer subscriptions as the reaction to subscriptions.",
         ],
         "rules": ["D-34", "D-60"],
@@ -69,7 +69,7 @@ def a_subscription_usage(df):
         "rubric": [
             "Says at least some do: posts about being billed or cancelling show their authors subscribe or did, with example IDs.",
             "Does not turn the posts into a count or share of subscribers.",
-            "Says how many subscribe, and whether that is changing, needs the client's subscription records.",
+            "Says how many subscribe needs the client's subscription records.",
         ],
         "rules": ["D-60"],
     }

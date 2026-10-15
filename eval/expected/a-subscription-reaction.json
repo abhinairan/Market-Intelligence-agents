@@ -35,7 +35,7 @@
   },
   "rubric": [
     "Answers from public conversation: the subscription posts are complaints (SUB, owned by Growth), with the count and example IDs.",
-    "Says the data has no account records, so it cannot say how many subscribe or how satisfied subscribers are overall.",
+    "Says the posts are not account records, so they cannot say how many subscribe.",
     "Does not use the overall sentiment of the lines that offer subscriptions as the reaction to subscriptions."
   ],
   "rules": [

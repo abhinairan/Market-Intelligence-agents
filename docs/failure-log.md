@@ -207,6 +207,12 @@ reader should know the "before" figures include them.
 - **Q11** had a rubric item, "refuses borrowed credentials", for a question that offers none.
 - **`answerable`** was graded as a pass/fail layer. The brief asks only that a question the data
   cannot answer is declined with the reason; the `partly`/`no` label is our own design.
+- **Expectations that asked for more than the question** (found in the round-2 re-run,
+  `E-82f3f4c1`, after two rounds of agent fixes left these at 0 of 3 while the answers were sound):
+  A-beer's key figure was 42, every post about the unrelated taproom, but the agents rightly
+  reported the 12 posts about beer; A-subscription-usage required saying records are needed for
+  "whether that is changing", which the question does not ask; A-subscription-reaction required
+  "how satisfied subscribers are overall".
 
 **Changes**
 - The oracle gives Brewbird's genuine count on 22 Sep (26) and its median genuine day (20); Q5's key
@@ -218,8 +224,11 @@ reader should know the "before" figures include them.
 - Judge prompt: an item is met by any wording that says the same thing; "/" and "or" mark
   alternatives; things listed with "and" must each be there.
 - `answerable` is shown in the report but no longer graded.
+- A-beer has no key figure; its rubric still requires the count of excluded posts. The two
+  subscription items now ask only what the questions ask: that the posts cannot say how many
+  subscribe, and that the client's subscription records would.
 
-**Files:** `oracle/golden.py`, `eval/golden.yaml`, `src/halyard/tools/base.py`, `mentions.py`,
+**Files:** `oracle/golden.py`, `oracle/adversarial.py`, `eval/golden.yaml`, `eval/adversarial.yaml`, `src/halyard/tools/base.py`, `mentions.py`,
 `sentiment.py`, `src/halyard/agents/loop.py`, `src/halyard/eval/grade.py`, `report.py`,
 `skills/eval/judge.md`.
 
@@ -350,3 +359,30 @@ in the brand's counts. Files: `src/halyard/tools/mentions.py`, `skills/consumer/
 | Q1 | Left out the 984 authors in 2 of 3 runs (D-15 pairs them with the 987) | Consumer rule 8: every total comes with its distinct-author count | 1 → 3 of 3 |
 | A-stale | Gave Rs 450 but not the earlier Rs 420 or when it changed, in 2 of 3 runs | Competitor rule 4: a price "now" gets the latest capture, the earlier ones and the change range | 0 → 3 of 3 |
 | Q6 | Did not say Nitro has no subscription (FAQ) in 2 of 3 runs | Grounding rule 11: check the question's premise against the client's pages | 0 → 1 of 3 (the FAQ line is now cited in 3 of 3; the remaining misses are on another item) |
+
+### F-P5-9: A ranking without its counts, and share of voice without its parts
+
+**Questions:** Q3, "What were the top complaint categories in the last three weeks…" (consumer agent),
+and Q9, "What is our share of voice… Say exactly how you counted." (competitor agent)
+
+**What failed** (`E-2824e5be`, after the first round of fixes)
+- **Q3** fell from 3 of 3 to 1 of 3. Two runs (`A-abf692c5`) listed the top three codes with their
+  owner teams and examples but no counts, so the reader could not see TST 36, PRC 23, DLV 16.
+- **Q9** failed every run in both evals. The method gave one total of 160 excluded mentions rather
+  than the size of each reason, and never said that Peak Instant posts were counted for Bluepeak,
+  although `share_of_voice` returned both (`left_out`, and 100 of Bluepeak's 198 in
+  `of_which_by_line`).
+
+**Cause:** nothing asked a ranking to carry its counts. The share-of-voice method note said only "a
+sub-brand counts for its brand" and did not point at the figures that show it.
+
+**Changes** (agreed by Abhinav, 15 Oct)
+- Output format: a ranking gives each item's count next to it (`skills/shared/answer_format.md`).
+- `share_of_voice` method note names `left_out` sizes per reason and `of_which_by_line`; competitor
+  rule 9 asks for both (`src/halyard/tools/share_of_voice.py`, `skills/competitor/SKILL.md`).
+
+| | Before (`E-2824e5be`) | After (`E-82f3f4c1`, the five open questions re-run) |
+|---|---|---|
+| Q3 passed | 1 of 3 | 3 of 3 |
+| Q9 passed | 0 of 3 | 3 of 3 |
+

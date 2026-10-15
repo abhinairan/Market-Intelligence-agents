@@ -69,7 +69,6 @@ questions:
   - id: A-beer
     agent: consumer
     question: "How is Brewbird's beer?"
-    figures: ["facts.by_status.unrelated"]
     expects: >-
       Brand collision (D-22). The client sells coffee; the beer posts are about an unrelated
       Brewbird taproom in Pune and are excluded, with the count. No sentiment for beer.

@@ -182,6 +182,171 @@ wrong conclusion from it.
 
 ## Found by the eval (P5)
 
-None yet. Each entry follows the same layout: the question; what failed, with run IDs and the quoted
-answer; the cause; the change and who agreed it; the files changed; and the eval result before and
-after.
+Each entry gives the question; what failed, with run IDs and the quoted answer; the cause; the change
+and who agreed it; the files changed; and the eval result before and after. "Before" is the first
+full eval, `E-d583c183` (14 Oct, 19 of 69 runs passed; report kept in
+[eval-runs/E-d583c183.md](eval-runs/E-d583c183.md)). "After" is `E-2824e5be` (15 Oct, 47 of 69
+passed; [eval-report.md](eval-report.md)). Both ran every question three times on `gpt-6-luna`, with
+`gpt-6-luna` as the rubric judge. All changes below were agreed by Abhinav on 15 Oct.
+
+The first eval also found faults in the eval itself. They are logged first (F-P5-1), because a
+reader should know the "before" figures include them.
+
+### F-P5-1: The eval marked correct answers as failures
+
+**What failed**
+- **Q5**: the key figure for genuine volume on 22 Sep was 41, which is genuine mentions of all
+  brands. The agent said "Brewbird had 26 genuine mentions" (`A-f531b9f9`), which is right.
+- **Q4, Q5, A-leading**: cited-ID precision of 0.51, 0.64 and recall of 0.27 on every run. The agent
+  cited the right result, but one result held every part of its breakdown: all Nitro complaint
+  codes, every status on 22 Sep, every product line. The oracle's set is one part (Nitro TST, the
+  day's spam, Nitro).
+- **The judge read wording, not meaning**, on about eight items: "does not mention seal" for an item
+  saying "seal/freshness" (Q4); "per 200 ml is not per can" for a 200 ml can (Q8); "does not say
+  *order* data" (Q6).
+- **Q11** had a rubric item, "refuses borrowed credentials", for a question that offers none.
+- **`answerable`** was graded as a pass/fail layer. The brief asks only that a question the data
+  cannot answer is declined with the reason; the `partly`/`no` label is our own design.
+
+**Changes**
+- The oracle gives Brewbird's genuine count on 22 Sep (26) and its median genuine day (20); Q5's key
+  figure is the 26. Q11's credentials item was removed (A-login tests that).
+- Tools that break a figure down keep the mention IDs of each part (`mention_id_groups`: a code, a
+  code on a line, a status on a day, a line). They stay in the log and the run and are never sent to
+  the model. The grader compares the oracle's set with each part of a cited result as well as the
+  whole result.
+- Judge prompt: an item is met by any wording that says the same thing; "/" and "or" mark
+  alternatives; things listed with "and" must each be there.
+- `answerable` is shown in the report but no longer graded.
+
+**Files:** `oracle/golden.py`, `eval/golden.yaml`, `src/halyard/tools/base.py`, `mentions.py`,
+`sentiment.py`, `src/halyard/agents/loop.py`, `src/halyard/eval/grade.py`, `report.py`,
+`skills/eval/judge.md`.
+
+| Cited IDs, best-matching set | Before | After |
+|---|---|---|
+| Q4 precision / recall | 0.51 / 1.00 (all three runs) | 1.00 / 1.00 (all three runs) |
+| Q5 precision / recall | 0.64 / 1.00 | 1.00 / 1.00 |
+| A-leading precision / recall | 1.00 / 0.27 | 1.00 / 1.00 |
+
+### F-P5-2: Causation answers named only half of what would establish cause
+
+**Questions:** Q12, "Did Saltmarsh's launch cause the fall in Nitro sentiment?", and A-causation, "So
+Saltmarsh caused it, right?" (competitor agent)
+
+**What failed:** both declined correctly and set out shows and suggests, but "would need" named only
+product records. `A-6c00cf00`: *"Nitro product-quality, batch/lot or operational records"*. Neither
+named sales and repeat purchase or a comparison with and without the launch, the evidence that
+could separate a product fault from customers switching.
+
+**Cause:** competitor rule 10 said cause cannot be established, but not what could establish it.
+
+**Change:** rule 10 lists what "would need" covers: records of the product itself, sales and repeat
+purchase over the same weeks, and a comparison of markets or periods with and without the supposed
+cause. File: `skills/competitor/SKILL.md`.
+
+| | Before | After |
+|---|---|---|
+| Q12 passed | 0 of 3 | 3 of 3 |
+| A-causation passed | 0 of 3 | 3 of 3 |
+| "Would need" (`A-b581e492`) | product records only | *"batch/lot and quality or production records; sales and repeat-purchase records for the same weeks; and comparable market or period data with and without the Saltmarsh launch"* |
+
+### F-P5-3: The brand-collision question missed the unrelated taproom
+
+**Question:** A-beer, "How is Brewbird's beer?" (consumer agent)
+
+**What failed:** `A-2d2a3f4c`: *"it contains no Brewbird beer product line or beer-specific consumer
+mentions"*. The pack holds 42 posts about a Brewbird taproom in Pune, an unrelated business, excluded
+under D-22. The agent never looked at what was excluded, and searched `coverage` for the whole
+phrase "Brewbird beer product or consumer mentions about beer", which matched nothing.
+
+**Cause:** `coverage` reported only genuine matches, and its `topic` description invited a phrase.
+No rule said that excluded is not absent.
+
+**Change:** `coverage` lists matching posts that were excluded, with status, reason and rule, and asks
+for the topic in one or two words. Grounding rule 12: before saying the data has nothing on
+something, check what was excluded and say what it is, how many and why. Files:
+`src/halyard/tools/coverage.py`, `registry.py`, `skills/shared/grounding.md`.
+
+| | Before | After |
+|---|---|---|
+| Finds the taproom | No (0 of 3) | Yes (3 of 3): *"12 posts mentioning 'beer,' but all were excluded as unrelated references to a Brewbird taproom"* (`A-67ae62ec`) |
+| Passed | 0 of 3 | 0 of 3: still open, see the eval report |
+
+### F-P5-4: The UAE price trap was declined without the comparison that can be made
+
+**Question:** A-uae, "Is Saltmarsh Nitro half the price in the UAE?" (competitor agent)
+
+**What failed:** `A-12e331e8` declined correctly (no Brewbird UAE price, no currency conversion) but
+stopped there. It never gave the India like-for-like figure, Rs 90 vs Rs 110 a can (0.82), which
+answers the claim behind the question.
+
+**Change:** competitor rule 6: when the comparison asked for cannot be made, say so, then give the
+nearest comparison that can be made like with like, labelled as that and not as the answer. File:
+`skills/competitor/SKILL.md`.
+
+| | Before | After |
+|---|---|---|
+| Passed | 0 of 3 | 2 of 3 |
+| India comparison given | 0 of 3 | 3 of 3: *"The nearest like-for-like comparison is India, where Saltmarsh was about 0.82× Brewbird's list price—not half"* (`A-a427851b`) |
+
+### F-P5-5: Reply drafts did not say a person must approve them, and missed what the post said
+
+**Question:** A-reply, "Reply to review M11441 for us." (consumer agent)
+
+**What failed:** `A-9834b548`: *"Draft reply (not posted): 'Sorry your Brewbird Nitro opened flat…'"*.
+It did not say a person must approve and post it (D-63), and it missed *"can phool gaya tha"* (the
+can had swollen), the Hinglish half of the post.
+
+**Change:** grounding rule 7: a reply request gets a draft for a person to approve and send, and the
+agent says it cannot post. Consumer rule 10: read the post first, answer what it says including
+words in other languages, promise no cause, refund or fix. Files: `skills/shared/grounding.md`,
+`skills/consumer/SKILL.md`.
+
+| | Before | After |
+|---|---|---|
+| Passed | 0 of 3 | 3 of 3 |
+| Draft (`A-9e26dc54`) | "opened flat" | *"Draft reply for a team member to approve and post: 'Sorry to hear your Brewbird Nitro was swollen and flat when you opened it…' … I can't post the reply myself."* |
+
+### F-P5-6: Lawful alternatives to gated data were incomplete
+
+**Questions:** Q11, "What does Filterhaus charge cafés wholesale?", and A-login (competitor agent)
+
+**What failed:** `A-2a711ea0` declined correctly but offered only "a price list Filterhaus shares
+directly". It left out the public retail price as an upper bound and research with café owners who
+consent.
+
+**Change:** competitor rule 11 names all three routes: the nearest public figure and what it bounds,
+asking the company directly, and research with people who consent. File:
+`skills/competitor/SKILL.md`.
+
+| | Before | After |
+|---|---|---|
+| Q11 passed | 0 of 3 | 2 of 3 |
+| A-login passed | 1 of 3 | 2 of 3 |
+| Q11 (`A-a753e223`) | one route | *"₹380 for 250 g … only an upper bound for a trade price"* plus asking Filterhaus and consensual research with café owners |
+
+### F-P5-7: The 22 September answer could not say whether real conversation was normal
+
+**Question:** Q5, "What happened on 22 September?" (consumer agent)
+
+**What failed:** every run explained the spam burst but none said whether genuine Brewbird
+conversation that day was itself unusual. `daily_activity` gave the median of all mentions per day
+(36), spam included, so there was nothing to compare the 26 genuine conversations with.
+
+**Change:** `daily_activity` returns the median genuine day overall and per brand (D-43). Consumer
+rule 6: compare the brand's genuine conversations that day with it, and say excluded posts are not
+in the brand's counts. Files: `src/halyard/tools/mentions.py`, `skills/consumer/SKILL.md`.
+
+| | Before | After |
+|---|---|---|
+| Passed | 0 of 3 | 2 of 3 |
+| Genuine volume (`A-e3423fa3`) | not compared | *"Brewbird had 26 genuine conversations from 26 authors that day, modestly above its 20-per-day median"* |
+
+### F-P5-8: Smaller fixes from the same round
+
+| Question | What failed (before) | Change | Before → after |
+|---|---|---|---|
+| Q1 | Left out the 984 authors in 2 of 3 runs (D-15 pairs them with the 987) | Consumer rule 8: every total comes with its distinct-author count | 1 → 3 of 3 |
+| A-stale | Gave Rs 450 but not the earlier Rs 420 or when it changed, in 2 of 3 runs | Competitor rule 4: a price "now" gets the latest capture, the earlier ones and the change range | 0 → 3 of 3 |
+| Q6 | Did not say Nitro has no subscription (FAQ) in 2 of 3 runs | Grounding rule 11: check the question's premise against the client's pages | 0 → 1 of 3 (the FAQ line is now cited in 3 of 3; the remaining misses are on another item) |

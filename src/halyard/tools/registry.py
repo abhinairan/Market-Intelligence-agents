@@ -268,9 +268,10 @@ TOOLS: dict[str, Tool] = {
             "pass the `topic` and it returns whether there is data on it, what was found, and "
             "what would be needed. With no topic it lists everything the graph holds.",
             coverage,
-            {"topic": {"type": "string", "description": "What the question needs, in a few "
-                                                        "words, e.g. `subscription "
-                                                        "cancellations`."}},
+            {"topic": {"type": "string", "description": "The thing itself in one or two "
+                                                        "words, as posts would name it, "
+                                                        "e.g. `beer`, `subscription "
+                                                        "cancellations`, `wholesale`."}},
             takes_filter=False,
             takes_window=False,
         ),

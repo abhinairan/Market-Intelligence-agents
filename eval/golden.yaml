@@ -22,7 +22,7 @@ questions:
   - id: Q5
     agent: consumer
     question: "What happened on 22 September?"
-    figures: ["answer.total", "answer.spam.count", "answer.genuine_that_day", "answer.median_daily_total"]
+    figures: ["answer.total", "answer.spam.count", "answer.brewbird_genuine_that_day", "answer.median_daily_total"]
   - id: Q6
     agent: consumer
     question: "How many of the people complaining about Nitro have cancelled their subscription?"

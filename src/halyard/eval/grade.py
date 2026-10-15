@@ -1,4 +1,4 @@
-"""Grading in code: key figures, cited mention IDs, `answerable` and the pass rule.
+"""Grading in code: key figures, cited mention IDs, `answerable` (reported only) and the pass rule.
 
 The rubric layer is graded by the judge (judge.py); everything here is deterministic.
 """
@@ -76,27 +76,32 @@ def grade_figures(case: Case, answer: dict[str, Any] | None) -> dict[str, Any] |
 
 
 def cited_sets(answer: dict[str, Any] | None, results: dict[str, dict[str, Any]]) -> dict[str, set[str]]:
-    """The mention-ID sets the answer cites: one per cited result, one for the mention IDs
-    cited directly, and their union."""
+    """The mention-ID sets the answer cites: one per cited result and per part of a cited
+    result's breakdown (`R-...#TST/Nitro`), one for the mention IDs cited directly, and the
+    union of the results and direct IDs."""
     sets: dict[str, set[str]] = {}
+    parts: dict[str, set[str]] = {}
     direct: set[str] = set()
     for claim in (answer or {}).get("claims", []):
         for cite in claim.get("cites", []) if isinstance(claim, dict) else []:
             if cite in results:
                 sets[cite] = set(results[cite].get("mention_ids", []))
+                for name, ids in results[cite].get("mention_id_groups", {}).items():
+                    parts[f"{cite}#{name}"] = set(ids)
             elif MENTION_ID.match(cite):
                 direct.add(cite)
     if direct:
         sets["direct"] = direct
     if len(sets) > 1:
         sets["union"] = set().union(*sets.values())
-    return sets
+    return sets | parts
 
 
 def grade_ids(case: Case, answer: dict[str, Any] | None, results: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
     """Precision and recall of the cited mentions against the oracle's. The answer may cite
-    several results (a line's figure and the brand's beside it), so the cited set compared is
-    whichever of them, or their union, best matches the oracle's set (highest F1)."""
+    several results (a line's figure and the brand's beside it), and a result may break its
+    figure down, so the cited set compared is whichever cited result, part of one, or union
+    best matches the oracle's set (highest F1)."""
     if not case.expected_ids:
         return None
     expected = case.expected_ids
@@ -129,11 +134,11 @@ class Grade:
 
     @property
     def passed(self) -> bool:
+        """`answerable` is reported, not graded: the brief asks that an answer the data cannot
+        give is declined with a reason, which the rubric checks (decided 15 Oct)."""
         layers = [self.figures, self.ids, self.rubric]
-        return (
-            self.status == "answered"
-            and self.answerable["passed"]
-            and all(layer["passed"] for layer in layers if layer and not layer.get("skipped"))
+        return self.status == "answered" and all(
+            layer["passed"] for layer in layers if layer and not layer.get("skipped")
         )
 
     def to_dict(self) -> dict[str, Any]:

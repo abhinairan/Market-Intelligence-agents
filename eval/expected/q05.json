@@ -119,7 +119,9 @@
       ]
     },
     "genuine_that_day": 41,
-    "median_daily_genuine": 33.0
+    "median_daily_genuine": 33.0,
+    "brewbird_genuine_that_day": 26,
+    "median_daily_brewbird_genuine": 20.0
   },
   "mention_ids": {
     "spam": [

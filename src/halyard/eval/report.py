@@ -22,10 +22,11 @@ Each question is run through its agent and graded on every layer that applies to
   both be at least {ID_THRESHOLD}.
 - **Rubric**: a judge model marks each rubric item met or not, quoting the answer; a "met"
   counts only when the quote is found in the answer. Every item must be met.
-- **Answerable**: the answer's `answerable` must equal the expected `yes` / `partly` / `no`,
-  and the run must pass its citation check.
+- **Citation check**: the run must end `answered`, i.e. pass the agents' own citation check.
 
-A run passes when every layer that applies passes. The expected answers come from the
+A run passes when every layer that applies passes. The answer's `answerable` (`yes` /
+`partly` / `no`) is shown against the expected value but not graded: the brief asks that a
+question the data cannot answer is declined with the reason, and the rubric items check that. The expected answers come from the
 independent oracle (`oracle/`), which shares only `docs/definitions.md` with the pipeline."""
 
 
@@ -128,7 +129,7 @@ def _calibration(ev, cases, by_case) -> list[str]:
 def _run_detail(i: int, g: dict[str, Any]) -> list[str]:
     a = g["answerable"]
     head = (f"**Run {i}** `{g['run_id']}`: {'pass' if g['passed'] else 'FAIL'}. Status {g['status']}; "
-            f"answerable {a['got']} (expected {a['expected']}){'' if a['passed'] else ' ✗'}; "
+            f"answerable {a['got']} (expected {a['expected']}, not graded); "
             f"agent {_money(g['cost_usd'])}.")  # fmt: skip
     out = [head, ""]
     if f := g.get("figures"):

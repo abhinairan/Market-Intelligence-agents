@@ -92,6 +92,11 @@ def test_ids_compared_with_the_best_matching_cited_set():
     assert only_brand["recall"] == 1.0 and only_brand["precision"] == 0.03 and not only_brand["passed"]
     assert grade_ids(case, {"claims": []}, results)["passed"] is False
 
+    # A part of a cited result's breakdown counts as a cited set of its own.
+    results["R-brand"]["mention_id_groups"] = {"TST/Nitro": ["M1", "M2", "M3"], "TST": ["M1", "M9"]}
+    part = grade_ids(case, {"claims": [{"claim": "brand", "cites": ["R-brand"]}]}, results)
+    assert (part["set"], part["precision"], part["passed"]) == ("R-brand#TST/Nitro", 1.0, True)
+
 
 # ---------- judge ----------
 
@@ -135,7 +140,7 @@ def test_pass_rule():
     ok = {"passed": True}
     g = Grade("T", "A-1", "answered", {"passed": True}, figures=ok, rubric={"skipped": True, "passed": None})
     assert g.passed
-    assert not Grade("T", "A-1", "answered", {"passed": False}, figures=ok).passed
+    assert Grade("T", "A-1", "answered", {"passed": False}, figures=ok).passed  # reported, not graded
     assert not Grade("T", "A-1", "failed_check", {"passed": True}, figures=ok).passed
     assert not Grade("T", "A-1", "answered", {"passed": True}, figures={"passed": False}).passed
 

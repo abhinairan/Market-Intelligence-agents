@@ -169,7 +169,9 @@ def test_model_failure_ends_the_run_as_an_error(ctx, tmp_path):
 
 def test_cap_leaves_short_results_alone():
     short = {"mention_ids": ["M1", "M2"], "data": {"total": 2}}
-    assert cap_result(short, 5) is short
+    assert cap_result(short, 5) == short
+    # ID groups stay in the log and the run; the model never gets them.
+    assert cap_result(short | {"mention_id_groups": {"TST": ["M1"]}}, 5) == short
 
 
 def test_limits_come_from_client_config(client_config):

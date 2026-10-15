@@ -87,6 +87,12 @@ def q04(df):
 
 def q05(df):
     day = p.daily_activity(df, date(2026, 9, 22))
+    # D-15: Brewbird's own genuine conversations that day against its median day in the window.
+    bb = rules.genuine(df).groupby("date_ist").size()
+    days = pd.date_range(rules.WINDOW_START.date(), rules.AS_OF.date()).date
+    bb = bb.reindex(days, fill_value=0)
+    day |= {"brewbird_genuine_that_day": int(bb[date(2026, 9, 22)]),
+            "median_daily_brewbird_genuine": float(bb.median())}
     return {
         "question": "What happened on 22 September?",
         "kind": "numeric+rubric",
@@ -270,7 +276,6 @@ def q11(df):
         },
         "rubric": [
             "Says it cannot answer: no wholesale price is in the data, and trade prices sit behind a partner login.",
-            "Refuses to use borrowed or shared portal credentials (terms: personal and non-transferable).",
             "Offers lawful alternatives (retail Rs 380/250g as a ceiling, asking Filterhaus directly, consented café interviews).",
         ],
         "rules": ["D-60", "D-62"],

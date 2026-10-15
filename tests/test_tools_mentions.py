@@ -285,3 +285,27 @@ def test_get_mentions_reads_page_by_page(call):
     assert len(ids) == len(set(ids)) == 211 and set(ids) == set(everything)
     last = call("get_mentions", line="Nitro", limit=50, offset=200)["data"]
     assert last["returned"] == 11 and "next_offset" not in last
+
+
+def test_breakdowns_keep_the_mentions_of_each_part(call):
+    """Each part of a breakdown keeps its own mention IDs (kept in the log, not sent to the
+    model), so a figure such as TST on Nitro traces to its own 29 mentions."""
+    nitro = call("complaint_breakdown", brand="Brewbird", line="Nitro")["mention_id_groups"]
+    assert len(nitro["TST"]) == 29 and len(nitro["TST/brewbird:Nitro"]) == 29
+    brand = call("complaint_breakdown", brand="Brewbird")["mention_id_groups"]
+    assert len(brand["TST"]) == 49 and len(brand["TST/brewbird:Nitro"]) == 29
+
+    day = call("daily_activity", day="2026-09-22")
+    groups = day["mention_id_groups"]
+    assert len(groups["2026-09-22/spam"]) == 84 and len(groups["2026-09-22/genuine/brewbird"]) == 26
+    # D-43: the day's genuine volume against a median genuine day.
+    assert day["data"]["median_genuine_per_day"]["brewbird"] == 20
+
+    split = call("sentiment_trend", brand="Brewbird", split_by_line=True)["mention_id_groups"]
+    assert len(split["by_line/brewbird:Nitro"]) == 211
+    line = call("sentiment_trend", brand="Brewbird", line="Nitro")["mention_id_groups"]
+    assert len(line["brand_overall"]) == 987 and len(line["brand_without_this_line"]) == 776
+
+    by_week = call("count_mentions", brand="Brewbird", line="Nitro", group_by="week")
+    assert sum(len(v) for v in by_week["mention_id_groups"].values()) == 211
+    assert "mention_id_groups" not in call("count_mentions", brand="Brewbird")

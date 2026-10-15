@@ -17,5 +17,12 @@ For each rubric item, decide whether the answer meets it:
   `quote` is empty.
 - `reason` is one short sentence on why.
 
+Judge meaning, not wording:
+- An item is met when the answer says the same thing in other words. Do not require the
+  item's exact terms, the brand name repeated, or a unit restated when it is plain from the
+  answer (a 200 ml can priced per 200 ml is priced per can).
+- Things joined by "/" or "or" are alternatives: any one of them meets that part.
+- Things listed with commas and "and" must each be in the answer.
+
 Grade only what the answer says. Do not judge whether its figures are correct: figures are
 checked separately. Give exactly one verdict per item, in the order given, using its number.

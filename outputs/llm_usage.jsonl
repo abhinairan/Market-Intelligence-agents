@@ -1297,3 +1297,14 @@
 {"at": "2026-10-15T09:16:03+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "pulse", "input_tokens": 5034, "output_tokens": 183, "cached_input_tokens": 0, "run_id": "A-3fead7f7"}
 {"at": "2026-10-15T09:16:11+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "pulse", "input_tokens": 20146, "output_tokens": 212, "cached_input_tokens": 4908, "run_id": "A-3fead7f7"}
 {"at": "2026-10-15T09:16:49+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "pulse", "input_tokens": 25562, "output_tokens": 1537, "cached_input_tokens": 20020, "run_id": "A-3fead7f7"}
+{"at": "2026-10-15T09:35:19+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 4753, "output_tokens": 151, "cached_input_tokens": 0, "run_id": "A-60daf07b"}
+{"at": "2026-10-15T09:35:23+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 12366, "output_tokens": 211, "cached_input_tokens": 4627, "run_id": "A-60daf07b"}
+{"at": "2026-10-15T09:35:32+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 14555, "output_tokens": 682, "cached_input_tokens": 12240, "run_id": "A-60daf07b"}
+{"at": "2026-10-15T09:35:35+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15125, "output_tokens": 180, "cached_input_tokens": 14429, "run_id": "A-60daf07b"}
+{"at": "2026-10-15T09:35:52+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 15946, "output_tokens": 1507, "cached_input_tokens": 14999, "run_id": "A-60daf07b"}
+{"at": "2026-10-15T09:35:56+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 5090, "output_tokens": 155, "cached_input_tokens": 0, "run_id": "A-5198f062"}
+{"at": "2026-10-15T09:36:00+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 7764, "output_tokens": 98, "cached_input_tokens": 4964, "run_id": "A-5198f062"}
+{"at": "2026-10-15T09:36:07+00:00", "provider": "openai", "model": "gpt-6-luna", "purpose": "agent", "input_tokens": 8821, "output_tokens": 624, "cached_input_tokens": 7638, "run_id": "A-5198f062"}
+{"at": "2026-10-15T09:36:11+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "pulse", "input_tokens": 5034, "output_tokens": 171, "cached_input_tokens": 4908, "run_id": "A-6b55676a"}
+{"at": "2026-10-15T09:36:20+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "pulse", "input_tokens": 20134, "output_tokens": 347, "cached_input_tokens": 4908, "run_id": "A-6b55676a"}
+{"at": "2026-10-15T09:36:56+00:00", "provider": "openai", "model": "gpt-6.1-sol", "purpose": "pulse", "input_tokens": 31062, "output_tokens": 1636, "cached_input_tokens": 20008, "run_id": "A-6b55676a"}

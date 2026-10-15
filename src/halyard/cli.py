@@ -257,6 +257,19 @@ def cmd_eval(args: argparse.Namespace) -> None:
     from halyard.eval.runner import EVAL_OUT, run_eval, save_eval
     from halyard.llm import get_client
 
+    if args.answers:
+        from halyard.eval.answers import ANSWERS, render_answers
+
+        evals = []
+        for eval_id in (x.strip() for x in args.answers.split(",")):
+            path = EVAL_OUT / f"{eval_id}.json"
+            if not path.exists():
+                raise HalyardError(f"No saved eval {eval_id} in {EVAL_OUT.relative_to(PROJECT_ROOT)}.")
+            evals.append(json.loads(path.read_text(encoding="utf-8")))
+        ANSWERS.write_text(render_answers(evals, load_cases()), encoding="utf-8")
+        print(f"Wrote {ANSWERS.relative_to(PROJECT_ROOT)} from {args.answers}.")
+        return
+
     if args.report:
         path = EVAL_OUT / f"{args.report}.json"
         if not path.exists():
@@ -344,6 +357,9 @@ def parser() -> argparse.ArgumentParser:
     ev.add_argument("--second-judge", metavar="MODEL",
                     help="also judge the first repeat with MODEL, to calibrate the judge")
     ev.add_argument("--report", metavar="E-ID", help="rewrite docs/eval-report.md from a saved eval")
+    ev.add_argument("--answers", metavar="E-ID,...",
+                    help="write docs/eval-answers.md (expected vs agent answer per question) from "
+                         "saved evals; a later eval's runs replace an earlier one's")
     ev.set_defaults(func=cmd_eval)
     return p
 

@@ -210,3 +210,19 @@ def test_report_notes_belong_to_one_eval(tmp_path):
     assert report_notes("E-1", path) == "## Recorded result\n\n58 of 69."
     assert report_notes("E-2", path) is None
     assert report_notes("E-1", tmp_path / "none.md") is None
+
+
+def test_answers_take_the_latest_eval_and_a_passing_run():
+    from halyard.eval.answers import render_answers
+
+    case = Case("Q1", "golden", "consumer", "How many?", {"answerable": "yes", "rubric": ["Says how."]},
+                (Figure("answer.total", 987.0),), frozenset({"M1", "M2"}))
+    old = {"eval_id": "E-old", "grades": [{"case_id": "Q1", "run_id": "A-old", "passed": True}]}
+    new = {"eval_id": "E-new", "grades": [{"case_id": "Q1", "run_id": "A-fail", "passed": False},
+                                          {"case_id": "Q1", "run_id": "A-pass", "passed": True}]}
+    runs = {"A-pass": {"answer": {"answer": "987 conversations.", "answerable": "yes",
+                                  "claims": [{"claim": "987.", "cites": ["R-1"]}]}}}
+    text = render_answers([old, new], [case], runs.__getitem__)
+    assert "`total` 987" in text and "Mentions behind the answer: 2" in text and "Says how." in text
+    assert "run `A-pass`, passed" in text and "> 987 conversations." in text
+    assert "passed 1 of 2 runs in `E-new`" in text and "A-old" not in text

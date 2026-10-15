@@ -38,3 +38,8 @@ fits any client, and `price_compare` now asks for names as `brand_facts` returns
 changes what the model is sent, not what any tool does, so the recorded result stands. A
 check on the questions that use those parameters passed every run: `E-8a88f98f` (Q1, Q2,
 Q3, Q7, Q9, Q10, A-beer, 7 of 7) and `E-15aa5fe9` (Q7 and Q8 twice, 4 of 4), $0.03 in all.
+
+**Costs in this report.** Agent costs here were computed before `config/llm_prices.yaml` had a
+cached-input price, so cached tokens are priced as ordinary input and the agent costs are
+about 2.4 times what was billed. At the cached rate this full run cost about $0.07 for the
+agents and $0.02 for the judge.

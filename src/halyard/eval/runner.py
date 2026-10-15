@@ -62,7 +62,8 @@ def grade_run(
     grade = Grade(
         case.id, run.run_id, run.status, grade_answerable(case, answer),
         figures=grade_figures(case, answer), ids=grade_ids(case, answer, run.results),
-        cost_usd=cost_usd(run.model or "", run.input_tokens, run.output_tokens, prices),
+        cost_usd=cost_usd(run.model or "", run.input_tokens, run.output_tokens, prices,
+                          run.cached_input_tokens),
         tokens={"input": run.input_tokens, "output": run.output_tokens, "cached": run.cached_input_tokens},
     )  # fmt: skip
     if case.rubric and answer is not None:

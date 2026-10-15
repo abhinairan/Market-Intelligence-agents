@@ -150,7 +150,7 @@ def test_pulse_week_must_start_a_reporting_week_in_the_data():
         pulse_week(client, "2026-10-05")  # after the data ends
 
 
-def test_pulse_is_written_with_its_evidence(run, tmp_path):
+def test_pulse_is_written_without_the_claims_list(run, tmp_path):
     from halyard.agents.pulse import pulse_week, write_pulse
 
     week = pulse_week(load_client("brewbird"), "2026-09-28")
@@ -158,7 +158,7 @@ def test_pulse_is_written_with_its_evidence(run, tmp_path):
     run.status = "answered"
     text = write_pulse(run, week, tmp_path).read_text()
     assert text.startswith("# Monday pulse: week of 28 Sep")
-    assert "1. 13 [R-1]" in text and "NOT VERIFIED" not in text
+    assert "R-1" not in text and "Evidence" not in text and "NOT VERIFIED" not in text
     run.status = "failed_check"
     path = write_pulse(run, week, tmp_path)
     assert path.name == "pulse-2026-09-28.md" and path.read_text().startswith("> NOT VERIFIED")

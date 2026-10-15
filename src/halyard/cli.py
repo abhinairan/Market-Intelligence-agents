@@ -160,14 +160,14 @@ def _golden_questions() -> list[dict]:
     return yaml.safe_load((PROJECT_ROOT / "eval" / "golden.yaml").read_text())["questions"]
 
 
-def _run(settings, agent: str, request: str, skill: str | None = None):
+def _run(settings, agent: str, request: str, skill: str | None = None, purpose: str = "agent"):
     """One agent run with the citation check; the transcript is saved. Returns (run, path)."""
     from halyard.agents.citations import citation_check
     from halyard.agents.loop import Limits, run_agent, save_run
     from halyard.agents.skills import MAIN, load_skill
     from halyard.llm import get_client
 
-    client = get_client(settings, "agent")
+    client = get_client(settings, purpose)
     with tool_context() as ctx:
         spec = load_skill(agent, ctx, skill or MAIN)
         limits = Limits.from_client(settings.client)
@@ -179,7 +179,7 @@ def _pulse(settings, week: str):
     from halyard.agents.pulse import pulse_request, pulse_week, write_pulse
 
     window = pulse_week(settings.client, week)
-    run, _ = _run(settings, "consumer", pulse_request(window), skill="pulse")
+    run, _ = _run(settings, "consumer", pulse_request(window), skill="pulse", purpose="pulse")
     return run, write_pulse(run, window)
 
 

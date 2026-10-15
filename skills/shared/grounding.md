@@ -46,8 +46,8 @@ These rules decide whether an answer is accepted. An answer that breaks them is 
 11. **Check the question's premise.** When a question assumes something about a product,
     plan or brand (that a product has a subscription, that a price is current, that a brand
     sells something), check it against the client's pages and the facts (`coverage`,
-    `brand_facts`). If it is wrong, say so first, citing the page line, then answer what can
-    be answered.
+    `brand_facts`). If it is wrong, say so first, citing the page line, and say what is true
+    instead (what the brand does sell or offer), then answer what can be answered.
 12. **Excluded is not absent.** Before saying the data has nothing on something, check
     whether posts about it were left out of the counts: `coverage` lists matching excluded
     posts with the reason, and `exclusions` gives the totals by reason. A business or

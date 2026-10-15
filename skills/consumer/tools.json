@@ -7,11 +7,11 @@
       "properties": {
         "brand": {
           "type": "string",
-          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+          "description": "Brand key or name: the client or a tracked competitor. Omit for all brands."
         },
         "line": {
           "type": "string",
-          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+          "description": "Product line, by its name (`<line>`) or with its brand's name (`<brand> <line>`), or `brand-level` for mentions that name the brand and none of its lines."
         },
         "platform": {
           "type": "string",
@@ -32,7 +32,7 @@
         },
         "code": {
           "type": "string",
-          "description": "One of the client's complaint codes, e.g. `TST`."
+          "description": "One of the client's complaint codes, as its taxonomy writes the code."
         },
         "include_excluded": {
           "type": "boolean",
@@ -81,11 +81,11 @@
       "properties": {
         "brand": {
           "type": "string",
-          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+          "description": "Brand key or name: the client or a tracked competitor. Omit for all brands."
         },
         "line": {
           "type": "string",
-          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+          "description": "Product line, by its name (`<line>`) or with its brand's name (`<brand> <line>`), or `brand-level` for mentions that name the brand and none of its lines."
         },
         "platform": {
           "type": "string",
@@ -106,7 +106,7 @@
         },
         "code": {
           "type": "string",
-          "description": "One of the client's complaint codes, e.g. `TST`."
+          "description": "One of the client's complaint codes, as its taxonomy writes the code."
         },
         "include_excluded": {
           "type": "boolean",
@@ -168,11 +168,11 @@
       "properties": {
         "brand": {
           "type": "string",
-          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+          "description": "Brand key or name: the client or a tracked competitor. Omit for all brands."
         },
         "line": {
           "type": "string",
-          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+          "description": "Product line, by its name (`<line>`) or with its brand's name (`<brand> <line>`), or `brand-level` for mentions that name the brand and none of its lines."
         },
         "platform": {
           "type": "string",
@@ -193,7 +193,7 @@
         },
         "code": {
           "type": "string",
-          "description": "One of the client's complaint codes, e.g. `TST`."
+          "description": "One of the client's complaint codes, as its taxonomy writes the code."
         },
         "start": {
           "type": "string",
@@ -228,11 +228,11 @@
       "properties": {
         "brand": {
           "type": "string",
-          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+          "description": "Brand key or name: the client or a tracked competitor. Omit for all brands."
         },
         "line": {
           "type": "string",
-          "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or `brand-level` for mentions that name the brand and none of its lines."
+          "description": "Product line, by its name (`<line>`) or with its brand's name (`<brand> <line>`), or `brand-level` for mentions that name the brand and none of its lines."
         },
         "platform": {
           "type": "string",
@@ -253,7 +253,7 @@
         },
         "code": {
           "type": "string",
-          "description": "One of the client's complaint codes, e.g. `TST`."
+          "description": "One of the client's complaint codes, as its taxonomy writes the code."
         },
         "start": {
           "type": "string",
@@ -354,11 +354,11 @@
       "properties": {
         "brand": {
           "type": "string",
-          "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands."
+          "description": "Brand key or name: the client or a tracked competitor. Omit for all brands."
         },
         "line": {
           "type": "string",
-          "description": "Product line, e.g. `Saltmarsh Nitro`."
+          "description": "Product line, by its name or with its brand's name."
         },
         "kind": {
           "type": "string",
@@ -382,7 +382,7 @@
       "properties": {
         "topic": {
           "type": "string",
-          "description": "The thing itself in one or two words, as posts would name it, e.g. `beer`, `subscription cancellations`, `wholesale`."
+          "description": "The thing itself in one or two words, as posts would name it, e.g. `subscription cancellations`, `wholesale`."
         }
       },
       "required": [],

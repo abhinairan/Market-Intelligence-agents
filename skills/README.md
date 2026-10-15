@@ -42,7 +42,7 @@ Each agent folder also has a `tools.json`: the schemas of the tools that agent i
 exactly as the model is sent them, with the `answer` tool last. It is generated from the tool
 registry (`src/halyard/tools/registry.py`) by `halyard skills`; never edit it by hand. A test
 fails if it differs from the registry. The descriptions in it are what the model uses to pick
-a tool for a question; the skill's instructions add the order to work in.
+a tool for a question; like the skills, they name no client. The skill's instructions add the order to work in.
 
 The answer's schema is in `src/halyard/agents/answer.py`. The grounding rules on citations
 are also enforced in code (`src/halyard/agents/citations.py`): an answer citing an ID that
@@ -95,9 +95,6 @@ What a new brand would hit today, stated plainly:
   including `price_inr` in the catalogue. A client whose export uses other columns, or a
   catalogue priced in another currency, needs a column mapping. That is a small core change
   (a mapping in config read by the loaders), not configuration.
-- **Tool descriptions use Brewbird examples.** Some parameter descriptions in the registry
-  say "e.g. `Saltmarsh`" or "e.g. `TST`". They change nothing in how a tool works, but the
-  model sees them. They should be made generic, or filled from config like the skills' slots.
 - **Tests check Brewbird's figures.** The unit tests run on this pack. A new client needs its
   own checks of the counts, as `docs/data-observations.md` did here.
 - **Labels are re-made, not re-used.** The cache key includes the prompt, and the prompt

@@ -28,11 +28,11 @@ from halyard.tools.windows import resolve_window
 FILTER_PARAMETERS: dict[str, dict[str, Any]] = {
     "brand": {
         "type": "string",
-        "description": "Brand key or name, e.g. `brewbird` or `Saltmarsh`. Omit for all brands.",
+        "description": "Brand key or name: the client or a tracked competitor. Omit for all brands.",
     },
     "line": {
         "type": "string",
-        "description": "Product line, e.g. `Nitro` or `Saltmarsh Nitro`, or "
+        "description": "Product line, by its name (`<line>`) or with its brand's name (`<brand> <line>`), or "
         f"`{BRAND_LEVEL}` for mentions that name the brand and none of its lines.",
     },
     "platform": {"type": "string", "description": "Platform as the export names it."},
@@ -41,7 +41,7 @@ FILTER_PARAMETERS: dict[str, dict[str, Any]] = {
         "type": "string",
         "enum": ["positive", "neutral", "negative", "unlabelled"],
     },
-    "code": {"type": "string", "description": "One of the client's complaint codes, e.g. `TST`."},
+    "code": {"type": "string", "description": "One of the client's complaint codes, as its taxonomy writes the code."},
     "include_excluded": {
         "type": "boolean",
         "description": "Also count reposts, spam and unrelated mentions. Default false: only "
@@ -210,7 +210,7 @@ TOOLS: dict[str, Tool] = {
             competitors.brand_facts,
             {
                 "brand": FILTER_PARAMETERS["brand"],
-                "line": {"type": "string", "description": "Product line, e.g. `Saltmarsh Nitro`."},
+                "line": {"type": "string", "description": "Product line, by its name or with its brand's name."},
                 "kind": {
                     "type": "string",
                     "enum": ["price", "free_shipping_threshold", "launch", "offer"],
@@ -227,10 +227,10 @@ TOOLS: dict[str, Tool] = {
             "ours' and to check a price claim in an ad.",
             competitors.price_compare,
             {
-                "a": {"type": "string", "description": "Product line or product, e.g. "
-                                                       "`Saltmarsh Nitro`."},
-                "b": {"type": "string", "description": "What to compare it with, e.g. "
-                                                       "`Brewbird Nitro`."},
+                "a": {"type": "string", "description": "Product line or product, named as "
+                                                       "`brand_facts` returns it."},
+                "b": {"type": "string", "description": "What to compare it with, named the "
+                                                       "same way."},
                 "region": {"type": "string", "description": "Market code, e.g. `IN`. Default: "
                                                             "every market both are priced in."},
                 "claimed_ratio": {
@@ -270,8 +270,8 @@ TOOLS: dict[str, Tool] = {
             coverage,
             {"topic": {"type": "string", "description": "The thing itself in one or two "
                                                         "words, as posts would name it, "
-                                                        "e.g. `beer`, `subscription "
-                                                        "cancellations`, `wholesale`."}},
+                                                        "e.g. `subscription cancellations`, "
+                                                        "`wholesale`."}},
             takes_filter=False,
             takes_window=False,
         ),

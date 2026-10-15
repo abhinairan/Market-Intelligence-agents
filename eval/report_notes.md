@@ -31,3 +31,10 @@ $0.02). The two judges agreed on 11 of 14 items. The 3 they split on were all qu
 one run into a pass (Q10). The other four runs still failed under both judges, so they were
 omissions in the answer, not judge errors: three on A-beer (since fixed) and one on
 A-subscription-reaction.
+
+**After the recorded run (P6, 15 Oct).** The tool descriptions were made generic: parameter
+examples that named Brewbird, its competitors or its codes were replaced with wording that
+fits any client, and `price_compare` now asks for names as `brand_facts` returns them. This
+changes what the model is sent, not what any tool does, so the recorded result stands. A
+check on the questions that use those parameters passed every run: `E-8a88f98f` (Q1, Q2,
+Q3, Q7, Q9, Q10, A-beer, 7 of 7) and `E-15aa5fe9` (Q7 and Q8 twice, 4 of 4), $0.03 in all.

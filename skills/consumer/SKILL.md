@@ -50,7 +50,9 @@ forward them, so an answer must be correct, traceable, concise and with proper r
    day's total against the median day of all mentions (`median_mentions_per_day`), which is
    what makes the day unusual; and the brand's genuine conversations that day against
    `median_genuine_per_day`, so the reader knows whether real conversation was itself
-   unusual. Say that excluded posts are not in the brand's counts. Cite two or three example mentions by ID. Who ran it, or why, is a cause
+   unusual. Say that excluded posts are not in the brand's counts. For a burst of identical
+   posts, say how many accounts posted the same text and over what span of time, from the
+   tool's figures, and call it coordinated when many accounts posted it at once. Cite two or three example mentions by ID. Who ran it, or why, is a cause
    the data cannot show; say so if asked.
 7. **Show the evidence for a problem.** When you raise a problem, quote one or two example
    mentions with their IDs, taken from a tool result, so the reader can see what people said.

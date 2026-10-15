@@ -147,7 +147,8 @@ Stop after each step with a short walkthrough, as in P2 and P3. Steps 1 to 4 com
 
 **P4 done-check (passed 14 Oct 2026):** clean clone of `p4-agents` with `.env` copied: 145 tests pass, lint clean, `halyard build` twice gives identical output (3,889 nodes, 5,384 edges, 0 model calls), `halyard demo` exits 0 with Q4, Q8 and the pulse answered and verified. Full run of 12 golden + 4 adversarial earlier the same day: all correct with valid citations. Agent spend for all of P4: $0.171 (208 calls on `gpt-6-luna`); project total $0.18. **Deferred by Abhinav:** the `gpt-6.1-sol` comparison (no price yet).
 
-## P5: evaluation (done 15 Oct 2026, branch `p5-eval`; done-check and merge pending)
+## P5: evaluation (done 15 Oct 2026, `p5-eval` merged to `main` and pushed, `4bcd993`)
+**P5 done-check (passed 15 Oct):** clean clone of `p5-eval` with `.env` copied: 181 tests pass, lint clean, `python -m oracle.run` reproduces `eval/expected/` exactly, `halyard build` twice gives identical output (3,889 nodes, 5,384 edges, 0 model calls), `halyard eval --only Q1,A-login --repeat 1` runs end to end (Q1 pass; A-login missed "the portal is gated", the same one-run gap seen in `E-2824e5be`).
 Recorded result: **58 of 69 runs** (23 questions x 3): golden 32 of 36, adversarial 26 of 33. Full evals went 19 -> 47 -> 51 of 69 (`E-d583c183`, `E-2824e5be`, `E-07443f38`); 58 adds the Q5 and A-beer fixes re-run after the last one and a Q10 judge error. `docs/eval-report.md` is `E-07443f38` plus `eval/report_notes.md`; kept reports in `docs/eval-runs/`. Failure log F-P5-1 to F-P5-11.
 
 **Built**

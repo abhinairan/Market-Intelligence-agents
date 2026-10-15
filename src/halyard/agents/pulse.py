@@ -34,16 +34,15 @@ def pulse_request(window: Window) -> str:
 
 
 def write_pulse(run: AgentRun, window: Window, out_dir: Path = OUTPUT_DIR) -> Path:
-    """The brief, then its evidence, then the run's footer, as Markdown."""
+    """The brief and the run's footer, as Markdown. The brief carries its example mention IDs
+    inline; the claims and what each cites stay in the run's transcript, not in the brief the
+    team reads."""
     if run.answer is None:
         raise HalyardError(f"The pulse run ended without a brief: {run.error}")
     lines = [run.answer["answer"].strip(), ""]
     if run.status != "answered":
         lines = ["> NOT VERIFIED: this brief failed the citation check.", "", *lines]
-    lines += ["---", "", "**Evidence** (trace any ID with `halyard trace <id>`)", ""]
-    lines += [f"{i}. {c['claim']} [{', '.join(c['cites'])}]"
-              for i, c in enumerate(run.answer["claims"], 1)]  # fmt: skip
-    lines += ["", f"<sub>{_footer(run)}. Generated {date.today():%d %b %Y}.</sub>", ""]
+    lines += ["---", "", f"<sub>{_footer(run)}. Generated {date.today():%d %b %Y}.</sub>", ""]
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"pulse-{window.start}.md"
     path.write_text("\n".join(lines), encoding="utf-8")

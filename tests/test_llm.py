@@ -61,6 +61,11 @@ def test_get_client_picks_provider_and_model():
     assert get_client(_settings(llm_provider="anthropic"), "label").provider == "anthropic"
 
 
+def test_pulse_uses_its_own_model_or_the_agent_model():
+    assert get_client(_settings(pulse_model="big"), "pulse").model == "big"
+    assert get_client(_settings(), "pulse").model == "m2"
+
+
 def test_missing_model_or_key_is_a_clear_error():
     with pytest.raises(HalyardError, match="LABEL_MODEL"):
         get_client(_settings(label_model=None), "label")

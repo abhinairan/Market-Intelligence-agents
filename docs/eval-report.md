@@ -4,7 +4,7 @@ Eval `E-07443f38`, started 2026-10-15T02:59:27+00:00. Agent model `gpt-6-luna`, 
 
 **11 of 23 questions passed every run; 51 of 69 runs passed.** Cost: agents $0.1783, judges $0.0200.
 
-Failures found here, their causes and fixes are logged in [failure-log.md](failure-log.md) under "Found by the eval (P5)".
+Failures found here, their causes and fixes are logged in [failure-log.md](failure-log.md) under "Found by the eval (P5)". The expected and the agent's actual answer for each question are side by side in [eval-answers.md](eval-answers.md).
 
 ## Recorded result: 58 of 69 runs (84%)
 

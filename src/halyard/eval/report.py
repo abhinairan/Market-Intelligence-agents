@@ -102,7 +102,9 @@ def render_report(ev: dict[str, Any], notes: str | None = None) -> str:
         (f"**{full} of {len(cases)} questions passed every run; {passes} of {len(ev['grades'])} runs passed.** "
         f"Cost: agents {_money(agent_cost)}, judges {_money(judge_cost)}."), "",
         ("Failures found here, their causes and fixes are logged in "
-        "[failure-log.md](failure-log.md) under \"Found by the eval (P5)\"."), "",
+        "[failure-log.md](failure-log.md) under \"Found by the eval (P5)\". The expected and the "
+        "agent's actual answer for each question are side by side in "
+        "[eval-answers.md](eval-answers.md)."), "",
         *([notes, ""] if notes else []),
         "## How it is graded", "", METHOD, "",
         "## Summary", "",

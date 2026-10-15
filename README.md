@@ -83,7 +83,8 @@ Monday pulse and prints the model spend. Other commands: `halyard spend` (tokens
 |---|---|
 | Ontology note | [`docs/ontology-note.md`](docs/ontology-note.md), with the generated reference [`docs/ontology.md`](docs/ontology.md) |
 | Entity-resolution log | [`docs/er-log.md`](docs/er-log.md) |
-| Evaluation report | [`docs/eval-report.md`](docs/eval-report.md), and the fixes it led to in [`docs/failure-log.md`](docs/failure-log.md) |
+| Evaluation report | [`docs/eval-report.md`](docs/eval-report.md); expected and actual answer for each question in [`docs/eval-answers.md`](docs/eval-answers.md); what it caught and how we fixed it in [`docs/failure-story.md`](docs/failure-story.md), with full detail in [`docs/failure-log.md`](docs/failure-log.md) |
+| Monday pulse, week of 28 September | [`outputs/pulse-2026-09-28.md`](outputs/pulse-2026-09-28.md) |
 | Readout for Ishita | [`docs/readout.pdf`](docs/readout.pdf) |
 | Three written replies | [`docs/replies.md`](docs/replies.md) |
 | Another week, and model spend | [`docs/another-week.md`](docs/another-week.md) |

@@ -33,13 +33,21 @@ right, short and in plain words, and every figure must be traceable.
    tool returns it. Describe a problem by what most of its posts say, with the split
    ("damaged, stale or late; 14 of 29 mention damage"), not by the most striking post.
 4. **Compare with the weeks before.** Say whether each thing is new, growing, steady or
-   falling, using the tools' direction labels and the weekly counts, each with its week.
-5. **Earn every noise verdict with counts.** Noise is what is big but needs no action:
+   falling, with the weekly figures, each with its week. When you compare the pulse week
+   with the week before, describe that change in plain words from the two figures ("up from
+   0.14 to 0.23"). A tool's direction label describes its whole series: use it only when you
+   describe that series, and name the weeks it covers.
+5. **Name what every figure measures and when.** A share says what it is a share of and
+   which week ("63% of the line's posts were negative in the pulse week, against 42% the
+   week before", with the weeks' dates); a sentiment change says whether the net score or the negative share
+   moved.
+6. **Earn every noise verdict with counts.** Noise is what is big but needs no action:
    a spike or burst in the weeks just before that has passed, or competitor activity that
    does not show up in the client's own conversation. Check before you say so: how many of
    the client's posts name the competitor (`count_mentions` with `group_by: brand`) and
-   whether the affected line's volume moved (`group_by: week`).
-6. **Do not repeat the lead.** When a brand-level figure is mostly the lead's line, say so
+   whether the affected line's volume moved (`group_by: week`), over the period from when
+   the competitor activity began to the end of the pulse week, and say those dates.
+7. **Do not repeat the lead.** When a brand-level figure is mostly the lead's line, say so
    ("15, of which 13 on that line") instead of reporting it as a second finding.
 
 ## The brief
@@ -51,7 +59,9 @@ right, short and in plain words, and every figure must be traceable.
   is, the figures with their weeks, the owner team, two or three mention IDs, and the
   action it needs.
 - **What changed**: three to five short bullets, most important first: other lines, codes,
-  share of voice or competitor moves that moved this week, each with its figure.
+  share of voice or competitor moves that moved this week, each with its figure. One point
+  per bullet, one or two lines each. Share of voice is the last item: a small table of every
+  compared brand with its conversations and share, under a bullet naming its window.
 - **Noise**: one to three bullets on what is big but needs no action, and why, each with
   the figure that shows it.
 - **Watch next week**: one or two bullets.

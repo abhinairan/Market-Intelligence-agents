@@ -45,6 +45,7 @@ class Settings:
     agent_model: str | None
     client: ClientConfig
     judge_model: str | None = None  # the eval's rubric judge (P5)
+    pulse_model: str | None = None  # the Monday pulse; the agent model when unset
 
 
 def load_client(name: str) -> ClientConfig:
@@ -96,4 +97,5 @@ def load_settings() -> Settings:
         agent_model=_env("AGENT_MODEL"),
         client=load_client(os.environ.get("HALYARD_CLIENT", "brewbird")),
         judge_model=_env("JUDGE_MODEL"),
+        pulse_model=_env("PULSE_MODEL"),
     )

@@ -25,14 +25,17 @@ __all__ = [
 ]
 
 
-MODEL_VARS = {"label": "LABEL_MODEL", "agent": "AGENT_MODEL", "judge": "JUDGE_MODEL"}
+MODEL_VARS = {"label": "LABEL_MODEL", "agent": "AGENT_MODEL", "judge": "JUDGE_MODEL", "pulse": "PULSE_MODEL"}
 
 
 def get_client(settings: Settings, purpose: str) -> LLMClient:
-    """Client for `purpose` ("label", "agent" or "judge") using the provider and models in .env."""
+    """Client for `purpose` ("label", "agent", "judge" or "pulse") using the provider and models
+    in .env. The pulse uses the agent model unless PULSE_MODEL is set."""
     if purpose not in MODEL_VARS:
         raise HalyardError(f"Unknown model purpose {purpose!r}.")
     model = getattr(settings, f"{purpose}_model")
+    if purpose == "pulse" and not model:
+        model = settings.agent_model
     if not model:
         raise HalyardError(f"{MODEL_VARS[purpose]} is empty in .env.")
     if not settings.llm_api_key:

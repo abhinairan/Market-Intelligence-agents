@@ -160,14 +160,14 @@ def _golden_questions() -> list[dict]:
     return yaml.safe_load((PROJECT_ROOT / "eval" / "golden.yaml").read_text())["questions"]
 
 
-def _run(settings, agent: str, request: str, skill: str | None = None):
+def _run(settings, agent: str, request: str, skill: str | None = None, purpose: str = "agent"):
     """One agent run with the citation check; the transcript is saved. Returns (run, path)."""
     from halyard.agents.citations import citation_check
     from halyard.agents.loop import Limits, run_agent, save_run
     from halyard.agents.skills import MAIN, load_skill
     from halyard.llm import get_client
 
-    client = get_client(settings, "agent")
+    client = get_client(settings, purpose)
     with tool_context() as ctx:
         spec = load_skill(agent, ctx, skill or MAIN)
         limits = Limits.from_client(settings.client)
@@ -179,7 +179,7 @@ def _pulse(settings, week: str):
     from halyard.agents.pulse import pulse_request, pulse_week, write_pulse
 
     window = pulse_week(settings.client, week)
-    run, _ = _run(settings, "consumer", pulse_request(window), skill="pulse")
+    run, _ = _run(settings, "consumer", pulse_request(window), skill="pulse", purpose="pulse")
     return run, write_pulse(run, window)
 
 
@@ -256,6 +256,19 @@ def cmd_eval(args: argparse.Namespace) -> None:
     from halyard.eval.report import REPORT, render_report, report_notes
     from halyard.eval.runner import EVAL_OUT, run_eval, save_eval
     from halyard.llm import get_client
+
+    if args.answers:
+        from halyard.eval.answers import ANSWERS, render_answers
+
+        evals = []
+        for eval_id in (x.strip() for x in args.answers.split(",")):
+            path = EVAL_OUT / f"{eval_id}.json"
+            if not path.exists():
+                raise HalyardError(f"No saved eval {eval_id} in {EVAL_OUT.relative_to(PROJECT_ROOT)}.")
+            evals.append(json.loads(path.read_text(encoding="utf-8")))
+        ANSWERS.write_text(render_answers(evals, load_cases()), encoding="utf-8")
+        print(f"Wrote {ANSWERS.relative_to(PROJECT_ROOT)} from {args.answers}.")
+        return
 
     if args.report:
         path = EVAL_OUT / f"{args.report}.json"
@@ -344,6 +357,9 @@ def parser() -> argparse.ArgumentParser:
     ev.add_argument("--second-judge", metavar="MODEL",
                     help="also judge the first repeat with MODEL, to calibrate the judge")
     ev.add_argument("--report", metavar="E-ID", help="rewrite docs/eval-report.md from a saved eval")
+    ev.add_argument("--answers", metavar="E-ID,...",
+                    help="write docs/eval-answers.md (expected vs agent answer per question) from "
+                         "saved evals; a later eval's runs replace an earlier one's")
     ev.set_defaults(func=cmd_eval)
     return p
 

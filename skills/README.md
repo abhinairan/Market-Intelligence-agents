@@ -15,6 +15,7 @@ folder and its own data pack; nothing here changes.
 | `consumer/pulse.tools.json` | Its tool schemas, generated from the registry. |
 | `shared/grounding.md` | Grounding rules every agent follows (D-60 to D-64). |
 | `shared/answer_format.md` | The output format every agent uses. |
+| `eval/judge.md` | The eval judge's prompt: marks each rubric item met or not, quoting the answer (`halyard eval`). Not an agent. |
 
 ## The package for each agent
 
@@ -51,7 +52,7 @@ no tool returned in that run is rejected.
 
 | Reusable (Halyard) | Brewbird configuration | Brewbird data |
 |---|---|---|
-| `src/halyard/`: loaders, hygiene, entity resolution, labelling, graph builder, the twelve query tools, agent loop, citation check | `config/brewbird/*.yaml` (below) | `data/raw/fde-v4-data-pack/`: the client's export, as it arrived |
+| `src/halyard/`: loaders, hygiene, entity resolution, labelling, graph builder, the twelve query tools, agent loop, citation check, eval runner and graders | `config/brewbird/*.yaml` (below) | `data/raw/fde-v4-data-pack/`: the client's export, as it arrived |
 | `skills/`: agent instructions, grounding rules, output format, labelling prompts | | `data/cache/labels.jsonl`: model labels for this pack's texts |
 | `docs/definitions.md`: the D-rules (the parameters they use are in config) | | `eval/`, `oracle/`: questions and expected answers for this client |
 
@@ -82,8 +83,9 @@ config: they come from the client's own files in the data pack and are used as t
 5. `halyard build`: builds the graph and prints counts. Read the exclusions and the
    unresolved mentions before trusting any number.
 6. `halyard ask consumer "..."` and `halyard ask competitor "..."`. No skill changes.
-7. Write `eval/` questions and expected answers for the new client (the oracle in `oracle/`
-   was built for this pack and is not reused).
+7. Write `eval/` questions and expected answers for the new client, then `halyard eval`.
+   The eval runner, graders and judge are reusable; the oracle in `oracle/` was built for
+   this pack and is not.
 
 ## Limits of "configuration only"
 
@@ -109,7 +111,7 @@ as such.
 | Ask (who) | Why config can't do it | What the product would need |
 |---|---|---|
 | Whether the people complaining about Nitro are cancelling (Dev) | The pack has no subscription or order data, and nothing links a social handle to a customer account | A connector for the client's subscription and order system, and a consented way to match customers to posts. Until then, the agents say they cannot answer and show what they can (D-60). |
-| Reply to bad reviews automatically (Ishita) | Halyard does not publish on its own: a person approves anything that reaches a customer (D-63) | A reply queue: the agent drafts, a person approves, and the product posts through each platform's API. The drafting is a skill; the queue, approvals and posting are product. |
+| Reply to bad reviews automatically (Ishita) | Halyard does not publish on its own: a person approves anything that reaches a customer (D-63) | A reply queue: the agent drafts, a person approves, and the product posts through each platform's API. The drafting is already in the consumer skill (rule 10, grounding rule 7); the queue, approvals and posting are product. |
 | Tell QA about swollen cans the day they appear (Farah) | The agents answer when asked and the pulse runs weekly; nothing pushes an alert | A scheduled run and a connector to QA's tracker or messaging, so TST complaints reach QA the same day. |
 | Ask questions herself (Ishita) | Today the agents run from a command line | A chat interface over the same agents, with the citations clickable back to posts. |
 | Monday pulse without six hours of spreadsheet work (Dev) | The pulse is one command, but someone has to run it | A scheduler that runs `halyard pulse` each Monday and delivers the brief. |

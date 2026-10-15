@@ -1,6 +1,7 @@
 # Brewbird Nitro cans are failing, and the brand numbers hide it
 
 **For:** Ishita Rao, for the leadership review on 19 October 2026.
+
 **Data:** Brewbird's listening export, 17 August to 4 October 2026: 987 genuine conversations
 about Brewbird after spam, reposts and the Pune taproom are removed.
 

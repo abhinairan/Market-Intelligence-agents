@@ -185,9 +185,14 @@ wrong conclusion from it.
 Each entry gives the question; what failed, with run IDs and the quoted answer; the cause; the change
 and who agreed it; the files changed; and the eval result before and after. "Before" is the first
 full eval, `E-d583c183` (14 Oct, 19 of 69 runs passed; report kept in
-[eval-runs/E-d583c183.md](eval-runs/E-d583c183.md)). "After" is `E-2824e5be` (15 Oct, 47 of 69
-passed; [eval-report.md](eval-report.md)). Both ran every question three times on `gpt-6-luna`, with
+[eval-runs/E-d583c183.md](eval-runs/E-d583c183.md)). "After" is the second full eval,
+`E-2824e5be` (15 Oct, 47 of 69; [eval-runs/E-2824e5be.md](eval-runs/E-2824e5be.md)), unless an
+entry names a later run. Every eval ran each question three times on `gpt-6-luna`, with
 `gpt-6-luna` as the rubric judge. All changes below were agreed by Abhinav on 15 Oct.
+
+The final full eval, `E-07443f38`, passed 51 of 69. With the fixes made after it (F-P5-10,
+F-P5-11) and one judge error found by re-judging (Q10), the recorded result is **58 of 69 runs**:
+golden 32 of 36, adversarial 26 of 33 ([eval-report.md](eval-report.md)).
 
 The first eval also found faults in the eval itself. They are logged first (F-P5-1), because a
 reader should know the "before" figures include them.
@@ -280,7 +285,7 @@ something, check what was excluded and say what it is, how many and why. Files:
 | | Before | After |
 |---|---|---|
 | Finds the taproom | No (0 of 3) | Yes (3 of 3): *"12 posts mentioning 'beer,' but all were excluded as unrelated references to a Brewbird taproom"* (`A-67ae62ec`) |
-| Passed | 0 of 3 | 0 of 3: still open, see the eval report |
+| Passed | 0 of 3 | 0 of 3; fixed in F-P5-11 (3 of 3) |
 
 ### F-P5-4: The UAE price trap was declined without the comparison that can be made
 
@@ -385,4 +390,54 @@ sub-brand counts for its brand" and did not point at the figures that show it.
 |---|---|---|
 | Q3 passed | 1 of 3 | 3 of 3 |
 | Q9 passed | 0 of 3 | 3 of 3 |
+
+### F-P5-10: The 22 September answer lost its main comparison after a fix
+
+**Question:** Q5, "What happened on 22 September?" (consumer agent)
+
+**What failed** (final eval `E-07443f38`, 0 of 3, after passing 2 of 3 in `E-2824e5be`)
+- F-P5-7 had told the agent to compare Brewbird's genuine conversations with the median genuine
+  day. From then on it gave that comparison *instead of* the day's total against the median day
+  of all mentions (132 against 36), which is what makes the day unusual under D-43. All three runs
+  missed the 36. A regression caused by our own fix.
+- After that was fixed (`E-37f9b91b`, 1 of 3), two runs called the burst "a burst of spam" without
+  saying it was coordinated: 84 posts of four identical texts from 84 accounts between 02:00 and
+  05:00. That separates a bot campaign from people talking, and is the point of D-13.
+
+**Changes** (agreed by Abhinav, 15 Oct, in two steps): consumer rule 6 asks for both
+comparisons (the day's total against the median day; the brand's genuine conversations against
+the median genuine day), and for a burst of identical posts, the number of accounts and the time
+span, called coordinated when many accounts posted at once. File: `skills/consumer/SKILL.md`.
+
+| | `E-07443f38` | `E-37f9b91b` | `E-db750b64` |
+|---|---|---|---|
+| Passed | 0 of 3 | 1 of 3 | 3 of 3 |
+| Gives the 36-mention median day | 0 of 3 | 3 of 3 | 3 of 3 |
+| Calls the burst coordinated | 3 of 3 | 1 of 3 | 3 of 3 |
+
+After (`A-c17347c6`): *"132 mentions versus a median of 36 per day, but only 26 were genuine
+Brewbird conversations versus Brewbird's median of 20. The spike was driven mainly by
+coordinated spam: four repeated BB50 discount texts appeared 84 times from 84 distinct accounts
+between 02:00 and 04:59."*
+
+### F-P5-11: The beer question never said what Brewbird does sell
+
+**Question:** A-beer, "How is Brewbird's beer?" (consumer agent)
+
+**What failed** (final eval `E-07443f38`, 0 of 3): after F-P5-3 every run found the unrelated
+taproom and its excluded posts, but none said the client sells coffee. `A-208fa536`: *"I can't
+assess Brewbird's beer from this data"*, then the taproom, with no statement of what Brewbird is.
+We first put this down to the judge; re-judged with `gpt-6.1-sol`, all three runs still failed the
+item, so the answers did leave it out.
+
+**Cause:** grounding rule 11 (check the question's premise) said to say when a premise is wrong,
+not to say what is true instead.
+
+**Change** (agreed by Abhinav, 15 Oct): rule 11 says to correct a wrong premise with what is true
+instead (what the brand does sell or offer). File: `skills/shared/grounding.md`.
+
+| | `E-07443f38` | `E-954d0a95` |
+|---|---|---|
+| Passed | 0 of 3 | 3 of 3 |
+| Answer (`A-de03181a`) | no statement of what Brewbird sells | *"Brewbird's catalogue lists coffee products, not beer. The 12 posts using 'Brewbird' and 'beer' were all excluded as unrelated mentions of Brewbird taproom, Pune"* |
 

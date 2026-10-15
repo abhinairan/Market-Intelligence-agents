@@ -253,7 +253,7 @@ def cmd_eval(args: argparse.Namespace) -> None:
     import json
 
     from halyard.eval.cases import load_cases
-    from halyard.eval.report import REPORT, render_report
+    from halyard.eval.report import REPORT, render_report, report_notes
     from halyard.eval.runner import EVAL_OUT, run_eval, save_eval
     from halyard.llm import get_client
 
@@ -261,7 +261,8 @@ def cmd_eval(args: argparse.Namespace) -> None:
         path = EVAL_OUT / f"{args.report}.json"
         if not path.exists():
             raise HalyardError(f"No saved eval {args.report} in {EVAL_OUT.relative_to(PROJECT_ROOT)}.")
-        REPORT.write_text(render_report(json.loads(path.read_text(encoding="utf-8"))), encoding="utf-8")
+        notes = report_notes(args.report)
+        REPORT.write_text(render_report(json.loads(path.read_text(encoding="utf-8")), notes), encoding="utf-8")
         print(f"Wrote {REPORT.relative_to(PROJECT_ROOT)} from {args.report}.")
         return
 

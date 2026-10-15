@@ -3,13 +3,20 @@ from the saved results without running anything again."""
 
 from __future__ import annotations
 
+import re
 from collections import defaultdict
+from pathlib import Path
 from typing import Any
+
+import yaml
 
 from halyard.eval.grade import ID_THRESHOLD
 from halyard.settings import PROJECT_ROOT
 
 REPORT = PROJECT_ROOT / "docs" / "eval-report.md"
+# Notes written by hand for one saved eval (what was fixed and re-run after it), included when
+# that eval's report is rendered. Front matter `eval: E-...` names the eval they belong to.
+NOTES = PROJECT_ROOT / "eval" / "report_notes.md"
 
 METHOD = f"""\
 Each question is run through its agent and graded on every layer that applies to it:
@@ -26,8 +33,18 @@ Each question is run through its agent and graded on every layer that applies to
 
 A run passes when every layer that applies passes. The answer's `answerable` (`yes` /
 `partly` / `no`) is shown against the expected value but not graded: the brief asks that a
-question the data cannot answer is declined with the reason, and the rubric items check that. The expected answers come from the
-independent oracle (`oracle/`), which shares only `docs/definitions.md` with the pipeline."""
+question the data cannot answer is declined with the reason, and the rubric items check that.
+The expected answers come from the independent oracle (`oracle/`), which shares only
+`docs/definitions.md` with the pipeline.
+
+**Limits of the grading.**
+- Figures are matched by value, not by position: a figure counts as found if the same number
+  appears anywhere in the answer, so two figures with the same value cannot be told apart.
+- The judge is `gpt-6-luna`, the same model as the agents, and still reads some items too
+  literally. A "met" verdict must quote the answer, so the judge cannot pass an item on a
+  passage that is not there; the errors seen so far run the other way, items marked not met
+  that a reader would accept. Every verdict is listed with its quote or reason below.
+- Three runs per question show how stable an answer is, not a rate to rely on."""
 
 
 def _money(x: float | None) -> str:
@@ -55,7 +72,18 @@ def _cell(grades: list[dict[str, Any]], key: str) -> str:
     return " · ".join(parts)
 
 
-def render_report(ev: dict[str, Any]) -> str:
+def report_notes(eval_id: str, path: Path = NOTES) -> str | None:
+    """The hand-written notes for `eval_id`, or None when the notes belong to another eval."""
+    if not path.exists():
+        return None
+    text = path.read_text(encoding="utf-8")
+    m = re.match(r"---\n(.*?)\n---\n", text, re.DOTALL)
+    if not m or yaml.safe_load(m[1]).get("eval") != eval_id:
+        return None
+    return text[m.end():].strip()
+
+
+def render_report(ev: dict[str, Any], notes: str | None = None) -> str:
     by_case: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for g in ev["grades"]:
         by_case[g["case_id"]].append(g)
@@ -75,6 +103,7 @@ def render_report(ev: dict[str, Any]) -> str:
         f"Cost: agents {_money(agent_cost)}, judges {_money(judge_cost)}."), "",
         ("Failures found here, their causes and fixes are logged in "
         "[failure-log.md](failure-log.md) under \"Found by the eval (P5)\"."), "",
+        *([notes, ""] if notes else []),
         "## How it is graded", "", METHOD, "",
         "## Summary", "",
         "Cells list each run in order. IDs are precision/recall.", "",

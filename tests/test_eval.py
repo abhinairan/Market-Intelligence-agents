@@ -9,7 +9,7 @@ from halyard.agents.loop import AgentRun, AgentSpec, Limits, run_agent
 from halyard.eval.cases import Case, Figure, load_cases, mention_ids_in, resolve
 from halyard.eval.grade import Grade, figure_found, grade_ids, matches, numbers_in
 from halyard.eval.judge import judge
-from halyard.eval.report import render_report
+from halyard.eval.report import render_report, report_notes
 from halyard.eval.runner import run_eval, save_eval
 from halyard.ingest.graph import build_graph
 from halyard.ingest.pipeline import prepare
@@ -202,3 +202,11 @@ def test_an_errored_run_is_reported_not_graded_as_passed():
     run = AgentRun("A-x", "consumer", "?", status="error", error="boom")
     ev = run_eval([_case(figures=(Figure("f", 1.0),))], lambda a, q: run, None, repeat=1)
     assert ev.errors and not ev.grades[0].passed
+
+
+def test_report_notes_belong_to_one_eval(tmp_path):
+    path = tmp_path / "notes.md"
+    path.write_text("---\neval: E-1\n---\n## Recorded result\n\n58 of 69.\n")
+    assert report_notes("E-1", path) == "## Recorded result\n\n58 of 69."
+    assert report_notes("E-2", path) is None
+    assert report_notes("E-1", tmp_path / "none.md") is None

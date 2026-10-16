@@ -5,6 +5,8 @@ v4). A pipeline turns the client's raw data pack into a Neo4j graph where every 
 records its source. A consumer agent and a competitor agent answer questions through query
 tools, and every figure in an answer cites the posts or rows behind it.
 
+**Demo recording:** [Google Drive](https://drive.google.com/drive/folders/19yu_DND1H0zxuL_YQ7kgV-_JlfCyzkO7?usp=sharing)
+
 ## Prerequisites
 
 - A Docker runtime: Docker Desktop, OrbStack, Colima, or Docker Engine on Linux.
@@ -89,7 +91,7 @@ Monday pulse and prints the model spend. Other commands: `halyard spend` (tokens
 | Three written replies | [`docs/replies.md`](docs/replies.md) |
 | Another week, and model spend | [`docs/another-week.md`](docs/another-week.md) |
 | Skills package | [`skills/`](skills/README.md): each agent's instructions, tool definitions, grounding rules and output format; Brewbird's configuration in [`config/brewbird/`](config/brewbird/) |
-| Recording | to follow |
+| Recording | [Demo recording (Google Drive)](https://drive.google.com/drive/folders/19yu_DND1H0zxuL_YQ7kgV-_JlfCyzkO7?usp=sharing) |
 
 The counting rules every number follows are in [`docs/definitions.md`](docs/definitions.md),
 each with an ID (D-xx) that the code and the answers cite.
